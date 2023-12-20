@@ -1,0 +1,60 @@
+:host {
+  display: flex;
+
+  height: 60px;
+  line-height: 60px;
+  ///overflow: hidden;
+  background-color: #3f51b5;
+  color: white;
+
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 2;
+
+  //box-shadow: #3f51b5 0 5px 5px;
+  box-shadow: 0 3px 5px -1px #0003,0 6px 10px #00000024,0 1px 18px #0000001f
+}
+
+
+.title {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.space {
+  flex: 1;
+}
+
+
+.nav {
+  padding: 0 10px;
+
+  a{
+    text-decoration: none;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+
+    &:hover {
+      background-color: black;
+    }
+  }
+}
+
+.user {
+  display: flex;
+  justify-content: center;
+
+  .alarm {
+    padding: 0 10px;
+    border-left: 1px solid grey;
+    border-right: 1px solid grey;
+    align-self: center;
+  }
+
+  .name {
+
+  }
+}
