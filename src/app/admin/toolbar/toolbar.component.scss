@@ -1,0 +1,18 @@
+:host{
+  display: flex;
+  //background-color: white;
+  justify-content: center;
+  align-items: center;
+  //line-height: 100%;
+  padding: 0 10px;
+}
+
+.space {
+  flex: 1;
+}
+
+.search-form-field {
+  flex: 1;
+  min-width: 200px;
+  max-width: 600px;
+}

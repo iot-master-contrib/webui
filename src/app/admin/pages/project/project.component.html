@@ -1,6 +1,12 @@
 <app-toolbar></app-toolbar>
 
-<mat-grid-list [cols]="cols" gutterSize="5" rowHeight="4:3">
+<mat-paginator [length]="100"
+               [pageSize]="10"
+               [pageSizeOptions]="[10, 50, 100]"
+               showFirstLastButtons>
+</mat-paginator>
+
+<mat-grid-list [cols]="cols" gutterSize="5">
 
   <mat-grid-tile>
     <mat-card class="project">
@@ -10,7 +16,18 @@
       <img src="assets/forest.jpg" alt="" mat-card-image>
       <mat-card-content>说明内容</mat-card-content>
       <mat-card-actions align="end">
-        <button mat-button>编辑</button>
+        <button mat-button>
+          <mat-icon>visibility</mat-icon>
+          打开
+        </button>
+        <button mat-button>
+          <mat-icon>edit</mat-icon>
+          编辑
+        </button>
+        <button mat-button title="删除">
+          <mat-icon>delete</mat-icon>
+          删除
+        </button>
       </mat-card-actions>
     </mat-card>
   </mat-grid-tile>

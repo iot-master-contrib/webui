@@ -5,6 +5,7 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
 import {MatGridListModule} from "@angular/material/grid-list";
 import {BreakpointObserver, Breakpoints} from "@angular/cdk/layout";
+import {MatPaginatorModule} from "@angular/material/paginator";
 
 @Component({
   selector: 'app-project',
@@ -14,7 +15,8 @@ import {BreakpointObserver, Breakpoints} from "@angular/cdk/layout";
     MatCardModule,
     MatIconModule,
     MatButtonModule,
-    MatGridListModule
+    MatGridListModule,
+    MatPaginatorModule
   ],
   templateUrl: './project.component.html',
   styleUrl: './project.component.scss'
