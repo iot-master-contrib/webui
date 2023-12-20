@@ -1,1 +1,36 @@
-<p>project works!</p>
+<app-toolbar></app-toolbar>
+
+<mat-grid-list [cols]="cols" gutterSize="5" rowHeight="4:3">
+
+  <mat-grid-tile>
+    <mat-card class="project">
+      <mat-card-header>
+        <mat-card-title>产品名称</mat-card-title>
+      </mat-card-header>
+      <img src="assets/forest.jpg" alt="" mat-card-image>
+      <mat-card-content>说明内容</mat-card-content>
+      <mat-card-actions align="end">
+        <button mat-button>编辑</button>
+      </mat-card-actions>
+    </mat-card>
+  </mat-grid-tile>
+
+  <mat-grid-tile>
+    <mat-card class="project">
+      <mat-card-header>
+        <mat-card-title>产品名称</mat-card-title>
+      </mat-card-header>
+      <img src="assets/forest.jpg" alt="" mat-card-image>
+      <mat-card-content>说明内容,说明内容
+        说明内容,说明内容
+        说明内容,说明内容,说明内容
+      ,说明内容
+        说明内容,说明内容,说明内容</mat-card-content>
+      <mat-card-actions align="end">
+        <button mat-button>编辑</button>
+      </mat-card-actions>
+    </mat-card>
+  </mat-grid-tile>
+
+</mat-grid-list>
+
