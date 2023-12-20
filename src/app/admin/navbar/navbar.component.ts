@@ -5,6 +5,7 @@ import {RouterLink} from "@angular/router";
 import {MatIconModule} from "@angular/material/icon";
 import {MatMenuModule} from "@angular/material/menu";
 import {MatDividerModule} from "@angular/material/divider";
+import {MatBadgeModule} from "@angular/material/badge";
 
 @Component({
   selector: 'app-navbar',
@@ -15,7 +16,8 @@ import {MatDividerModule} from "@angular/material/divider";
     RouterLink,
     MatIconModule,
     MatMenuModule,
-    MatDividerModule
+    MatDividerModule,
+    MatBadgeModule
   ],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss'

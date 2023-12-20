@@ -18,12 +18,17 @@
 <div class="user">
 
   <div class="alarm">
-    <mat-icon fontIcon="notifications"></mat-icon>
+    <button mat-button style="color: white" matBadge="8" matBadgePosition="after" matBadgeColor="accent">
+      <mat-icon>notifications</mat-icon>
+      通知
+    </button>
   </div>
 
-  <div class="name" [matMenuTriggerFor]="userMenu">
-    <mat-icon fontIcon="account_circle"></mat-icon>
-    测试账号
+  <div class="name">
+    <button mat-button [matMenuTriggerFor]="userMenu" style="color: white">
+      <mat-icon>account_circle</mat-icon>
+      测试账号
+    </button>
   </div>
   <mat-menu #userMenu="matMenu">
     <button mat-menu-item>修改密码</button>
