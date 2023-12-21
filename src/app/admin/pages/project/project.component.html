@@ -2,25 +2,27 @@
 
 
 <nz-row [nzGutter]="[4,4]">
-  <nz-col [nzXs]="2" [nzSm]="3" [nzMd]="4" [nzLg]="5" [nzXl]="6" [nzXXl]="7">
-    <nz-card nzTitle="项目名称" nzSize="small" [nzCover]="coverTemplate" [nzActions]="[actionView, actionEdit, actionEllipsis]">
-      <nz-card-meta nzDescription="产品说明"></nz-card-meta>
+  <nz-col *ngFor="let p of projects; index as i"
+    [nzXs]="24" [nzSm]="12" [nzMd]="8" [nzLg]="6" [nzXl]="4" [nzXXl]="3">
+
+    <nz-card nzTitle="项目名称" nzSize="small" nzHoverable [nzCover]="coverTemplate" [nzActions]="[actionView, actionEdit, actionEllipsis]">
+      <nz-card-meta nzDescription="项目说明"></nz-card-meta>
     </nz-card>
     <ng-template #coverTemplate>
       <img alt="example" src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"/>
     </ng-template>
     <ng-template #actionView>
-      <span nz-icon nzType="eye" title="打开"></span>
+      <span nz-icon nzType="eye" title="打开" (click)="open(p)"></span>
     </ng-template>
     <ng-template #actionEdit>
-      <span nz-icon nzType="edit" title="编辑"></span>
+      <span nz-icon nzType="edit" title="编辑" (click)="edit(p)"></span>
     </ng-template>
     <ng-template #actionEllipsis>
       <span nz-icon nzType="ellipsis" nz-dropdown [nzDropdownMenu]="menu" nzTrigger="click"></span>
       <nz-dropdown-menu #menu="nzDropdownMenu">
         <ul nz-menu>
           <li nz-menu-item>
-            <span nz-icon nzType="delete"></span>
+            <span nz-icon nzType="delete" nz-popconfirm nzPopconfirmTrigger="click" nzPopconfirmTitle="确认删除" (nzOnConfirm)="delete(i)"></span>
             删除
           </li>
         </ul>
@@ -29,4 +31,6 @@
 
   </nz-col>
 </nz-row>
+
+<nz-pagination [nzPageIndex]="3" [nzPageSize]="10" [nzTotal]="500" nzShowSizeChanger nzShowQuickJumper></nz-pagination>
 

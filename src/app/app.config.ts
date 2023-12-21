@@ -27,6 +27,9 @@ import {
   UserOutline,
   ProfileOutline,
   EyeOutline,
+  ReloadOutline,
+  BackwardOutline,
+  ArrowLeftOutline,
 
 } from '@ant-design/icons-angular/icons';
 const icons: IconDefinition[] = [
@@ -43,6 +46,9 @@ const icons: IconDefinition[] = [
   UserOutline,
   ProfileOutline,
   EyeOutline,
+  ReloadOutline,
+  BackwardOutline,
+  ArrowLeftOutline,
 
 
 ];

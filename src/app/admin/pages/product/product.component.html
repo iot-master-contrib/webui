@@ -1,1 +1,36 @@
-<p>product works!</p>
+<app-toolbar></app-toolbar>
+
+
+<nz-row [nzGutter]="[4,4]">
+  <nz-col *ngFor="let p of products"
+          [nzXs]="24" [nzSm]="12" [nzMd]="8" [nzLg]="6" [nzXl]="4" [nzXXl]="3">
+
+    <nz-card nzTitle="产品名称" nzSize="small" nzHoverable [nzCover]="coverTemplate" [nzActions]="[actionView, actionEdit, actionEllipsis]">
+      <nz-card-meta nzDescription="产品说明"></nz-card-meta>
+    </nz-card>
+    <ng-template #coverTemplate>
+      <img alt="example" src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png?x-oss-process=image/resize,w_640"/>
+    </ng-template>
+    <ng-template #actionView>
+      <span nz-icon nzType="eye" title="打开"></span>
+    </ng-template>
+    <ng-template #actionEdit>
+      <span nz-icon nzType="edit" title="编辑"></span>
+    </ng-template>
+    <ng-template #actionEllipsis>
+      <span nz-icon nzType="ellipsis" nz-dropdown [nzDropdownMenu]="menu" nzTrigger="click"></span>
+      <nz-dropdown-menu #menu="nzDropdownMenu">
+        <ul nz-menu>
+          <li nz-menu-item>
+            <span nz-icon nzType="delete"></span>
+            删除
+          </li>
+        </ul>
+      </nz-dropdown-menu>
+    </ng-template>
+
+  </nz-col>
+</nz-row>
+
+<nz-pagination [nzPageIndex]="3" [nzPageSize]="10" [nzTotal]="500" nzShowSizeChanger nzShowQuickJumper></nz-pagination>
+
