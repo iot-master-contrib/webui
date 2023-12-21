@@ -1,16 +1,18 @@
-<mat-form-field class="search-form-field">
-  <mat-label>快捷搜索</mat-label>
-  <input matInput type="text" placeholder="请输入关键字" [(ngModel)]="keyword">
-  <button matSuffix mat-icon-button (click)="search()">
-    <mat-icon>search</mat-icon>
-  </button>
-</mat-form-field>
+
+<div class="search">
+  <nz-input-group nzSearch nzSize="large" [nzAddOnAfter]="suffixButton">
+    <input type="text" nz-input placeholder="请输入关键字" />
+  </nz-input-group>
+  <ng-template #suffixButton>
+    <button nz-button nzType="primary" nzSize="large" nzSearch>搜索</button>
+  </ng-template>
+</div>
 
 <div class="space"></div>
 
 <div>
-  <button mat-raised-button color="primary">
-    <mat-icon>add</mat-icon>
-    创建
+  <button nz-button nzType="primary" nzSize="large" nzShape="round">
+    <span nz-icon nzType="plus"></span>
+    新建
   </button>
 </div>

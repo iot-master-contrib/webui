@@ -1,0 +1,48 @@
+:host{
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  width: 100%;
+  height: 100%;
+
+  background-color: #888888;
+
+  //background-image: url("../../assets/bk.jpg");
+  background-image: url(/assets/bk.jpg);
+  background-size: cover;
+  background-position: center;
+}
+
+.login{
+  margin-top: 100px;
+  width: 300px;
+  max-width: 400px;
+
+  >h1{
+    color: white;
+    text-align: center;
+    text-shadow: black 2px 2px 5px;
+    letter-spacing: 5px;
+  }
+}
+
+
+.login-form {
+  //background-color: white;
+  background-color: white;
+  border-radius: 15px;
+  padding: 30px 50px;
+  //box-shadow: black 2px 2px 5px;
+}
+
+.login-form-margin {
+  margin-bottom: 16px;
+}
+
+.login-form-forgot {
+  float: right;
+}
+
+.login-form-button {
+  width: 100%;
+}

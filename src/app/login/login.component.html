@@ -1,14 +1,34 @@
-<p>登录页</p>
+<div class="login">
+  <h1 class="login-title">{{oem.title}}</h1>
+  <div class="login-form" >
+    <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+      <nz-form-item>
+        <nz-form-control nzErrorTip="请输入用户名!">
+          <nz-input-group nzPrefixIcon="user" nzSize="large" style="border-radius: 10px">
+            <input type="text" nz-input formControlName="username" placeholder="用户名" nzSize="large"/>
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control nzErrorTip="请输入密码!">
+          <nz-input-group nzPrefixIcon="lock" nzSize="large" style="border-radius: 10px">
+            <input type="password" nz-input formControlName="password" placeholder="密码" />
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+      <div nz-row class="login-form-margin">
+        <div nz-col [nzSpan]="12">
+          <label nz-checkbox formControlName="remember" nzDisabled>
+            <span>记住我</span>
+          </label>
+        </div>
+        <div nz-col [nzSpan]="12">
+          <a class="login-form-forgot">忘记密码</a>
+        </div>
+      </div>
+      <button nz-button nzSize="large" class="login-form-button login-form-margin" nzType="primary">登 录</button>
+    </form>
 
 
-<mat-form-field>
-  <mat-label>账号：</mat-label>
-  <input matInput type="text" [(ngModel)]="username">
-</mat-form-field>
-
-<mat-form-field>
-  <mat-label>密码：</mat-label>
-  <input matInput type="password" [(ngModel)]="password">
-</mat-form-field>
-
-<button mat-raised-button color="primary">登录</button>
+  </div>
+</div>

@@ -88,7 +88,8 @@
               "buildTarget": "webui:build:production"
             },
             "development": {
-              "buildTarget": "webui:build:development"
+              "buildTarget": "webui:build:development",
+              "proxyConfig": "proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"

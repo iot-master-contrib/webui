@@ -1,17 +1,18 @@
 import { Component } from '@angular/core';
-import {MatInputModule} from "@angular/material/input";
-import {MatIconModule} from "@angular/material/icon";
 import {FormsModule} from "@angular/forms";
-import {MatButtonModule} from "@angular/material/button";
+import {NzInputDirective, NzInputGroupComponent} from "ng-zorro-antd/input";
+import {NzButtonComponent} from "ng-zorro-antd/button";
+import {NZ_ICONS, NZ_ICONS_PATCH, NzIconDirective, NzIconModule} from "ng-zorro-antd/icon";
 
 @Component({
   selector: 'app-toolbar',
   standalone: true,
   imports: [
-    MatInputModule,
-    MatIconModule,
     FormsModule,
-    MatButtonModule,
+    NzInputGroupComponent,
+    NzButtonComponent,
+    NzInputDirective,
+    NzIconDirective,
   ],
   templateUrl: './toolbar.component.html',
   styleUrl: './toolbar.component.scss'

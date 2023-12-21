@@ -15,6 +15,7 @@ import {PluginComponent} from "./admin/pages/plugin/plugin.component";
 import {PluginDetailComponent} from "./admin/pages/plugin-detail/plugin-detail.component";
 import {PluginEditComponent} from "./admin/pages/plugin-edit/plugin-edit.component";
 import {UnknownComponent} from "./unknown/unknown.component";
+import {AlarmComponent} from "./admin/pages/alarm/alarm.component";
 
 export const routes: Routes = [
   {path: "", pathMatch: "full", redirectTo: "admin"},
@@ -35,6 +36,7 @@ export const routes: Routes = [
       {path: "plugin", component: PluginComponent},
       {path: "plugin/:id", component: PluginDetailComponent},
       {path: "plugin/:id/edit", component: PluginEditComponent},
+      {path: "alarm", component: AlarmComponent},
       {path: "setting", component: SettingComponent},
     ]
   },

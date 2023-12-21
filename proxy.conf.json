@@ -1,0 +1,27 @@
+{
+  "/mqtt/": {
+    "target": "http://demo.iot-master.com:8080/",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true,
+    "ws": true
+  },
+  "/api/": {
+    "target": "http://demo.iot-master.com:8080/",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/app/": {
+    "target": "http://demo.iot-master.com:8080/",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/attach/": {
+    "target": "http://demo.iot-master.com:8080/",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  }
+}

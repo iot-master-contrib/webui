@@ -1,4 +1,67 @@
-<app-navbar></app-navbar>
-<div class="content">
-  <router-outlet></router-outlet>
-</div>
+<nz-layout>
+  <nz-header>
+    <div class="logo">
+      <img src="assets/infinite.svg" alt="logo">
+    </div>
+
+    <div class="title">
+      物联大师
+    </div>
+
+    <ul nz-menu nzTheme="dark" nzMode="horizontal" class="nav">
+      <li nz-menu-item nzMatchRouter>
+        <a routerLink="project">
+          <span nz-icon nzType="apartment"></span>
+          项目
+        </a>
+      </li>
+      <li nz-menu-item nzMatchRouter>
+        <a routerLink="device">
+          <span nz-icon nzType="block"></span>
+          设备
+        </a>
+      </li>
+      <li nz-menu-item nzMatchRouter>
+        <a routerLink="product">
+          <span nz-icon nzType="profile"></span>
+          产品
+        </a>
+      </li>
+      <li nz-menu-item nzMatchRouter>
+        <a routerLink="plugin">
+          <span nz-icon nzType="appstore"></span>
+          插件
+        </a>
+      </li>
+      <li nz-menu-item nzMatchRouter>
+        <a routerLink="setting">
+          <span nz-icon nzType="setting"></span>
+          设置
+        </a>
+      </li>
+    </ul>
+
+    <div class="space">
+    </div>
+
+    <ul nz-menu nzTheme="dark" nzMode="horizontal" class="user">
+      <li nz-menu-item nzMatchRouter>
+        <a routerLink="alarm">
+          <span nz-icon nzType="bell"></span>
+          通知
+        </a>
+      </li>
+      <li nz-submenu nzTitle="测试用户" nzIcon="user">
+        <ul>
+          <li nz-menu-item nzSelected="false">修改密码</li>
+          <li nz-menu-divider></li>
+          <li nz-menu-item nzSelected="false" nzDanger>退出</li>
+        </ul>
+      </li>
+    </ul>
+
+  </nz-header>
+  <nz-content class="content">
+    <router-outlet></router-outlet>
+  </nz-content>
+</nz-layout>
