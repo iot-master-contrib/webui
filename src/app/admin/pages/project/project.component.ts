@@ -8,7 +8,11 @@ import {NzMenuDirective, NzMenuItemComponent} from "ng-zorro-antd/menu";
 import {NgForOf} from "@angular/common";
 import {NzPaginationComponent} from "ng-zorro-antd/pagination";
 import {NzPopconfirmDirective} from "ng-zorro-antd/popconfirm";
-import {Router} from "@angular/router";
+import {Router, RouterLink} from "@angular/router";
+import {NzSpaceComponent, NzSpaceItemDirective} from "ng-zorro-antd/space";
+import {NzButtonComponent} from "ng-zorro-antd/button";
+import {NzInputDirective, NzInputGroupComponent} from "ng-zorro-antd/input";
+import {NzAffixComponent} from "ng-zorro-antd/affix";
 
 @Component({
   selector: 'app-project',
@@ -27,7 +31,14 @@ import {Router} from "@angular/router";
     NzMenuItemComponent,
     NgForOf,
     NzPaginationComponent,
-    NzPopconfirmDirective
+    NzPopconfirmDirective,
+    NzSpaceComponent,
+    NzButtonComponent,
+    NzInputDirective,
+    NzInputGroupComponent,
+    NzSpaceItemDirective,
+    NzAffixComponent,
+    RouterLink
   ],
   templateUrl: './project.component.html',
   styleUrl: './project.component.scss'

@@ -30,7 +30,7 @@ import {
   ReloadOutline,
   BackwardOutline,
   ArrowLeftOutline,
-
+  LockOutline,
 } from '@ant-design/icons-angular/icons';
 const icons: IconDefinition[] = [
   PlusOutline,
@@ -49,6 +49,7 @@ const icons: IconDefinition[] = [
   ReloadOutline,
   BackwardOutline,
   ArrowLeftOutline,
+  LockOutline,
 
 
 ];
