@@ -36,6 +36,11 @@ import {RouterLink} from "@angular/router";
   styleUrl: './product.component.scss'
 })
 export class ProductComponent {
-  products: any[] = [{}, {}, {}, {}, {}, {}, {}, {}]
+  products: any[] = [
+    {id: 1, icon:"/assets/temp.png", name: "温度计", description: "温度计"},
+    {id: 2, icon:"/assets/temp.png", name: "继电器板", description: "4路继电器板"},
+    {id: 3, icon:"/assets/temp.png", name: "排污PLC", description: "排污PLC S7 200Smart"},
+    {id: 4, icon:"/assets/temp.png", name: "光感", description: "光照强度"},
+  ]
 
 }

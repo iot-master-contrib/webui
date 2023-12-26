@@ -1,1 +1,19 @@
-<p>plugin works!</p>
+
+<div class="content">
+  <nz-row [nzGutter]="[4,4]">
+    <nz-col *ngFor="let p of plugins; index as i"
+            [nzXs]="12" [nzSm]="8"
+            [nzMd]="6" [nzLg]="4"
+            [nzXl]="3" [nzXXl]="2">
+
+      <nz-card nzHoverable [nzCover]="coverTemplate">
+        <nz-card-meta [nzTitle]="p.name" [nzDescription]="p.description"></nz-card-meta>
+      </nz-card>
+      <ng-template #coverTemplate>
+        <img alt="icon" [src]="p.icon"/>
+      </ng-template>
+
+    </nz-col>
+  </nz-row>
+</div>
+

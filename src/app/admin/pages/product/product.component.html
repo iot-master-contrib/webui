@@ -28,11 +28,11 @@
           [nzMd]="6" [nzLg]="4"
           [nzXl]="3" [nzXXl]="2">
 
-    <nz-card nzTitle="产品名称" nzSize="small" nzHoverable [nzCover]="coverTemplate" [nzActions]="[actionView, actionEdit, actionEllipsis]">
-      <nz-card-meta nzDescription="产品说明"></nz-card-meta>
+    <nz-card [nzTitle]="p.name" nzSize="small" nzHoverable [nzCover]="coverTemplate" [nzActions]="[actionView, actionEdit, actionEllipsis]">
+      <nz-card-meta [nzDescription]="p.description"></nz-card-meta>
     </nz-card>
     <ng-template #coverTemplate>
-      <img alt="example" src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png?x-oss-process=image/resize,w_640"/>
+      <img alt="example" [src]="p.icon"/>
     </ng-template>
     <ng-template #actionView>
       <span nz-icon nzType="eye" title="打开"></span>

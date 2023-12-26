@@ -43,7 +43,12 @@ import {NzAffixComponent} from "ng-zorro-antd/affix";
 })
 export class ProjectComponent {
 
-  projects: any[] = [{id: 1}, {id: 2}, {id: 3}, {id: 4}, {id: 5}, {id: 6}, {id: 7}, {id: 8}]
+  projects: any[] = [
+    {id: 1, name: "第一人民医院", description: "放射科室"},
+    {id: 2, name: "中医院", description: "放射科室"},
+    {id: 3, name: "第五人民医院", description: "放射科室"},
+    {id: 4, name: "协和医院", description: "放射科室"},
+  ]
 
   constructor(private route: Router) {
   }

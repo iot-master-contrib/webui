@@ -28,9 +28,9 @@
             [nzMd]="8" [nzLg]="8"
             [nzXl]="6" [nzXXl]="4">
 
-      <nz-card nzTitle="项目名称" nzSize="small" nzHoverable [nzCover]="coverTemplate"
+      <nz-card [nzTitle]="p.name" nzSize="small" nzHoverable [nzCover]="coverTemplate"
                [nzActions]="[actionView, actionEdit, actionEllipsis]">
-        <nz-card-meta nzDescription="项目说明"></nz-card-meta>
+        <nz-card-meta [nzDescription]="p.description"></nz-card-meta>
       </nz-card>
       <ng-template #coverTemplate>
         <img alt="example" src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"/>
