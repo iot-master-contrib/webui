@@ -1,1 +1,58 @@
-<p>device works!</p>
+<nz-space class="toolbar">
+  <button *nzSpaceItem nz-button nzType="primary" nzSize="large">
+    <span nz-icon nzType="reload"></span>
+    刷新
+  </button>
+
+  <div *nzSpaceItem class="search">
+    <nz-input-group nzSearch nzSize="large" [nzAddOnAfter]="suffixButton">
+      <input type="text" nz-input placeholder="请输入关键字"/>
+    </nz-input-group>
+    <ng-template #suffixButton>
+      <button nz-button nzType="primary" nzSize="large" nzSearch>搜索</button>
+    </ng-template>
+  </div>
+
+  <div *nzSpaceItem>
+    <button nz-button nzType="primary" nzSize="large" nzShape="round" routerLink="create">
+      <span nz-icon nzType="plus"></span>
+      新建
+    </button>
+  </div>
+</nz-space>
+
+
+<nz-table #table [nzData]="devices" [nzFrontPagination]="false">
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>名称</th>
+    <th>产品</th>
+    <th>上线时间</th>
+    <th>操作</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let data of table.data">
+    <td>{{ data.id }}</td>
+    <td>{{ data.name }}</td>
+    <td>{{ data.product }}</td>
+    <td [title]="data.online">{{ data.online | date }}</td>
+    <td>
+      <nz-space>
+        <a *nzSpaceItem title="查看" [routerLink]="data.id"><i nz-icon nzType="eye"></i></a>
+        <a *nzSpaceItem title="编辑" [routerLink]="data.id+'/edit'"><i nz-icon nzType="edit"></i></a>
+        <a *nzSpaceItem title="删除" nz-popconfirm nzPopconfirmTitle="确认删除"><i nz-icon nzType="delete"></i></a>
+      </nz-space>
+    </td>
+  </tr>
+  </tbody>
+</nz-table>
+
+
+
+
+<div class="pages">
+  <nz-pagination [nzPageIndex]="3" [nzPageSize]="10" [nzTotal]="500" nzShowSizeChanger
+                 nzShowQuickJumper></nz-pagination>
+</div>

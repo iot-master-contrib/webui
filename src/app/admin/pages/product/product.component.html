@@ -1,9 +1,32 @@
-<app-toolbar></app-toolbar>
+<nz-space class="toolbar">
+  <button *nzSpaceItem nz-button nzType="primary" nzSize="large">
+    <span nz-icon nzType="reload"></span>
+    刷新
+  </button>
+
+  <div *nzSpaceItem  class="search">
+    <nz-input-group nzSearch nzSize="large" [nzAddOnAfter]="suffixButton">
+      <input type="text" nz-input placeholder="请输入关键字" />
+    </nz-input-group>
+    <ng-template #suffixButton>
+      <button nz-button nzType="primary" nzSize="large" nzSearch>搜索</button>
+    </ng-template>
+  </div>
+
+  <div *nzSpaceItem >
+    <button nz-button nzType="primary" nzSize="large" nzShape="round" routerLink="create">
+      <span nz-icon nzType="plus"></span>
+      新建
+    </button>
+  </div>
+</nz-space>
 
 
 <nz-row [nzGutter]="[4,4]">
   <nz-col *ngFor="let p of products"
-          [nzXs]="24" [nzSm]="12" [nzMd]="8" [nzLg]="6" [nzXl]="4" [nzXXl]="3">
+          [nzXs]="12" [nzSm]="8"
+          [nzMd]="6" [nzLg]="4"
+          [nzXl]="3" [nzXXl]="2">
 
     <nz-card nzTitle="产品名称" nzSize="small" nzHoverable [nzCover]="coverTemplate" [nzActions]="[actionView, actionEdit, actionEllipsis]">
       <nz-card-meta nzDescription="产品说明"></nz-card-meta>
@@ -32,5 +55,8 @@
   </nz-col>
 </nz-row>
 
-<nz-pagination [nzPageIndex]="3" [nzPageSize]="10" [nzTotal]="500" nzShowSizeChanger nzShowQuickJumper></nz-pagination>
 
+<div class="pages">
+  <nz-pagination [nzPageIndex]="3" [nzPageSize]="10" [nzTotal]="500" nzShowSizeChanger
+                 nzShowQuickJumper></nz-pagination>
+</div>

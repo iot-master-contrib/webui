@@ -4,16 +4,16 @@
     刷新
   </button>
 
-  <div *nzSpaceItem  class="search">
+  <div *nzSpaceItem class="search">
     <nz-input-group nzSearch nzSize="large" [nzAddOnAfter]="suffixButton">
-      <input type="text" nz-input placeholder="请输入关键字" />
+      <input type="text" nz-input placeholder="请输入关键字"/>
     </nz-input-group>
     <ng-template #suffixButton>
       <button nz-button nzType="primary" nzSize="large" nzSearch>搜索</button>
     </ng-template>
   </div>
 
-  <div *nzSpaceItem >
+  <div *nzSpaceItem>
     <button nz-button nzType="primary" nzSize="large" nzShape="round" routerLink="create">
       <span nz-icon nzType="plus"></span>
       新建
@@ -24,9 +24,12 @@
 <div class="content">
   <nz-row [nzGutter]="[4,4]">
     <nz-col *ngFor="let p of projects; index as i"
-            [nzXs]="24" [nzSm]="12" [nzMd]="8" [nzLg]="6" [nzXl]="4" [nzXXl]="3">
+            [nzXs]="24" [nzSm]="12"
+            [nzMd]="8" [nzLg]="8"
+            [nzXl]="6" [nzXXl]="4">
 
-      <nz-card nzTitle="项目名称" nzSize="small" nzHoverable [nzCover]="coverTemplate" [nzActions]="[actionView, actionEdit, actionEllipsis]">
+      <nz-card nzTitle="项目名称" nzSize="small" nzHoverable [nzCover]="coverTemplate"
+               [nzActions]="[actionView, actionEdit, actionEllipsis]">
         <nz-card-meta nzDescription="项目说明"></nz-card-meta>
       </nz-card>
       <ng-template #coverTemplate>
@@ -43,7 +46,8 @@
         <nz-dropdown-menu #menu="nzDropdownMenu">
           <ul nz-menu>
             <li nz-menu-item>
-              <span nz-icon nzType="delete" nz-popconfirm nzPopconfirmTrigger="click" nzPopconfirmTitle="确认删除" (nzOnConfirm)="delete(i)"></span>
+              <span nz-icon nzType="delete" nz-popconfirm nzPopconfirmTrigger="click" nzPopconfirmTitle="确认删除"
+                    (nzOnConfirm)="delete(i)"></span>
               删除
             </li>
           </ul>
@@ -54,9 +58,10 @@
   </nz-row>
 </div>
 
-  <div class="pages">
-    <nz-pagination [nzPageIndex]="3" [nzPageSize]="10" [nzTotal]="500" nzShowSizeChanger nzShowQuickJumper></nz-pagination>
-  </div>
+<div class="pages">
+  <nz-pagination [nzPageIndex]="3" [nzPageSize]="10" [nzTotal]="500" nzShowSizeChanger
+                 nzShowQuickJumper></nz-pagination>
+</div>
 
 
 

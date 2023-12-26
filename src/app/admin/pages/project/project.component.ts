@@ -1,5 +1,4 @@
 import {Component} from '@angular/core';
-import {ToolbarComponent} from "../../toolbar/toolbar.component";
 import {NzColDirective, NzRowDirective} from "ng-zorro-antd/grid";
 import {NzCardComponent, NzCardMetaComponent} from "ng-zorro-antd/card";
 import {NzIconDirective} from "ng-zorro-antd/icon";
@@ -18,7 +17,6 @@ import {NzAffixComponent} from "ng-zorro-antd/affix";
   selector: 'app-project',
   standalone: true,
   imports: [
-    ToolbarComponent,
     NzRowDirective,
     NzColDirective,
     NzCardComponent,
