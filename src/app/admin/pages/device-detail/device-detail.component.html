@@ -1,1 +1,37 @@
-<p>device-detail works!</p>
+<nz-page-header nzBackIcon>
+  <nz-page-header-title>设备详情</nz-page-header-title>
+  <nz-page-header-subtitle>{{ data.name }}</nz-page-header-subtitle>
+  <nz-page-header-extra>
+    <nz-space>
+      <button *nzSpaceItem nz-button routerLink="edit">编辑</button>
+      <button *nzSpaceItem nz-button nz-popconfirm nzPopconfirmTitle="确认删除" (nzOnConfirm)="delete()">删除</button>
+    </nz-space>
+  </nz-page-header-extra>
+  <nz-page-header-content>
+    <nz-descriptions nzSize="small" [nzColumn]="3">
+      <nz-descriptions-item nzTitle="ID" [nzSpan]="1">{{ data.id }}</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="名称" [nzSpan]="1">{{ data.name }}</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="版本" [nzSpan]="1">{{ data.version }}</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="创建时间" [nzSpan]="1">{{ data.created | date }}</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="说明" [nzSpan]="2">{{ data.description }}</nz-descriptions-item>
+    </nz-descriptions>
+  </nz-page-header-content>
+</nz-page-header>
+
+<!--插件列表-->
+<app-plugins [plugins]="plugins"></app-plugins>
+
+<nz-row class="variables" [nzGutter]="[4,4]">
+  <nz-col *ngFor="let p of data.properties"
+       [nzXs]="12" [nzSm]="8"
+       [nzMd]="6" [nzLg]="4"
+       [nzXl]="3" [nzXXl]="2"  >
+    <div class="variable">
+      <nz-statistic
+        [nzTitle]="p.label"
+        [nzValue]="variables[p.name]"
+        [nzSuffix]="p.unit"
+      ></nz-statistic>
+    </div>
+  </nz-col>
+</nz-row>
