@@ -16,6 +16,10 @@ import {PluginDetailComponent} from "./admin/pages/plugin-detail/plugin-detail.c
 import {PluginEditComponent} from "./admin/pages/plugin-edit/plugin-edit.component";
 import {UnknownComponent} from "./unknown/unknown.component";
 import {AlarmComponent} from "./admin/pages/alarm/alarm.component";
+import {GatewayComponent} from "./admin/pages/gateway/gateway.component";
+import {GatewayEditComponent} from "./admin/pages/gateway-edit/gateway-edit.component";
+import {GatewayBatchComponent} from "./admin/pages/gateway-batch/gateway-batch.component";
+import {GatewayDetailComponent} from "./admin/pages/gateway-detail/gateway-detail.component";
 
 export const routes: Routes = [
   {path: "", pathMatch: "full", redirectTo: "admin"},
@@ -32,6 +36,11 @@ export const routes: Routes = [
       {path: "device/create", component: DeviceEditComponent},
       {path: "device/:id", component: DeviceDetailComponent},
       {path: "device/:id/edit", component: DeviceEditComponent},
+      {path: "gateway", component: GatewayComponent},
+      {path: "gateway/create", component: GatewayEditComponent},
+      {path: "gateway/batch", component: GatewayBatchComponent},
+      {path: "gateway/:id", component: GatewayDetailComponent},
+      {path: "gateway/:id/edit", component: GatewayEditComponent},
       {path: "product", component: ProductComponent},
       {path: "product/create", component: ProductEditComponent},
       {path: "product/:id", component: ProductDetailComponent},

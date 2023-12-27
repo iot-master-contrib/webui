@@ -27,16 +27,9 @@
 
   <nz-space>
     <div *nzSpaceItem>
-      <button nz-button nzType="primary" nzSize="large" routerLink="/admin/product">
+      <button nz-button nzType="primary" nzSize="large" routerLink="batch">
         <span nz-icon nzType="profile"></span>
-        产品库
-      </button>
-    </div>
-
-    <div *nzSpaceItem>
-      <button nz-button nzType="primary" nzSize="large" routerLink="/admin/gateway">
-        <span nz-icon nzType="link"></span>
-        网关管理
+        批量创建
       </button>
     </div>
   </nz-space>
@@ -45,12 +38,12 @@
 
 
 
-<nz-table #table [nzData]="devices" [nzFrontPagination]="false">
+<nz-table #table [nzData]="gateways" [nzFrontPagination]="false">
   <thead>
   <tr>
     <th>ID</th>
-    <th>名称</th>
-    <th>产品</th>
+    <th>用户名</th>
+    <th>密码</th>
     <th>上线时间</th>
     <th>操作</th>
   </tr>
@@ -58,8 +51,8 @@
   <tbody>
   <tr *ngFor="let data of table.data">
     <td>{{ data.id }}</td>
-    <td>{{ data.name }}</td>
-    <td>{{ data.product }}</td>
+    <td>{{ data.username }}</td>
+    <td>{{ data.password }}</td>
     <td [title]="data.online">{{ data.online | date }}</td>
     <td>
       <nz-space>
