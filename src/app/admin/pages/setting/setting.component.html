@@ -1,1 +1,25 @@
-<p>setting works!</p>
+<nz-layout>
+  <nz-sider>
+    <ul nz-menu nzMode="inline" nzTheme="light">
+      <li nz-submenu nzTitle="系统" nzIcon="appstore" nzOpen>
+        <ul>
+          <li nz-menu-item>Web服务</li>
+          <li nz-menu-item>HTTPS</li>
+          <li nz-menu-item>数据库</li>
+          <li nz-menu-item>日志</li>
+          <li nz-menu-item>MQTT总线</li>
+        </ul>
+      </li>
+      <li nz-submenu nzTitle="维护" nzIcon="setting" nzOpen>
+        <ul>
+          <li nz-menu-item>数据备份</li>
+          <li nz-menu-item>插件库</li>
+        </ul>
+      </li>
+    </ul>
+  </nz-sider>
+  <nz-content>
+
+    <input nz-input placeholder="网页端口号">
+  </nz-content>
+</nz-layout>
