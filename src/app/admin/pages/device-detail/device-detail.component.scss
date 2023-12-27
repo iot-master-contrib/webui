@@ -4,6 +4,12 @@
   .variable {
     background-color: white;
     padding: 10px;
+    cursor: pointer;
 
+    transition: box-swadow 0.3s, border-color 0.3s;
+
+    &:hover {
+      box-shadow: 2px 2px 5px grey;
+    }
   }
 }

@@ -11,6 +11,15 @@ import {RouterLink} from "@angular/router";
 import {NzPopconfirmDirective} from "ng-zorro-antd/popconfirm";
 import {NzStatisticComponent} from "ng-zorro-antd/statistic";
 import {NzColDirective, NzRowDirective} from "ng-zorro-antd/grid";
+import {NzDividerComponent} from "ng-zorro-antd/divider";
+import {NzPaginationComponent} from "ng-zorro-antd/pagination";
+import {
+  NzTableCellDirective,
+  NzTableComponent,
+  NzTbodyComponent,
+  NzTheadComponent,
+  NzThMeasureDirective, NzTrDirective
+} from "ng-zorro-antd/table";
 
 @Component({
   selector: 'app-device-detail',
@@ -31,6 +40,14 @@ import {NzColDirective, NzRowDirective} from "ng-zorro-antd/grid";
     NzStatisticComponent,
     NzRowDirective,
     NzColDirective,
+    NzDividerComponent,
+    NzPaginationComponent,
+    NzTableCellDirective,
+    NzTableComponent,
+    NzTbodyComponent,
+    NzThMeasureDirective,
+    NzTheadComponent,
+    NzTrDirective,
   ],
   templateUrl: './device-detail.component.html',
   styleUrl: './device-detail.component.scss'
@@ -71,6 +88,14 @@ export class DeviceDetailComponent {
       description: ''
     },
   ];
+
+  alarms: any[] = [
+    {level: 1, title: '温度过高', message: '温度大于35度', created: new Date()},
+    {level: 1, title: '温度过高', message: '温度大于35度', created: new Date()},
+    {level: 1, title: '温度过高', message: '温度大于35度', created: new Date()},
+    {level: 1, title: '温度过高', message: '温度大于35度', created: new Date()},
+    {level: 1, title: '温度过高', message: '温度大于35度', created: new Date()},
+  ]
 
   delete() {
 
