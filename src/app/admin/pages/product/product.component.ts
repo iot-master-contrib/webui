@@ -9,7 +9,7 @@ import {NzPaginationComponent} from "ng-zorro-antd/pagination";
 import {NzButtonComponent} from "ng-zorro-antd/button";
 import {NzInputDirective, NzInputGroupComponent} from "ng-zorro-antd/input";
 import {NzSpaceComponent, NzSpaceItemDirective} from "ng-zorro-antd/space";
-import {RouterLink} from "@angular/router";
+import {Router, RouterLink} from "@angular/router";
 @Component({
   selector: 'app-product',
   standalone: true,
@@ -43,4 +43,18 @@ export class ProductComponent {
     {id: 4, icon:"/assets/temp.png", name: "光感", description: "光照强度"},
   ]
 
+  constructor(private route: Router) {
+  }
+
+  open(p: any) {
+    this.route.navigateByUrl("admin/project/" + p.id)
+  }
+
+  edit(p: any) {
+    this.route.navigateByUrl("admin/project/" + p.id + "/edit")
+  }
+
+  delete(i: number) {
+
+  }
 }

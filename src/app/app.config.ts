@@ -11,7 +11,7 @@ registerLocaleData(zh);
 
 import {provideAnimations} from '@angular/platform-browser/animations';
 
-import {NZ_ICONS, NzIconModule} from "ng-zorro-antd/icon";
+import {NZ_ICONS} from "ng-zorro-antd/icon";
 import { IconDefinition } from '@ant-design/icons-angular';
 import {
   PlusOutline,
@@ -31,6 +31,7 @@ import {
   BackwardOutline,
   ArrowLeftOutline,
   LockOutline,
+  DisconnectOutline,
 } from '@ant-design/icons-angular/icons';
 const icons: IconDefinition[] = [
   PlusOutline,
@@ -50,7 +51,7 @@ const icons: IconDefinition[] = [
   BackwardOutline,
   ArrowLeftOutline,
   LockOutline,
-
+  DisconnectOutline,
 
 ];
 

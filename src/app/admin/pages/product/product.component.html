@@ -35,11 +35,11 @@
       <img alt="example" [src]="p.icon"/>
     </ng-template>
     <ng-template #actionView>
-      <span nz-icon nzType="eye" title="打开"></span>
-    </ng-template>
-    <ng-template #actionEdit>
-      <span nz-icon nzType="edit" title="编辑"></span>
-    </ng-template>
+        <span nz-icon nzType="eye" title="打开" [routerLink]="p.id"></span>
+      </ng-template>
+      <ng-template #actionEdit>
+        <span nz-icon nzType="edit" title="编辑" [routerLink]="p.id+'/edit'"></span>
+      </ng-template>
     <ng-template #actionEllipsis>
       <span nz-icon nzType="ellipsis" nz-dropdown [nzDropdownMenu]="menu" nzTrigger="click"></span>
       <nz-dropdown-menu #menu="nzDropdownMenu">
