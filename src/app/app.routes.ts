@@ -20,6 +20,12 @@ import {GatewayComponent} from "./admin/pages/gateway/gateway.component";
 import {GatewayEditComponent} from "./admin/pages/gateway-edit/gateway-edit.component";
 import {GatewayBatchComponent} from "./admin/pages/gateway-batch/gateway-batch.component";
 import {GatewayDetailComponent} from "./admin/pages/gateway-detail/gateway-detail.component";
+import {SettingWebComponent} from "./admin/pages/setting-web/setting-web.component";
+import {SettingDatabaseComponent} from "./admin/pages/setting-database/setting-database.component";
+import {SettingLogComponent} from "./admin/pages/setting-log/setting-log.component";
+import {SettingBrokerComponent} from "./admin/pages/setting-broker/setting-broker.component";
+import {SettingHttpsComponent} from "./admin/pages/setting-https/setting-https.component";
+import {SettingBackupComponent} from "./admin/pages/setting-backup/setting-backup.component";
 
 export const routes: Routes = [
   {path: "", pathMatch: "full", redirectTo: "admin"},
@@ -50,7 +56,17 @@ export const routes: Routes = [
       {path: "plugin/:id", component: PluginDetailComponent},
       {path: "plugin/:id/edit", component: PluginEditComponent},
       {path: "alarm", component: AlarmComponent},
-      {path: "setting", component: SettingComponent},
+      {
+        path: "setting", component: SettingComponent,
+        children: [
+          {path: "web", component: SettingWebComponent},
+          {path: "database", component: SettingDatabaseComponent},
+          {path: "log", component: SettingLogComponent},
+          {path: "broker", component: SettingBrokerComponent},
+          {path: "https", component: SettingHttpsComponent},
+          {path: "backup", component: SettingBackupComponent},
+        ]
+      },
     ]
   },
   {path: "**", component: UnknownComponent},
