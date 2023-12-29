@@ -59,6 +59,7 @@ export const routes: Routes = [
       {
         path: "setting", component: SettingComponent,
         children: [
+          {path: "", pathMatch: "full", redirectTo: "web"},
           {path: "web", component: SettingWebComponent},
           {path: "database", component: SettingDatabaseComponent},
           {path: "log", component: SettingLogComponent},

@@ -3,16 +3,16 @@
     <ul nz-menu nzMode="inline" nzTheme="light">
       <li nz-submenu nzTitle="系统" nzIcon="appstore" nzOpen>
         <ul>
-          <li nz-menu-item routerLink="web">Web服务</li>
-          <li nz-menu-item routerLink="https">HTTPS</li>
-          <li nz-menu-item routerLink="database">数据库</li>
-          <li nz-menu-item routerLink="log">日志</li>
-          <li nz-menu-item routerLink="broker">MQTT总线</li>
+          <li nz-menu-item nzMatchRouter routerLink="web">Web服务</li>
+          <li nz-menu-item nzMatchRouter routerLink="database">数据库</li>
+          <li nz-menu-item nzMatchRouter routerLink="https">HTTPS</li>
+          <li nz-menu-item nzMatchRouter routerLink="broker">MQTT总线</li>
+          <li nz-menu-item nzMatchRouter routerLink="log">日志</li>
         </ul>
       </li>
       <li nz-submenu nzTitle="维护" nzIcon="setting" nzOpen>
         <ul>
-          <li nz-menu-item routerLink="backup">数据备份</li>
+          <li nz-menu-item nzMatchRouter routerLink="backup">数据备份</li>
           <li nz-menu-item>插件库</li>
         </ul>
       </li>
