@@ -55,7 +55,8 @@ export class SettingLogComponent {
       level: [this.data.level || 'info', []],
       caller: [this.data.caller || true, []],
       text: [this.data.text || true, []],
-      filename: [this.data.filename || "", []],
+      output: [this.data.output || "stdout", []],
+      filename: [this.data.filename || "log.txt", []],
       max_size: [this.data.max_size || 10, []],  //MB
       max_backups: [this.data.max_backups || 3, []], //保留文件数
       max_age: [this.data.max_age || 30, []],   //天

@@ -39,8 +39,18 @@
     </nz-form-control>
   </nz-form-item>
 
-
   <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="type">输出方式</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="">
+      <nz-select formControlName="output">
+        <nz-option nzLabel="文件" nzValue="file"></nz-option>
+        <nz-option nzLabel="标准输出" nzValue="stdout"></nz-option>
+        <nz-option nzLabel="滚动文件" nzValue="fileRotate"></nz-option>
+      </nz-select>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item *ngIf="formGroup.controls['output'].value!=='stdout'">
     <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="filename">日志文件</nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="">
       <input nz-input formControlName="filename"/>
@@ -48,28 +58,28 @@
   </nz-form-item>
 
 
-  <nz-form-item *ngIf="formGroup.controls['filename'].value!==''">
+  <nz-form-item *ngIf="formGroup.controls['output'].value==='fileRotate'">
     <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="max_size">最大尺寸 MB</nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="">
       <input nz-input type="number" formControlName="max_size"/>
     </nz-form-control>
   </nz-form-item>
 
-  <nz-form-item *ngIf="formGroup.controls['filename'].value!==''">
+  <nz-form-item *ngIf="formGroup.controls['output'].value==='fileRotate'">
     <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="max_backups">最大保留天数</nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="">
       <input nz-input type="number" formControlName="max_backups"/>
     </nz-form-control>
   </nz-form-item>
 
-  <nz-form-item *ngIf="formGroup.controls['filename'].value!==''">
+  <nz-form-item *ngIf="formGroup.controls['output'].value==='fileRotate'">
     <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="max_age">保留数量（滚动删除）</nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="">
       <input nz-input type="number" formControlName="max_age"/>
     </nz-form-control>
   </nz-form-item>
 
-  <nz-form-item *ngIf="formGroup.controls['filename'].value!==''">
+  <nz-form-item *ngIf="formGroup.controls['output'].value==='fileRotate'">
     <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="compress">文件压缩</nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="">
       <nz-switch formControlName="compress"></nz-switch>
