@@ -64,7 +64,7 @@ export class SettingWebComponent {
       key: [this.data.key || '', []],
       email: [this.data.email || '', []],
     })
-    console.log(this.formGroup)
+    //console.log(this.formGroup)
   }
   onSubmit(){
 

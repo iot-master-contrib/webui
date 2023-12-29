@@ -24,7 +24,6 @@ import {SettingWebComponent} from "./admin/pages/setting-web/setting-web.compone
 import {SettingDatabaseComponent} from "./admin/pages/setting-database/setting-database.component";
 import {SettingLogComponent} from "./admin/pages/setting-log/setting-log.component";
 import {SettingBrokerComponent} from "./admin/pages/setting-broker/setting-broker.component";
-import {SettingHttpsComponent} from "./admin/pages/setting-https/setting-https.component";
 import {SettingBackupComponent} from "./admin/pages/setting-backup/setting-backup.component";
 
 export const routes: Routes = [
@@ -64,7 +63,6 @@ export const routes: Routes = [
           {path: "database", component: SettingDatabaseComponent},
           {path: "log", component: SettingLogComponent},
           {path: "broker", component: SettingBrokerComponent},
-          {path: "https", component: SettingHttpsComponent},
           {path: "backup", component: SettingBackupComponent},
         ]
       },
