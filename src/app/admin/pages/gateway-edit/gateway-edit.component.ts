@@ -58,12 +58,11 @@ export class GatewayEditComponent {
 
   buildFromGroup(){
     this.formGroup = this.fb.group({
+      id: [this.data.id || '', []],
       name: [this.data.name || '', []],
       description: [this.data.description || '', []],
-      icon: [this.data.icon || '', []],
-      version: [this.data.version || '', []],
-      url: [this.data.url || '', []],
-      keywords: [this.data.keywords || [], []],
+      username: [this.data.username || '', []],
+      password: [this.data.password || '', []],
     })
   }
 
