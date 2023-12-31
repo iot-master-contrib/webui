@@ -1,1 +1,54 @@
-<p>alarm works!</p>
+<div class="toolbar">
+  <nz-space>
+    <button *nzSpaceItem nz-button nzType="primary" nzSize="large">
+      <span nz-icon nzType="reload"></span>
+      刷新
+    </button>
+
+    <div *nzSpaceItem class="search">
+      <nz-input-group nzSearch nzSize="large" [nzAddOnAfter]="suffixButton">
+        <input type="text" nz-input placeholder="请输入关键字"/>
+      </nz-input-group>
+      <ng-template #suffixButton>
+        <button nz-button nzType="primary" nzSize="large" nzSearch>搜索</button>
+      </ng-template>
+    </div>
+
+  </nz-space>
+
+</div>
+
+
+
+<nz-table #table [nzData]="alarms" [nzFrontPagination]="false">
+  <thead>
+  <tr>
+    <th>等级</th>
+    <th>标题</th>
+    <th>内容</th>
+    <th>创建时间</th>
+    <th>操作</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let data of table.data">
+    <td>{{ data.level }}</td>
+    <td>{{ data.title }}</td>
+    <td>{{ data.message }}</td>
+    <td [title]="data.created">{{ data.created | date }}</td>
+    <td>
+      <nz-space>
+        <a *nzSpaceItem title="删除" nz-popconfirm nzPopconfirmTitle="确认解绑"><i nz-icon nzType="delete"></i></a>
+      </nz-space>
+    </td>
+  </tr>
+  </tbody>
+</nz-table>
+
+
+
+
+<div class="pages">
+  <nz-pagination [nzPageIndex]="3" [nzPageSize]="10" [nzTotal]="500" nzShowSizeChanger
+                 nzShowQuickJumper></nz-pagination>
+</div>

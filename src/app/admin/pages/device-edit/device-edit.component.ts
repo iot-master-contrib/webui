@@ -60,9 +60,8 @@ export class DeviceEditComponent {
     this.formGroup = this.fb.group({
       name: [this.data.name || '', []],
       description: [this.data.description || '', []],
-      icon: [this.data.icon || '', []],
-      version: [this.data.version || '', []],
-      url: [this.data.url || '', []],
+      gateway_id: [this.data.gateway_id || '', []],
+      product_id: [this.data.product_id || '', []],
       keywords: [this.data.keywords || [], []],
     })
   }
