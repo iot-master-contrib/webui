@@ -1,0 +1,17 @@
+<nz-page-header nzBackIcon>
+  <nz-page-header-title>产品属性编辑</nz-page-header-title>
+  <nz-page-header-subtitle>{{ data.name }}</nz-page-header-subtitle>
+  <nz-page-header-extra>
+    <nz-space>
+      <button *nzSpaceItem nz-button nzType="primary" (click)="onSubmit()">保存</button>
+    </nz-space>
+  </nz-page-header-extra>
+</nz-page-header>
+
+
+<form nz-form (ngSubmit)="onSubmit()" [formGroup]="formGroup">
+
+  <app-edit-table [items]="items" formControlName="properties">
+  </app-edit-table>
+
+</form>

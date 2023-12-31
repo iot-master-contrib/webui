@@ -23,6 +23,8 @@
 <nz-table #table [nzData]="alarms" [nzFrontPagination]="false">
   <thead>
   <tr>
+    <th>项目</th>
+    <th>设备</th>
     <th>等级</th>
     <th>标题</th>
     <th>内容</th>
@@ -32,6 +34,8 @@
   </thead>
   <tbody>
   <tr *ngFor="let data of table.data">
+    <td>{{ data.project }}</td>
+    <td>{{ data.device }}</td>
     <td>{{ data.level }}</td>
     <td>{{ data.title }}</td>
     <td>{{ data.message }}</td>

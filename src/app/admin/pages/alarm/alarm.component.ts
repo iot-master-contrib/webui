@@ -43,10 +43,10 @@ import {RouterLink} from "@angular/router";
 export class AlarmComponent {
 
   alarms: any[] = [
-    {id:1,level:1,title:"1号温度过高",message:"温度计",created:new Date()},
-    {id:2,level:1,title:"2号温度过高",message:"温度计",created:new Date()},
-    {id:3,level:1,title:"3号温度过高",message:"温度计",created:new Date()},
-    {id:4,level:1,title:"4号温度过高",message:"温度计",created:new Date()},
+    {id:1,project:"第一人民医院",device:"1号温度计",level:1,title:"1号温度过高",message:"温度计",created:new Date()},
+    {id:2,project:"第一人民医院",device:"2号温度计",level:1,title:"2号温度过高",message:"温度计",created:new Date()},
+    {id:3,project:"第一人民医院",device:"3号温度计",level:1,title:"3号温度过高",message:"温度计",created:new Date()},
+    {id:4,project:"第一人民医院",device:"4号温度计",level:1,title:"4号温度过高",message:"温度计",created:new Date()},
   ]
 
 }

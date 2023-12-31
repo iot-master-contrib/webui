@@ -33,6 +33,7 @@ import {
   LockOutline,
   DisconnectOutline,
   LinkOutline,
+  DragOutline,
 } from '@ant-design/icons-angular/icons';
 const icons: IconDefinition[] = [
   PlusOutline,
@@ -54,6 +55,7 @@ const icons: IconDefinition[] = [
   LockOutline,
   DisconnectOutline,
   LinkOutline,
+  DragOutline,
 ];
 
 export const appConfig: ApplicationConfig = {

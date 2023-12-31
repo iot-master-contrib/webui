@@ -25,6 +25,7 @@ import {SettingDatabaseComponent} from "./admin/pages/setting-database/setting-d
 import {SettingLogComponent} from "./admin/pages/setting-log/setting-log.component";
 import {SettingBrokerComponent} from "./admin/pages/setting-broker/setting-broker.component";
 import {SettingBackupComponent} from "./admin/pages/setting-backup/setting-backup.component";
+import {ProductEditPropertyComponent} from "./admin/pages/product-edit-property/product-edit-property.component";
 
 export const routes: Routes = [
   {path: "", pathMatch: "full", redirectTo: "admin"},
@@ -50,6 +51,7 @@ export const routes: Routes = [
       {path: "product/create", component: ProductEditComponent},
       {path: "product/:id", component: ProductDetailComponent},
       {path: "product/:id/edit", component: ProductEditComponent},
+      {path: "product/:id/edit/property", component: ProductEditPropertyComponent},
       {path: "plugin", component: PluginComponent},
       {path: "plugin/create", component: PluginEditComponent},
       {path: "plugin/:id", component: PluginDetailComponent},
