@@ -67,7 +67,7 @@ export class LoginComponent implements OnInit {
 
       //TODO 缓存用户喜好
       // let main = localStorage.getItem("main") || "/admin"
-      let main = "/desktop";
+      let main = "/admin";
       this.router.navigate([main]).then(r => {
       });
 

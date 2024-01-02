@@ -53,7 +53,7 @@
       </li>
       <li nz-submenu nzTitle="测试用户" nzIcon="user">
         <ul>
-          <li nz-menu-item nzSelected="false">修改密码</li>
+          <li nz-menu-item nzSelected="false" (click)="handlePassword()">修改密码</li>
           <li nz-menu-divider></li>
           <li nz-menu-item nzSelected="false" nzDanger>退出</li>
         </ul>

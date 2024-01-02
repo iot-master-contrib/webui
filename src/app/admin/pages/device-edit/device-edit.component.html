@@ -1,5 +1,5 @@
 <nz-page-header nzBackIcon>
-  <nz-page-header-title>设备编辑</nz-page-header-title>
+  <nz-page-header-title>设备{{this.id?"编辑":"创建"}}</nz-page-header-title>
   <nz-page-header-subtitle>{{ data.name }}</nz-page-header-subtitle>
   <nz-page-header-extra>
     <nz-space>
@@ -22,7 +22,7 @@
   <nz-form-item>
     <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="gateway_id">网关</nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="">
-      <nz-select nzPlaceHolder="网关" formControlName="gateway_id">
+      <nz-select nzPlaceHolder="网关" formControlName="gateway_id"  [nzOptions]="gateway">
       </nz-select>
     </nz-form-control>
   </nz-form-item>
@@ -30,7 +30,7 @@
   <nz-form-item>
     <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="product_id">产品</nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="">
-      <nz-select nzPlaceHolder="产品" formControlName="product_id">
+      <nz-select nzPlaceHolder="产品" formControlName="product_id" [nzOptions]="product">
       </nz-select>
     </nz-form-control>
   </nz-form-item>

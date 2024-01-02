@@ -4,15 +4,15 @@
   <nz-page-header-extra>
     <nz-space>
       <button *nzSpaceItem nz-button routerLink="edit">编辑</button>
-      <button *nzSpaceItem nz-button nz-popconfirm nzPopconfirmTitle="确认删除" (nzOnConfirm)="delete()">删除</button>
+      <button *nzSpaceItem nz-button nz-popconfirm nzPopconfirmTitle="确认删除" (nzOnConfirm)="delete(this.id)">删除</button>
     </nz-space>
   </nz-page-header-extra>
   <nz-page-header-content>
     <nz-descriptions nzSize="small" [nzColumn]="3">
       <nz-descriptions-item nzTitle="ID" [nzSpan]="1">{{ data.id }}</nz-descriptions-item>
       <nz-descriptions-item nzTitle="名称" [nzSpan]="1">{{ data.name }}</nz-descriptions-item>
-      <nz-descriptions-item nzTitle="用户名" [nzSpan]="1">{{ data.version }}</nz-descriptions-item>
-      <nz-descriptions-item nzTitle="密码" [nzSpan]="1">{{ data.version }}</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="用户名" [nzSpan]="1">{{ data.username }}</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="密码" [nzSpan]="1">{{ data.password}}</nz-descriptions-item>
       <nz-descriptions-item nzTitle="创建时间" [nzSpan]="1">{{ data.created | date }}</nz-descriptions-item>
       <nz-descriptions-item nzTitle="说明" [nzSpan]="2">{{ data.description }}</nz-descriptions-item>
     </nz-descriptions>
@@ -64,7 +64,7 @@
       <nz-space>
         <a *nzSpaceItem title="打开" [routerLink]="'/admin/device/'+data.id"><i nz-icon nzType="eye"></i></a>
         <a *nzSpaceItem title="编辑"><i nz-icon nzType="edit"></i></a>
-        <a *nzSpaceItem title="删除" nz-popconfirm nzPopconfirmTitle="确认删除"><i nz-icon nzType="disconnect"></i></a>
+        <a *nzSpaceItem title="删除" nz-popconfirm nzPopconfirmTitle="确认删除" (nzOnConfirm)="unbind(data.id)"><i nz-icon nzType="disconnect"></i></a>
       </nz-space>
     </td>
   </tr>

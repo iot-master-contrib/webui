@@ -1,4 +1,4 @@
-import {Component, signal} from '@angular/core';
+import { Component, signal, OnInit } from '@angular/core';
 import {DatePipe} from "@angular/common";
 import {NzButtonComponent} from "ng-zorro-antd/button";
 import {NzDescriptionsComponent, NzDescriptionsItemComponent} from "ng-zorro-antd/descriptions";
@@ -9,13 +9,15 @@ import {
 } from "ng-zorro-antd/page-header";
 import {NzPopconfirmDirective} from "ng-zorro-antd/popconfirm";
 import {NzSpaceComponent, NzSpaceItemDirective} from "ng-zorro-antd/space";
-import {RouterLink} from "@angular/router";
+import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 import {NzFormModule} from "ng-zorro-antd/form";
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {NzInputDirective, NzTextareaCountComponent} from "ng-zorro-antd/input";
 import {NzUploadChangeParam, NzUploadComponent} from "ng-zorro-antd/upload";
 import {NzIconDirective} from "ng-zorro-antd/icon";
 import {NzSelectComponent} from "ng-zorro-antd/select";
+import { NzMessageService } from 'ng-zorro-antd/message';
+import { RequestService } from '../../../request.service';
 
 @Component({
   selector: 'app-gateway-edit',
@@ -46,28 +48,71 @@ import {NzSelectComponent} from "ng-zorro-antd/select";
   templateUrl: './gateway-edit.component.html',
   styleUrl: './gateway-edit.component.scss'
 })
-export class GatewayEditComponent {
+export class GatewayEditComponent implements OnInit{
   data: any = {
     name: "测试网关",
   }
   formGroup!: FormGroup;
-
-  constructor(private fb: FormBuilder) {
-    this.buildFromGroup()
+ id!:any
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private msg: NzMessageService,
+    private rs: RequestService,
+    private route: ActivatedRoute
+  ) {
+    this.buildFromGroup();
   }
-
-  buildFromGroup(){
+  buildFromGroup(data?:any){
+    data=data||{}
     this.formGroup = this.fb.group({
-      id: [this.data.id || '', []],
-      name: [this.data.name || '', []],
-      description: [this.data.description || '', []],
-      username: [this.data.username || '', []],
-      password: [this.data.password || '', []],
+      id: [data.id || '', []],
+      name: [data.name || '', []],
+      description: [data.description || '', []],
+      username: [data.username || '', []],
+      password: [data.password || '', []],
     })
   }
 
+  ngOnInit(): void {
+    if (this.route.snapshot.paramMap.has('id')) {
+      this.id = this.route.snapshot.paramMap.get('id');
+      this.load();
+      return
+    }
+    this.buildFromGroup();
+    
+  }
+  load() {
+    this.rs.get(`gateway/${this.id}`, { 
+    }).subscribe(
+      (res) => { 
+        this.buildFromGroup(res.data); 
+      },
+      (err) => {
+        console.log('err:', err);
+      }
+    );
+   
+   
+  }
   onSubmit() {
+    if (this.formGroup.valid) {
+      let url = this.id ? `gateway/${this.id}` : `gateway/create`;
+      this.rs.post(url, this.formGroup.value).subscribe((res) => {
+        this.router.navigateByUrl('admin/gateway');
+        this.msg.success('保存成功');
+      });
 
+      return;
+    } else {
+      Object.values(this.formGroup.controls).forEach((control) => {
+        if (control.invalid) {
+          control.markAsDirty();
+          control.updateValueAndValidity({ onlySelf: true });
+        }
+      });
+    }
   }
 
 

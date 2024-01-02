@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {NzPageHeaderComponent, NzPageHeaderModule} from "ng-zorro-antd/page-header";
 import {NzSpaceModule} from "ng-zorro-antd/space";
 import {NzDescriptionsModule} from "ng-zorro-antd/descriptions";
@@ -7,7 +7,7 @@ import {NzButtonComponent} from "ng-zorro-antd/button";
 import {NzIconDirective} from "ng-zorro-antd/icon";
 import {NzInputDirective, NzInputGroupComponent} from "ng-zorro-antd/input";
 import {DatePipe, NgForOf} from "@angular/common";
-import {RouterLink} from "@angular/router";
+import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 import {NzPopconfirmDirective} from "ng-zorro-antd/popconfirm";
 import {NzStatisticComponent} from "ng-zorro-antd/statistic";
 import {NzColDirective, NzRowDirective} from "ng-zorro-antd/grid";
@@ -20,6 +20,9 @@ import {
   NzTheadComponent,
   NzThMeasureDirective, NzTrDirective
 } from "ng-zorro-antd/table";
+import { FormBuilder } from '@angular/forms';
+import { NzMessageService } from 'ng-zorro-antd/message';
+import { RequestService  } from '../../../request.service';
 
 @Component({
   selector: 'app-device-detail',
@@ -52,7 +55,17 @@ import {
   templateUrl: './device-detail.component.html',
   styleUrl: './device-detail.component.scss'
 })
-export class DeviceDetailComponent {
+export class DeviceDetailComponent implements OnInit{
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private msg: NzMessageService,
+    private rs: RequestService,
+    private route: ActivatedRoute
+  ) {
+   
+  }
+  id!:any
   data: any = {
     id: 1,
     name: '温度计',
@@ -88,7 +101,14 @@ export class DeviceDetailComponent {
       description: ''
     },
   ];
-
+  ngOnInit(): void {
+    if (this.route.snapshot.paramMap.has('id')) {
+      this.id = this.route.snapshot.paramMap.get('id'); 
+      return
+    }
+   
+    
+  }
   alarms: any[] = [
     {level: 1, title: '温度过高', message: '温度大于35度', created: new Date()},
     {level: 1, title: '温度过高', message: '温度大于35度', created: new Date()},
@@ -97,8 +117,17 @@ export class DeviceDetailComponent {
     {level: 1, title: '温度过高', message: '温度大于35度', created: new Date()},
   ]
 
-  delete() {
-
+  delete( ) {
+    this.rs.get(`device/${this.id}/delete`, {}).subscribe(
+      (res) => {
+        this.msg.success('删除成功');
+        this.router.navigateByUrl('admin/device');
+      },
+      (err) => {
+        console.log('err:', err);
+      }
+    );
+    
   }
 
 }

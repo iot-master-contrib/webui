@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {NzPageHeaderComponent, NzPageHeaderModule} from "ng-zorro-antd/page-header";
 import {NzSpaceModule} from "ng-zorro-antd/space";
 import {NzDescriptionsModule} from "ng-zorro-antd/descriptions";
@@ -7,9 +7,12 @@ import {NzButtonComponent} from "ng-zorro-antd/button";
 import {NzIconDirective} from "ng-zorro-antd/icon";
 import {NzInputDirective, NzInputGroupComponent} from "ng-zorro-antd/input";
 import {DatePipe, NgForOf} from "@angular/common";
-import {RouterLink} from "@angular/router";
+import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 import {NzPopconfirmDirective} from "ng-zorro-antd/popconfirm";
 import {NzStatisticComponent} from "ng-zorro-antd/statistic";
+import { RequestService } from '../../../request.service';
+import { NzMessageService } from 'ng-zorro-antd/message';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-product-detail',
@@ -32,7 +35,8 @@ import {NzStatisticComponent} from "ng-zorro-antd/statistic";
   templateUrl: './product-detail.component.html',
   styleUrl: './product-detail.component.scss'
 })
-export class ProductDetailComponent {
+export class ProductDetailComponent implements OnInit{
+  id!:any
   data: any = {
     id: 1,
     name: '温度计',
@@ -47,7 +51,12 @@ export class ProductDetailComponent {
       {name: "hum", label: "湿度", unit: '%'},
     ]
   }
-
+  constructor( private fb: FormBuilder,
+    private router: Router,
+    private msg: NzMessageService,
+    private rs: RequestService,
+    private route: ActivatedRoute) { 
+  }
   plugins: any[] = [
     {
       id: 'modbus',
@@ -56,9 +65,38 @@ export class ProductDetailComponent {
       description: 'Modbus映射编辑'
     },
   ];
+  ngOnInit(): void {
+    if (this.route.snapshot.paramMap.has('id')) {
+      this.id = this.route.snapshot.paramMap.get('id');
+     this.load()
+    }
 
-  delete() {
-
+   
   }
-
+  load() {
+    this.rs.get(`product/${this.id}`, {}).subscribe(
+      (res) => {},
+      (err) => {
+        console.log('err:', err);
+      }
+    );
+    this.rs.get(`product/${this.id}/manifest`, {}).subscribe(
+      (res) => {},
+      (err) => {
+        console.log('err:', err);
+      }
+    );
+  }
+  delete( ) {
+    this.rs.get(`product/${this.id}/delete`, {}).subscribe(
+      (res) => {
+        this.msg.success('删除成功');
+        this.router.navigateByUrl('admin/product');
+      },
+      (err) => {
+        console.log('err:', err);
+      }
+    );
+    this.load();
+  }
 }

@@ -1,5 +1,5 @@
-import {Component, signal} from '@angular/core';
-import {DatePipe} from "@angular/common";
+import { Component, signal, OnInit } from '@angular/core';
+import {DatePipe,CommonModule} from "@angular/common";
 import {NzButtonComponent} from "ng-zorro-antd/button";
 import {NzDescriptionsComponent, NzDescriptionsItemComponent} from "ng-zorro-antd/descriptions";
 import {
@@ -9,18 +9,20 @@ import {
 } from "ng-zorro-antd/page-header";
 import {NzPopconfirmDirective} from "ng-zorro-antd/popconfirm";
 import {NzSpaceComponent, NzSpaceItemDirective} from "ng-zorro-antd/space";
-import {RouterLink} from "@angular/router";
+import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 import {NzFormDirective, NzFormItemComponent, NzFormModule} from "ng-zorro-antd/form";
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {NzInputDirective, NzTextareaCountComponent} from "ng-zorro-antd/input";
 import {NzUploadChangeParam, NzUploadComponent} from "ng-zorro-antd/upload";
 import {NzIconDirective} from "ng-zorro-antd/icon";
 import {NzSelectComponent} from "ng-zorro-antd/select";
-
+import { RequestService } from '../../../request.service';
+import { NzMessageService } from 'ng-zorro-antd/message'; 
 @Component({
   selector: 'app-product-edit',
   standalone: true,
   imports: [
+    CommonModule,
     DatePipe,
     NzButtonComponent,
     NzDescriptionsComponent,
@@ -46,30 +48,68 @@ import {NzSelectComponent} from "ng-zorro-antd/select";
   templateUrl: './product-edit.component.html',
   styleUrl: './product-edit.component.scss'
 })
-export class ProductEditComponent {
+export class ProductEditComponent implements OnInit{
   data: any = {
     name: "测试产品",
   }
   formGroup!: FormGroup;
-
-  constructor(private fb: FormBuilder) {
+  id: any = 0;
+  constructor( private fb: FormBuilder,
+    private router: Router,
+    private msg: NzMessageService,
+    private rs: RequestService,
+    private route: ActivatedRoute) {
     this.buildFromGroup()
   }
 
-  buildFromGroup(){
+  buildFromGroup(data?:any){
+    data=data||{}
     this.formGroup = this.fb.group({
-      name: [this.data.name || '', []],
-      description: [this.data.description || '', []],
-      icon: [this.data.icon || '', []],
-      version: [this.data.version || '', []],
-      url: [this.data.url || '', []],
-      keywords: [this.data.keywords || [], []],
+     id: [data.id || '', []],
+      name: [data.name || '', []],
+      description: [data.description || '', []],
+      icon: [data.icon || '', []],
+      version: [data.version || '', []],
+      url: [data.url || '', []],
+      keywords: [data.keywords || [], []],
     })
   }
 
-  onSubmit() {
+  ngOnInit(): void {
+    if (this.route.snapshot.paramMap.has('id')) {
+      this.id = this.route.snapshot.paramMap.get('id');
+     this.load()
+    }
 
+    this.buildFromGroup();
   }
+  load() {
+    this.rs.get(`product/${this.id}`, {}).subscribe(
+      (res) => {},
+      (err) => {
+        console.log('err:', err);
+      }
+    );
+  }
+  onSubmit() {
+    if (this.formGroup.valid) {
+      let url = this.id ? `product/${this.id}` : `product/create`;
+      this.rs.post(url, this.formGroup.value).subscribe((res) => {
+        this.router.navigateByUrl('admin/product');
+        this.msg.success('保存成功');
+      });
+
+      return;
+    } else {
+      Object.values(this.formGroup.controls).forEach((control) => {
+        if (control.invalid) {
+          control.markAsDirty();
+          control.updateValueAndValidity({ onlySelf: true });
+        }
+      });
+    }
+  }
+  
 
 
   onIconChange($event: NzUploadChangeParam) {
