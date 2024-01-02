@@ -9,7 +9,7 @@ import {RequestService} from "./request.service";
 export class OemService {
 
   oem: any = {
-    title: '物联大师',
+    name: '物联大师',
     logo: '/assets/logo.png',
     company: '无锡真格智能科技有限公司',
     copyright: '©2016-2024'

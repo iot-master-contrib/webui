@@ -1,6 +1,6 @@
 <div class="login">
-  <h1 class="login-title">{{oem.title}}</h1>
-  <div class="login-form" >
+  <h1 class="login-title">{{ os.oem.name }}</h1>
+  <div class="login-form">
     <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
       <nz-form-item>
         <nz-form-control nzErrorTip="请输入用户名!">
@@ -12,7 +12,7 @@
       <nz-form-item>
         <nz-form-control nzErrorTip="请输入密码!">
           <nz-input-group nzPrefixIcon="lock" nzSize="large" style="border-radius: 10px">
-            <input type="password" nz-input formControlName="password" placeholder="密码" />
+            <input type="password" nz-input formControlName="password" placeholder="密码"/>
           </nz-input-group>
         </nz-form-control>
       </nz-form-item>

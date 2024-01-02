@@ -33,7 +33,6 @@ import {NzButtonComponent} from "ng-zorro-antd/button";
 })
 export class LoginComponent implements OnInit {
   validateForm!: FormGroup;
-  oem: any;
 
   constructor(private fb: FormBuilder,
               private rs: RequestService,
@@ -41,8 +40,8 @@ export class LoginComponent implements OnInit {
               private router: Router,
               protected os: OemService
   ) {
-    this.oem = os.oem;
   }
+
 
   submitForm(): void {
     console.log('submit form');
