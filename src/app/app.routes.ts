@@ -26,6 +26,7 @@ import {SettingLogComponent} from "./admin/pages/setting-log/setting-log.compone
 import {SettingBrokerComponent} from "./admin/pages/setting-broker/setting-broker.component";
 import {SettingBackupComponent} from "./admin/pages/setting-backup/setting-backup.component";
 import {ProductEditPropertyComponent} from "./admin/pages/product-edit-property/product-edit-property.component";
+import {ProjectEditUserComponent} from "./admin/pages/project-edit-user/project-edit-user.component";
 
 export const routes: Routes = [
   {path: "", pathMatch: "full", redirectTo: "admin"},
@@ -38,6 +39,7 @@ export const routes: Routes = [
       {path: "project/create", component: ProjectEditComponent},
       {path: "project/:id", component: ProjectDetailComponent},
       {path: "project/:id/edit", component: ProjectEditComponent},
+      {path: "project/:id/edit/user", component: ProjectEditUserComponent},
       {path: "device", component: DeviceComponent},
       {path: "device/create", component: DeviceEditComponent},
       {path: "device/:id", component: DeviceDetailComponent},
