@@ -27,6 +27,7 @@ import {SettingBrokerComponent} from "./admin/pages/setting-broker/setting-broke
 import {SettingBackupComponent} from "./admin/pages/setting-backup/setting-backup.component";
 import {ProductEditPropertyComponent} from "./admin/pages/product-edit-property/product-edit-property.component";
 import {ProjectEditUserComponent} from "./admin/pages/project-edit-user/project-edit-user.component";
+import {SettingMqttComponent} from "./admin/pages/setting-mqtt/setting-mqtt.component";
 
 export const routes: Routes = [
   {path: "", pathMatch: "full", redirectTo: "admin"},
@@ -65,8 +66,9 @@ export const routes: Routes = [
           {path: "", pathMatch: "full", redirectTo: "web"},
           {path: "web", component: SettingWebComponent},
           {path: "database", component: SettingDatabaseComponent},
-          {path: "log", component: SettingLogComponent},
           {path: "broker", component: SettingBrokerComponent},
+          {path: "mqtt", component: SettingMqttComponent},
+          {path: "log", component: SettingLogComponent},
           {path: "backup", component: SettingBackupComponent},
         ]
       },
