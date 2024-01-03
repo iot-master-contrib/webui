@@ -3,7 +3,9 @@
   <nz-page-header-subtitle>{{ data.name }}</nz-page-header-subtitle>
   <nz-page-header-extra>
     <nz-space>
-      <a *nzSpaceItem nz-button routerLink="user">项目用户</a>
+      <a *nzSpaceItem nz-button routerLink="device">绑定设备</a>
+      <a *nzSpaceItem nz-button routerLink="plugin">绑定插件</a>
+      <a *nzSpaceItem nz-button routerLink="user">绑定用户</a>
       <button *nzSpaceItem nz-button nzType="primary" (click)="onSubmit()">保存</button>
     </nz-space>
   </nz-page-header-extra>
@@ -27,8 +29,8 @@
         <input nz-input formControlName="name"/>
       </nz-form-control>
     </nz-form-item>
-  
-  
+
+
     <nz-form-item  >
       <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">关键字</nz-form-label>
       <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="">
@@ -36,14 +38,14 @@
         </nz-select>
       </nz-form-control>
     </nz-form-item>
-  
+
     <nz-form-item>
       <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="version">版本</nz-form-label>
       <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="">
         <input nz-input formControlName="version"/>
       </nz-form-control>
     </nz-form-item>
-  
+
     <nz-form-item>
       <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="description">说明</nz-form-label>
       <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="">
@@ -52,7 +54,7 @@
         </nz-textarea-count>
       </nz-form-control>
     </nz-form-item>
-  
+
     <nz-form-item>
       <nz-form-label [nzSm]="6" [nzXs]="24">封面
       </nz-form-label>
@@ -64,15 +66,15 @@
         </nz-upload>
       </nz-form-control>
     </nz-form-item>
-  
-  
+
+
     <nz-form-item>
       <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="version">URL</nz-form-label>
       <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="">
         <input nz-input formControlName="url"/>
       </nz-form-control>
     </nz-form-item>
-  
+
     <nz-form-item>
       <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="version">版本</nz-form-label>
       <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="">
@@ -80,12 +82,12 @@
       </nz-form-control>
     </nz-form-item>
   </ng-template>
-  
 
-  
+
+
 <!-- <div *ngIf="!id">  -->
 
-  
+
 <!-- </div> -->
 
 </form>

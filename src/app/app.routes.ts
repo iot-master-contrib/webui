@@ -28,6 +28,10 @@ import {SettingBackupComponent} from "./admin/pages/setting-backup/setting-backu
 import {ProductEditPropertyComponent} from "./admin/pages/product-edit-property/product-edit-property.component";
 import {ProjectEditUserComponent} from "./admin/pages/project-edit-user/project-edit-user.component";
 import {SettingMqttComponent} from "./admin/pages/setting-mqtt/setting-mqtt.component";
+import {ProductEditEventComponent} from "./admin/pages/product-edit-event/product-edit-event.component";
+import {ProductEditActionComponent} from "./admin/pages/product-edit-action/product-edit-action.component";
+import {ProjectEditPluginComponent} from "./admin/pages/project-edit-plugin/project-edit-plugin.component";
+import {ProjectEditDeviceComponent} from "./admin/pages/project-edit-device/project-edit-device.component";
 
 export const routes: Routes = [
   {path: "", pathMatch: "full", redirectTo: "admin"},
@@ -40,7 +44,9 @@ export const routes: Routes = [
       {path: "project/create", component: ProjectEditComponent},
       {path: "project/:id", component: ProjectDetailComponent},
       {path: "project/:id/edit", component: ProjectEditComponent},
+      {path: "project/:id/edit/device", component: ProjectEditDeviceComponent},
       {path: "project/:id/edit/user", component: ProjectEditUserComponent},
+      {path: "project/:id/edit/plugin", component: ProjectEditPluginComponent},
       {path: "device", component: DeviceComponent},
       {path: "device/create", component: DeviceEditComponent},
       {path: "device/:id", component: DeviceDetailComponent},
@@ -55,6 +61,8 @@ export const routes: Routes = [
       {path: "product/:id", component: ProductDetailComponent},
       {path: "product/:id/edit", component: ProductEditComponent},
       {path: "product/:id/edit/property", component: ProductEditPropertyComponent},
+      {path: "product/:id/edit/event", component: ProductEditEventComponent},
+      {path: "product/:id/edit/action", component: ProductEditActionComponent},
       {path: "plugin", component: PluginComponent},
       {path: "plugin/create", component: PluginEditComponent},
       {path: "plugin/:id", component: PluginDetailComponent},
