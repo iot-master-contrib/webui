@@ -25,6 +25,7 @@ import {SettingDatabaseComponent} from "./admin/pages/setting-database/setting-d
 import {SettingLogComponent} from "./admin/pages/setting-log/setting-log.component";
 import {SettingBrokerComponent} from "./admin/pages/setting-broker/setting-broker.component";
 import {SettingBackupComponent} from "./admin/pages/setting-backup/setting-backup.component";
+import { SettingAttachComponent } from './admin/pages/setting-attach/setting-attach.component';
 import {ProductEditPropertyComponent} from "./admin/pages/product-edit-property/product-edit-property.component";
 import {ProjectEditUserComponent} from "./admin/pages/project-edit-user/project-edit-user.component";
 import {SettingMqttComponent} from "./admin/pages/setting-mqtt/setting-mqtt.component";
@@ -77,7 +78,8 @@ export const routes: Routes = [
           {path: "broker", component: SettingBrokerComponent},
           {path: "mqtt", component: SettingMqttComponent},
           {path: "log", component: SettingLogComponent},
-          {path: "backup", component: SettingBackupComponent},
+          {path: "backup", component: SettingBackupComponent}, 
+          {path: "attach", component: SettingAttachComponent}
         ]
       },
     ]

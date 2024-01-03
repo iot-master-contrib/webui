@@ -13,6 +13,8 @@ import {NzSpaceComponent} from "ng-zorro-antd/space";
 import {Router, RouterLink} from "@angular/router";
 import { RequestService } from '../../../request.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
+import { CreateComponent } from '../../modals/create/create.component';
 
 @Component({
   selector: 'app-plugin',
@@ -45,7 +47,7 @@ export class PluginComponent implements OnInit{
   nzPageIndex = 1;
   nzPageSize = 10;
   value = '';
-  constructor(
+  constructor( private ms: NzModalService, 
     private route: Router,
     private rs: RequestService,
     private msg: NzMessageService
@@ -83,5 +85,38 @@ export class PluginComponent implements OnInit{
         }
       );
   }
-
+  create(){
+ 
+    const modal: NzModalRef = this.ms.create({
+      nzTitle: '创建插件',   
+      nzContent: CreateComponent, 
+      nzData: {
+        name: 'product', 
+      },
+      nzMaskClosable: false,
+      nzFooter: [
+                {
+                    label: '取消',
+                    onClick: () => {
+                        modal.destroy();
+                    },
+                },
+               {
+                    label: '保存',
+                    type: 'primary',
+                    onClick: (rs: any) => {
+                        rs!.submit().then(
+                            () => {
+                                modal.destroy();
+                                this.load()
+                            },
+                            () => {}
+                        );
+                    },
+                },
+              
+            ],
+    });
+  
+    }
 }

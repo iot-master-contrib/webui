@@ -70,22 +70,27 @@ export class ProductDetailComponent implements OnInit{
       this.id = this.route.snapshot.paramMap.get('id');
      this.load()
     }
-
-   
+ 
   }
   load() {
     this.rs.get(`product/${this.id}`, {}).subscribe(
-      (res) => {},
+      (res) => {
+
+        this.rs.get(`product/${this.id}/manifest`, {}).subscribe(
+          (mes) => {
+            this.data={...mes.data,...res.data}
+          },
+          (err) => {
+            console.log('err:', err);
+          }
+        );
+
+      },
       (err) => {
         console.log('err:', err);
       }
     );
-    this.rs.get(`product/${this.id}/manifest`, {}).subscribe(
-      (res) => {},
-      (err) => {
-        console.log('err:', err);
-      }
-    );
+   
   }
   delete( ) {
     this.rs.get(`product/${this.id}/delete`, {}).subscribe(

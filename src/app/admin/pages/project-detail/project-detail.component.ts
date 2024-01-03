@@ -113,28 +113,47 @@ export class ProjectDetailComponent implements OnInit{
  
   }
   load() {
-    this.rs.get(`project/${this.id}/manifest`, {}).subscribe(
-      (res) => {},
-      (err) => {
-        console.log('err:', err);
-      }
-    );
-
-    this.rs.post(`device/search`, {}).subscribe(
+    this.rs.post(`project/search`, { filter:{ id: this.id}  }).subscribe(
       (res) => {
-      if(res.data)
-      {
-        this.devices=res.data
-        res.data.filter((item:any)=>{
 
-        res.data.push({label:item.id,value:item.id})
-      })}
-      
+        let data=res.data[0]
+        this.rs.get(`project/${this.id}/manifest`, {}).subscribe(
+          (mes) => {
+            this.data={...data,...mes.data}
+            
+          },
+          (err) => {
+            console.log('err:', err);
+          }
+        );
+    
       },
       (err) => {
         console.log('err:', err);
       }
     );
+    
+    this.rs.post(`device/search`, {}).subscribe(
+      (res) => {
+      if(res.data)
+      {
+        this.devices=res.data
+    
+    }
+      this.total=res.total
+      },
+      (err) => {
+        console.log('err:', err);
+      }
+    );
+  }
+  nzPageSizeChange(e: any) {
+    this.nzPageSize = e;
+    this.load();
+  }
+  nzPageIndexChange(e: any) {
+    this.nzPageIndex = e;
+    this.load();
   }
   delete( ) {
     this.rs.get(`project/${this.id}/delete`, {}).subscribe(

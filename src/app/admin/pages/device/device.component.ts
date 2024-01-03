@@ -94,10 +94,10 @@ export class DeviceComponent {
       skip: (this.nzPageIndex - 1) * this.nzPageSize,
     };
 
-    this.value ? (query = { ...query, filter: { name: this.value } }) : '';
+    this.value ? (query = { ...query, keyword: { name: this.value } }) : '';
    
     this.rs
-      .get('device/list', query)
+      .post('device/search', query)
       .subscribe(
         (res) => { 
             this.devices = res.data;

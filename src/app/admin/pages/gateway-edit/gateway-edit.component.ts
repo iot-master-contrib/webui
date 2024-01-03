@@ -11,7 +11,7 @@ import {NzPopconfirmDirective} from "ng-zorro-antd/popconfirm";
 import {NzSpaceComponent, NzSpaceItemDirective} from "ng-zorro-antd/space";
 import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 import {NzFormModule} from "ng-zorro-antd/form";
-import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {NzInputDirective, NzTextareaCountComponent} from "ng-zorro-antd/input";
 import {NzUploadChangeParam, NzUploadComponent} from "ng-zorro-antd/upload";
 import {NzIconDirective} from "ng-zorro-antd/icon";
@@ -69,8 +69,8 @@ export class GatewayEditComponent implements OnInit{
       id: [data.id || '', []],
       name: [data.name || '', []],
       description: [data.description || '', []],
-      username: [data.username || '', []],
-      password: [data.password || '', []],
+      username: [data.username || '', [Validators.required]],
+      password: [data.password || '', [Validators.required]],
     })
   }
 

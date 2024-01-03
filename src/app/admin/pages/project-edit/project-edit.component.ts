@@ -85,7 +85,7 @@ export class ProjectEditComponent implements OnInit {
   buildFromGroup(data?: any) {
     data = data || {};
     this.formGroup = this.fb.group({
-      id: [data.id || '', []],
+      id: [this.id  , []],
       name: [data.name || '', []],
       description: [data.description || '', []],
       icon: [data.icon || '', []],
@@ -93,19 +93,25 @@ export class ProjectEditComponent implements OnInit {
       url: [data.url || '', []],
       keywords: [data.keywords || [], []],
     });
+    console.log( this.formGroup.value)
   }
 
-  ngOnInit(): void {
+  ngOnInit(): void { 
+     
     if (this.route.snapshot.paramMap.has('id')) {
       this.id = this.route.snapshot.paramMap.get('id');
+      this.buildFromGroup( );
      this.load()
     }
 
-    this.buildFromGroup();
+   
   }
   load() {
     this.rs.get(`project/${this.id}/manifest`, {}).subscribe(
-      (res) => {},
+      (res) => {
+
+        this.buildFromGroup(res.data);
+      },
       (err) => {
         console.log('err:', err);
       }
@@ -113,7 +119,7 @@ export class ProjectEditComponent implements OnInit {
   }
   onSubmit() {
     if (this.formGroup.valid) {
-      let url = this.id ? `project/${this.id}` : `project/create`;
+      let url =  `project/${this.id}/manifest`  ;
       this.rs.post(url, this.formGroup.value).subscribe((res) => {
         this.router.navigateByUrl('admin');
         this.msg.success('保存成功');

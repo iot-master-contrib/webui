@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {NgIf} from "@angular/common";
 import {NzButtonComponent} from "ng-zorro-antd/button";
@@ -13,6 +13,9 @@ import {
 } from "ng-zorro-antd/page-header";
 import {NzSpaceComponent} from "ng-zorro-antd/space";
 import {NzSwitchComponent} from "ng-zorro-antd/switch";
+import { Router } from '@angular/router';
+import { RequestService } from '../../../request.service';
+import { NzMessageService } from 'ng-zorro-antd/message';
 
 @Component({
   selector: 'app-setting-log',
@@ -41,15 +44,28 @@ import {NzSwitchComponent} from "ng-zorro-antd/switch";
   templateUrl: './setting-log.component.html',
   styleUrl: './setting-log.component.scss'
 })
-export class SettingLogComponent {
+export class SettingLogComponent implements OnInit{
   formGroup!: FormGroup;
 
   data: any = {}
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, 
+    private route: Router,
+    private rs: RequestService,
+    private msg: NzMessageService) {
     this.buildFromGroup()
   }
-
+  ngOnInit(): void {
+    this.rs.get('setting/log', {}).subscribe(
+      (res) => {
+        // this.projects = res.data;
+        // this.total = res.total;
+      },
+      (err) => {
+        console.log('err:', err);
+      }
+    );
+  }
   buildFromGroup() {
     this.formGroup = this.fb.group({
       level: [this.data.level || 'info', []],
@@ -66,6 +82,14 @@ export class SettingLogComponent {
   }
 
   onSubmit() {
-
+    this.rs.post('setting/log',this.formGroup.value).subscribe(
+      (res) => {
+        // this.projects = res.data;
+        // this.total = res.total;
+      },
+      (err) => {
+        console.log('err:', err);
+      }
+    );
   }
 }

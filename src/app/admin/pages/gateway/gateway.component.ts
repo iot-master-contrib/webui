@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Optional } from '@angular/core';
 import {NzSpaceComponent, NzSpaceItemDirective} from "ng-zorro-antd/space";
 import {NzButtonComponent} from "ng-zorro-antd/button";
 import {NzIconDirective} from "ng-zorro-antd/icon";
@@ -11,10 +11,13 @@ import {NzPopconfirmDirective} from "ng-zorro-antd/popconfirm";
 import { RequestService } from '../../../request.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { FormsModule } from '@angular/forms';
+import { NzModalRef } from 'ng-zorro-antd/modal';
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-gateway',
   standalone: true,
   imports: [
+    CommonModule,
     FormsModule,
     NzSpaceComponent,
     NzButtonComponent,
@@ -33,11 +36,13 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './gateway.component.scss'
 })
 export class GatewayComponent  implements OnInit{
+  @Input() chooseGateway = false;
   total = 0;
   nzPageIndex = 1;
   nzPageSize = 10;
   value = '';
   constructor(
+    @Optional() protected ref: NzModalRef,
     private route: Router,
     private rs: RequestService,
     private msg: NzMessageService
@@ -56,7 +61,10 @@ export class GatewayComponent  implements OnInit{
     // {id:3,name:"新安镇",username:"test",password:"test",online:new Date()},
     // {id:4,name:"华庄",username:"test",password:"test",online:new Date()},
   ]
-
+  select(id: any) {
+    
+    this.ref && this.ref.close(id);
+  }
   search() {
     console.log(this.value);
     this.load();
@@ -88,7 +96,7 @@ export class GatewayComponent  implements OnInit{
       skip: (this.nzPageIndex - 1) * this.nzPageSize,
     };
 
-    this.value ? (query = { ...query, filter: {username: this.value } }) : '';
+    this.value ? (query = { ...query, keyword: {username: this.value } }) : '';
    
     this.rs
       .post('gateway/search', query)

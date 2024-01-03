@@ -14,6 +14,9 @@ import {
 } from "ng-zorro-antd/page-header";
 import {NzSpaceComponent, NzSpaceItemDirective} from "ng-zorro-antd/space";
 import {NzUploadComponent} from "ng-zorro-antd/upload";
+import { Router } from '@angular/router';
+import { RequestService } from '../../../request.service';
+import { NzMessageService } from 'ng-zorro-antd/message';
 
 @Component({
   selector: 'app-setting-database',
@@ -58,10 +61,23 @@ export class SettingDatabaseComponent {
     godror: 'user="root" password="123456" connectString="127.0.0.1:1521/master"',
   }
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, 
+    private route: Router,
+    private rs: RequestService,
+    private msg: NzMessageService) {
     this.buildFromGroup()
   }
-
+  ngOnInit(): void {
+    this.rs.get('setting/database', {}).subscribe(
+      (res) => {
+        // this.projects = res.data;
+        // this.total = res.total;
+      },
+      (err) => {
+        console.log('err:', err);
+      }
+    );
+  }
   buildFromGroup() {
     this.formGroup = this.fb.group({
       type: [this.data.type || 'sqlite', []],
@@ -72,7 +88,15 @@ export class SettingDatabaseComponent {
   }
 
   onSubmit() {
-
+    this.rs.post('setting/database', this.formGroup.value).subscribe(
+      (res) => {
+        // this.projects = res.data;
+        // this.total = res.total;
+      },
+      (err) => {
+        console.log('err:', err);
+      }
+    );
   }
 
   writeExample() {

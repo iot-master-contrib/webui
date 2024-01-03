@@ -80,7 +80,10 @@ export class DeviceDetailComponent implements OnInit{
       {name: "hum", label: "湿度", unit: '%'},
     ]
   }
-
+  total = 0;
+  nzPageIndex = 1;
+  nzPageSize = 10;
+  value = '';
   variables: any = {
     temp: 30,
     hum: 71,
@@ -104,6 +107,7 @@ export class DeviceDetailComponent implements OnInit{
   ngOnInit(): void {
     if (this.route.snapshot.paramMap.has('id')) {
       this.id = this.route.snapshot.paramMap.get('id'); 
+      this.load()
       return
     }
    
@@ -116,7 +120,39 @@ export class DeviceDetailComponent implements OnInit{
     {level: 1, title: '温度过高', message: '温度大于35度', created: new Date()},
     {level: 1, title: '温度过高', message: '温度大于35度', created: new Date()},
   ]
+  load(){
 
+    this.rs.get(`device/${this.id}`, {}).subscribe(
+      (res) => {
+        this.data={...res.data, properties: [
+          {name: "temp", label: "温度", unit: '℃'},
+          {name: "hum", label: "湿度", unit: '%'},
+        ]}
+      },
+      (err) => {
+        console.log('err:', err);
+      }
+    );
+    this.rs
+    .get('alarm/list', {})
+    .subscribe(
+      (res) => { 
+          this.alarms = res.data;
+          this.total = res.total; 
+      },
+      (err) => {
+        console.log('err:', err);
+      }
+    );
+  }
+  nzPageSizeChange(e: any) {
+    this.nzPageSize = e;
+    this.load();
+  }
+  nzPageIndexChange(e: any) {
+    this.nzPageIndex = e;
+    this.load();
+  }
   delete( ) {
     this.rs.get(`device/${this.id}/delete`, {}).subscribe(
       (res) => {

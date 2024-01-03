@@ -21,10 +21,13 @@ import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { FormsModule } from '@angular/forms';
+import { CreateComponent } from '../../modals/create/create.component';
+import { NzModalRef, NzModalService, NzModalModule } from 'ng-zorro-antd/modal';
 @Component({
   selector: 'app-project',
   standalone: true,
   imports: [
+    NzModalModule,
     FormsModule,
     NzInputModule,
     NzPopconfirmModule,
@@ -67,7 +70,8 @@ export class ProjectComponent implements OnInit {
   constructor(
     private route: Router,
     private rs: RequestService,
-    private msg: NzMessageService
+    private msg: NzMessageService,
+    private ms: NzModalService
   ) {}
   ngOnInit(): void {
     this.load();
@@ -90,7 +94,8 @@ export class ProjectComponent implements OnInit {
   delete(i: any) {
     this.rs.get(`project/${i}/delete`, {}).subscribe(
       (res) => {
-        this.msg.success('保存成功');
+        this.msg.success('删除成功');
+        this.load();
       },
       (err) => {
         console.log('err:', err);
@@ -106,6 +111,37 @@ export class ProjectComponent implements OnInit {
     this.nzPageIndex = e;
     this.load();
   }
+  create() {
+    const modal: NzModalRef = this.ms.create({
+      nzTitle: '创建项目',
+      nzContent: CreateComponent,
+      nzData: {
+        name: 'project',
+      },
+      nzMaskClosable: false,
+      nzFooter: [
+        {
+          label: '取消',
+          onClick: () => {
+            modal.destroy();
+          },
+        },
+        {
+          label: '保存',
+          type: 'primary',
+          onClick: (rs: any) => {
+            rs!.submit().then(
+              () => {
+                modal.destroy();
+                this.load();
+              },
+              () => {}
+            );
+          },
+        },
+      ],
+    });
+  }
   load() {
     let query;
 
@@ -115,18 +151,29 @@ export class ProjectComponent implements OnInit {
     };
 
     this.value ? (query = { ...query, filter: { id: this.value } }) : '';
-    this.rs
-      .post('project/search', query)
-      .subscribe(
-        (res) => {
-         
-            this.projects = res.data;
-            this.total = res.total;
-         
-        },
-        (err) => {
-          console.log('err:', err);
-        }
-      );
+    this.rs.post('project/search', query).subscribe(
+      (res) => {
+        let projects = res.data;
+        this.projects = res.data;
+        this.total = res.total;
+        projects.filter((item: any, index: any) => {
+          this.rs.get(`project/${item.id}/manifest`, {}).subscribe(
+            (mes) => {
+              if (res.data) {
+                projects[index] = { ...projects, ...mes.data };
+
+                console.log(projects[index]);
+              }
+            },
+            (err) => {
+              console.log('err:', err);
+            }
+          );
+        });
+      },
+      (err) => {
+        console.log('err:', err);
+      }
+    );
   }
 }

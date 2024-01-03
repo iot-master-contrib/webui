@@ -66,8 +66,8 @@
 
 
 <div class="pages">
-  <nz-pagination [nzPageIndex]="3" [nzPageSize]="10" [nzTotal]="20" nzShowSizeChanger
-                 nzShowQuickJumper></nz-pagination>
+  <nz-pagination  [nzPageIndex]="nzPageIndex" [nzPageSize]="nzPageSize" [nzTotal]="total" nzShowSizeChanger
+  nzShowQuickJumper (nzPageIndexChange)="nzPageIndexChange($event)"  (nzPageSizeChange)="nzPageSizeChange($event)"></nz-pagination>
 </div>
 
 

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {NzButtonComponent} from "ng-zorro-antd/button";
 import {NzColDirective, NzRowDirective} from "ng-zorro-antd/grid";
@@ -12,6 +12,9 @@ import {
 } from "ng-zorro-antd/page-header";
 import {NzSpaceComponent, NzSpaceItemDirective} from "ng-zorro-antd/space";
 import {NgIf} from "@angular/common";
+import { Router } from '@angular/router';
+import { RequestService } from '../../../request.service';
+import { NzMessageService } from 'ng-zorro-antd/message';
 
 @Component({
   selector: 'app-setting-broker',
@@ -40,15 +43,29 @@ import {NgIf} from "@angular/common";
   templateUrl: './setting-broker.component.html',
   styleUrl: './setting-broker.component.scss'
 })
-export class SettingBrokerComponent {
-  formGroup!: FormGroup;
-
-  data: any = {}
-
-  constructor(private fb: FormBuilder) {
+export class SettingBrokerComponent implements OnInit{
+  constructor(private fb: FormBuilder, 
+    private route: Router,
+    private rs: RequestService,
+    private msg: NzMessageService) {
     this.buildFromGroup()
   }
 
+  formGroup!: FormGroup;
+
+  data: any = {}
+  ngOnInit(): void {
+    this.rs.get('setting/broker', {}).subscribe(
+      (res) => {
+        // this.projects = res.data;
+        // this.total = res.total;
+      },
+      (err) => {
+        console.log('err:', err);
+      }
+    );
+  }
+ 
   buildFromGroup() {
     this.formGroup = this.fb.group({
       type: [this.data.type || 'internal', []],
@@ -62,7 +79,15 @@ export class SettingBrokerComponent {
   }
 
   onSubmit() {
-
+    this.rs.post('setting/broker', this.formGroup.value).subscribe(
+      (res) => {
+        // this.projects = res.data;
+        // this.total = res.total;
+      },
+      (err) => {
+        console.log('err:', err);
+      }
+    );
   }
 
 }

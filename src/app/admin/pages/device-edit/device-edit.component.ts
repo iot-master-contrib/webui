@@ -35,11 +35,15 @@ import { NzIconDirective } from 'ng-zorro-antd/icon';
 import { NzSelectComponent } from 'ng-zorro-antd/select';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { RequestService } from '../../../request.service';
-
+import { NzAutocompleteModule } from 'ng-zorro-antd/auto-complete';
+import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
+import { GatewayComponent } from '../gateway/gateway.component';
+import { ProductComponent } from '../product/product.component';
 @Component({
   selector: 'app-device-edit',
   standalone: true,
   imports: [
+    NzAutocompleteModule,
     DatePipe,
     NzButtonComponent,
     NzDescriptionsComponent,
@@ -73,16 +77,24 @@ export class DeviceEditComponent {
   formGroup!: FormGroup;
   product: any = [];
   gateway: any = [];
+  filteredOptions: string[] = [
+    'Burns Bay Road',
+    'Downing Street',
+    'Wall Street',
+  ];
   constructor(
     private fb: FormBuilder,
     private router: Router,
     private msg: NzMessageService,
     private rs: RequestService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private ms: NzModalService
   ) {
     this.buildFromGroup();
   }
-
+  onInputChange() {
+    console.log(this.formGroup.value.gateway_id);
+  }
   buildFromGroup(data?: any) {
     data = data || {};
     this.formGroup = this.fb.group({
@@ -94,13 +106,45 @@ export class DeviceEditComponent {
       keywords: [data.keywords || [], []],
     });
   }
-
+  onChoose(e: Number) {
+    if (e) {
+      this.ms
+        .create({
+          nzTitle: '产品选择',
+          nzCentered: true,
+          nzMaskClosable: false,
+          nzContent: ProductComponent,
+          nzFooter: null,
+        })
+        .afterClose.subscribe((res) => {
+          console.log(res);
+          if (res) {
+            this.formGroup.patchValue({ product_id: res });
+          }
+        });
+    } else {
+      this.ms
+        .create({
+          nzTitle: '网关选择',
+          nzCentered: true,
+          nzMaskClosable: false,
+          nzContent: GatewayComponent,
+          nzFooter: null,
+        })
+        .afterClose.subscribe((res) => {
+          if (res) {
+            this.formGroup.patchValue({ gateway_id: res });
+            // this.group.patchValue({ gateway_id: res });
+          }
+        });
+    }
+  }
   ngOnInit(): void {
     if (this.route.snapshot.paramMap.has('id')) {
       this.id = this.route.snapshot.paramMap.get('id');
       this.load();
     }
-this.loadSelect()
+    this.loadSelect();
     this.buildFromGroup();
   }
   load() {

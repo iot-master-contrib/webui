@@ -14,12 +14,12 @@
   <nz-form-item>
     <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="id">ID</nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="">
-      <input nz-input formControlName="id" placeholder="mqtt clientId"/>
+      <input nz-input formControlName="id" placeholder="选填"/>
     </nz-form-control>
   </nz-form-item>
 
   <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">名称</nz-form-label>
+    <nz-form-label [nzSm]="6" [nzXs]="24"   nzFor="name">名称</nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="">
       <input nz-input formControlName="name"/>
     </nz-form-control>
@@ -28,15 +28,18 @@
 
   <nz-form-item>
     <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="username">用户名</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="">
-      <input nz-input formControlName="username" placeholder="mqtt username"/>
+    <nz-form-control [nzSm]="14" [nzXs]="24"  >
+      <input nz-input formControlName="username" placeholder="请输入用户名"/>
+      <ng-template #nameErrorTpl let-control>
+        <ng-container *ngIf="control.hasError('required')">请输入名称!</ng-container>
+    </ng-template>
     </nz-form-control>
   </nz-form-item>
 
   <nz-form-item>
     <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="password">密码</nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="">
-      <input nz-input formControlName="password" placeholder="mqtt password"/>
+      <input nz-input formControlName="password" placeholder="请输入密码"/>
     </nz-form-control>
   </nz-form-item>
 

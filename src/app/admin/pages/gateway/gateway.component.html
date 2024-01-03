@@ -13,19 +13,19 @@
         <button nz-button nzType="primary" nzSize="large" nzSearch  (click)="search()">搜索</button>
       </ng-template>
     </div>
-
-    <div *nzSpaceItem>
-      <button nz-button nzType="primary" nzSize="large" nzShape="round" routerLink="create">
+<div *nzSpaceItem> 
+    <div     *ngIf="!ref"  >
+      <button nz-button nzType="primary" nzSize="large" nzShape="round" routerLink="create"  >
         <span nz-icon nzType="plus"></span>
         新建
       </button>
     </div>
-
+  </div>
   </nz-space>
 
   <div class="fill"></div>
-
-  <nz-space>
+<div  *ngIf="!ref" > 
+  <nz-space   >
     <div *nzSpaceItem>
       <button nz-button nzType="primary" nzSize="large" routerLink="batch">
         <span nz-icon nzType="profile"></span>
@@ -33,7 +33,7 @@
       </button>
     </div>
   </nz-space>
-
+</div>
 </div>
 
 
@@ -55,11 +55,20 @@
     <td>{{ data.password }}</td>
     <td [title]="data.online">{{ data.online | date }}</td>
     <td>
-      <nz-space>
-        <a *nzSpaceItem title="打开" [routerLink]="data.id"><i nz-icon nzType="eye"></i></a>
-        <a *nzSpaceItem title="编辑" [routerLink]="data.id+'/edit'"><i nz-icon nzType="edit"></i></a>
-        <a *nzSpaceItem title="删除" nz-popconfirm nzPopconfirmTitle="确认解绑" (nzOnConfirm)="delete(data.id)"><i nz-icon nzType="delete"></i></a>
-      </nz-space>
+      
+        <ng-container   *ngIf="!ref; else elseTemplate">
+          <nz-space>
+          <a *nzSpaceItem title="打开" [routerLink]="data.id"><i nz-icon nzType="eye"></i></a>
+          <a *nzSpaceItem title="编辑" [routerLink]="data.id+'/edit'"><i nz-icon nzType="edit"></i></a>
+          <a *nzSpaceItem title="删除" nz-popconfirm nzPopconfirmTitle="确认解绑" (nzOnConfirm)="delete(data.id)"><i nz-icon nzType="delete"></i></a>
+        </nz-space>
+        </ng-container>
+        <ng-template   #elseTemplate>
+          <a   title="选择"  (click)="select( data.id)">选择 </a>
+        </ng-template>
+        
+       
+      
     </td>
   </tr>
   </tbody>

@@ -1,1 +1,80 @@
-<p>object-attach works!</p>
+ 
+  <nz-space>
+    <nz-input-group nzSearch *nzSpaceItem [nzAddOnAfter]="suffixButton">
+        <input type="text" nz-input placeholder="当前所处文件夹" [(ngModel)]="queryName" />
+    </nz-input-group>
+    <ng-template #suffixButton>
+        <button nz-button nzType="primary" nzSearch (click)="search()">跳转</button>
+    </ng-template>
+    <button *nzSpaceItem nz-button nzType="primary" (click)="handleUpload()">
+        <i nz-icon nzType="plus"></i>上传
+    </button>
+    <button *nzSpaceItem nz-button nzType="primary" (click)="load()">
+        <i nz-icon nzType="reload" [nzSpin]="loading"></i>
+        刷新
+    </button>
+    <ng-container *ngIf="inputValue">
+        <button *nzSpaceItem nz-button (click)="handlePre()">
+            <span nz-icon nzType="rollback" nzTheme="outline"></span>
+            返回上一级目录
+        </button>
+    </ng-container>
+</nz-space>
+
+
+<ng-template #totalTemplate let-total>总共 {{ total }} 条</ng-template>
+<nz-table #basicTable [nzData]="datum" [nzLoading]="loading" nzShowPagination [nzTotal]="total" nzShowSizeChanger [nzShowTotal]="totalTemplate" [nzPageSize]="pageSize" [nzPageIndex]="pageIndex">
+<thead>
+    <tr>
+        <th nzColumnKey="pre">预览</th>
+        <th nzColumnKey="name">名称</th>
+        <th nzColumnKey="mime">类型</th>
+        <th nzColumnKey="time" [nzSortFn]="true">日期</th>
+        <th>操作</th>
+    </tr>
+</thead>
+<tbody>
+    <tr *ngFor="let data of basicTable.data; let i = index">
+        <td>
+            <img width="40px" *ngIf="data.folder;else tpw " src="/assets/fold.svg" alt="logo" />
+            <ng-template #tpw>
+                <!-- <div [ngSwitch]="getMatched(data.mime)">
+                    <img nz-image width="50px" *ngSwitchCase="'image'" [nzSrc]="handleSrc(data.name)" />
+                    <video width="50px" *ngSwitchCase="'video'" [src]="handleSrc(data.name)" (click)="handleOpenLink(data.name)"></video>
+                    <img width="50px" *ngSwitchDefault [src]="'/assets/attach_icon/'+getMatched(data.mime)+'.svg'" (click)="handleOpenLink(data.name)" />
+                </div> -->
+            </ng-template>
+        </td>
+        <td>
+            <span *ngIf="data.folder;else tpl"><a href="javascript:;" (click)="handleRedictTo(data.name)">{{data.name}}</a></span>
+            <ng-template #tpl>{{data.name}}</ng-template>
+        </td>
+        <td>{{data.mime || '文件夹'}}</td>
+        <td>{{data.time | date}}</td>
+        <td>
+            <a nz-popconfirm nzPopconfirmTitle="确定删除?" (nzOnConfirm)="delete(data.name)" (nzOnCancel)="cancel()" nzPopconfirmPlacement="topLeft">
+                删除
+            </a>
+            <nz-divider nzType="vertical"></nz-divider>
+            <a (click)="handleRename(data.name)">
+                重命名
+            </a>
+            <ng-template [ngIf]="!data.folder">
+                <nz-divider nzType="vertical"></nz-divider>
+                <a (click)="handleCopy(data.name)">
+                    复制链接
+                </a>
+                <nz-divider nzType="vertical"></nz-divider>
+                <a (click)="handleDownLoad(data.name)">
+                    下载
+                </a>
+            </ng-template>
+            <ng-template [ngIf]="!data.folder && fromIframe">
+                <nz-divider nzType="vertical"></nz-divider>
+                <a (click)="handleSelect(data.name)"> 选择</a>
+            </ng-template>
+        </td>
+    </tr>
+</tbody>
+</nz-table>
+

@@ -1,1 +1,16 @@
-<p>create works!</p>
+ 
+{{nzModalData?.favoriteLibrary}}
+
+<form nz-form   [formGroup]="formGroup">
+  
+  <nz-form-item> 
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="id">ID</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="">
+      <input nz-input formControlName="id"  placeholder ="选填"/>
+    </nz-form-control>
+  </nz-form-item>
+ 
+
+</form>
+
+ 

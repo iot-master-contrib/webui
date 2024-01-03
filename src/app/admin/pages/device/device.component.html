@@ -59,7 +59,7 @@
   <tr *ngFor="let data of table.data">
     <td>{{ data.id }}</td>
     <td>{{ data.name }}</td>
-    <td>{{ data.product }}</td>
+    <td>{{ data.product_id }}</td>
     <td [title]="data.online">{{ data.online | date }}</td>
     <td>
       <nz-space>
@@ -71,6 +71,7 @@
   </tr>
   </tbody>
 </nz-table>
+
 
 
 
