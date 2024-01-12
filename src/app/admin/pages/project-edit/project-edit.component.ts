@@ -107,10 +107,10 @@ export class ProjectEditComponent implements OnInit {
    
   }
   load() {
-    this.rs.get(`project/${this.id}/manifest`, {}).subscribe(
+    this.rs.post(`project/search`, {  filter:{id:this.id}  }).subscribe(
       (res) => {
 
-        this.buildFromGroup(res.data);
+        this.buildFromGroup(res.data[0]);
       },
       (err) => {
         console.log('err:', err);
@@ -119,7 +119,7 @@ export class ProjectEditComponent implements OnInit {
   }
   onSubmit() {
     if (this.formGroup.valid) {
-      let url =  `project/${this.id}/manifest`  ;
+      let url =  `project/${this.id}`  ;
       this.rs.post(url, this.formGroup.value).subscribe((res) => {
         this.router.navigateByUrl('admin');
         this.msg.success('保存成功');

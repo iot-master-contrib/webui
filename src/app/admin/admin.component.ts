@@ -9,11 +9,12 @@ import {FormsModule} from '@angular/forms';
 import {OemService} from "../oem.service";
 import {UserService} from "../user.service";
 import {PasswordComponent} from "./modals/password/password.component";
-
+import { RequestService } from '../request.service';
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-admin',
   standalone: true,
-  imports: [
+  imports: [CommonModule,
     FormsModule,
     RouterOutlet,
     NzModalModule,
@@ -34,16 +35,26 @@ import {PasswordComponent} from "./modals/password/password.component";
 })
 export class AdminComponent {
   isVisible = false
-
+admin=false
   constructor(
     // private router: Router,
     // private rs: RequestService,
     private ms: NzModalService,
     private us: UserService,
+    private rs: RequestService,
     // protected _as: AppService,
     // private msg: NzMessageService,
     protected os: OemService
   ) {
+
+    rs.get('user/me').subscribe(res => {
+      res?.data?.admin?this.admin=true:''
+    
+    }, error => {
+     
+    }).add(()=>{
+      
+    })
   }
 
 

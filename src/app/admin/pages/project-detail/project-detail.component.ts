@@ -117,15 +117,7 @@ export class ProjectDetailComponent implements OnInit{
       (res) => {
 
         let data=res.data[0]
-        this.rs.get(`project/${this.id}/manifest`, {}).subscribe(
-          (mes) => {
-            this.data={...data,...mes.data}
-            
-          },
-          (err) => {
-            console.log('err:', err);
-          }
-        );
+       
     
       },
       (err) => {

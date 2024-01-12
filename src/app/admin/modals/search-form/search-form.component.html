@@ -1,0 +1,20 @@
+<nz-space>
+  <nz-input-group  nzSize="large" nzSearch *nzSpaceItem [nzAddOnAfter]="suffixButton">
+    <input
+    
+      type="text"
+      nz-input
+      [placeholder]="placeholder"
+      [(ngModel)]="text"
+      [ngModelOptions]="{ standalone: true }"
+    />
+  </nz-input-group>
+  <ng-template #suffixButton>
+    <button nz-button nzType="primary" nzSearch (click)="onSearch.emit(text)">
+      {{ searchText }}
+    </button>
+  </ng-template>
+  <button  nzSize="large" nz-button *nzSpaceItem nzType="default" (click)="handleClear()">
+    清空搜索条件
+  </button>
+</nz-space>

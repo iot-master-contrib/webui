@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Optional } from '@angular/core';
 import { NzColDirective, NzRowDirective } from 'ng-zorro-antd/grid';
 import { NzCardComponent, NzCardMetaComponent } from 'ng-zorro-antd/card';
 import { NzIconDirective } from 'ng-zorro-antd/icon';
@@ -23,10 +23,14 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 import { FormsModule } from '@angular/forms';
 import { CreateComponent } from '../../modals/create/create.component';
 import { NzModalRef, NzModalService, NzModalModule } from 'ng-zorro-antd/modal';
+import { NzTableModule } from 'ng-zorro-antd/table';
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-project',
   standalone: true,
   imports: [
+    CommonModule,
+    NzTableModule,
     NzModalModule,
     FormsModule,
     NzInputModule,
@@ -71,7 +75,8 @@ export class ProjectComponent implements OnInit {
     private route: Router,
     private rs: RequestService,
     private msg: NzMessageService,
-    private ms: NzModalService
+    private ms: NzModalService,
+    @Optional() protected ref: NzModalRef
   ) {}
   ngOnInit(): void {
     this.load();
@@ -82,6 +87,9 @@ export class ProjectComponent implements OnInit {
   }
   open(p: any) {
     this.route.navigateByUrl('admin/project/' + p.id);
+  } 
+  select(id: any) {
+    this.ref && this.ref.close(id);
   }
 
   edit(p: any) {
@@ -156,20 +164,7 @@ export class ProjectComponent implements OnInit {
         let projects = res.data;
         this.projects = res.data;
         this.total = res.total;
-        projects.filter((item: any, index: any) => {
-          this.rs.get(`project/${item.id}/manifest`, {}).subscribe(
-            (mes) => {
-              if (res.data) {
-                projects[index] = { ...projects, ...mes.data };
-
-                console.log(projects[index]);
-              }
-            },
-            (err) => {
-              console.log('err:', err);
-            }
-          );
-        });
+        
       },
       (err) => {
         console.log('err:', err);

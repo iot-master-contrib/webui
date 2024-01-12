@@ -51,6 +51,7 @@
     <th>ID</th>
     <th>名称</th>
     <th>产品</th>
+    <th>项目</th>
     <th>上线时间</th>
     <th>操作</th>
   </tr>
@@ -60,6 +61,8 @@
     <td>{{ data.id }}</td>
     <td>{{ data.name }}</td>
     <td>{{ data.product_id }}</td>
+    <td>{{ data.project_id }}</td>
+     
     <td [title]="data.online">{{ data.online | date }}</td>
     <td>
       <nz-space>

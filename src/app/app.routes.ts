@@ -32,9 +32,9 @@ import {SettingMqttComponent} from "./admin/pages/setting-mqtt/setting-mqtt.comp
 import {ProductEditEventComponent} from "./admin/pages/product-edit-event/product-edit-event.component";
 import {ProductEditActionComponent} from "./admin/pages/product-edit-action/product-edit-action.component";
 import {ProjectEditPluginComponent} from "./admin/pages/project-edit-plugin/project-edit-plugin.component";
-import {UserComponent} from "./admin/pages/user/user.component";
-import {UserDetailComponent} from "./admin/pages/user-detail/user-detail.component";
-import {UserEditComponent} from "./admin/pages/user-edit/user-edit.component";
+import {UserComponent} from "./admin/pages/users/user/user.component";
+import {UserDetailComponent} from "./admin/pages/users/user-detail/user-detail.component";
+import {UserEditComponent} from "./admin/pages/users/user-edit/user-edit.component";
 
 export const routes: Routes = [
   {path: "", pathMatch: "full", redirectTo: "admin"},
@@ -69,10 +69,10 @@ export const routes: Routes = [
       {path: "plugin/create", component: PluginEditComponent},
       {path: "plugin/:id", component: PluginDetailComponent},
       {path: "plugin/:id/edit", component: PluginEditComponent},
-      {path: "user", component: UserComponent},
-      {path: "user/create", component: UserEditComponent},
-      {path: "user/:id", component: UserDetailComponent},
-      {path: "user/:id/edit", component: UserEditComponent},
+      {
+        path: 'user', 
+        loadChildren: () => import('./admin/pages/users/user.module').then(m => m.UserModule)
+    }, 
       {path: "alarm", component: AlarmComponent},
       {
         path: "setting", component: SettingComponent,

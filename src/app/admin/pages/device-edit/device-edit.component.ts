@@ -39,6 +39,7 @@ import { NzAutocompleteModule } from 'ng-zorro-antd/auto-complete';
 import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 import { GatewayComponent } from '../gateway/gateway.component';
 import { ProductComponent } from '../product/product.component';
+import { ProjectComponent } from '../project/project.component';
 @Component({
   selector: 'app-device-edit',
   standalone: true,
@@ -103,41 +104,69 @@ export class DeviceEditComponent {
       description: [data.description || '', []],
       gateway_id: [data.gateway_id || null, []],
       product_id: [data.product_id || null, []],
+      project_id: [data.project_id || null, []],
       keywords: [data.keywords || [], []],
     });
   }
   onChoose(e: Number) {
-    if (e) {
+switch (e) {
+  case 0:
+    this.ms
+    .create({
+      nzTitle: '网关选择',
+      nzCentered: true,
+      nzMaskClosable: false,
+      nzContent: GatewayComponent,
+      nzFooter: null,
+    })
+    .afterClose.subscribe((res) => {
+      if (res) {
+        this.formGroup.patchValue({ gateway_id: res });
+        // this.group.patchValue({ gateway_id: res });
+      }
+    });
+    break;
+
+    case 1:
       this.ms
+      .create({
+        nzTitle: '产品选择',
+        nzCentered: true,
+        nzMaskClosable: false,
+        nzContent: ProductComponent,
+        nzFooter: null,
+      })
+      .afterClose.subscribe((res) => {
+        console.log(res);
+        if (res) {
+          this.formGroup.patchValue({ product_id: res });
+        }
+      });
+      break;
+
+      case 2:
+        this.ms
         .create({
-          nzTitle: '产品选择',
+          nzTitle: '项目选择',
           nzCentered: true,
           nzMaskClosable: false,
-          nzContent: ProductComponent,
+          nzContent: ProjectComponent,
           nzFooter: null,
         })
         .afterClose.subscribe((res) => {
           console.log(res);
           if (res) {
-            this.formGroup.patchValue({ product_id: res });
+            this.formGroup.patchValue({ project_id: res });
           }
         });
-    } else {
-      this.ms
-        .create({
-          nzTitle: '网关选择',
-          nzCentered: true,
-          nzMaskClosable: false,
-          nzContent: GatewayComponent,
-          nzFooter: null,
-        })
-        .afterClose.subscribe((res) => {
-          if (res) {
-            this.formGroup.patchValue({ gateway_id: res });
-            // this.group.patchValue({ gateway_id: res });
-          }
-        });
-    }
+    break;
+
+  default:
+    break;
+}
+
+    
+  
   }
   ngOnInit(): void {
     if (this.route.snapshot.paramMap.has('id')) {

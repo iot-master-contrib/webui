@@ -15,36 +15,42 @@
           项目
         </a>
       </li>
-      <li nz-menu-item nzMatchRouter>
-        <a routerLink="device">
-          <span nz-icon nzType="block"></span>
-          设备
-        </a>
-      </li>
-      <li nz-menu-item nzMatchRouter>
-        <a routerLink="product">
-          <span nz-icon nzType="profile"></span>
-          产品
-        </a>
-      </li>
-      <li nz-menu-item nzMatchRouter>
-        <a routerLink="user">
-          <span nz-icon nzType="user"></span>
-          用户
-        </a>
-      </li>
-      <li nz-menu-item nzMatchRouter>
-        <a routerLink="plugin">
-          <span nz-icon nzType="appstore"></span>
-          应用
-        </a>
-      </li>
-      <li nz-menu-item nzMatchRouter>
-        <a routerLink="setting">
-          <span nz-icon nzType="setting"></span>
-          设置
-        </a>
-      </li>
+      <ng-container *ngIf="admin ">
+        <li nz-menu-item nzMatchRouter>
+          <a routerLink="device">
+            <span nz-icon nzType="block"></span>
+            设备
+          </a>
+        </li>
+        <li nz-menu-item nzMatchRouter>
+          <a routerLink="product">
+            <span nz-icon nzType="profile"></span>
+            产品
+          </a>
+        </li>
+        <li nz-menu-item nzMatchRouter>
+          <a routerLink="user">
+            <span nz-icon nzType="user"></span>
+            用户
+          </a>
+        </li>
+        <li nz-menu-item nzMatchRouter>
+          <a routerLink="plugin">
+            <span nz-icon nzType="appstore"></span>
+            应用
+          </a>
+        </li>
+        <li nz-menu-item nzMatchRouter>
+          <a routerLink="setting">
+            <span nz-icon nzType="setting"></span>
+            设置
+          </a>
+        </li>
+      </ng-container>
+      
+      
+     
+      
     </ul>
 
     <div class="space">

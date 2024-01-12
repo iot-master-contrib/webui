@@ -75,16 +75,8 @@ export class ProductDetailComponent implements OnInit{
   load() {
     this.rs.get(`product/${this.id}`, {}).subscribe(
       (res) => {
-
-        this.rs.get(`product/${this.id}/manifest`, {}).subscribe(
-          (mes) => {
-            this.data={...mes.data,...res.data}
-          },
-          (err) => {
-            console.log('err:', err);
-          }
-        );
-
+        this.data= res.data 
+       
       },
       (err) => {
         console.log('err:', err);

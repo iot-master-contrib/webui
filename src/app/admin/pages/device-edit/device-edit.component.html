@@ -44,6 +44,17 @@
     </nz-form-control>
   </nz-form-item>
 
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="project_id">项目</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="">
+ 
+      <input nz-input formControlName="project_id"/>
+  
+      <button  nz-button nzType="primary" (click)="onChoose(2)">选择</button>
+    </nz-form-control>
+  </nz-form-item>
+
   <nz-form-item>
     <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="description">说明</nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="">

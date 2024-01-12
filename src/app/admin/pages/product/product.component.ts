@@ -114,10 +114,13 @@ export class ProductComponent implements OnInit {
     });
   }
   search() {
-    this.rs.get(`product/${this.value}/manifest`, {}).subscribe(
+    let query
+   
+    this.value?query={filter:{name:this.value}}:query={}
+    this.rs.post(`product/search`, query).subscribe(
       (res) => {
-        // this.products = res.data;
-        // this.total = res.total;
+        this.products = res.data;
+         this.total = res.total;
       },
       (err) => {
         console.log('err:', err);
@@ -151,25 +154,15 @@ export class ProductComponent implements OnInit {
       skip: (this.nzPageIndex - 1) * this.nzPageSize,
     };
 
-    this.value ? (query = { ...query, filter: { username: this.value } }) : '';
+    this.value ? (query = { ...query, filter: {name: this.value } }) : '';
 
     this.rs.post('product/search', query).subscribe(
       (res) => {
-        let products = res.data;
+        
         this.products = res.data;
         this.total = res.total;
 
-        products.filter((item: any, index: any) => {
-          this.rs.get(`product/${item.id}/manifest`, {}).subscribe(
-            (mes) => {
-               products[index] ={  ...products[index],  ...mes.data};
-              // this.total = res.total;
-            },
-            (err) => {
-              console.log('err:', err);
-            }
-          );
-        });
+        
       },
       (err) => {
         console.log('err:', err);
