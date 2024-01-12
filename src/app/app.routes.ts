@@ -32,7 +32,6 @@ import {SettingMqttComponent} from "./admin/pages/setting-mqtt/setting-mqtt.comp
 import {ProductEditEventComponent} from "./admin/pages/product-edit-event/product-edit-event.component";
 import {ProductEditActionComponent} from "./admin/pages/product-edit-action/product-edit-action.component";
 import {ProjectEditPluginComponent} from "./admin/pages/project-edit-plugin/project-edit-plugin.component";
-import {ProjectEditDeviceComponent} from "./admin/pages/project-edit-device/project-edit-device.component";
 import {UserComponent} from "./admin/pages/user/user.component";
 import {UserDetailComponent} from "./admin/pages/user-detail/user-detail.component";
 import {UserEditComponent} from "./admin/pages/user-edit/user-edit.component";
@@ -48,7 +47,6 @@ export const routes: Routes = [
       {path: "project/create", component: ProjectEditComponent},
       {path: "project/:id", component: ProjectDetailComponent},
       {path: "project/:id/edit", component: ProjectEditComponent},
-      {path: "project/:id/edit/device", component: ProjectEditDeviceComponent},
       {path: "project/:id/edit/user", component: ProjectEditUserComponent},
       {path: "project/:id/edit/plugin", component: ProjectEditPluginComponent},
       {path: "device", component: DeviceComponent},
