@@ -65,35 +65,35 @@
 
 
 
-<!--<nz-table #table [nzData]="projects" [nzFrontPagination]="false" *ngIf="ref">-->
-<!--  <thead>-->
-<!--    <tr>-->
-<!--      <th>ID</th>-->
-<!--      <th>创建时间</th>-->
-<!--      <th>操作</th>-->
-<!--    </tr>-->
-<!--  </thead>-->
-<!--  <tbody>-->
-<!--    <tr *ngFor="let data of projects">-->
-<!--      <td>{{ data.id }}</td>-->
-<!--      <td>{{ data.created }}</td>-->
-<!--      <td>-->
-<!--        <a title="选择" (click)="select(data.id)">选择 </a>-->
-<!--      </td>-->
-<!--    </tr>-->
-<!--  </tbody>-->
-<!--</nz-table>-->
+<nz-table #table [nzData]="projects" [nzFrontPagination]="false" *ngIf="ref">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>创建时间</th>
+      <th>操作</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of projects">
+      <td>{{ data.id }}</td>
+      <td>{{ data.created }}</td>
+      <td>
+        <a title="选择" (click)="select(data.id)">选择 </a>
+      </td>
+    </tr>
+  </tbody>
+</nz-table>
 
-<!--<div class="pages">-->
-<!--  <nz-pagination-->
-<!--    [nzPageIndex]="nzPageIndex"-->
-<!--    [nzPageSize]="nzPageSize"-->
-<!--    [nzTotal]="total"-->
-<!--    nzShowSizeChanger-->
-<!--    nzShowQuickJumper-->
-<!--    (nzPageIndexChange)="nzPageIndexChange($event)"-->
-<!--    (nzPageSizeChange)="nzPageSizeChange($event)"-->
-<!--  ></nz-pagination>-->
-<!--</div>-->
+<div class="pages" *ngIf="ref">
+  <nz-pagination
+    [nzPageIndex]="nzPageIndex"
+    [nzPageSize]="nzPageSize"
+    [nzTotal]="total"
+    nzShowSizeChanger
+    nzShowQuickJumper
+    (nzPageIndexChange)="nzPageIndexChange($event)"
+    (nzPageSizeChange)="nzPageSizeChange($event)"
+  ></nz-pagination>
+</div>
 
 
