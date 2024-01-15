@@ -83,35 +83,41 @@ export class ProductComponent implements OnInit {
   }
 
   create() {
-    const modal: NzModalRef = this.ms.create({
-      nzTitle: '创建产品',
-      nzContent: CreateComponent,
-      nzData: {
-        name: 'product',
-      },
-      nzMaskClosable: false,
-      nzFooter: [
-        {
-          label: '取消',
-          onClick: () => {
-            modal.destroy();
-          },
-        },
-        {
-          label: '保存',
-          type: 'primary',
-          onClick: (rs: any) => {
-            rs!.submit().then(
-              () => {
-                modal.destroy();
-                this.load();
-              },
-              () => {}
-            );
-          },
-        },
-      ],
-    });
+    
+      this.rs.post(`product/create`, {}).subscribe((res) => { 
+        this.load()
+        this.msg.success('保存成功');
+      });
+      
+    // const modal: NzModalRef = this.ms.create({
+    //   nzTitle: '创建产品',
+    //   nzContent: CreateComponent,
+    //   nzData: {
+    //     name: 'product',
+    //   },
+    //   nzMaskClosable: false,
+    //   nzFooter: [
+    //     {
+    //       label: '取消',
+    //       onClick: () => {
+    //         modal.destroy();
+    //       },
+    //     },
+    //     {
+    //       label: '保存',
+    //       type: 'primary',
+    //       onClick: (rs: any) => {
+    //         rs!.submit().then(
+    //           () => {
+    //             modal.destroy();
+    //             this.load();
+    //           },
+    //           () => {}
+    //         );
+    //       },
+    //     },
+    //   ],
+    // });
   }
   search() {
     let query

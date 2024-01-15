@@ -97,7 +97,7 @@ export class GatewayComponent  implements OnInit{
     };
 
     this.value ? (query = { ...query, keyword: {username: this.value } }) : '';
-   
+   if(this.ref){query.limit=9999}
     this.rs
       .post('gateway/search', query)
       .subscribe(

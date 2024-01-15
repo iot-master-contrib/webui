@@ -18,11 +18,14 @@ import { RequestService } from '../../../request.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 import { CreateComponent } from '../../modals/create/create.component';
-
+ import { SearchFormComponent } from '../../modals/search-form/search-form.component';
+ import { BatchBtnComponent } from '../../modals/batch-btn/batch-btn.component';
 @Component({
   selector: 'app-plugin',
   standalone: true,
   imports: [
+    BatchBtnComponent,
+    SearchFormComponent,
     NgForOf,
     NzButtonComponent,
     NzCardComponent,
@@ -49,10 +52,11 @@ export class PluginComponent implements OnInit {
   total = 0;
   nzPageIndex = 1;
   nzPageSize = 10;
+  query:any={limit:20,skip:0}
   value = '';
   constructor(
     private ms: NzModalService,
-    private route: Router,
+    private router: Router,
     private rs: RequestService,
     private msg: NzMessageService
   ) {}
@@ -104,21 +108,21 @@ export class PluginComponent implements OnInit {
     },
   ];
   load() {
-    let query;
-    query = {
-      limit: this.nzPageSize,
-      skip: (this.nzPageIndex - 1) * this.nzPageSize,
-    };
+    // let query;
+    // query = {
+    //   limit: this.nzPageSize,
+    //   skip: (this.nzPageIndex - 1) * this.nzPageSize,
+    // };
 
-    this.value ? (query = { ...query, filter: { username: this.value } }) : '';
-
-    this.rs.post('plugin/search', query).subscribe(
+    // this.query ? (query = { ...query, filter: { username: this.value } }) : '';
+ 
+    this.rs.post('plugin/search', this.query).subscribe(
       (res) => {
         res.data.filter((item: any, index: any) => {
-          // res.data[index] = { ...item, icon: '/assets/app.png' };
+           res.data[index] = { ...item, icon: '/assets/app.png' };
         });
-        // this.plugins = res.data;
-        // this.total = res.total;
+          this.plugins = res.data;
+         this.total = res.total;
       },
       (err) => {
         console.log('err:', err);
@@ -155,5 +159,35 @@ export class PluginComponent implements OnInit {
         },
       ],
     });
+  }
+  
+  delete(i: any) {
+    this.rs.get(`plugin/${i}/delete`, {}).subscribe(
+      (res) => {
+        this.msg.success('删除成功');
+        this.load();
+      },
+      (err) => {
+        console.log('err:', err);
+      }
+    );
+    this.load();
+  }
+  refresh() {
+    this.nzPageIndex = 1;
+    this.load();
+  }
+  search($event: string) {
+    console.log($event)
+    this.query.keyword = {
+      name: $event,
+    };
+    this.query.skip = 0;
+    this.load();
+  }
+  handleEdit( ) {
+     
+    this.router.navigateByUrl('admin/plugin/create'  );
+    
   }
 }

@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzInputModule } from 'ng-zorro-antd/input';
@@ -52,14 +52,19 @@ export class ProjectEditPluginComponent {
   indeterminate = false;
   setOfCheckedId = new Set<number>();
   delResData: any = [];
+  id!:any
   constructor(
     private modal: NzModalService,
     private router: Router,
     private rs: RequestService,
     private msg: NzMessageService,
-    private location: Location
+    private location: Location,
+    private route: ActivatedRoute,
   ) {
-    //this.load();
+    
+    if (this.route.snapshot.paramMap.has('id')) {
+      this.id=this.route.snapshot.paramMap.get('id') 
+    }
   }
 
   reload() {
@@ -88,9 +93,16 @@ export class ProjectEditPluginComponent {
     this.router.navigateByUrl(path);
   }
 
-  submit(id: number, size?: number) {
-    this.msg.success('绑定插件'+id);
-   
+  submit(id: number, size?: number) { 
+    this.rs
+    .post(`project/${this.id}/plugin/${id}`, {})
+    .subscribe((res) => { 
+      this.msg.success('绑定插件'+id);
+    })
+    .add(() => {
+      this.loading = false;
+    });
+ 
   }
   handleExport() {
     this.href = `/api/user/export`;

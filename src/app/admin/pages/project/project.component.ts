@@ -120,35 +120,39 @@ export class ProjectComponent implements OnInit {
     this.load();
   }
   create() {
-    const modal: NzModalRef = this.ms.create({
-      nzTitle: '创建项目',
-      nzContent: CreateComponent,
-      nzData: {
-        name: 'project',
-      },
-      nzMaskClosable: false,
-      nzFooter: [
-        {
-          label: '取消',
-          onClick: () => {
-            modal.destroy();
-          },
-        },
-        {
-          label: '保存',
-          type: 'primary',
-          onClick: (rs: any) => {
-            rs!.submit().then(
-              () => {
-                modal.destroy();
-                this.load();
-              },
-              () => {}
-            );
-          },
-        },
-      ],
+    this.rs.post(`project/create`, {}).subscribe((res) => { 
+      this.load()
+      this.msg.success('保存成功');
     });
+    // const modal: NzModalRef = this.ms.create({
+    //   nzTitle: '创建项目',
+    //   nzContent: CreateComponent,
+    //   nzData: {
+    //     name: 'project',
+    //   },
+    //   nzMaskClosable: false,
+    //   nzFooter: [
+    //     {
+    //       label: '取消',
+    //       onClick: () => {
+    //         modal.destroy();
+    //       },
+    //     },
+    //     {
+    //       label: '保存',
+    //       type: 'primary',
+    //       onClick: (rs: any) => {
+    //         rs!.submit().then(
+    //           () => {
+    //             modal.destroy();
+    //             this.load();
+    //           },
+    //           () => {}
+    //         );
+    //       },
+    //     },
+    //   ],
+    // });
   }
   load() {
     let query;

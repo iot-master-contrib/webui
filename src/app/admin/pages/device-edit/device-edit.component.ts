@@ -40,10 +40,12 @@ import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 import { GatewayComponent } from '../gateway/gateway.component';
 import { ProductComponent } from '../product/product.component';
 import { ProjectComponent } from '../project/project.component';
+import { NzSelectModule } from 'ng-zorro-antd/select';
 @Component({
   selector: 'app-device-edit',
   standalone: true,
   imports: [
+    NzSelectModule,
     NzAutocompleteModule,
     DatePipe,
     NzButtonComponent,
@@ -74,6 +76,9 @@ export class DeviceEditComponent {
   data: any = {
     name: '测试设备',
   };
+
+  projectOption: any = [];
+  productOption: any = [];
   id!: any;
   formGroup!: FormGroup;
   product: any = [];
@@ -90,9 +95,7 @@ export class DeviceEditComponent {
     private rs: RequestService,
     private route: ActivatedRoute,
     private ms: NzModalService
-  ) {
-    this.buildFromGroup();
-  }
+  ) {}
   onInputChange() {
     console.log(this.formGroup.value.gateway_id);
   }
@@ -109,64 +112,75 @@ export class DeviceEditComponent {
     });
   }
   onChoose(e: Number) {
-switch (e) {
-  case 0:
-    this.ms
-    .create({
-      nzTitle: '网关选择',
-      nzCentered: true,
-      nzMaskClosable: false,
-      nzContent: GatewayComponent,
-      nzFooter: null,
-    })
-    .afterClose.subscribe((res) => {
-      if (res) {
-        this.formGroup.patchValue({ gateway_id: res });
-        // this.group.patchValue({ gateway_id: res });
-      }
-    });
-    break;
+    switch (e) {
+      case 0:
+        this.ms
+          .create({
+            nzTitle: '网关选择',
+            nzCentered: true,
+            nzMaskClosable: false,
+            nzContent: GatewayComponent,
+            nzFooter: null,
+          })
+          .afterClose.subscribe((res) => {
+            if (res) {
+              this.formGroup.patchValue({ gateway_id: res });
+              // this.group.patchValue({ gateway_id: res });
+            }
+          });
+        break;
 
-    case 1:
-      this.ms
-      .create({
-        nzTitle: '产品选择',
-        nzCentered: true,
-        nzMaskClosable: false,
-        nzContent: ProductComponent,
-        nzFooter: null,
-      })
-      .afterClose.subscribe((res) => {
-        console.log(res);
-        if (res) {
-          this.formGroup.patchValue({ product_id: res });
-        }
-      });
-      break;
+      case 1:
+        this.ms
+          .create({
+            nzTitle: '产品选择',
+            nzCentered: true,
+            nzMaskClosable: false,
+            nzContent: ProductComponent,
+            nzFooter: null,
+          })
+          .afterClose.subscribe((res) => {
+            if (res) {
+              console.log(res);
+
+              this.productOption = [
+                {
+                  label:
+                    (res.name || '名称为空') +
+                    ' (' +
+                    (res.version || '版本号为空') +
+                    ')',
+                  value: res.id,
+                },
+              ];
+              this.formGroup.patchValue({ product_id: res.id });
+            }
+          });
+        break;
 
       case 2:
         this.ms
-        .create({
-          nzTitle: '项目选择',
-          nzCentered: true,
-          nzMaskClosable: false,
-          nzContent: ProjectComponent,
-          nzFooter: null,
-        })
-        .afterClose.subscribe((res) => {
-          console.log(res);
-          if (res) {
-            this.formGroup.patchValue({ project_id: res });
-          }
-        });
-    break;
+          .create({
+            nzTitle: '项目选择',
+            nzCentered: true,
+            nzMaskClosable: false,
+            nzContent: ProjectComponent,
+            nzFooter: null,
+          })
+          .afterClose.subscribe((res) => {
+            console.log(res);
+            if (res) {
+              this.projectOption = [
+                { label: res.name || '名称为空', value: res.id },
+              ];
+              this.formGroup.patchValue({ project_id: res.id });
+            }
+          });
+        break;
 
-  default:
-    break;
-}
-
-    
-  
+      default:
+        break;
+    }
   }
   ngOnInit(): void {
     if (this.route.snapshot.paramMap.has('id')) {
@@ -178,7 +192,39 @@ switch (e) {
   }
   load() {
     this.rs.get(`device/${this.id}`, {}).subscribe(
-      (res) => {
+      async (res) => {
+        if (res.data?.product_id) {
+          await this.rs
+            .get(`product/${res.data.product_id}`)
+            .subscribe((mes) => {
+              if (mes.data) {
+                let data = mes.data;
+                this.productOption = [
+                  {
+                    label:
+                      (data.name || '名称为空') +
+                      ' (' +
+                      (data.version || '版本号为空') +
+                      ')',
+                    value: data.id,
+                  },
+                ];
+              }
+            });
+        }
+        if (res.data?.project_id) {
+          await this.rs
+            .get(`project/${res.data.project_id}`)
+            .subscribe((mes) => {
+              if (mes.data) {
+                let data = mes.data;
+                this.projectOption = [
+                  { label: data.name || '名称为空', value: data.id },
+                ];
+              } 
+            });
+        }
+        console.log(3);
         this.buildFromGroup(res.data);
       },
       (err) => {

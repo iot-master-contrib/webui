@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { RequestService } from '../../../../request.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzTableQueryParams } from 'ng-zorro-antd/table';
@@ -42,6 +42,7 @@ import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
 })
 export class UserComponent {
   @Input() show: Boolean=false;
+  id!:any
   href!: string;
   loading = true;
   uploading: Boolean = false;
@@ -58,8 +59,13 @@ export class UserComponent {
     private modal: NzModalService,
     private router: Router,
     private rs: RequestService,
-    private msg: NzMessageService
+    private msg: NzMessageService, 
+    private route: ActivatedRoute,
   ) {
+    if (this.route.snapshot.paramMap.has('id')) {
+      this.id=this.route.snapshot.paramMap.get('id') 
+      
+    }
     //this.load();
   }
 
@@ -89,7 +95,15 @@ export class UserComponent {
     this.router.navigateByUrl(path);
   }
   submit(id: number, size?: number) {
-    this.msg.success('绑定用户'+id);
+    this.rs
+    .post(`project/${this.id}/user/${id}`, {})
+    .subscribe((res) => { 
+      this.msg.success('绑定用户'+id);
+    })
+    .add(() => {
+      this.loading = false;
+    });
+    
    
   }
   delete(id: number, size?: number) {
@@ -173,4 +187,5 @@ export class UserComponent {
   handleItemChecked(id: number, checked: boolean) {
      onItemChecked(id, checked, this);
   }
+  
 }

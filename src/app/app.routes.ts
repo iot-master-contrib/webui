@@ -32,9 +32,7 @@ import {SettingMqttComponent} from "./admin/pages/setting-mqtt/setting-mqtt.comp
 import {ProductEditEventComponent} from "./admin/pages/product-edit-event/product-edit-event.component";
 import {ProductEditActionComponent} from "./admin/pages/product-edit-action/product-edit-action.component";
 import {ProjectEditPluginComponent} from "./admin/pages/project-edit-plugin/project-edit-plugin.component";
-import {UserComponent} from "./admin/pages/users/user/user.component";
-import {UserDetailComponent} from "./admin/pages/users/user-detail/user-detail.component";
-import {UserEditComponent} from "./admin/pages/users/user-edit/user-edit.component";
+import { SpaceEditComponent } from './admin/pages/space-edit/space-edit.component';
 
 export const routes: Routes = [
   {path: "", pathMatch: "full", redirectTo: "admin"},
@@ -49,6 +47,8 @@ export const routes: Routes = [
       {path: "project/:id/edit", component: ProjectEditComponent},
       {path: "project/:id/edit/user", component: ProjectEditUserComponent},
       {path: "project/:id/edit/plugin", component: ProjectEditPluginComponent},
+      {path: "space/create", component: SpaceEditComponent},
+      {path: "space/:id", component: SpaceEditComponent}, 
       {path: "device", component: DeviceComponent},
       {path: "device/create", component: DeviceEditComponent},
       {path: "device/:id", component: DeviceDetailComponent},

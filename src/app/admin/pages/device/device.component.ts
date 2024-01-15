@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Optional } from '@angular/core';
 import {NzSpaceComponent, NzSpaceItemDirective} from "ng-zorro-antd/space";
 import {NzButtonComponent} from "ng-zorro-antd/button";
 import {NzIconDirective} from "ng-zorro-antd/icon";
@@ -11,10 +11,13 @@ import {NzPopconfirmDirective} from "ng-zorro-antd/popconfirm";
 import { RequestService } from '../../../request.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { FormsModule } from '@angular/forms';
+import { NzModalRef } from 'ng-zorro-antd/modal';
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-device',
   standalone: true,
   imports: [
+    CommonModule,
     FormsModule ,
     NzSpaceComponent,
     NzButtonComponent,
@@ -45,12 +48,17 @@ export class DeviceComponent {
   ]
 
   constructor(
+    @Optional() protected ref: NzModalRef,
     private route: Router,
     private rs: RequestService,
     private msg: NzMessageService
   ) {}
   ngOnInit(): void {
     this.load();
+  }
+  select(status:any,id: any) {
+    let data={status:status,id:id}
+    this.ref && this.ref.close(data);
   }
   refresh() {
     this.nzPageIndex = 1;

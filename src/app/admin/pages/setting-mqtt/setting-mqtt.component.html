@@ -1,1 +1,56 @@
-<p>setting-mqtt works!</p>
+<nz-page-header>
+  <nz-page-header-title>设置</nz-page-header-title>
+  <nz-page-header-subtitle>MQTT连接</nz-page-header-subtitle>
+  <nz-page-header-extra>
+    <nz-space>
+      <button *nzSpaceItem nz-button nzType="primary" (click)="submit()">保存</button>
+    </nz-space>
+  </nz-page-header-extra>
+</nz-page-header>
+
+
+<form nz-form (ngSubmit)="submit()" [formGroup]="formGroup">
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="Username">用户名</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24" nzHasFeedback [nzErrorTip]="nameErrorTpl">
+      <input nz-input  name="Username"  formControlName="Username"/>
+      <ng-template #nameErrorTpl let-control>
+        <ng-container *ngIf="control.hasError('required')">请输入用户名!</ng-container> 
+      </ng-template>
+    </nz-form-control>
+  </nz-form-item>
+
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24"   nzFor="Password">密码</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24" nzHasFeedback [nzErrorTip]="PasswordErrorTpl">
+      <input nz-input name="Password"  formControlName="Password"/>
+      <ng-template #PasswordErrorTpl let-control>
+        <ng-container *ngIf="control.hasError('required')">请输入密码!</ng-container> 
+      </ng-template>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="Url">地址</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24" nzHasFeedback [nzErrorTip]="UrlErrorTpl">
+      <input nz-input name="Url" formControlName="Url"/>
+      <ng-template #UrlErrorTpl let-control>
+        <ng-container *ngIf="control.hasError('required')">请输入地址!</ng-container> 
+      </ng-template>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="ClientId">Id</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24" nzHasFeedback [nzErrorTip]="ClientIdErrorTpl">
+      <input nz-input name="ClientId"   formControlName="ClientId"/>
+      <ng-template #ClientIdErrorTpl let-control>
+        <ng-container *ngIf="control.hasError('required')">请输入Id!</ng-container> 
+      </ng-template>
+    </nz-form-control>
+  </nz-form-item>
+
+
+</form>
