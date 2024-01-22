@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {NzButtonComponent} from "ng-zorro-antd/button";
 import {NzColDirective, NzRowDirective} from "ng-zorro-antd/grid";
@@ -17,6 +17,9 @@ import {NzTableModule} from "ng-zorro-antd/table";
 import {CdkDrag, CdkDragHandle, CdkDropList} from "@angular/cdk/drag-drop";
 import {NgForOf} from "@angular/common";
 import {EditTableComponent, EditTableItem} from "../../../components/edit-table/edit-table.component";
+import {RequestService} from "../../../request.service";
+import {ActivatedRoute, Router} from "@angular/router";
+import {NzNotificationService} from "ng-zorro-antd/notification";
 
 @Component({
   selector: 'app-product-edit-property',
@@ -52,7 +55,7 @@ import {EditTableComponent, EditTableItem} from "../../../components/edit-table/
   templateUrl: './product-edit-property.component.html',
   styleUrl: './product-edit-property.component.scss'
 })
-export class ProductEditPropertyComponent {
+export class ProductEditPropertyComponent implements OnInit {
   data: any = {
     name: "新产品",
   }
@@ -98,7 +101,7 @@ export class ProductEditPropertyComponent {
     label: '模式',
     name: 'mode',
     type: 'select',
-    default: 'rw',
+    default: 'r',
     options: [{
       label: '只读',
       value: 'r'
@@ -108,29 +111,39 @@ export class ProductEditPropertyComponent {
     }]
   }]
 
-  constructor(private fb: FormBuilder) {
+  id: any = ''
+  properties: any = []
+
+  constructor(private fb: FormBuilder,
+              private rs: RequestService,
+              private ms: NzNotificationService,
+              private router: Router,
+              private route: ActivatedRoute) {
     this.buildFromGroup()
+  }
+
+  ngOnInit(): void {
+    this.id = this.route.snapshot.paramMap.get('id');
+    this.rs.get(`product/${this.id}/attach/read/property.json`).subscribe(res => {
+
+      //console.log("test", res)
+      this.properties = res
+      this.buildFromGroup()
+    })
   }
 
   buildFromGroup() {
     this.formGroup = this.fb.group({
-      properties: [[], []]
+      properties: [this.properties || [], []]
     })
   }
 
   onSubmit() {
-
+    let value = this.formGroup.value
+    this.rs.post(`product/${this.id}/attach/write/property.json`, value.properties).subscribe(res => {
+      this.ms.success("提示", "保存成功")
+      this.router.navigateByUrl("/admin/product/" + this.id+"/edit")
+    })
   }
 
-  onDrop($event: any) {
-
-  }
-
-  onCopy(i: number) {
-
-  }
-
-  onDelete(i: number) {
-
-  }
 }
