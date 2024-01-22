@@ -1,4 +1,4 @@
-<nz-layout>
+<nz-layout style="height: 100%">
   <nz-header>
     <div class="logo">
       <img [src]="os.oem.logo || 'assets/infinite.svg'" alt="logo">
@@ -8,50 +8,6 @@
       {{ os.oem.name || '物联大师' }}
     </div>
 
-    <ul nz-menu nzTheme="dark" nzMode="horizontal" class="nav">
-      <li nz-menu-item nzMatchRouter>
-        <a routerLink="project">
-          <span nz-icon nzType="apartment"></span>
-          项目
-        </a>
-      </li>
-      <ng-container *ngIf="admin ">
-        <li nz-menu-item nzMatchRouter>
-          <a routerLink="device">
-            <span nz-icon nzType="block"></span>
-            设备
-          </a>
-        </li>
-        <li nz-menu-item nzMatchRouter>
-          <a routerLink="product">
-            <span nz-icon nzType="profile"></span>
-            产品
-          </a>
-        </li>
-        <li nz-menu-item nzMatchRouter>
-          <a routerLink="user">
-            <span nz-icon nzType="user"></span>
-            用户
-          </a>
-        </li>
-        <li nz-menu-item nzMatchRouter>
-          <a routerLink="plugin">
-            <span nz-icon nzType="appstore"></span>
-            应用
-          </a>
-        </li>
-        <li nz-menu-item nzMatchRouter>
-          <a routerLink="setting">
-            <span nz-icon nzType="setting"></span>
-            设置
-          </a>
-        </li>
-      </ng-container>
-
-
-
-
-    </ul>
 
     <div class="space">
     </div>
@@ -73,7 +29,63 @@
     </ul>
 
   </nz-header>
-  <nz-content class="content">
-    <router-outlet></router-outlet>
-  </nz-content>
+
+  <nz-layout>
+    <nz-sider nzWidth="200px">
+
+      <ul nz-menu nzTheme="dark" nzMode="inline" class="menu">
+        <li nz-submenu nzIcon="apartment" nzTitle="项目管理">
+          <ul>
+            <li nz-menu-item nzMatchRouter nzMatchRouterExact routerLink="project">所有项目</li>
+            <li nz-menu-item nzMatchRouter nzMatchRouterExact routerLink="project/create">创建项目</li>
+          </ul>
+        </li>
+
+        <li nz-submenu nzIcon="block" nzTitle="设备管理">
+          <ul>
+            <li nz-menu-item nzMatchRouter nzMatchRouterExact routerLink="device">所有设备</li>
+            <li nz-menu-item nzMatchRouter nzMatchRouterExact routerLink="device/create">创建设备</li>
+            <li nz-menu-item nzMatchRouter nzMatchRouterExact routerLink="gateway">网关管理</li>
+          </ul>
+        </li>
+
+        <li nz-submenu nzIcon="profile" nzTitle="产品管理">
+          <ul>
+            <li nz-menu-item nzMatchRouter nzMatchRouterExact routerLink="product">所有产品</li>
+            <li nz-menu-item nzMatchRouter nzMatchRouterExact routerLink="product/create">创建产品</li>
+          </ul>
+        </li>
+
+        <li nz-submenu nzIcon="user" nzTitle="用户管理">
+          <ul>
+            <li nz-menu-item nzMatchRouter nzMatchRouterExact routerLink="user">所有用户</li>
+            <li nz-menu-item nzMatchRouter nzMatchRouterExact routerLink="user/create">创建用户</li>
+          </ul>
+        </li>
+
+        <li nz-submenu nzIcon="appstore" nzTitle="插件管理">
+          <ul>
+            <li nz-menu-item nzMatchRouter nzMatchRouterExact routerLink="plugin">所有插件</li>
+          </ul>
+        </li>
+
+        <li nz-submenu nzIcon="setting" nzTitle="系统设置">
+          <ul>
+            <li nz-menu-item nzMatchRouter nzMatchRouterExact routerLink="setting/web">Web服务</li>
+            <li nz-menu-item nzMatchRouter nzMatchRouterExact routerLink="setting/database">数据库</li>
+            <li nz-menu-item nzMatchRouter nzMatchRouterExact routerLink="setting/broker">MQTT总线</li>
+            <li nz-menu-item nzMatchRouter nzMatchRouterExact routerLink="setting/mqtt">MQTT连接</li>
+            <li nz-menu-item nzMatchRouter nzMatchRouterExact routerLink="setting/log">系统日志</li>
+            <li nz-menu-item nzMatchRouter nzMatchRouterExact routerLink="setting/attach">附件管理</li>
+          </ul>
+        </li>
+
+      </ul>
+
+    </nz-sider>
+    <nz-content class="content">
+      <router-outlet></router-outlet>
+    </nz-content>
+  </nz-layout>
+
 </nz-layout>

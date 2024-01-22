@@ -1,6 +1,6 @@
 import {Component, signal} from '@angular/core';
 import {Router, RouterLink, RouterOutlet} from "@angular/router";
-import {NzContentComponent, NzHeaderComponent, NzLayoutComponent} from "ng-zorro-antd/layout";
+import {NzContentComponent, NzHeaderComponent, NzLayoutComponent, NzSiderComponent} from "ng-zorro-antd/layout";
 import {NzDropDownDirective, NzDropdownMenuComponent} from "ng-zorro-antd/dropdown";
 import {NzIconDirective} from "ng-zorro-antd/icon";
 import {NzMenuDirective, NzMenuDividerDirective, NzMenuItemComponent, NzSubMenuComponent} from "ng-zorro-antd/menu";
@@ -29,7 +29,7 @@ import {CommonModule} from '@angular/common';
     NzMenuDividerDirective,
     NzMenuItemComponent,
     RouterLink,
-    NzSubMenuComponent,
+    NzSubMenuComponent, NzSiderComponent,
   ],
   templateUrl: './admin.component.html',
   styleUrl: './admin.component.scss'

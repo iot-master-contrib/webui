@@ -25,14 +25,14 @@ import {SettingDatabaseComponent} from "./admin/pages/setting-database/setting-d
 import {SettingLogComponent} from "./admin/pages/setting-log/setting-log.component";
 import {SettingBrokerComponent} from "./admin/pages/setting-broker/setting-broker.component";
 import {SettingBackupComponent} from "./admin/pages/setting-backup/setting-backup.component";
-import { SettingAttachComponent } from './admin/pages/setting-attach/setting-attach.component';
+import {SettingAttachComponent} from './admin/pages/setting-attach/setting-attach.component';
 import {ProductEditPropertyComponent} from "./admin/pages/product-edit-property/product-edit-property.component";
 import {ProjectEditUserComponent} from "./admin/pages/project-edit-user/project-edit-user.component";
 import {SettingMqttComponent} from "./admin/pages/setting-mqtt/setting-mqtt.component";
 import {ProductEditEventComponent} from "./admin/pages/product-edit-event/product-edit-event.component";
 import {ProductEditActionComponent} from "./admin/pages/product-edit-action/product-edit-action.component";
 import {ProjectEditPluginComponent} from "./admin/pages/project-edit-plugin/project-edit-plugin.component";
-import { SpaceEditComponent } from './admin/pages/space-edit/space-edit.component';
+import {SpaceEditComponent} from './admin/pages/space-edit/space-edit.component';
 import {authGuard} from "./auth.guard";
 
 export const routes: Routes = [
@@ -71,24 +71,18 @@ export const routes: Routes = [
       {path: "plugin/create", component: PluginEditComponent},
       {path: "plugin/:id", component: PluginDetailComponent},
       {path: "plugin/:id/edit", component: PluginEditComponent},
+      {path: "setting/web", component: SettingWebComponent},
+      {path: "setting/database", component: SettingDatabaseComponent},
+      {path: "setting/broker", component: SettingBrokerComponent},
+      {path: "setting/mqtt", component: SettingMqttComponent},
+      {path: "setting/log", component: SettingLogComponent},
+      {path: "setting/backup", component: SettingBackupComponent},
+      {path: "setting/attach", component: SettingAttachComponent},
       {
         path: 'user',
         loadChildren: () => import('./admin/pages/users/user.module').then(m => m.UserModule)
-    },
-      {path: "alarm", component: AlarmComponent},
-      {
-        path: "setting", component: SettingComponent,
-        children: [
-          {path: "", pathMatch: "full", redirectTo: "web"},
-          {path: "web", component: SettingWebComponent},
-          {path: "database", component: SettingDatabaseComponent},
-          {path: "broker", component: SettingBrokerComponent},
-          {path: "mqtt", component: SettingMqttComponent},
-          {path: "log", component: SettingLogComponent},
-          {path: "backup", component: SettingBackupComponent},
-          {path: "attach", component: SettingAttachComponent}
-        ]
       },
+      {path: "alarm", component: AlarmComponent},
     ]
   },
   {path: "**", component: UnknownComponent},
