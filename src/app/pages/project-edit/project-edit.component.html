@@ -1,0 +1,75 @@
+<nz-page-header>
+  <nz-page-header-title>项目{{ this.id ? "编辑" : "创建" }}</nz-page-header-title>
+  <nz-page-header-subtitle>{{ data.name }}</nz-page-header-subtitle>
+  <nz-page-header-extra>
+    <nz-space>
+      <a *nzSpaceItem nz-button routerLink="plugin">绑定插件</a>
+      <a *nzSpaceItem nz-button routerLink="user">绑定用户</a>
+      <button *nzSpaceItem nz-button nzType="primary" (click)="onSubmit()">保存</button>
+    </nz-space>
+  </nz-page-header-extra>
+</nz-page-header>
+
+
+<form nz-form (ngSubmit)="onSubmit()" [formGroup]="formGroup">
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="id">ID</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="">
+      <input nz-input formControlName="id" placeholder="选填，默认随机"/>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">名称</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="">
+      <input nz-input formControlName="name"/>
+    </nz-form-control>
+  </nz-form-item>
+
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="name">关键字</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="">
+      <nz-select nzMode="tags" nzPlaceHolder="关键字" formControlName="keywords">
+      </nz-select>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="version">版本</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="">
+      <input nz-input formControlName="version"/>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="description">说明</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="">
+      <nz-textarea-count [nzMaxCharacterCount]="200">
+        <textarea rows="4" nz-input formControlName="description"></textarea>
+      </nz-textarea-count>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24">封面
+    </nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <nz-upload nzAction="/" (nzChange)="onIconChange($event)">
+        <button nz-button>
+          <span nz-icon nzType="upload"></span> 点击上传
+        </button>
+      </nz-upload>
+    </nz-form-control>
+  </nz-form-item>
+
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="version">URL</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="">
+      <input nz-input formControlName="url"/>
+    </nz-form-control>
+  </nz-form-item>
+
+</form>
