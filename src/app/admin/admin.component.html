@@ -34,6 +34,15 @@
     <nz-sider nzWidth="200px">
 
       <ul nz-menu nzTheme="dark" nzMode="inline" class="menu">
+
+
+        <li nz-submenu nzIcon="dashboard" nzTitle="控制台">
+          <ul>
+            <li nz-menu-item nzMatchRouter nzMatchRouterExact routerLink="dash">控制台</li>
+            <li nz-menu-item nzMatchRouter nzMatchRouterExact routerLink="bigdata">数据大屏</li>
+          </ul>
+        </li>
+
         <li nz-submenu nzIcon="apartment" nzTitle="项目管理">
           <ul>
             <li nz-menu-item nzMatchRouter nzMatchRouterExact routerLink="project">所有项目</li>
@@ -45,7 +54,14 @@
           <ul>
             <li nz-menu-item nzMatchRouter nzMatchRouterExact routerLink="device">所有设备</li>
             <li nz-menu-item nzMatchRouter nzMatchRouterExact routerLink="device/create">创建设备</li>
-            <li nz-menu-item nzMatchRouter nzMatchRouterExact routerLink="gateway">网关管理</li>
+          </ul>
+        </li>
+
+        <li nz-submenu nzIcon="link" nzTitle="网关管理">
+          <ul>
+            <li nz-menu-item nzMatchRouter nzMatchRouterExact routerLink="gateway">所有网关</li>
+            <li nz-menu-item nzMatchRouter nzMatchRouterExact routerLink="gateway/create">创建网关</li>
+            <li nz-menu-item nzMatchRouter nzMatchRouterExact routerLink="gateway/batch" nzDisabled>批量创建</li>
           </ul>
         </li>
 

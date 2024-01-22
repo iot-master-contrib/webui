@@ -1,4 +1,4 @@
-<nz-page-header nzBackIcon>
+<nz-page-header>
   <nz-page-header-title>项目详情</nz-page-header-title>
   <nz-page-header-subtitle>{{ data.name }}</nz-page-header-subtitle>
   <nz-page-header-extra>
@@ -50,18 +50,18 @@
     placeholder="请输入名称"
     (onSearch)="search($event)"
   ></app-search-form>
-  <app-batch-btn   
+  <app-batch-btn
   [showExportBtn]="false"
   [showImportBtn]="false"
   [showDelBtn]="false"
-    (add)="handleEdit()" 
+    (add)="handleEdit()"
   ></app-batch-btn>
-</div>  
+</div>
 
 <nz-table #table [nzData]="space" [nzFrontPagination]="false">
   <thead>
   <tr>
-    <th>ID</th> 
+    <th>ID</th>
     <th>名称</th>
     <th>设备</th>
     <th>属性值</th>
@@ -70,10 +70,10 @@
   </thead>
   <tbody>
   <tr *ngFor="let data of table.data">
-    <td>{{ data.id }}</td> 
+    <td>{{ data.id }}</td>
     <td>{{ data.name }}</td>
     <td>{{ data.devices }}</td>
-    <td>{{ data.values }}</td> 
+    <td>{{ data.values }}</td>
     <td>
       <nz-space>
         <!-- <a *nzSpaceItem title="打开" [routerLink]="'/admin/device/'+data.id"><i nz-icon nzType="eye"></i></a> -->
@@ -99,7 +99,7 @@
         <nz-select nzPlaceHolder="请选择"   [nzOptions]="deviceOption">
         </nz-select>
       </div>
-     
+
     </div>
   </ng-container>
 </nz-modal> -->

@@ -1,6 +1,6 @@
-<nz-page-header nzBackIcon>
+<nz-page-header>
   <nz-page-header-title>插件{{this.id?"编辑":"创建"}}</nz-page-header-title>
- 
+
   <nz-page-header-extra>
     <nz-space>
       <button *nzSpaceItem nz-button nzType="primary" (click)="onSubmit()">保存</button>
@@ -17,7 +17,7 @@
       <input nz-input formControlName="id"/>
     </nz-form-control>
   </nz-form-item>
-  
+
     <nz-form-item  >
       <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">名称</nz-form-label>
       <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="">
@@ -71,7 +71,7 @@
     </nz-form-item>
 
 
-   
+
 
 
 

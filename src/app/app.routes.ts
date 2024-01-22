@@ -83,6 +83,7 @@ export const routes: Routes = [
         loadChildren: () => import('./admin/pages/users/user.module').then(m => m.UserModule)
       },
       {path: "alarm", component: AlarmComponent},
+      {path: "**", component: UnknownComponent},
     ]
   },
   {path: "**", component: UnknownComponent},

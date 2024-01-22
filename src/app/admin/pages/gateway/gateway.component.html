@@ -7,35 +7,28 @@
 
     <div *nzSpaceItem class="search">
       <nz-input-group nzSearch nzSize="large" [nzAddOnAfter]="suffixButton">
-        <input type="text"  [(ngModel)]="value" nz-input placeholder="请输入关键字"/>
+        <input type="text" [(ngModel)]="value" nz-input placeholder="请输入关键字"/>
       </nz-input-group>
       <ng-template #suffixButton>
-        <button nz-button nzType="primary" nzSize="large" nzSearch  (click)="search()">搜索</button>
+        <button nz-button nzType="primary" nzSize="large" nzSearch (click)="search()">搜索</button>
       </ng-template>
     </div>
-<div *nzSpaceItem> 
-    <div     *ngIf="!ref"  >
-      <button nz-button nzType="primary" nzSize="large" nzShape="round" routerLink="create"  >
-        <span nz-icon nzType="plus"></span>
-        新建
-      </button>
+    <div *nzSpaceItem>
+      <div *ngIf="!ref">
+        <button nz-button nzType="primary" nzSize="large" nzShape="round" routerLink="create">
+          <span nz-icon nzType="plus"></span>
+          新建
+        </button>
+      </div>
     </div>
-  </div>
   </nz-space>
 
   <div class="fill"></div>
-<div  *ngIf="!ref" > 
-  <nz-space   >
-    <div *nzSpaceItem>
-      <button nz-button nzType="primary" nzSize="large" routerLink="batch">
-        <span nz-icon nzType="profile"></span>
-        批量创建
-      </button>
-    </div>
-  </nz-space>
-</div>
-</div>
 
+  <div *ngIf="!ref">
+
+  </div>
+</div>
 
 
 <nz-table #table [nzData]="gateways" [nzFrontPagination]="false">
@@ -55,29 +48,28 @@
     <td>{{ data.password }}</td>
     <td [title]="data.online">{{ data.online | date }}</td>
     <td>
-      
-        <ng-container   *ngIf="!ref; else elseTemplate">
-          <nz-space>
+
+      <ng-container *ngIf="!ref; else elseTemplate">
+        <nz-space>
           <a *nzSpaceItem title="打开" [routerLink]="data.id"><i nz-icon nzType="eye"></i></a>
           <a *nzSpaceItem title="编辑" [routerLink]="data.id+'/edit'"><i nz-icon nzType="edit"></i></a>
-          <a *nzSpaceItem title="删除" nz-popconfirm nzPopconfirmTitle="确认解绑" (nzOnConfirm)="delete(data.id)"><i nz-icon nzType="delete"></i></a>
+          <a *nzSpaceItem title="删除" nz-popconfirm nzPopconfirmTitle="确认解绑" (nzOnConfirm)="delete(data.id)"><i
+            nz-icon nzType="delete"></i></a>
         </nz-space>
-        </ng-container>
-        <ng-template   #elseTemplate>
-          <a   title="选择"  (click)="select( data.id)">选择 </a>
-        </ng-template>
-        
-       
-      
+      </ng-container>
+      <ng-template #elseTemplate>
+        <a title="选择" (click)="select( data.id)">选择 </a>
+      </ng-template>
+
+
     </td>
   </tr>
   </tbody>
 </nz-table>
 
 
-
-
 <div class="pages" *ngIf="!ref">
   <nz-pagination [nzPageIndex]="nzPageIndex" [nzPageSize]="nzPageSize" [nzTotal]="total" nzShowSizeChanger
-  nzShowQuickJumper (nzPageIndexChange)="nzPageIndexChange($event)"  (nzPageSizeChange)="nzPageSizeChange($event)"></nz-pagination>
+                 nzShowQuickJumper (nzPageIndexChange)="nzPageIndexChange($event)"
+                 (nzPageSizeChange)="nzPageSizeChange($event)"></nz-pagination>
 </div>

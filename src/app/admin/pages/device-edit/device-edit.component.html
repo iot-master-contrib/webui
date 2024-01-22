@@ -1,4 +1,4 @@
-<nz-page-header nzBackIcon>
+<nz-page-header>
   <nz-page-header-title>设备{{this.id?"编辑":"创建"}}</nz-page-header-title>
   <nz-page-header-subtitle>{{ data.name }}</nz-page-header-subtitle>
   <nz-page-header-extra>
@@ -12,6 +12,13 @@
 <form nz-form   [formGroup]="formGroup">
 
   <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="id">ID</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="">
+      <input nz-input formControlName="id" placeholder="选填，默认随机"/>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
     <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">名称</nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="">
       <input nz-input formControlName="name"/>
@@ -23,8 +30,8 @@
     <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="gateway_id">网关</nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="">
 
-     
-        
+
+
         <input nz-input formControlName="gateway_id"/>
 
         <button  nz-button nzType="primary" (click)="onChoose(0)">选择</button>
@@ -38,8 +45,8 @@
     <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="product_id">产品</nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="">
       <nz-select class="select" formControlName="product_id" [nzOptions]="productOption"></nz-select>
-   
-  
+
+
       <button  nz-button nzType="primary" (click)="onChoose(1)">选择</button>
     </nz-form-control>
   </nz-form-item>
@@ -49,7 +56,7 @@
     <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="project_id">项目</nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="">
       <nz-select class="select" formControlName="project_id" [nzOptions]="projectOption"></nz-select>
-      
+
       <button  nz-button nzType="primary" (click)="onChoose(2)">选择</button>
     </nz-form-control>
   </nz-form-item>

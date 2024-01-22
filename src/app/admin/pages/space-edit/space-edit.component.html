@@ -1,5 +1,5 @@
-<nz-page-header nzBackIcon>
-  <nz-page-header-title>空间{{this.id?"编辑":"创建"}}</nz-page-header-title> 
+<nz-page-header>
+  <nz-page-header-title>空间{{this.id?"编辑":"创建"}}</nz-page-header-title>
   <nz-page-header-extra>
     <nz-space>
       <button *nzSpaceItem nz-button nzType="primary" (click)="onSubmit()">保存</button>
@@ -31,19 +31,19 @@
     <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="" >
 
      <div  class="flex">
-         
+
       <nz-select class="select" formControlName="devices" [nzOptions]="deviceOption"></nz-select>
 
         <button  nz-button nzType="primary" (click)="onChoose()">选择</button>
      </div>
-      
 
-    
+
+
     </nz-form-control>
   </nz-form-item>
 
- 
- 
- 
+
+
+
 
 </form>

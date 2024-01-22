@@ -1,2 +1,5 @@
-<p>未知页面</p>
-<a routerLink="/admin">返回首页</a>
+<nz-empty nzNotFoundContent="未知页面" [nzNotFoundFooter]="footer"></nz-empty>
+<ng-template #footer>
+  <a nz-button nzType="primary" routerLink="/admin">返回首页</a>
+</ng-template>
+

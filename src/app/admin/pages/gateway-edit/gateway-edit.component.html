@@ -1,4 +1,4 @@
-<nz-page-header nzBackIcon>
+<nz-page-header>
   <nz-page-header-title>网关{{this.id?"编辑":"创建"}}</nz-page-header-title>
   <nz-page-header-subtitle>{{ data.name }}</nz-page-header-subtitle>
   <nz-page-header-extra>
@@ -12,9 +12,9 @@
 <form nz-form (ngSubmit)="onSubmit()" [formGroup]="formGroup">
 
   <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="id">ID</nz-form-label>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="id">ID</nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="">
-      <input nz-input formControlName="id" placeholder="选填"/>
+      <input nz-input formControlName="id" placeholder="选填，默认随机"/>
     </nz-form-control>
   </nz-form-item>
 

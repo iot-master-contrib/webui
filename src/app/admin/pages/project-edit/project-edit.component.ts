@@ -1,6 +1,6 @@
-import { Component, OnInit, signal } from '@angular/core';
-import { DatePipe } from '@angular/common';
-import { NzButtonComponent } from 'ng-zorro-antd/button';
+import {Component, OnInit, signal} from '@angular/core';
+import {DatePipe} from '@angular/common';
+import {NzButtonComponent} from 'ng-zorro-antd/button';
 import {
   NzDescriptionsComponent,
   NzDescriptionsItemComponent,
@@ -12,9 +12,9 @@ import {
   NzPageHeaderSubtitleDirective,
   NzPageHeaderTitleDirective,
 } from 'ng-zorro-antd/page-header';
-import { NzPopconfirmDirective } from 'ng-zorro-antd/popconfirm';
-import { NzSpaceComponent, NzSpaceItemDirective } from 'ng-zorro-antd/space';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import {NzPopconfirmDirective} from 'ng-zorro-antd/popconfirm';
+import {NzSpaceComponent, NzSpaceItemDirective} from 'ng-zorro-antd/space';
+import {ActivatedRoute, RouterLink} from '@angular/router';
 import {
   NzFormDirective,
   NzFormItemComponent,
@@ -31,13 +31,14 @@ import {
   NzInputDirective,
   NzTextareaCountComponent,
 } from 'ng-zorro-antd/input';
-import { NzUploadChangeParam, NzUploadComponent } from 'ng-zorro-antd/upload';
-import { NzIconDirective } from 'ng-zorro-antd/icon';
-import { NzSelectComponent } from 'ng-zorro-antd/select';
-import { RequestService } from '../../../request.service';
-import { NzMessageService } from 'ng-zorro-antd/message';
-import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import {NzUploadChangeParam, NzUploadComponent} from 'ng-zorro-antd/upload';
+import {NzIconDirective} from 'ng-zorro-antd/icon';
+import {NzSelectComponent} from 'ng-zorro-antd/select';
+import {RequestService} from '../../../request.service';
+import {NzMessageService} from 'ng-zorro-antd/message';
+import {CommonModule} from '@angular/common';
+import {Router} from '@angular/router';
+
 @Component({
   selector: 'app-project-edit',
   standalone: true,
@@ -74,18 +75,21 @@ export class ProjectEditComponent implements OnInit {
   };
   formGroup!: FormGroup;
   id: any = 0;
+
   constructor(
     private fb: FormBuilder,
     private router: Router,
     private msg: NzMessageService,
     private rs: RequestService,
     private route: ActivatedRoute
-  ) {}
+  ) {
+    this.buildFromGroup()
+  }
 
   buildFromGroup(data?: any) {
     data = data || {};
     this.formGroup = this.fb.group({
-      id: [this.id  , []],
+      id: [this.id || '', []],
       name: [data.name || '', []],
       description: [data.description || '', []],
       icon: [data.icon || '', []],
@@ -93,21 +97,22 @@ export class ProjectEditComponent implements OnInit {
       url: [data.url || '', []],
       keywords: [data.keywords || [], []],
     });
-    console.log( this.formGroup.value)
+    console.log(this.formGroup.value)
   }
 
-  ngOnInit(): void { 
-     
+  ngOnInit(): void {
+
     if (this.route.snapshot.paramMap.has('id')) {
       this.id = this.route.snapshot.paramMap.get('id');
-      this.buildFromGroup( );
-     this.load()
+      this.buildFromGroup();
+      this.load()
     }
 
-   
+
   }
+
   load() {
-    this.rs.post(`project/search`, {  filter:{id:this.id}  }).subscribe(
+    this.rs.post(`project/search`, {filter: {id: this.id}}).subscribe(
       (res) => {
 
         this.buildFromGroup(res.data[0]);
@@ -117,9 +122,10 @@ export class ProjectEditComponent implements OnInit {
       }
     );
   }
+
   onSubmit() {
     if (this.formGroup.valid) {
-      let url =  `project/${this.id}`  ;
+      let url = `project/${this.id}`;
       this.rs.post(url, this.formGroup.value).subscribe((res) => {
         this.router.navigateByUrl('admin');
         this.msg.success('保存成功');
@@ -130,11 +136,12 @@ export class ProjectEditComponent implements OnInit {
       Object.values(this.formGroup.controls).forEach((control) => {
         if (control.invalid) {
           control.markAsDirty();
-          control.updateValueAndValidity({ onlySelf: true });
+          control.updateValueAndValidity({onlySelf: true});
         }
       });
     }
   }
 
-  onIconChange($event: NzUploadChangeParam) {}
+  onIconChange($event: NzUploadChangeParam) {
+  }
 }

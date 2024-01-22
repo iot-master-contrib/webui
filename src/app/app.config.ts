@@ -14,6 +14,7 @@ import {provideAnimations} from '@angular/platform-browser/animations';
 import {NZ_ICONS} from "ng-zorro-antd/icon";
 import { IconDefinition } from '@ant-design/icons-angular';
 import {
+  DashboardOutline,
   PlusOutline,
   BellOutline ,
   SettingOutline,
@@ -36,6 +37,7 @@ import {
   DragOutline,
 } from '@ant-design/icons-angular/icons';
 const icons: IconDefinition[] = [
+  DashboardOutline,
   PlusOutline,
   BellOutline,
   SettingOutline,
