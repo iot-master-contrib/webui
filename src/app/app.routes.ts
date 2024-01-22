@@ -33,11 +33,13 @@ import {ProductEditEventComponent} from "./admin/pages/product-edit-event/produc
 import {ProductEditActionComponent} from "./admin/pages/product-edit-action/product-edit-action.component";
 import {ProjectEditPluginComponent} from "./admin/pages/project-edit-plugin/project-edit-plugin.component";
 import { SpaceEditComponent } from './admin/pages/space-edit/space-edit.component';
+import {authGuard} from "./auth.guard";
 
 export const routes: Routes = [
   {path: "", pathMatch: "full", redirectTo: "admin"},
   {path: "login", component: LoginComponent},
   {
+    canActivate: [authGuard],
     path: "admin", component: AdminComponent,
     children: [
       {path: "", pathMatch: "full", redirectTo: "project"},
@@ -48,7 +50,7 @@ export const routes: Routes = [
       {path: "project/:id/edit/user", component: ProjectEditUserComponent},
       {path: "project/:id/edit/plugin", component: ProjectEditPluginComponent},
       {path: "space/create", component: SpaceEditComponent},
-      {path: "space/:id", component: SpaceEditComponent}, 
+      {path: "space/:id", component: SpaceEditComponent},
       {path: "device", component: DeviceComponent},
       {path: "device/create", component: DeviceEditComponent},
       {path: "device/:id", component: DeviceDetailComponent},
@@ -70,9 +72,9 @@ export const routes: Routes = [
       {path: "plugin/:id", component: PluginDetailComponent},
       {path: "plugin/:id/edit", component: PluginEditComponent},
       {
-        path: 'user', 
+        path: 'user',
         loadChildren: () => import('./admin/pages/users/user.module').then(m => m.UserModule)
-    }, 
+    },
       {path: "alarm", component: AlarmComponent},
       {
         path: "setting", component: SettingComponent,

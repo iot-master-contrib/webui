@@ -1,5 +1,5 @@
 import { Component, signal, OnInit } from '@angular/core';
-import {DatePipe} from "@angular/common";
+import {DatePipe, NgIf} from "@angular/common";
 import {NzButtonComponent} from "ng-zorro-antd/button";
 import {NzDescriptionsComponent, NzDescriptionsItemComponent} from "ng-zorro-antd/descriptions";
 import {
@@ -44,6 +44,7 @@ import { RequestService } from '../../../request.service';
     NzUploadComponent,
     NzIconDirective,
     NzSelectComponent,
+    NgIf,
   ],
   templateUrl: './gateway-edit.component.html',
   styleUrl: './gateway-edit.component.scss'
@@ -81,20 +82,20 @@ export class GatewayEditComponent implements OnInit{
       return
     }
     this.buildFromGroup();
-    
+
   }
   load() {
-    this.rs.get(`gateway/${this.id}`, { 
+    this.rs.get(`gateway/${this.id}`, {
     }).subscribe(
-      (res) => { 
-        this.buildFromGroup(res.data); 
+      (res) => {
+        this.buildFromGroup(res.data);
       },
       (err) => {
         console.log('err:', err);
       }
     );
-   
-   
+
+
   }
   onSubmit() {
     if (this.formGroup.valid) {
