@@ -29,7 +29,7 @@
     <nz-form-item  >
       <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">关键字</nz-form-label>
       <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="">
-        <nz-select nzMode="tags" nzPlaceHolder="关键字" formControlName="keywords">
+        <nz-select nzMode="tags" [nzTokenSeparators]="[',','，']" nzPlaceHolder="关键字，逗号分隔" formControlName="keywords">
         </nz-select>
       </nz-form-control>
     </nz-form-item>
