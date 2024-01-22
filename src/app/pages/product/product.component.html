@@ -3,7 +3,7 @@
     *nzSpaceItem
     nz-button
     nzType="primary"
-    nzSize="large"
+
     (click)="refresh()"
   >
     <span nz-icon nzType="reload"></span>
@@ -11,7 +11,7 @@
   </button>
 
   <div *nzSpaceItem class="search">
-    <nz-input-group nzSearch nzSize="large" [nzAddOnAfter]="suffixButton">
+    <nz-input-group nzSearch  [nzAddOnAfter]="suffixButton">
       <input
         [(ngModel)]="value"
         type="text"
@@ -23,7 +23,7 @@
       <button
         nz-button
         nzType="primary"
-        nzSize="large"
+
         nzSearch
         (click)="search()"
       >
@@ -31,13 +31,13 @@
       </button>
     </ng-template>
   </div>
- 
+
   <div  *nzSpaceItem  >
-    <div *ngIf="!ref"> 
-    <button  
+    <div *ngIf="!ref">
+    <button
       nz-button
       nzType="primary"
-      nzSize="large"
+
       nzShape="round"
       (click)="create()"
     >

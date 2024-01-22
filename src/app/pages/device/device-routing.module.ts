@@ -6,9 +6,9 @@ import {DeviceEditComponent} from "./device-edit/device-edit.component";
 
 const routes: Routes = [
   {path: '', component: DeviceComponent},
+  {path: 'create', component: DeviceEditComponent},
   {path: ':id', component: DeviceDetailComponent},
   {path: ':id/edit', component: DeviceEditComponent},
-  {path: 'create', component: DeviceEditComponent},
 ];
 
 @NgModule({

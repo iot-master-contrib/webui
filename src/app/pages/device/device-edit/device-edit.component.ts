@@ -74,7 +74,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
 })
 export class DeviceEditComponent {
   data: any = {
-    name: '测试设备',
+    name: '新设备',
   };
 
   projectOption: any = [];

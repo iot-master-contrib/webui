@@ -54,7 +54,7 @@ import {EditTableComponent, EditTableItem} from "../../../components/edit-table/
 })
 export class ProductEditPropertyComponent {
   data: any = {
-    name: "测试产品",
+    name: "新产品",
   }
   formGroup!: FormGroup;
 

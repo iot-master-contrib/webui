@@ -71,7 +71,7 @@ import {Router} from '@angular/router';
 })
 export class ProjectEditComponent implements OnInit {
   data: any = {
-    name: '测试项目',
+    name: '新项目',
   };
   formGroup!: FormGroup;
   id: any = '';

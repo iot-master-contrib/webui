@@ -68,7 +68,7 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 })
 export class ProductEditComponent implements OnInit {
   data: any = {
-    name: '测试产品',
+    name: '新产品',
   };
   formGroup!: FormGroup;
   id: any = 0;

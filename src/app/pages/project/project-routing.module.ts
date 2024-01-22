@@ -7,11 +7,11 @@ import {ProjectDetailComponent} from "./project-detail/project-detail.component"
 import {ProjectEditComponent} from "./project-edit/project-edit.component";
 const routes: Routes = [
   {path: '', component: ProjectComponent},
+  {path: 'create', component: ProjectEditComponent},
   {path: ':id', component: ProjectDetailComponent},
   {path: ':id/edit', component: ProjectEditComponent},
   {path: ':id/edit/plugin', component: ProjectEditPluginComponent},
   {path: ':id/edit/user', component: ProjectEditUserComponent},
-  {path: 'create', component: ProjectEditComponent},
 ];
 
 @NgModule({

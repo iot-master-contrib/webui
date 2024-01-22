@@ -51,7 +51,7 @@ import { RequestService } from '../../../request.service';
 })
 export class GatewayEditComponent implements OnInit{
   data: any = {
-    name: "测试网关",
+    name: "新网关",
   }
   formGroup!: FormGroup;
  id!:any

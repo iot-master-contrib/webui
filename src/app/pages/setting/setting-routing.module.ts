@@ -9,7 +9,7 @@ import {SettingBackupComponent} from "./setting-backup/setting-backup.component"
 import {SettingAttachComponent} from "./setting-attach/setting-attach.component";
 
 const routes: Routes = [
-  {path: '', pathMatch:"full", redirectTo:"web"},
+  //{path: '', pathMatch:"full", redirectTo:"web"},
   {path: "web", component: SettingWebComponent},
   {path: "database", component: SettingDatabaseComponent},
   {path: "broker", component: SettingBrokerComponent},

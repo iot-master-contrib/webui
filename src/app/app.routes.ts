@@ -21,6 +21,7 @@ export const routes: Routes = [
       {path: 'space', loadChildren: () => import('./pages/space/space.module').then(m => m.SpaceModule)},
       {path: 'plugin', loadChildren: () => import('./pages/plugin/plugin.module').then(m => m.PluginModule)},
       {path: 'user', loadChildren: () => import('./pages/users/user.module').then(m => m.UserModule)},
+      {path: 'setting', loadChildren: () => import('./pages/setting/setting.module').then(m => m.SettingModule)},
 
       {path: "alarm", component: AlarmComponent},
       {path: "**", component: UnknownComponent},

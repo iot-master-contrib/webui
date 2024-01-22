@@ -6,9 +6,10 @@ import {PluginEditComponent} from "./plugin-edit/plugin-edit.component";
 
 const routes: Routes = [
   {path: '', component: PluginComponent},
+  {path: 'create', component: PluginEditComponent},
   {path: ':id', component: PluginDetailComponent},
   {path: ':id/edit', component: PluginEditComponent},
-  {path: 'create', component: PluginEditComponent},];
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

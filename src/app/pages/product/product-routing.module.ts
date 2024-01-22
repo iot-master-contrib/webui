@@ -9,12 +9,12 @@ import {ProductEditPropertyComponent} from "./product-edit-property/product-edit
 
 const routes: Routes = [
   {path: '', component: ProductComponent},
+  {path: 'create', component: ProductEditComponent},
   {path: ':id', component: ProductDetailComponent},
   {path: ':id/edit', component: ProductEditComponent},
   {path: ':id/edit/property', component: ProductEditPropertyComponent},
   {path: ':id/edit/event', component: ProductEditEventComponent},
   {path: ':id/edit/action', component: ProductEditActionComponent},
-  {path: 'create', component: ProductEditComponent},
 ];
 
 @NgModule({

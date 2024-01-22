@@ -48,7 +48,7 @@ import { NzSwitchModule } from 'ng-zorro-antd/switch';
 })
 export class UserEditComponent implements OnInit {
   data: any = {
-    name: '测试项目',
+    name: '新项目',
   };
   formGroup!: FormGroup;
   id: any = 0;
