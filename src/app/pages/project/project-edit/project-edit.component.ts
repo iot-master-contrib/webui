@@ -111,7 +111,7 @@ export class ProjectEditComponent implements OnInit {
   load() {
     this.rs.get(`project/` + this.id).subscribe(
       (res) => {
-        this.buildFromGroup(res.data[0]);
+        this.buildFromGroup(res.data);
       },
       (err) => {
         console.log('err:', err);

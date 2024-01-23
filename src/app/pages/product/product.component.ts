@@ -19,6 +19,7 @@ import { FormsModule } from '@angular/forms';
 import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 import { NzTableComponent, NzTableModule } from 'ng-zorro-antd/table';
 import { CommonModule } from '@angular/common';
+import {NzPopconfirmDirective} from "ng-zorro-antd/popconfirm";
 
 @Component({
   selector: 'app-product',
@@ -44,6 +45,7 @@ import { CommonModule } from '@angular/common';
     NzSpaceComponent,
     RouterLink,
     NzSpaceItemDirective,
+    NzPopconfirmDirective,
   ],
   templateUrl: './product.component.html',
   styleUrl: './product.component.scss',
