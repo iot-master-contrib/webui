@@ -1,1 +1,106 @@
-<p>space-detail works!</p>
+<nz-page-header>
+  <nz-page-header-title>空间详情</nz-page-header-title>
+  <nz-page-header-subtitle>{{ data.name }}</nz-page-header-subtitle>
+  <nz-page-header-extra>
+    <nz-space>
+      <button *nzSpaceItem nz-button routerLink="edit">编辑</button>
+      <button *nzSpaceItem nz-button nz-popconfirm nzPopconfirmTitle="确认删除" (nzOnConfirm)="delete()">删除</button>
+    </nz-space>
+  </nz-page-header-extra>
+  <nz-page-header-content>
+    <nz-descriptions nzSize="small" [nzColumn]="3">
+      <nz-descriptions-item nzTitle="ID" [nzSpan]="1">{{ data.id }}</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="名称" [nzSpan]="1">{{ data.name }}</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="创建时间" [nzSpan]="1">{{ data.created | date }}</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="说明" [nzSpan]="2">{{ data.description }}</nz-descriptions-item>
+    </nz-descriptions>
+  </nz-page-header-content>
+</nz-page-header>
+
+<!--插件列表-->
+<nz-divider nzText="插件列表" nzOrientation="left"></nz-divider>
+<app-plugins [plugins]="plugins"></app-plugins>
+
+
+<!--设备列表-->
+<nz-divider nzText="设备列表" nzOrientation="left"></nz-divider>
+<!-- <nz-space class="toolbar">
+  <button *nzSpaceItem nz-button nzType="primary" >
+    <span nz-icon nzType="reload"></span>
+    刷新
+  </button>
+
+  <div *nzSpaceItem class="search">
+    <nz-input-group nzSearch  [nzAddOnAfter]="suffixButton">
+      <input type="text" nz-input placeholder="请输入关键字"/>
+    </nz-input-group>
+    <ng-template #suffixButton>
+      <button nz-button nzType="primary"  nzSearch>搜索</button>
+    </ng-template>
+  </div>
+
+  <div *nzSpaceItem>
+    <button nz-button nzType="primary"  nzShape="round">
+      <span nz-icon nzType="plus"></span>
+      绑定设备
+    </button>
+  </div>
+</nz-space> -->
+<div class="top"  >
+  <app-search-form
+    placeholder="请输入名称"
+    (onSearch)="search($event)"
+  ></app-search-form>
+  <app-batch-btn
+  [showExportBtn]="false"
+  [showImportBtn]="false"
+  [showDelBtn]="false"
+    (add)="handleEdit()"
+  ></app-batch-btn>
+</div>
+
+<nz-table #table [nzData]="devices" [nzFrontPagination]="false">
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>名称</th>
+    <th>设备</th>
+    <th>属性值</th>
+    <th>操作</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let data of table.data">
+    <td>{{ data.id }}</td>
+    <td>{{ data.name }}</td>
+    <td>{{ data.devices }}</td>
+    <td>{{ data.values }}</td>
+    <td>
+      <nz-space>
+        <!-- <a *nzSpaceItem title="打开" [routerLink]="'/admin/device/'+data.id"><i nz-icon nzType="eye"></i></a> -->
+        <a *nzSpaceItem title="编辑" [routerLink]="'/admin/space/'+data.id"><i nz-icon nzType="edit"></i></a>
+        <a *nzSpaceItem title="删除" nz-popconfirm nzPopconfirmTitle="确认删除" (nzOnConfirm)="deleteSpace(data.id)"><i nz-icon nzType="delete"></i></a>
+      </nz-space>
+    </td>
+  </tr>
+  </tbody>
+</nz-table>
+
+
+<div class="pages">
+  <nz-pagination [nzPageIndex]="nzPageIndex" [nzPageSize]="nzPageSize" [nzTotal]="total" nzShowSizeChanger
+  nzShowQuickJumper (nzPageIndexChange)="nzPageIndexChange($event)"  (nzPageSizeChange)="nzPageSizeChange($event)"></nz-pagination>
+</div>
+
+<!-- <nz-modal [(nzVisible)]="isVisible" nzTitle="绑定设备" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+  <ng-container *nzModalContent>
+    <div nz-row>
+      <div nz-col nzSpan="8">设备名称</div>
+      <div nz-col nzSpan="8">
+        <nz-select nzPlaceHolder="请选择"   [nzOptions]="deviceOption">
+        </nz-select>
+      </div>
+
+    </div>
+  </ng-container>
+</nz-modal> -->

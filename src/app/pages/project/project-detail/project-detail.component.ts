@@ -6,7 +6,6 @@ import {
   NzPageHeaderSubtitleDirective,
   NzPageHeaderTitleDirective,
 } from 'ng-zorro-antd/page-header';
-import {NzBreadCrumbItemComponent} from 'ng-zorro-antd/breadcrumb';
 import {NzSpaceComponent, NzSpaceItemDirective} from 'ng-zorro-antd/space';
 import {NzButtonComponent} from 'ng-zorro-antd/button';
 import {
@@ -33,6 +32,11 @@ import {NzMessageService} from 'ng-zorro-antd/message';
 import {NzSelectModule} from 'ng-zorro-antd/select';
 import {SearchFormComponent} from '../../../components/search-form/search-form.component';
 import {BatchBtnComponent} from '../../../modals/batch-btn/batch-btn.component';
+import {NzDividerComponent} from "ng-zorro-antd/divider";
+import {NzColDirective, NzRowDirective} from "ng-zorro-antd/grid";
+import {NzStatisticComponent} from "ng-zorro-antd/statistic";
+import {NzListComponent, NzListItemComponent} from "ng-zorro-antd/list";
+import {NzCardComponent} from "ng-zorro-antd/card";
 
 @Component({
   selector: 'app-project-detail',
@@ -66,19 +70,22 @@ import {BatchBtnComponent} from '../../../modals/batch-btn/batch-btn.component';
     NzThMeasureDirective,
     NzTheadComponent,
     NzTrDirective,
+    NzDividerComponent,
+    NzRowDirective,
+    NzColDirective,
+    NzStatisticComponent,
+    NzListComponent,
+    NzListItemComponent,
+    NzCardComponent,
   ],
   templateUrl: './project-detail.component.html',
   styleUrl: './project-detail.component.scss',
 })
 export class ProjectDetailComponent implements OnInit {
-  isVisible = false;
   id!: any;
-  total = 0;
-  query: any = {limit: 20, skip: 0};
 
-  nzPageIndex = 1;
-  nzPageSize = 10;
   value = '';
+
   data: any = {
     id: 1,
     name: '人民医院',
@@ -105,6 +112,8 @@ export class ProjectDetailComponent implements OnInit {
     },
   ];
 
+  spaces: any[] = []
+
   space: any[] = [
     {id: 1, name: '1号', product: '温度计', alias: 't1', online: new Date()},
     {id: 2, name: '2号', product: '温度计', alias: 't2', online: new Date()},
@@ -126,42 +135,36 @@ export class ProjectDetailComponent implements OnInit {
   ngOnInit(): void {
     if (this.route.snapshot.paramMap.has('id')) {
       this.id = this.route.snapshot.paramMap.get('id');
-      this.query.filter = {project_id: this.id};
       this.load();
+      this.loadSpaces()
     }
   }
 
   load() {
     this.rs.get(`project/${this.id}`).subscribe(
       (res: any) => {
-        let data = res.data;
+        this.data = res.data;
       },
       (err: any) => {
         console.log('err:', err);
       }
     );
+  }
 
-    this.rs.post(`space/search`, this.query).subscribe(
+  loadSpaces() {
+    this.rs.post(`space/search`, {
+      limit: 999999, skip: 0,
+      filter: {project_id: this.id}
+    }).subscribe(
       (res: any) => {
         if (res.data) {
-          this.space = res.data;
+          this.spaces = res.data;
         }
-        this.total = res.total;
       },
       (err: any) => {
         console.log('err:', err);
       }
     );
-  }
-
-  nzPageSizeChange(e: any) {
-    this.nzPageSize = e;
-    this.load();
-  }
-
-  nzPageIndexChange(e: any) {
-    this.nzPageIndex = e;
-    this.load();
   }
 
   delete() {
@@ -177,6 +180,7 @@ export class ProjectDetailComponent implements OnInit {
     this.load();
   }
 
+
   deleteSpace(e: any) {
     this.rs.get(`space/${e}/delete`, {}).subscribe(
       (res: any) => {
@@ -190,22 +194,7 @@ export class ProjectDetailComponent implements OnInit {
     this.load();
   }
 
-  search($event: string) {
-    console.log($event);
-    this.query.keyword = {
-      name: $event,
-    };
-    this.query.skip = 0;
-    this.load();
-  }
-
-  handleEdit() {
-    this.router.navigateByUrl('admin/space/create');
-  }
-
-  handleCancel() {
-  }
-
-  handleOk() {
+  open(s: any) {
+    this.router.navigateByUrl('/admin/space/' + s.id)
   }
 }

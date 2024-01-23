@@ -1,4 +1,4 @@
-import {Component, signal} from '@angular/core';
+import {Component, OnInit, signal} from '@angular/core';
 import {DatePipe} from '@angular/common';
 import {NzButtonComponent} from 'ng-zorro-antd/button';
 import {
@@ -71,17 +71,18 @@ import {NzSelectModule} from 'ng-zorro-antd/select';
   templateUrl: './space-edit.component.html',
   styleUrl: './space-edit.component.scss',
 })
-export class SpaceEditComponent {
+export class SpaceEditComponent implements OnInit{
   data: any = {
     name: '新设备',
   };
 
   deviceOption: any = [];
-  productOption: any = [];
+
   id!: any;
   formGroup!: FormGroup;
   product: any = [];
   gateway: any = [];
+
   filteredOptions: string[] = [
     'Burns Bay Road',
     'Downing Street',
@@ -106,9 +107,8 @@ export class SpaceEditComponent {
     data = data || {};
     this.formGroup = this.fb.group({
       id: [data.id || null, []],
+      project_id: [data.project_id || '', []],
       name: [data.name || '', []],
-      devices: [data.devices || '', []],
-      values: [data.values || null, []],
     });
   }
 
@@ -145,7 +145,14 @@ export class SpaceEditComponent {
       this.load();
     }
 
+
     this.buildFromGroup();
+
+    if (this.route.snapshot.queryParamMap.has('project')) {
+      let project = this.route.snapshot.queryParamMap.get('project');
+      this.formGroup.patchValue({project_id: project})
+    }
+
   }
 
   load() {

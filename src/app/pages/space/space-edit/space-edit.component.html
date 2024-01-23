@@ -1,14 +1,30 @@
 <nz-page-header>
   <nz-page-header-title>空间{{this.id?"编辑":"创建"}}</nz-page-header-title>
+  <nz-page-header-subtitle>{{ data.name }}</nz-page-header-subtitle>
   <nz-page-header-extra>
     <nz-space>
+      <a *nzSpaceItem nz-button routerLink="device">绑定设备</a>
       <button *nzSpaceItem nz-button nzType="primary" (click)="onSubmit()">保存</button>
     </nz-space>
   </nz-page-header-extra>
 </nz-page-header>
 
 
-<form nz-form   [formGroup]="formGroup">
+<form nz-form (ngSubmit)="onSubmit()" [formGroup]="formGroup">
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="id">ID</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="">
+      <input nz-input formControlName="id" placeholder="选填，默认随机"/>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="project_id">项目</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="">
+      <input nz-input formControlName="project_id"/>
+    </nz-form-control>
+  </nz-form-item>
 
   <nz-form-item>
     <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">名称</nz-form-label>
@@ -18,29 +34,7 @@
   </nz-form-item>
 
 
-  <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="values">属性值</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="">
-      <input nz-input formControlName="values"/>
-    </nz-form-control>
-  </nz-form-item>
 
-
-  <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="devices">设备</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="" >
-
-     <div  class="flex">
-
-      <nz-select class="select" formControlName="devices" [nzOptions]="deviceOption"></nz-select>
-
-        <button  nz-button nzType="primary" (click)="onChoose()">选择</button>
-     </div>
-
-
-
-    </nz-form-control>
-  </nz-form-item>
 
 
 
