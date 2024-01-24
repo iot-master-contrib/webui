@@ -44,9 +44,9 @@
   <nz-form-item>
     <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="product_id">产品</nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="">
-      <nz-select class="select" formControlName="product_id" [nzOptions]="productOption"></nz-select>
+      <!-- <nz-select class="select" formControlName="product_id" [nzOptions]="productOption"></nz-select> -->
 
-
+      <input nz-input formControlName="product_id"/>
       <button  nz-button nzType="primary" (click)="onChoose(1)">选择</button>
     </nz-form-control>
   </nz-form-item>
@@ -55,8 +55,8 @@
   <nz-form-item>
     <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="project_id">项目</nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="">
-      <nz-select class="select" formControlName="project_id" [nzOptions]="projectOption"></nz-select>
-
+      <!-- <nz-select class="select" formControlName="project_id" [nzOptions]="projectOption"></nz-select> -->
+      <input nz-input formControlName="project_id"/>
       <button  nz-button nzType="primary" (click)="onChoose(2)">选择</button>
     </nz-form-control>
   </nz-form-item>

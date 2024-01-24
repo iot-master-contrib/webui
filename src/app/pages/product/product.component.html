@@ -39,7 +39,7 @@
         nzType="primary"
 
         nzShape="round"
-        (click)="create()"
+         routerLink ="create"
       >
         <span nz-icon nzType="plus"></span>
         新建
@@ -63,7 +63,7 @@
     <td>{{ data.id }}</td>
     <td>{{ data.name }}</td>
     <td>{{ data.version }}</td>
-    <td>{{ data.created }}</td>
+    <td>{{ data.created| date }}</td>
     <td *ngIf="!ref">
       <nz-space>
         <!--        <a *nzSpaceItem title="打开" [routerLink]="data.id"><i nz-icon nzType="eye"></i></a>-->

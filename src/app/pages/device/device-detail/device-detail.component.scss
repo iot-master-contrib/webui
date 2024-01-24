@@ -1,6 +1,4 @@
-
 .variables {
-
   .variable {
     background-color: white;
     padding: 10px;
@@ -11,5 +9,23 @@
     &:hover {
       box-shadow: 2px 2px 5px grey;
     }
+  }
+}
+.links {
+  display: flex;
+  .link {
+    margin: 10px;
+    padding: 10px;
+    background-color: white;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer; 
+    img {
+      margin: 10px;
+      width: 60px;
+      height: 60px;
+    }  
   }
 }

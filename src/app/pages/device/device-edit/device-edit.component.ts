@@ -106,8 +106,8 @@ export class DeviceEditComponent {
       name: [data.name || '', []],
       description: [data.description || '', []],
       gateway_id: [data.gateway_id || null, []],
-      product_id: [data.product_id || null, []],
-      project_id: [data.project_id || null, []],
+      product_id: [this.productOption[0]?.label|| null, []],
+      project_id: [this.projectOption[0]?.label || null, []],
       keywords: [data.keywords || [], []],
     });
   }
@@ -119,6 +119,7 @@ export class DeviceEditComponent {
             nzTitle: '网关选择',
             nzCentered: true,
             nzMaskClosable: false,
+            nzWidth: '800px',
             nzContent: GatewayComponent,
             nzFooter: null,
           })
@@ -136,6 +137,7 @@ export class DeviceEditComponent {
             nzTitle: '产品选择',
             nzCentered: true,
             nzMaskClosable: false,
+            nzWidth: '800px',
             nzContent: ProductComponent,
             nzFooter: null,
           })
@@ -153,7 +155,7 @@ export class DeviceEditComponent {
                   value: res.id,
                 },
               ];
-              this.formGroup.patchValue({ product_id: res.id });
+              this.formGroup.patchValue({ product_id: this.productOption[0].label });
             }
           });
         break;
@@ -164,6 +166,7 @@ export class DeviceEditComponent {
             nzTitle: '项目选择',
             nzCentered: true,
             nzMaskClosable: false,
+            nzWidth: '800px', 
             nzContent: ProjectComponent,
             nzFooter: null,
           })
@@ -173,7 +176,7 @@ export class DeviceEditComponent {
               this.projectOption = [
                 { label: res.name || '名称为空', value: res.id },
               ];
-              this.formGroup.patchValue({ project_id: res.id });
+              this.formGroup.patchValue({ project_id: this.projectOption[0].label});
             }
           });
         break;
@@ -209,6 +212,7 @@ export class DeviceEditComponent {
                     value: data.id,
                   },
                 ];
+                this.formGroup.patchValue({ product_id: this.productOption[0].label});
               }
             });
         }
@@ -221,6 +225,7 @@ export class DeviceEditComponent {
                 this.projectOption = [
                   { label: data.name || '名称为空', value: data.id },
                 ];
+                this.formGroup.patchValue({ project_id: this.projectOption[0].label});
               }
             });
         }
@@ -267,8 +272,9 @@ export class DeviceEditComponent {
 
   onSubmit() {
     if (this.formGroup.valid) {
+      let data={...this.formGroup.value,product_id: this.productOption[0]?.value,project_id: this.projectOption[0]?.value}
       let url = this.id ? `device/${this.id}` : `device/create`;
-      this.rs.post(url, this.formGroup.value).subscribe((res) => {
+      this.rs.post(url, data).subscribe((res) => {
         this.router.navigateByUrl('admin/device');
         this.msg.success('保存成功');
       });

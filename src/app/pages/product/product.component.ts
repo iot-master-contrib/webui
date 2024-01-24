@@ -86,10 +86,10 @@ export class ProductComponent implements OnInit {
 
   create() {
 
-      this.rs.post(`product/create`, {}).subscribe((res) => {
-        this.load()
-        this.msg.success('保存成功');
-      });
+      // this.rs.post(`product/create`, {}).subscribe((res) => {
+      //   this.load()
+      //   this.msg.success('保存成功');
+      // });
 
     // const modal: NzModalRef = this.ms.create({
     //   nzTitle: '创建产品',

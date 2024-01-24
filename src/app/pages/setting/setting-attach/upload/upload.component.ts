@@ -1,18 +1,24 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { NzMessageService } from 'ng-zorro-antd/message';
-import { FileItem, FileUploader, ParsedResponseHeaders } from 'ng2-file-upload';
-
+import { NzMessageService } from 'ng-zorro-antd/message'; 
+import { FormsModule } from '@angular/forms';
+import { NgModule } from '@angular/core';
+import { NzUploadModule } from 'ng-zorro-antd/upload';
+import { NzInputModule } from 'ng-zorro-antd/input'; 
+import { RequestService } from '../../../../request.service';
+// , FileUploadModule
 @Component({
   selector: 'app-upload',
+  imports: [FormsModule, NzUploadModule, NzInputModule],
+  standalone: true,
   templateUrl: './upload.component.html',
-  styleUrls: ['./upload.component.scss']
+  styleUrls: ['./upload.component.scss'],
 })
 
 export class UploadComponent {
   group!: FormGroup;
   name!: '';
-  uploader: FileUploader;
+   
   isSuccess: boolean = false
   @Input() set inputValue(value: any){
     this.name = value || '';
@@ -22,29 +28,26 @@ export class UploadComponent {
   constructor(
     private msg: NzMessageService
   ) {
-    this.uploader = new FileUploader({
-      url: `api/attach/upload/`,
-      method: "POST",  //上传方式
-      autoUpload: true
-    });
+     
     this.isSuccess = false;
-    this.uploader.onAfterAddingFile = this.onAfterAddingFile.bind(this);
-    this.uploader.onSuccessItem = this.onSuccessItem.bind(this);
+    
   }
-  onAfterAddingFile(fileItem: FileItem): any {
-    this.uploader.setOptions({
-      url: `api/attach/upload/${this.name || ''}`,
-    })
-  }
-  onSuccessItem(item: FileItem, response: string, status: number, headers: ParsedResponseHeaders): any {
-    const res = JSON.parse(response);
-    if (res.error) {
-      this.msg.error(res.error)
-      this.uploader.clearQueue();
-    } else {
-      this.msg.success('上传成功!');
-      this.isSuccess = true;
-      this.load.emit();
+   
+  handleUpload(info: any): void {
+    if (info.type === 'error') {
+      this.msg.error(`上传失败`);
+      return;
+    }
+    if (info.file && info.file.response) {
+      const res = info.file.response;
+      if (!res.error) {
+        this.msg.success(`上传成功!`);
+        // this.onLoad.emit();
+      } else {
+        this.msg.error(`${res.error}`);
+      }
     }
   }
+
+  
 }

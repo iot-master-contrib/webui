@@ -4,29 +4,65 @@
   <nz-page-header-extra>
     <nz-space>
       <button *nzSpaceItem nz-button routerLink="edit">编辑</button>
-      <button *nzSpaceItem nz-button nz-popconfirm nzPopconfirmTitle="确认删除" (nzOnConfirm)="delete()">删除</button>
+      <button
+        *nzSpaceItem
+        nz-button
+        nz-popconfirm
+        nzPopconfirmTitle="确认删除"
+        (nzOnConfirm)="delete()"
+      >
+        删除
+      </button>
     </nz-space>
   </nz-page-header-extra>
   <nz-page-header-content>
     <nz-descriptions nzSize="small" [nzColumn]="3">
-      <nz-descriptions-item nzTitle="ID" [nzSpan]="1">{{ data.id }}</nz-descriptions-item>
-      <nz-descriptions-item nzTitle="名称" [nzSpan]="1">{{ data.name }}</nz-descriptions-item>
-      <nz-descriptions-item nzTitle="版本" [nzSpan]="1">{{ data.version }}</nz-descriptions-item>
-      <nz-descriptions-item nzTitle="创建时间" [nzSpan]="1">{{ data.created | date }}</nz-descriptions-item>
-      <nz-descriptions-item nzTitle="说明" [nzSpan]="2">{{ data.description }}</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="ID" [nzSpan]="1">{{
+        data.id
+      }}</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="名称" [nzSpan]="1">{{
+        data.name
+      }}</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="版本" [nzSpan]="1">{{
+        data.version
+      }}</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="创建时间" [nzSpan]="1">{{
+        data.created | date
+      }}</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="说明" [nzSpan]="2">{{
+        data.description
+      }}</nz-descriptions-item>
     </nz-descriptions>
   </nz-page-header-content>
 </nz-page-header>
+
+<nz-divider nzText="链接" nzOrientation="left"></nz-divider>
+<div class="links">
+  <div
+    *ngFor="let p of link; let i = index"
+    class="link"
+    [title]="p.description"
+    (click)="toLink(i)"
+  >
+    <img [src]="p.icon" />
+    <span> {{ p.name }} </span>
+  </div>
+</div>
 
 <nz-divider nzText="插件列表" nzOrientation="left"></nz-divider>
 <app-plugins [plugins]="plugins"></app-plugins>
 
 <nz-divider nzText="实时变量" nzOrientation="left"></nz-divider>
-<nz-row class="variables" [nzGutter]="[4,4]">
-  <nz-col *ngFor="let p of properties"
-       [nzXs]="12" [nzSm]="8"
-       [nzMd]="6" [nzLg]="4"
-       [nzXl]="3" [nzXXl]="2"  >
+<nz-row class="variables" [nzGutter]="[4, 4]">
+  <nz-col
+    *ngFor="let p of properties"
+    [nzXs]="12"
+    [nzSm]="8"
+    [nzMd]="6"
+    [nzLg]="4"
+    [nzXl]="3"
+    [nzXXl]="2"
+  >
     <div class="variable">
       <nz-statistic
         [nzTitle]="p.label"
@@ -41,33 +77,43 @@
 
 <nz-table #table [nzData]="alarms" [nzFrontPagination]="false">
   <thead>
-  <tr>
-    <th>等级</th>
-    <th>标题</th>
-    <th>内容</th>
-    <th>时间</th>
-    <th>操作</th>
-  </tr>
+    <tr>
+      <th>等级</th>
+      <th>标题</th>
+      <th>内容</th>
+      <th>时间</th>
+      <th>操作</th>
+    </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let data of table.data">
-    <td>{{ data.level }}</td>
-    <td>{{ data.title }}</td>
-    <td>{{ data.message }}</td>
-    <td [title]="data.created">{{ data.created | date }}</td>
-    <td>
-      <nz-space>
-        <a *nzSpaceItem title="删除" nz-popconfirm nzPopconfirmTitle="确认删除"><i nz-icon nzType="delete"></i></a>
-      </nz-space>
-    </td>
-  </tr>
+    <tr *ngFor="let data of table.data">
+      <td>{{ data.level }}</td>
+      <td>{{ data.title }}</td>
+      <td>{{ data.message }}</td>
+      <td [title]="data.created">{{ data.created | date }}</td>
+      <td>
+        <nz-space>
+          <a
+            *nzSpaceItem
+            title="删除"
+            nz-popconfirm
+            nzPopconfirmTitle="确认删除"
+            ><i nz-icon nzType="delete"></i
+          ></a>
+        </nz-space>
+      </td>
+    </tr>
   </tbody>
 </nz-table>
 
-
 <div class="pages">
-  <nz-pagination  [nzPageIndex]="nzPageIndex" [nzPageSize]="nzPageSize" [nzTotal]="total" nzShowSizeChanger
-  nzShowQuickJumper (nzPageIndexChange)="nzPageIndexChange($event)"  (nzPageSizeChange)="nzPageSizeChange($event)"></nz-pagination>
+  <nz-pagination
+    [nzPageIndex]="nzPageIndex"
+    [nzPageSize]="nzPageSize"
+    [nzTotal]="total"
+    nzShowSizeChanger
+    nzShowQuickJumper
+    (nzPageIndexChange)="nzPageIndexChange($event)"
+    (nzPageSizeChange)="nzPageSizeChange($event)"
+  ></nz-pagination>
 </div>
-
-

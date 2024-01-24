@@ -51,12 +51,11 @@
     placeholder="请输入名称"
     (onSearch)="search($event)"
   ></app-search-form>
-  <app-batch-btn
-  [showExportBtn]="false"
-  [showImportBtn]="false"
-  [showDelBtn]="false"
-    (add)="handleEdit()"
-  ></app-batch-btn>
+  <button  nzSize="large"  nz-button nzType="primary" (click)="handleEdit()">
+    <i nz-icon nzType="plus"></i>
+   绑定
+  </button>
+   
 </div>
 
 <nz-table #table [nzData]="devices" [nzFrontPagination]="false">

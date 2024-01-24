@@ -104,10 +104,10 @@ export class SpaceDetailComponent implements OnInit {
   ];
 
   devices: any[] = [
-    {id: 1, name: '1号', product: '温度计', alias: 't1', online: new Date()},
-    {id: 2, name: '2号', product: '温度计', alias: 't2', online: new Date()},
-    {id: 3, name: '3号', product: '温度计', alias: 't3', online: new Date()},
-    {id: 4, name: '4号', product: '温度计', alias: 't4', online: new Date()},
+    // {id: 1, name: '1号', product: '温度计', alias: 't1', online: new Date()},
+    // {id: 2, name: '2号', product: '温度计', alias: 't2', online: new Date()},
+    // {id: 3, name: '3号', product: '温度计', alias: 't3', online: new Date()},
+    // {id: 4, name: '4号', product: '温度计', alias: 't4', online: new Date()},
   ];
 
 
@@ -139,7 +139,7 @@ export class SpaceDetailComponent implements OnInit {
       }
     );
 
-    this.rs.post(`space/search`, this.query).subscribe(
+    this.rs.get(`space/${this.id}/device`, {}).subscribe(
       (res: any) => {
         if (res.data) {
           this.devices = res.data;
@@ -198,7 +198,7 @@ export class SpaceDetailComponent implements OnInit {
   }
 
   handleEdit() {
-    this.router.navigateByUrl('admin/space/create');
+    this.router.navigateByUrl('admin/device/create');
   }
 
   handleCancel() {
