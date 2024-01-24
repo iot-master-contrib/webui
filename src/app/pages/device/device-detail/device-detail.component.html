@@ -23,14 +23,14 @@
 
 <nz-divider nzText="实时变量" nzOrientation="left"></nz-divider>
 <nz-row class="variables" [nzGutter]="[4,4]">
-  <nz-col *ngFor="let p of data.properties"
+  <nz-col *ngFor="let p of properties"
        [nzXs]="12" [nzSm]="8"
        [nzMd]="6" [nzLg]="4"
        [nzXl]="3" [nzXXl]="2"  >
     <div class="variable">
       <nz-statistic
         [nzTitle]="p.label"
-        [nzValue]="variables[p.name]"
+        [nzValue]="variables[p.name] || '-'"
         [nzSuffix]="p.unit"
       ></nz-statistic>
     </div>

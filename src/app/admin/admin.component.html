@@ -19,7 +19,7 @@
           通知
         </a>
       </li>
-      <li nz-submenu nzTitle="测试用户" nzIcon="user">
+      <li nz-submenu [nzTitle]="us.user.name || us.user.id || '无名'" nzIcon="user">
         <ul>
           <li nz-menu-item nzSelected="false" (click)="handlePassword()">修改密码</li>
           <li nz-menu-divider></li>
@@ -36,12 +36,12 @@
       <ul nz-menu nzTheme="dark" nzMode="inline" class="menu">
 
 
-        <li nz-submenu nzIcon="dashboard" nzTitle="控制台">
-          <ul>
-            <li nz-menu-item nzMatchRouter nzMatchRouterExact routerLink="dash">控制台</li>
-            <li nz-menu-item nzMatchRouter nzMatchRouterExact routerLink="bigdata">数据大屏</li>
-          </ul>
-        </li>
+<!--        <li nz-submenu nzIcon="dashboard" nzTitle="控制台">-->
+<!--          <ul>-->
+<!--            <li nz-menu-item nzMatchRouter nzMatchRouterExact routerLink="dash">控制台</li>-->
+<!--            <li nz-menu-item nzMatchRouter nzMatchRouterExact routerLink="bigdata">数据大屏</li>-->
+<!--          </ul>-->
+<!--        </li>-->
 
         <li nz-submenu nzIcon="apartment" nzTitle="项目管理">
           <ul>

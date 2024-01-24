@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {NzPageHeaderComponent, NzPageHeaderModule} from "ng-zorro-antd/page-header";
 import {NzSpaceModule} from "ng-zorro-antd/space";
 import {NzDescriptionsModule} from "ng-zorro-antd/descriptions";
@@ -20,9 +20,9 @@ import {
   NzTheadComponent,
   NzThMeasureDirective, NzTrDirective
 } from "ng-zorro-antd/table";
-import { FormBuilder } from '@angular/forms';
-import { NzMessageService } from 'ng-zorro-antd/message';
-import { RequestService  } from '../../../request.service';
+import {FormBuilder} from '@angular/forms';
+import {NzMessageService} from 'ng-zorro-antd/message';
+import {RequestService} from '../../../request.service';
 
 @Component({
   selector: 'app-device-detail',
@@ -55,7 +55,7 @@ import { RequestService  } from '../../../request.service';
   templateUrl: './device-detail.component.html',
   styleUrl: './device-detail.component.scss'
 })
-export class DeviceDetailComponent implements OnInit{
+export class DeviceDetailComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private router: Router,
@@ -65,21 +65,19 @@ export class DeviceDetailComponent implements OnInit{
   ) {
 
   }
-  id!:any
-  data: any = {
-    id: 1,
-    name: '温度计',
-    description: '标准485温度计',
-    version: '3',
-    keywords: ['modbus'],
-    icon: '',
-    url: 'https://www.baidu.com',
-    created: new Date(),
-    properties: [
-      {name: "temp", label: "温度", unit: '℃'},
-      {name: "hum", label: "湿度", unit: '%'},
-    ]
-  }
+
+  id!: any
+
+
+  data: any = { }
+
+  product: any = {}
+
+  properties: any = [
+    {name: "temp", label: "温度", unit: '℃'},
+    {name: "hum", label: "湿度", unit: '%'},
+  ]
+
   total = 0;
   nzPageIndex = 1;
   nzPageSize = 10;
@@ -104,56 +102,64 @@ export class DeviceDetailComponent implements OnInit{
       description: ''
     },
   ];
+
   ngOnInit(): void {
     if (this.route.snapshot.paramMap.has('id')) {
       this.id = this.route.snapshot.paramMap.get('id');
       this.load()
       return
     }
-
-
   }
-  alarms: any[] = [
-    {level: 1, title: '温度过高', message: '温度大于35度', created: new Date()},
-    {level: 1, title: '温度过高', message: '温度大于35度', created: new Date()},
-    {level: 1, title: '温度过高', message: '温度大于35度', created: new Date()},
-    {level: 1, title: '温度过高', message: '温度大于35度', created: new Date()},
-    {level: 1, title: '温度过高', message: '温度大于35度', created: new Date()},
-  ]
-  load(){
+
+  alarms: any[] = [  ]
+
+  load() {
 
     this.rs.get(`device/${this.id}`, {}).subscribe(
       (res) => {
-        this.data={...res.data, properties: [
-          {name: "temp", label: "温度", unit: '℃'},
-          {name: "hum", label: "湿度", unit: '%'},
-        ]}
-      },
-      (err) => {
-        console.log('err:', err);
-      }
-    );
+        this.data = res.data
+        this.loadProduct()
+        this.loadProperties()
+      });
+
     this.rs
-    .get('alarm/list', {})
-    .subscribe(
-      (res) => {
+      .get('alarm/list', {})
+      .subscribe(
+        (res) => {
           this.alarms = res.data;
           this.total = res.total;
-      },
-      (err) => {
-        console.log('err:', err);
-      }
-    );
+        },
+        (err) => {
+          console.log('err:', err);
+        }
+      );
   }
+
+  loadProduct() {
+    this.rs.get('product/' + this.data.product_id).subscribe(res => {
+      this.product = res.data
+    })
+  }
+
+  loadProperties() {
+    this.rs.get('product/' + this.data.product_id + '/attach/read/property.json').subscribe(res => {
+      console.log("property", res)
+      this.properties = res
+    })
+  }
+
+
   nzPageSizeChange(e: any) {
     this.nzPageSize = e;
     this.load();
   }
+
   nzPageIndexChange(e: any) {
     this.nzPageIndex = e;
     this.load();
   }
-  delete( ) {
+
+  delete() {
     this.rs.get(`device/${this.id}/delete`, {}).subscribe(
       (res) => {
         this.msg.success('删除成功');

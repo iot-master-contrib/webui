@@ -40,12 +40,9 @@ export class AdminComponent {
 
   constructor(
     private router: Router,
-    // private rs: RequestService,
     private ms: NzModalService,
-    private us: UserService,
+    protected us: UserService,
     private rs: RequestService,
-    // protected _as: AppService,
-    // private msg: NzMessageService,
     protected os: OemService
   ) {
 

@@ -10,17 +10,15 @@
 
 <form nz-form (ngSubmit)="onSubmit()" [formGroup]="formGroup">
 
-  <!-- <ng-container *ngIf="!id; else elseTemplate">
     <nz-form-item >
-      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="id">ID</nz-form-label>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="id">ID(用户名)</nz-form-label>
       <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="">
         <input nz-input formControlName="id" placeholder="选填"/>
       </nz-form-control>
     </nz-form-item>
-  </ng-container>
-  <ng-template #elseTemplate> -->
+
     <nz-form-item  >
-      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">名称</nz-form-label>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">姓名</nz-form-label>
       <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="">
         <input nz-input formControlName="name"/>
       </nz-form-control>

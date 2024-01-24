@@ -27,17 +27,10 @@
 
 <button nz-button routerLink="/admin/space/create" [queryParams]="{project:this.id}">新建空间</button>
 
-  <div nz-row [nzGutter]="[16,16]">
-    <div nz-col [nzXXl]="8" [nzXl]="4" [nzLg]="6" [nzMd]="6" [nzSm]="12" [nzXs]="24" *ngFor="let s of spaces">
-        <nz-card nzHoverable (click)="open(s)">
-          {{ s.name }}
-        </nz-card>
-    </div>
+<div nz-row [nzGutter]="[16,16]">
+  <div nz-col [nzXXl]="8" [nzXl]="4" [nzLg]="6" [nzMd]="6" [nzSm]="12" [nzXs]="24" *ngFor="let s of spaces">
+    <nz-card nzHoverable (click)="open(s)">
+      {{ s.name }}
+    </nz-card>
   </div>
-
-<nz-row>
-  <nz-col *ngFor="let s of spaces">
-    <nz-statistic [nzTitle]="s.name" nzValue="">
-    </nz-statistic>
-  </nz-col>
-</nz-row>
+</div>

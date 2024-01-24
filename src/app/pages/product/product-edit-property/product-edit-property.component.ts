@@ -62,10 +62,10 @@ export class ProductEditPropertyComponent implements OnInit {
   formGroup!: FormGroup;
 
   items: EditTableItem[] = [{
-    label: '名称(ID)',
+    label: '变量',
     name: 'name'
   }, {
-    label: '显示',
+    label: '显示名称',
     name: 'label'
   }, {
     label: '类型',
@@ -84,16 +84,18 @@ export class ProductEditPropertyComponent implements OnInit {
     }, {
       label: '文本',
       value: 'text'
-    }, {
-      label: '枚举',
-      value: 'enum'
-    }, {
-      label: '数组',
-      value: 'array'
-    }, {
-      label: '对象',
-      value: 'object'
-    }]
+    },
+      //   {
+      //   label: '枚举',
+      //   value: 'enum'
+      // }, {
+      //   label: '数组',
+      //   value: 'array'
+      // }, {
+      //   label: '对象',
+      //   value: 'object'
+      // }
+    ]
   }, {
     label: '单位',
     name: 'unit'
@@ -142,7 +144,7 @@ export class ProductEditPropertyComponent implements OnInit {
     let value = this.formGroup.value
     this.rs.post(`product/${this.id}/attach/write/property.json`, value.properties).subscribe(res => {
       this.ms.success("提示", "保存成功")
-      this.router.navigateByUrl("/admin/product/" + this.id+"/edit")
+      this.router.navigateByUrl("/admin/product/" + this.id + "/edit")
     })
   }
 

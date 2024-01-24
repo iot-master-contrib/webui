@@ -71,7 +71,7 @@ import {NzSelectModule} from 'ng-zorro-antd/select';
   templateUrl: './space-edit.component.html',
   styleUrl: './space-edit.component.scss',
 })
-export class SpaceEditComponent implements OnInit{
+export class SpaceEditComponent implements OnInit {
   data: any = {
     name: '新设备',
   };
@@ -109,6 +109,7 @@ export class SpaceEditComponent implements OnInit{
       id: [data.id || null, []],
       project_id: [data.project_id || '', []],
       name: [data.name || '', []],
+      description: [data.description || '', []],
     });
   }
 
@@ -170,7 +171,7 @@ export class SpaceEditComponent implements OnInit{
     if (this.formGroup.valid) {
       let url = this.id ? `space/${this.id}` : `space/create`;
       this.rs.post(url, this.formGroup.value).subscribe((res) => {
-        this.router.navigateByUrl('admin/space');
+        this.router.navigateByUrl('/admin/space/' + res.data.id);
         this.msg.success('保存成功');
       });
 

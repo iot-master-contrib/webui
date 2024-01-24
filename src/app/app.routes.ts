@@ -12,7 +12,7 @@ export const routes: Routes = [
     canActivate: [authGuard],
     path: "admin", component: AdminComponent,
     children: [
-      {path: "", pathMatch: "full", redirectTo: "dash"},
+      {path: "", pathMatch: "full", redirectTo: "project"},
       {path: 'dash', loadChildren: () => import('./pages/dash/dash.module').then(m => m.DashModule)},
       {path: 'product', loadChildren: () => import('./pages/product/product.module').then(m => m.ProductModule)},
       {path: 'device', loadChildren: () => import('./pages/device/device.module').then(m => m.DeviceModule)},
