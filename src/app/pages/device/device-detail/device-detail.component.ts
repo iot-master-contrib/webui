@@ -69,7 +69,7 @@ export class DeviceDetailComponent implements OnInit {
   id!: any
 
 
-  data: any = { }
+  data: any = {}
 
   product: any = {}
 
@@ -82,7 +82,9 @@ export class DeviceDetailComponent implements OnInit {
   nzPageIndex = 1;
   nzPageSize = 10;
   value = '';
-  variables: any = {
+
+
+  values: any = {
     temp: 30,
     hum: 71,
   }
@@ -107,11 +109,12 @@ export class DeviceDetailComponent implements OnInit {
     if (this.route.snapshot.paramMap.has('id')) {
       this.id = this.route.snapshot.paramMap.get('id');
       this.load()
+      this.loadValues()
       return
     }
   }
 
-  alarms: any[] = [  ]
+  alarms: any[] = []
 
   load() {
 
@@ -133,6 +136,12 @@ export class DeviceDetailComponent implements OnInit {
           console.log('err:', err);
         }
       );
+  }
+
+  loadValues() {
+    this.rs.get('device/' + this.id + '/values').subscribe(res => {
+      this.values = res.data
+    })
   }
 
   loadProduct() {
