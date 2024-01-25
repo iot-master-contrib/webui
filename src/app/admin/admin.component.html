@@ -36,7 +36,7 @@
       <ul nz-menu nzTheme="dark" nzMode="inline" class="menu">
 
         <ng-container *ngFor="let menu of menus">
-          <li nz-submenu nzIcon="appstore" [nzTitle]="menu.name" *ngIf="menu.first">
+          <li nz-submenu nzIcon="appstore-add" [nzTitle]="menu.name" *ngIf="menu.first">
             <ul>
               <li nz-menu-item *ngFor="let item of menu.items"
                   nzMatchRouter nzMatchRouterExact routerLink="web"
@@ -56,6 +56,13 @@
           <ul>
             <li nz-menu-item nzMatchRouter nzMatchRouterExact routerLink="project">所有项目</li>
             <li nz-menu-item nzMatchRouter nzMatchRouterExact routerLink="project/create">创建项目</li>
+          </ul>
+        </li>
+
+        <li nz-submenu nzIcon="appstore" nzTitle="空间管理">
+          <ul>
+            <li nz-menu-item nzMatchRouter nzMatchRouterExact routerLink="space">所有空间</li>
+            <li nz-menu-item nzMatchRouter nzMatchRouterExact routerLink="space/create">创建空间</li>
           </ul>
         </li>
 

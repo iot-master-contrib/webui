@@ -2,8 +2,10 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {SpaceDetailComponent} from "./space-detail/space-detail.component";
 import {SpaceEditComponent} from "./space-edit/space-edit.component";
+import {SpaceComponent} from "./space.component";
 
 const routes: Routes = [
+  {path: '', component: SpaceComponent},
   {path: 'create', component: SpaceEditComponent},
   {path: ':id', component: SpaceDetailComponent},
   {path: ':id/edit', component: SpaceEditComponent},

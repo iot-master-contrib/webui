@@ -42,7 +42,7 @@
   </thead>
   <tbody>
   <tr *ngFor="let data of table.data">
-    <td>{{ data.id }}</td>
+    <td><a [routerLink]="data.id">{{ data.id }}</a></td>
     <td>{{ data.name }}</td>
     <td><a [routerLink]="'/admin/gateway/'+data.gateway_id">{{ data.gateway }}</a></td>
     <td><a [routerLink]="'/admin/product/'+data.product_id">{{ data.product }}</a></td>
@@ -52,7 +52,6 @@
     <td>
       <ng-container *ngIf="!ref; else elseTemplate">
         <nz-space>
-          <a *nzSpaceItem title="打开" [routerLink]="data.id"><i nz-icon nzType="eye"></i></a>
           <a *nzSpaceItem title="编辑" [routerLink]="data.id+'/edit'"><i nz-icon nzType="edit"></i></a>
           <a *nzSpaceItem title="删除" nz-popconfirm nzPopconfirmTitle="确认删除" (nzOnConfirm)="delete(data.id)"><i
             nz-icon nzType="delete"></i></a>
