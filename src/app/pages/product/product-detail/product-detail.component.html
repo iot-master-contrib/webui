@@ -19,4 +19,12 @@
 </nz-page-header>
 
 <!--插件列表-->
-<app-plugins [plugins]="plugins"></app-plugins>
+<!--<app-plugins [plugins]="plugins"></app-plugins>-->
+
+<nz-tabset>
+  <nz-tab [nzTitle]="p.name" *ngFor="let p of plugins">
+    <ng-template nz-tab>
+      <app-web-view [url]="p.url + '?product=' + this.id"></app-web-view>
+    </ng-template>
+  </nz-tab>
+</nz-tabset>

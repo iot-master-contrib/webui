@@ -21,6 +21,7 @@ export class WebViewComponent implements OnInit, OnDestroy {
   set url(u: string) {
     //this.src = this.ds.bypassSecurityTrustUrl(u)
     this.src = this.ds.bypassSecurityTrustResourceUrl(u)
+    console.log("iframe url", u)
   }
 
   constructor(private ds: DomSanitizer, private route: ActivatedRoute) {
@@ -32,7 +33,8 @@ export class WebViewComponent implements OnInit, OnDestroy {
     //this.url = this.route.snapshot.queryParamMap.get("url") || ''
     //this.tm = setInterval(this.onLoad, 1000)
     this.route.queryParams.subscribe(qs=>{
-      this.url = qs['url']
+      if (qs.hasOwnProperty('url'))
+        this.url = qs['url']
     })
   }
 
