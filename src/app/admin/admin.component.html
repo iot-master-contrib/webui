@@ -35,13 +35,22 @@
 
       <ul nz-menu nzTheme="dark" nzMode="inline" class="menu">
 
+        <ng-container *ngFor="let menu of menus">
+          <li nz-submenu nzIcon="appstore" [nzTitle]="menu.name" *ngIf="menu.first">
+            <ul>
+              <li nz-menu-item *ngFor="let item of menu.items"
+                  nzMatchRouter nzMatchRouterExact routerLink="web"
+                  [queryParams]="{url: item.url}">{{ item.name }}</li>
+            </ul>
+          </li>
+        </ng-container>
 
-<!--        <li nz-submenu nzIcon="dashboard" nzTitle="控制台">-->
-<!--          <ul>-->
-<!--            <li nz-menu-item nzMatchRouter nzMatchRouterExact routerLink="dash">控制台</li>-->
-<!--            <li nz-menu-item nzMatchRouter nzMatchRouterExact routerLink="bigdata">数据大屏</li>-->
-<!--          </ul>-->
-<!--        </li>-->
+        <!--        <li nz-submenu nzIcon="dashboard" nzTitle="控制台">-->
+        <!--          <ul>-->
+        <!--            <li nz-menu-item nzMatchRouter nzMatchRouterExact routerLink="dash">控制台</li>-->
+        <!--            <li nz-menu-item nzMatchRouter nzMatchRouterExact routerLink="bigdata">数据大屏</li>-->
+        <!--          </ul>-->
+        <!--        </li>-->
 
         <li nz-submenu nzIcon="apartment" nzTitle="项目管理">
           <ul>
@@ -79,11 +88,21 @@
           </ul>
         </li>
 
-        <li nz-submenu nzIcon="appstore" nzTitle="插件管理">
-          <ul>
-            <li nz-menu-item nzMatchRouter nzMatchRouterExact routerLink="plugin">所有插件</li>
-          </ul>
-        </li>
+<!--        <li nz-submenu nzIcon="appstore" nzTitle="插件管理">-->
+<!--          <ul>-->
+<!--            <li nz-menu-item nzMatchRouter nzMatchRouterExact routerLink="plugin">所有插件</li>-->
+<!--          </ul>-->
+<!--        </li>-->
+
+        <ng-container *ngFor="let menu of menus">
+          <li nz-submenu nzIcon="appstore-add" [nzTitle]="menu.name" *ngIf="!menu.first">
+            <ul>
+              <li nz-menu-item *ngFor="let item of menu.items"
+                  nzMatchRouter nzMatchRouterExact routerLink="web"
+                  [queryParams]="{url: item.url}">{{ item.name }}</li>
+            </ul>
+          </li>
+        </ng-container>
 
         <li nz-submenu nzIcon="setting" nzTitle="系统设置">
           <ul>

@@ -4,6 +4,7 @@ import {AdminComponent} from "./admin/admin.component";
 import {UnknownComponent} from "./unknown/unknown.component";
 import {AlarmComponent} from "./pages/alarm/alarm.component";
 import {authGuard} from "./auth.guard";
+import {WebViewComponent} from "./components/web-view/web-view.component";
 
 export const routes: Routes = [
   {path: "", pathMatch: "full", redirectTo: "admin"},
@@ -23,6 +24,7 @@ export const routes: Routes = [
       {path: 'user', loadChildren: () => import('./pages/users/user.module').then(m => m.UserModule)},
       {path: 'setting', loadChildren: () => import('./pages/setting/setting.module').then(m => m.SettingModule)},
 
+      {path: "web", component: WebViewComponent},
       {path: "alarm", component: AlarmComponent},
       {path: "**", component: UnknownComponent},
     ]

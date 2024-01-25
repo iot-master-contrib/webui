@@ -38,6 +38,8 @@ export class AdminComponent {
   isVisible = false
   admin = false
 
+  menus: any = [];
+
   constructor(
     private router: Router,
     private ms: NzModalService,
@@ -52,6 +54,15 @@ export class AdminComponent {
     }, error => {
 
     }).add(() => {
+
+    })
+
+    this.loadMenu()
+  }
+
+  loadMenu() {
+    this.rs.get('plugin/menus').subscribe(res => {
+      this.menus = res.data
 
     })
   }

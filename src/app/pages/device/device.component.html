@@ -33,6 +33,7 @@
   <tr>
     <th>ID</th>
     <th>名称</th>
+    <th>网关</th>
     <th>产品</th>
     <th>项目</th>
     <th>上线时间</th>
@@ -43,8 +44,9 @@
   <tr *ngFor="let data of table.data">
     <td>{{ data.id }}</td>
     <td>{{ data.name }}</td>
-    <td>{{ data.product_id }}</td>
-    <td>{{ data.project_id }}</td>
+    <td><a [routerLink]="'/admin/gateway/'+data.gateway_id">{{ data.gateway }}</a></td>
+    <td><a [routerLink]="'/admin/product/'+data.product_id">{{ data.product }}</a></td>
+    <td><a [routerLink]="'/admin/project/'+data.project_id">{{ data.project }}</a></td>
 
     <td [title]="data.online">{{ data.online | date }}</td>
     <td>
