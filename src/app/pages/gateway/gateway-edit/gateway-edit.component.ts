@@ -18,6 +18,7 @@ import {NzIconDirective} from "ng-zorro-antd/icon";
 import {NzSelectComponent} from "ng-zorro-antd/select";
 import {NzMessageService} from 'ng-zorro-antd/message';
 import {RequestService} from '../../../request.service';
+import {InputProjectComponent} from "../../../components/input-project/input-project.component";
 
 @Component({
   selector: 'app-gateway-edit',
@@ -45,6 +46,7 @@ import {RequestService} from '../../../request.service';
     NzIconDirective,
     NzSelectComponent,
     NgIf,
+    InputProjectComponent,
   ],
   templateUrl: './gateway-edit.component.html',
   styleUrl: './gateway-edit.component.scss'

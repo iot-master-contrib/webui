@@ -27,37 +27,24 @@
 
 
   <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="gateway_id">网关</nz-form-label>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="gateway_id">网关</nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="">
-
-
-
-        <input nz-input formControlName="gateway_id"/>
-
-        <button  nz-button nzType="primary" (click)="onChoose(0)">选择</button>
-
-      <!-- <nz-select nzPlaceHolder="网关" formControlName="gateway_id"  [nzOptions]="gateway">
-      </nz-select> -->
+      <app-input-gateway formControlName="gateway_id"></app-input-gateway>
     </nz-form-control>
   </nz-form-item>
 
   <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="product_id">产品</nz-form-label>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="product_id">产品</nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="">
-      <!-- <nz-select class="select" formControlName="product_id" [nzOptions]="productOption"></nz-select> -->
-
-      <input nz-input formControlName="product_id"/>
-      <button  nz-button nzType="primary" (click)="onChoose(1)">选择</button>
+      <app-input-product formControlName="product_id"></app-input-product>
     </nz-form-control>
   </nz-form-item>
 
 
   <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="project_id">项目</nz-form-label>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="project_id">项目</nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="">
-      <!-- <nz-select class="select" formControlName="project_id" [nzOptions]="projectOption"></nz-select> -->
-      <input nz-input formControlName="project_id"/>
-      <button  nz-button nzType="primary" (click)="onChoose(2)">选择</button>
+      <app-input-project formControlName="project_id"></app-input-project>
     </nz-form-control>
   </nz-form-item>
 

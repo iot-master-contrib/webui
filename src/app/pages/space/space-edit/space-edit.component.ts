@@ -39,6 +39,7 @@ import {NzAutocompleteModule} from 'ng-zorro-antd/auto-complete';
 import {NzModalRef, NzModalService} from 'ng-zorro-antd/modal';
 import {DevicesComponent} from '../../device/devices/devices.component';
 import {NzSelectModule} from 'ng-zorro-antd/select';
+import {InputProjectComponent} from "../../../components/input-project/input-project.component";
 
 @Component({
   selector: 'app-space-edit',
@@ -67,6 +68,7 @@ import {NzSelectModule} from 'ng-zorro-antd/select';
     NzUploadComponent,
     NzIconDirective,
     NzSelectComponent,
+    InputProjectComponent,
   ],
   templateUrl: './space-edit.component.html',
   styleUrl: './space-edit.component.scss',

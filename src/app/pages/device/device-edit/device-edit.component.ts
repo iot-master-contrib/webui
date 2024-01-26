@@ -1,6 +1,6 @@
-import { Component, signal } from '@angular/core';
-import { DatePipe } from '@angular/common';
-import { NzButtonComponent } from 'ng-zorro-antd/button';
+import {Component, signal} from '@angular/core';
+import {DatePipe} from '@angular/common';
+import {NzButtonComponent} from 'ng-zorro-antd/button';
 import {
   NzDescriptionsComponent,
   NzDescriptionsItemComponent,
@@ -12,9 +12,9 @@ import {
   NzPageHeaderSubtitleDirective,
   NzPageHeaderTitleDirective,
 } from 'ng-zorro-antd/page-header';
-import { NzPopconfirmDirective } from 'ng-zorro-antd/popconfirm';
-import { NzSpaceComponent, NzSpaceItemDirective } from 'ng-zorro-antd/space';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import {NzPopconfirmDirective} from 'ng-zorro-antd/popconfirm';
+import {NzSpaceComponent, NzSpaceItemDirective} from 'ng-zorro-antd/space';
+import {ActivatedRoute, Router, RouterLink} from '@angular/router';
 import {
   NzFormDirective,
   NzFormItemComponent,
@@ -30,17 +30,21 @@ import {
   NzInputDirective,
   NzTextareaCountComponent,
 } from 'ng-zorro-antd/input';
-import { NzUploadChangeParam, NzUploadComponent } from 'ng-zorro-antd/upload';
-import { NzIconDirective } from 'ng-zorro-antd/icon';
-import { NzSelectComponent } from 'ng-zorro-antd/select';
-import { NzMessageService } from 'ng-zorro-antd/message';
-import { RequestService } from '../../../request.service';
-import { NzAutocompleteModule } from 'ng-zorro-antd/auto-complete';
-import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
-import { GatewaysComponent } from '../../gateway/gateways/gateways.component';
-import { ProductsComponent } from '../../product/products/products.component';
-import { ProjectsComponent } from '../../project/projects/projects.component';
-import { NzSelectModule } from 'ng-zorro-antd/select';
+import {NzUploadChangeParam, NzUploadComponent} from 'ng-zorro-antd/upload';
+import {NzIconDirective} from 'ng-zorro-antd/icon';
+import {NzSelectComponent} from 'ng-zorro-antd/select';
+import {NzMessageService} from 'ng-zorro-antd/message';
+import {RequestService} from '../../../request.service';
+import {NzAutocompleteModule} from 'ng-zorro-antd/auto-complete';
+import {NzModalRef, NzModalService} from 'ng-zorro-antd/modal';
+import {GatewaysComponent} from '../../gateway/gateways/gateways.component';
+import {ProductsComponent} from '../../product/products/products.component';
+import {ProjectsComponent} from '../../project/projects/projects.component';
+import {NzSelectModule} from 'ng-zorro-antd/select';
+import {InputProductComponent} from "../../../components/input-product/input-product.component";
+import {InputGatewayComponent} from "../../../components/input-gateway/input-gateway.component";
+import {InputProjectComponent} from "../../../components/input-project/input-project.component";
+
 @Component({
   selector: 'app-device-edit',
   standalone: true,
@@ -68,6 +72,9 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
     NzUploadComponent,
     NzIconDirective,
     NzSelectComponent,
+    InputProductComponent,
+    InputGatewayComponent,
+    InputProjectComponent,
   ],
   templateUrl: './device-edit.component.html',
   styleUrl: './device-edit.component.scss',
@@ -77,17 +84,10 @@ export class DeviceEditComponent {
     name: '新设备',
   };
 
-  projectOption: any = [];
-  productOption: any = [];
+
   id!: any;
   formGroup!: FormGroup;
-  product: any = [];
-  gateway: any = [];
-  filteredOptions: string[] = [
-    'Burns Bay Road',
-    'Downing Street',
-    'Wall Street',
-  ];
+
   constructor(
     private fb: FormBuilder,
     private router: Router,
@@ -95,200 +95,59 @@ export class DeviceEditComponent {
     private rs: RequestService,
     private route: ActivatedRoute,
     private ms: NzModalService
-  ) {}
+  ) {
+  }
+
   onInputChange() {
     console.log(this.formGroup.value.gateway_id);
   }
+
   buildFromGroup(data?: any) {
     data = data || {};
     this.formGroup = this.fb.group({
       id: [data.id || '', []],
       name: [data.name || '', []],
       description: [data.description || '', []],
-      gateway_id: [data.gateway_id || null, []],
-      product_id: [this.productOption[0]?.label|| null, []],
-      project_id: [this.projectOption[0]?.label || null, []],
+      gateway_id: [data.gateway_id || '', []],
+      product_id: [data.product_id || '', []],
+      project_id: [data.project_id || '', []],
       keywords: [data.keywords || [], []],
     });
   }
-  onChoose(e: Number) {
-    switch (e) {
-      case 0:
-        this.ms
-          .create({
-            nzTitle: '网关选择',
-            nzCentered: true,
-            nzMaskClosable: false,
-            nzWidth: '800px',
-            nzContent: GatewaysComponent,
-            nzFooter: null,
-          })
-          .afterClose.subscribe((res) => {
-            if (res) {
-              this.formGroup.patchValue({ gateway_id: res });
-              // this.group.patchValue({ gateway_id: res });
-            }
-          });
-        break;
 
-      case 1:
-        this.ms
-          .create({
-            nzTitle: '产品选择',
-            nzCentered: true,
-            nzMaskClosable: false,
-            nzWidth: '800px',
-            nzContent: ProductsComponent,
-            nzFooter: null,
-          })
-          .afterClose.subscribe((res) => {
-            if (res) {
-              console.log(res);
-
-              this.productOption = [
-                {
-                  label:
-                    (res.name || '名称为空') +
-                    ' (' +
-                    (res.version || '版本号为空') +
-                    ')',
-                  value: res.id,
-                },
-              ];
-              this.formGroup.patchValue({ product_id: this.productOption[0].label });
-            }
-          });
-        break;
-
-      case 2:
-        this.ms
-          .create({
-            nzTitle: '项目选择',
-            nzCentered: true,
-            nzMaskClosable: false,
-            nzWidth: '800px',
-            nzContent: ProjectsComponent,
-            nzFooter: null,
-          })
-          .afterClose.subscribe((res) => {
-            console.log(res);
-            if (res) {
-              this.projectOption = [
-                { label: res.name || '名称为空', value: res.id },
-              ];
-              this.formGroup.patchValue({ project_id: this.projectOption[0].label});
-            }
-          });
-        break;
-
-      default:
-        break;
-    }
-  }
   ngOnInit(): void {
     if (this.route.snapshot.paramMap.has('id')) {
       this.id = this.route.snapshot.paramMap.get('id');
       this.load();
     }
-    this.loadSelect();
     this.buildFromGroup();
   }
-  load() {
-    this.rs.get(`device/${this.id}`, {}).subscribe(
-      async (res) => {
-        if (res.data?.product_id) {
-          this.rs
-            .get(`product/${res.data.product_id}`)
-            .subscribe((mes) => {
-              if (mes.data) {
-                let data = mes.data;
-                this.productOption = [
-                  {
-                    label:
-                      (data.name || '名称为空') +
-                      ' (' +
-                      (data.version || '版本号为空') +
-                      ')',
-                    value: data.id,
-                  },
-                ];
-                this.formGroup.patchValue({ product_id: this.productOption[0].label});
-              }
-            });
-        }
-        if (res.data?.project_id) {
-          this.rs
-            .get(`project/${res.data.project_id}`)
-            .subscribe((mes) => {
-              if (mes.data) {
-                let data = mes.data;
-                this.projectOption = [
-                  { label: data.name || '名称为空', value: data.id },
-                ];
-                this.formGroup.patchValue({ project_id: this.projectOption[0].label});
-              }
-            });
-        }
-        console.log(3);
-        this.buildFromGroup(res.data);
-      },
-      (err) => {
-        console.log('err:', err);
-      }
-    );
-  }
-  loadSelect() {
-    //gateway
-    this.rs.post(`gateway/search`, { limit: 9999 }).subscribe(
-      (res) => {
-        let gateway: any = [];
-        if (res.data)
-          res.data.filter((item: any) => {
-            gateway.push({ label: item.name, value: item.id });
-          });
-        this.gateway = gateway;
-        console.log(this.gateway);
-      },
-      (err) => {
-        console.log('err:', err);
-      }
-    );
 
-    //product
-    this.rs.post(`product/search`, { limit: 9999 }).subscribe(
-      (res) => {
-        let product: any = [];
-        if (res.data)
-          res.data.filter((item: any) => {
-            product.push({ label: item.id, value: item.id });
-          });
-        this.product = product;
-      },
-      (err) => {
-        console.log('err:', err);
-      }
-    );
+  load() {
+    this.rs.get(`device/${this.id}`).subscribe(res => {
+      this.buildFromGroup(res.data);
+    });
   }
 
   onSubmit() {
     if (this.formGroup.valid) {
-      let data={...this.formGroup.value,product_id: this.productOption[0]?.value,project_id: this.projectOption[0]?.value}
-      let url = this.id ? `device/${this.id}` : `device/create`;
+      let data = this.formGroup.value
+      let url = `device/${this.id || 'create'}`;
       this.rs.post(url, data).subscribe((res) => {
-        this.router.navigateByUrl('admin/device');
+        this.router.navigateByUrl('/admin/device/' + res.data.id);
         this.msg.success('保存成功');
       });
-
       return;
-    } else {
-      Object.values(this.formGroup.controls).forEach((control) => {
-        if (control.invalid) {
-          control.markAsDirty();
-          control.updateValueAndValidity({ onlySelf: true });
-        }
-      });
     }
+
+    Object.values(this.formGroup.controls).forEach((control) => {
+      if (control.invalid) {
+        control.markAsDirty();
+        control.updateValueAndValidity({onlySelf: true});
+      }
+    });
   }
 
-  onIconChange($event: NzUploadChangeParam) {}
+  onIconChange($event: NzUploadChangeParam) {
+  }
 }
