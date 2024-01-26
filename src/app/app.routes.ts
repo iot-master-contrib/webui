@@ -8,6 +8,7 @@ import {WebViewComponent} from "./components/web-view/web-view.component";
 import {ProjectComponent} from "./project/project.component";
 import {SelectComponent} from "./select/select.component";
 import {adminGuard} from "./admin.guard";
+import {projectGuard} from "./project.guard";
 
 export const routes: Routes = [
   {path: "", pathMatch: "full", redirectTo: "admin"},

@@ -13,14 +13,12 @@ export class UserService {
   public getting = true;
 
   constructor(private rs: RequestService) {
-    console.log("user me")
+    //console.log("user me")
     rs.get('user/me').subscribe(res => {
-      console.log("user me ok")
+      //console.log("user me ok")
       this.setUser(res.data) ;
-    }, error => {
-      this.userSub.error(error)
     }).add(()=>{
-      console.log('getting false')
+      //console.log('getting false')
       this.getting = false;
     })
   }
