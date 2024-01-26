@@ -9,7 +9,7 @@
 </nz-page-header>
 
 
-<form nz-form (ngSubmit)="onSubmit()" [formGroup]="formGroup">
+<form nz-form [formGroup]="formGroup">
 
   <app-edit-table [items]="items" formControlName="properties">
   </app-edit-table>
