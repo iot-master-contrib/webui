@@ -78,18 +78,8 @@ export class SpaceEditComponent implements OnInit {
     name: '新设备',
   };
 
-  deviceOption: any = [];
-
   id!: any;
   formGroup!: FormGroup;
-  product: any = [];
-  gateway: any = [];
-
-  filteredOptions: string[] = [
-    'Burns Bay Road',
-    'Downing Street',
-    'Wall Street',
-  ];
 
   constructor(
     private fb: FormBuilder,
@@ -101,10 +91,6 @@ export class SpaceEditComponent implements OnInit {
   ) {
   }
 
-  onInputChange() {
-    console.log(this.formGroup.value.gateway_id);
-  }
-
   buildFromGroup(data?: any) {
     data = data || {};
     this.formGroup = this.fb.group({
@@ -112,33 +98,6 @@ export class SpaceEditComponent implements OnInit {
       project_id: [data.project_id || '', []],
       name: [data.name || '', []],
       description: [data.description || '', []],
-    });
-  }
-
-  onChoose() {
-    this.ms
-      .create({
-        nzTitle: '设备绑定',
-        nzCentered: true,
-        nzMaskClosable: false,
-        nzContent: DevicesComponent,
-        nzFooter: null,
-      })
-      .afterClose.subscribe((res) => {
-      console.log(res);
-      let value = this.formGroup.value
-      if (res) {
-        if (res.status) {
-          this.deviceOption = [{label: res.id, value: res.id}]
-          this.formGroup.patchValue({devices: res.id});
-        } else {
-          if (value.devices && value.devices === res.id)
-            this.formGroup.patchValue({devices: null})
-        }
-
-
-        // this.group.patchValue({ gateway_id: res });
-      }
     });
   }
 
@@ -159,14 +118,9 @@ export class SpaceEditComponent implements OnInit {
   }
 
   load() {
-    this.rs.get(`space/${this.id}`, {}).subscribe(
-      (res) => {
-        this.buildFromGroup(res.data);
-      },
-      (err) => {
-        console.log('err:', err);
-      }
-    );
+    this.rs.get(`space/${this.id}`).subscribe((res) => {
+      this.buildFromGroup(res.data);
+    });
   }
 
   onSubmit() {
@@ -186,8 +140,5 @@ export class SpaceEditComponent implements OnInit {
         }
       });
     }
-  }
-
-  onIconChange($event: NzUploadChangeParam) {
   }
 }
