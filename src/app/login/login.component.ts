@@ -57,21 +57,16 @@ export class LoginComponent implements OnInit {
 
     this.rs.post('login', {username: this.validateForm.value.username, password}).subscribe(res => {
       console.log('res:', res);
-      //this.us.setUser(res.data);
-
       //localStorage.setItem('token', res.data.token);
 
       //更新用户
       this.us.setUser(res.data);
 
-      //TODO 缓存用户喜好
-      // let main = localStorage.getItem("main") || "/admin"
-      let main = "/admin";
-      this.router.navigate([main]).then(r => {
-      });
-
-    }, err => {
-      console.log('err:', err);
+      if (res.data.admin) {
+        this.router.navigateByUrl('/admin')
+      } else {
+        this.router.navigateByUrl('/select')
+      }
     });
   }
 
