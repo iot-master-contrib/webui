@@ -5,9 +5,11 @@ import {ProjectEditUserComponent} from "./project-edit-user/project-edit-user.co
 import {ProjectsComponent} from "./projects/projects.component";
 import {ProjectDetailComponent} from "./project-detail/project-detail.component";
 import {ProjectEditComponent} from "./project-edit/project-edit.component";
+import {ProjectDashComponent} from "./project-dash/project-dash.component";
 const routes: Routes = [
   {path: '', component: ProjectsComponent},
   {path: 'create', component: ProjectEditComponent},
+  {path: 'dash', component: ProjectDashComponent},
   {path: 'detail', component: ProjectDetailComponent},
   {path: ':id', component: ProjectDetailComponent},
   {path: ':id/edit', component: ProjectEditComponent},

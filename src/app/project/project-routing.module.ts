@@ -5,8 +5,7 @@ import {AlarmComponent} from "../pages/alarm/alarm.component";
 import {UnknownComponent} from "../unknown/unknown.component";
 
 const routes: Routes = [
-  {path: "", pathMatch: "full", redirectTo: "dash"},
-  {path: 'dash', loadChildren: () => import('../pages/dash/dash.module').then(m => m.DashModule)},
+  {path: "", pathMatch: "full", redirectTo: "project/dash"},
   {path: 'device', loadChildren: () => import('../pages/device/device.module').then(m => m.DeviceModule)},
   {path: 'gateway', loadChildren: () => import('../pages/gateway/gateway.module').then(m => m.GatewayModule)},
   {path: 'project', loadChildren: () => import('../pages/project/project.module').then(m => m.ProjectModule)},
