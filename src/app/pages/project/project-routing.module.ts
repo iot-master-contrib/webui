@@ -8,6 +8,7 @@ import {ProjectEditComponent} from "./project-edit/project-edit.component";
 const routes: Routes = [
   {path: '', component: ProjectsComponent},
   {path: 'create', component: ProjectEditComponent},
+  {path: 'detail', component: ProjectDetailComponent},
   {path: ':id', component: ProjectDetailComponent},
   {path: ':id/edit', component: ProjectEditComponent},
   {path: ':id/edit/plugin', component: ProjectEditPluginComponent},

@@ -36,6 +36,8 @@ import {
   DisconnectOutline,
   LinkOutline,
   DragOutline,
+  ExportOutline,
+  ImportOutline,
 } from '@ant-design/icons-angular/icons';
 const icons: IconDefinition[] = [
   DashboardOutline,
@@ -60,6 +62,8 @@ const icons: IconDefinition[] = [
   DisconnectOutline,
   LinkOutline,
   DragOutline,
+  ExportOutline,
+  ImportOutline,
 ];
 
 export const appConfig: ApplicationConfig = {

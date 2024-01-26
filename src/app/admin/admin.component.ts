@@ -61,7 +61,7 @@ export class AdminComponent {
   }
 
   loadMenu() {
-    this.rs.get('plugin/menus').subscribe(res => {
+    this.rs.get('plugin/menus/admin').subscribe(res => {
       this.menus = res.data
 
     })

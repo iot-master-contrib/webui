@@ -63,7 +63,7 @@ export class ProjectComponent implements OnInit{
   }
 
   loadMenu() {
-    this.rs.get('plugin/menus').subscribe(res => {
+    this.rs.get('plugin/menus/project').subscribe(res => {
       this.menus = res.data
     })
   }
