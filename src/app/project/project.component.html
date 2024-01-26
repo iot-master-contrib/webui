@@ -1,0 +1,102 @@
+<nz-layout style="height: 100%">
+  <nz-header>
+    <div class="logo">
+      <img [src]="'assets/infinite.svg'" alt="logo">
+    </div>
+
+    <div class="title">
+      {{ project.name || '未命名项目' }}
+    </div>
+
+
+    <div class="space">
+    </div>
+
+    <ul nz-menu nzTheme="dark" nzMode="horizontal" class="user">
+      <li nz-menu-item nzMatchRouter>
+        <a routerLink="alarm">
+          <span nz-icon nzType="bell"></span>
+          通知
+        </a>
+      </li>
+      <li nz-submenu [nzTitle]="us.user.name || us.user.id || '无名'" nzIcon="user">
+        <ul>
+          <li nz-menu-item nzSelected="false" (click)="handlePassword()">修改密码</li>
+          <li nz-menu-divider></li>
+          <li nz-menu-item nzSelected="false" nzDanger (click)="handleExit()">退出</li>
+        </ul>
+      </li>
+    </ul>
+
+  </nz-header>
+
+  <nz-layout>
+    <nz-sider nzWidth="200px">
+
+      <ul nz-menu nzTheme="dark" nzMode="inline" class="menu">
+
+        <ng-container *ngFor="let menu of menus">
+          <li nz-submenu nzIcon="appstore-add" [nzTitle]="menu.name" *ngIf="menu.first">
+            <ul>
+              <li nz-menu-item *ngFor="let item of menu.items"
+                  nzMatchRouter nzMatchRouterExact routerLink="web"
+                  [queryParams]="{url: item.url}">{{ item.name }}</li>
+            </ul>
+          </li>
+        </ng-container>
+
+        <!--        <li nz-submenu nzIcon="dashboard" nzTitle="控制台">-->
+        <!--          <ul>-->
+        <!--            <li nz-menu-item nzMatchRouter nzMatchRouterExact routerLink="dash">控制台</li>-->
+        <!--            <li nz-menu-item nzMatchRouter nzMatchRouterExact routerLink="bigdata">数据大屏</li>-->
+        <!--          </ul>-->
+        <!--        </li>-->
+
+
+        <li nz-submenu nzIcon="appstore" nzTitle="空间管理">
+          <ul>
+            <li nz-menu-item nzMatchRouter nzMatchRouterExact routerLink="space">所有空间</li>
+            <li nz-menu-item nzMatchRouter nzMatchRouterExact routerLink="space/create">创建空间</li>
+          </ul>
+        </li>
+
+        <li nz-submenu nzIcon="block" nzTitle="设备管理">
+          <ul>
+            <li nz-menu-item nzMatchRouter nzMatchRouterExact routerLink="device">所有设备</li>
+            <li nz-menu-item nzMatchRouter nzMatchRouterExact routerLink="device/create">创建设备</li>
+          </ul>
+        </li>
+
+
+        <li nz-submenu nzIcon="user" nzTitle="用户管理">
+          <ul>
+            <li nz-menu-item nzMatchRouter nzMatchRouterExact routerLink="user">所有用户</li>
+            <li nz-menu-item nzMatchRouter nzMatchRouterExact routerLink="user/create">创建用户</li>
+          </ul>
+        </li>
+
+<!--        <li nz-submenu nzIcon="appstore" nzTitle="插件管理">-->
+<!--          <ul>-->
+<!--            <li nz-menu-item nzMatchRouter nzMatchRouterExact routerLink="plugin">所有插件</li>-->
+<!--          </ul>-->
+<!--        </li>-->
+
+        <ng-container *ngFor="let menu of menus">
+          <li nz-submenu nzIcon="appstore-add" [nzTitle]="menu.name" *ngIf="!menu.first">
+            <ul>
+              <li nz-menu-item *ngFor="let item of menu.items"
+                  nzMatchRouter nzMatchRouterExact routerLink="web"
+                  [queryParams]="{url: item.url}">{{ item.name }}</li>
+            </ul>
+          </li>
+        </ng-container>
+
+      </ul>
+
+    </nz-sider>
+    <nz-content class="content">
+      <router-outlet></router-outlet>
+    </nz-content>
+  </nz-layout>
+
+</nz-layout>
