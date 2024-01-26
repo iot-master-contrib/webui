@@ -1,21 +1,21 @@
 <div class="toolbar">
   <nz-space>
-    <button *nzSpaceItem nz-button nzType="primary"  (click)="refresh()">
+    <button *nzSpaceItem nz-button nzType="primary" (click)="refresh()">
       <span nz-icon nzType="reload"></span>
       刷新
     </button>
 
     <div *nzSpaceItem class="search">
-      <nz-input-group nzSearch  [nzAddOnAfter]="suffixButton">
+      <nz-input-group nzSearch [nzAddOnAfter]="suffixButton">
         <input type="text" [(ngModel)]="value" nz-input placeholder="请输入关键字"/>
       </nz-input-group>
       <ng-template #suffixButton>
-        <button nz-button nzType="primary"  nzSearch (click)="search()">搜索</button>
+        <button nz-button nzType="primary" nzSearch (click)="search()">搜索</button>
       </ng-template>
     </div>
     <div *nzSpaceItem>
       <div *ngIf="!ref">
-        <button nz-button nzType="primary"  nzShape="round" routerLink="create">
+        <button nz-button nzType="primary" nzShape="round" routerLink="create">
           <span nz-icon nzType="plus"></span>
           新建
         </button>
@@ -36,8 +36,7 @@
   <tr>
     <th>ID</th>
     <th>名称</th>
-    <th>用户名</th>
-    <th>密码</th>
+    <th>项目</th>
     <th>上线时间</th>
     <th>操作</th>
   </tr>
@@ -46,8 +45,7 @@
   <tr *ngFor="let data of table.data">
     <td><a [routerLink]="data.id">{{ data.id }}</a></td>
     <td>{{ data.name }}</td>
-    <td>{{ data.username }}</td>
-    <td>{{ data.password }}</td>
+    <td><a [routerLink]="'/admin/project/'+data.project_id">{{ data.project }}</a></td>
     <td [title]="data.online">{{ data.online | date }}</td>
     <td>
 

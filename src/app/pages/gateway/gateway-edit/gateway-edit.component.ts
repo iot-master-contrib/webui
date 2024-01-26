@@ -1,4 +1,4 @@
-import { Component, signal, OnInit } from '@angular/core';
+import {Component, signal, OnInit} from '@angular/core';
 import {DatePipe, NgIf} from "@angular/common";
 import {NzButtonComponent} from "ng-zorro-antd/button";
 import {NzDescriptionsComponent, NzDescriptionsItemComponent} from "ng-zorro-antd/descriptions";
@@ -16,8 +16,8 @@ import {NzInputDirective, NzTextareaCountComponent} from "ng-zorro-antd/input";
 import {NzUploadChangeParam, NzUploadComponent} from "ng-zorro-antd/upload";
 import {NzIconDirective} from "ng-zorro-antd/icon";
 import {NzSelectComponent} from "ng-zorro-antd/select";
-import { NzMessageService } from 'ng-zorro-antd/message';
-import { RequestService } from '../../../request.service';
+import {NzMessageService} from 'ng-zorro-antd/message';
+import {RequestService} from '../../../request.service';
 
 @Component({
   selector: 'app-gateway-edit',
@@ -49,12 +49,13 @@ import { RequestService } from '../../../request.service';
   templateUrl: './gateway-edit.component.html',
   styleUrl: './gateway-edit.component.scss'
 })
-export class GatewayEditComponent implements OnInit{
+export class GatewayEditComponent implements OnInit {
   data: any = {
     name: "新网关",
   }
   formGroup!: FormGroup;
- id!:any
+  id!: any
+
   constructor(
     private fb: FormBuilder,
     private router: Router,
@@ -64,11 +65,13 @@ export class GatewayEditComponent implements OnInit{
   ) {
     this.buildFromGroup();
   }
-  buildFromGroup(data?:any){
-    data=data||{}
+
+  buildFromGroup(data?: any) {
+    data = data || {}
     this.formGroup = this.fb.group({
       id: [data.id || '', []],
       name: [data.name || '', []],
+      project_id: [data.project_id || '', []],
       description: [data.description || '', []],
       username: [data.username || '', [Validators.required]],
       password: [data.password || '', [Validators.required]],
@@ -84,9 +87,9 @@ export class GatewayEditComponent implements OnInit{
     this.buildFromGroup();
 
   }
+
   load() {
-    this.rs.get(`gateway/${this.id}`, {
-    }).subscribe(
+    this.rs.get(`gateway/${this.id}`, {}).subscribe(
       (res) => {
         this.buildFromGroup(res.data);
       },
@@ -97,6 +100,7 @@ export class GatewayEditComponent implements OnInit{
 
 
   }
+
   onSubmit() {
     if (this.formGroup.valid) {
       let url = this.id ? `gateway/${this.id}` : `gateway/create`;
@@ -110,7 +114,7 @@ export class GatewayEditComponent implements OnInit{
       Object.values(this.formGroup.controls).forEach((control) => {
         if (control.invalid) {
           control.markAsDirty();
-          control.updateValueAndValidity({ onlySelf: true });
+          control.updateValueAndValidity({onlySelf: true});
         }
       });
     }
