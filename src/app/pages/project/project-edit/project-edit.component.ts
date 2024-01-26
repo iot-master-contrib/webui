@@ -123,7 +123,7 @@ export class ProjectEditComponent implements OnInit {
     if (this.formGroup.valid) {
       let url = `project/${this.id || 'create'}`
       this.rs.post(url, this.formGroup.value).subscribe((res) => {
-        this.router.navigateByUrl('admin');
+        this.router.navigateByUrl('/admin/project/' + res.data.id);
         this.msg.success('保存成功');
       });
 

@@ -120,7 +120,7 @@ export class ProductEditComponent implements OnInit {
     if (this.formGroup.valid) {
       let url = `product/${this.id||'create'}`;
       this.rs.post(url, this.formGroup.value).subscribe((res) => {
-        this.router.navigateByUrl('admin/product');
+        this.router.navigateByUrl('/admin/product/' + res.data.id);
         this.msg.success('保存成功');
       });
 

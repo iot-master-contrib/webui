@@ -108,7 +108,7 @@ export class UserEditComponent implements OnInit {
     if (this.formGroup.valid) {
       let url = this.id ? `user/${this.id}` : `user/create`;
       this.rs.post(url, this.formGroup.value).subscribe((res) => {
-        this.router.navigateByUrl('admin/user');
+        this.router.navigateByUrl('/admin/user/' + res.data.id);
         this.msg.success('保存成功');
       });
 
@@ -121,8 +121,5 @@ export class UserEditComponent implements OnInit {
         }
       });
     }
-  }
-
-  onIconChange($event: NzUploadChangeParam) {
   }
 }

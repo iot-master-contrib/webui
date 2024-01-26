@@ -75,8 +75,8 @@ export class GatewayEditComponent implements OnInit {
       name: [data.name || '', []],
       project_id: [data.project_id || '', []],
       description: [data.description || '', []],
-      username: [data.username || '', [Validators.required]],
-      password: [data.password || '', [Validators.required]],
+      username: [data.username || '', []],
+      password: [data.password || '', []],
     })
   }
 
@@ -107,7 +107,7 @@ export class GatewayEditComponent implements OnInit {
     if (this.formGroup.valid) {
       let url = this.id ? `gateway/${this.id}` : `gateway/create`;
       this.rs.post(url, this.formGroup.value).subscribe((res) => {
-        this.router.navigateByUrl('admin/gateway');
+        this.router.navigateByUrl('/admin/gateway/' + res.data.id);
         this.msg.success('保存成功');
       });
 
