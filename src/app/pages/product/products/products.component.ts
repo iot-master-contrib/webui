@@ -51,12 +51,7 @@ import {NzPopconfirmDirective} from "ng-zorro-antd/popconfirm";
   styleUrl: './products.component.scss',
 })
 export class ProductsComponent implements OnInit {
-  products: any[] = [
-    // {id: 1, icon:"/assets/temp.png", name: "温度计", description: "温度计"},
-    // {id: 2, icon:"/assets/temp.png", name: "继电器板", description: "4路继电器板"},
-    // {id: 3, icon:"/assets/temp.png", name: "排污PLC", description: "排污PLC S7 200Smart"},
-    // {id: 4, icon:"/assets/temp.png", name: "光感", description: "光照强度"},
-  ];
+  products: any[] = [  ];
   total = 0;
   pageIndex = 1;
   pageSize = 10;
@@ -76,51 +71,6 @@ export class ProductsComponent implements OnInit {
     this.load();
   }
 
-  open(p: any) {
-    this.route.navigateByUrl('admin/product/' + p.id);
-  }
-
-  edit(p: any) {
-    this.route.navigateByUrl('admin/product/' + p.id + '/edit');
-  }
-
-  create() {
-
-      // this.rs.post(`product/create`, {}).subscribe((res) => {
-      //   this.load()
-      //   this.msg.success('保存成功');
-      // });
-
-    // const modal: NzModalRef = this.ms.create({
-    //   nzTitle: '创建产品',
-    //   nzContent: CreateComponent,
-    //   nzData: {
-    //     name: 'product',
-    //   },
-    //   nzMaskClosable: false,
-    //   nzFooter: [
-    //     {
-    //       label: '取消',
-    //       onClick: () => {
-    //         modal.destroy();
-    //       },
-    //     },
-    //     {
-    //       label: '保存',
-    //       type: 'primary',
-    //       onClick: (rs: any) => {
-    //         rs!.submit().then(
-    //           () => {
-    //             modal.destroy();
-    //             this.load();
-    //           },
-    //           () => {}
-    //         );
-    //       },
-    //     },
-    //   ],
-    // });
-  }
   search() {
     let query
 
@@ -162,7 +112,7 @@ export class ProductsComponent implements OnInit {
       skip: (this.pageIndex - 1) * this.pageSize,
     };
 
-    this.value ? (query = { ...query, filter: {name: this.value } }) : '';
+    this.value ? (query = { ...query, keyword: {id: this.value, name: this.value} }) : '';
 
     this.rs.post('product/search', query).subscribe(
       (res) => {

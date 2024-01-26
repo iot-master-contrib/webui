@@ -115,41 +115,6 @@ export class SpacesComponent implements OnInit {
     this.pageIndex = e;
     this.load();
   }
-  create() {
-    this.rs.post(`space/create`, {}).subscribe((res) => {
-      this.load()
-      this.msg.success('保存成功');
-    });
-    // const modal: NzModalRef = this.ms.create({
-    //   nzTitle: '创建项目',
-    //   nzContent: CreateComponent,
-    //   nzData: {
-    //     name: 'space',
-    //   },
-    //   nzMaskClosable: false,
-    //   nzFooter: [
-    //     {
-    //       label: '取消',
-    //       onClick: () => {
-    //         modal.destroy();
-    //       },
-    //     },
-    //     {
-    //       label: '保存',
-    //       type: 'primary',
-    //       onClick: (rs: any) => {
-    //         rs!.submit().then(
-    //           () => {
-    //             modal.destroy();
-    //             this.load();
-    //           },
-    //           () => {}
-    //         );
-    //       },
-    //     },
-    //   ],
-    // });
-  }
   load() {
     let query;
 
@@ -158,16 +123,12 @@ export class SpacesComponent implements OnInit {
       skip: (this.pageIndex - 1) * this.pageSize,
     };
 
-    this.value ? (query = { ...query, filter: { id: this.value } }) : '';
+    this.value ? (query = { ...query, keyword: {id: this.value, name: this.value} }) : '';
     this.rs.post('space/search', query).subscribe(
       (res) => {
-        let spaces = res.data;
         this.spaces = res.data;
         this.total = res.total;
 
-      },
-      (err) => {
-        console.log('err:', err);
       }
     );
   }

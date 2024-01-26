@@ -62,16 +62,8 @@ export class UsersComponent {
     this.load();
   }
 
-  open(p: any) {
-    this.route.navigateByUrl('admin/user/' + p.id);
-  }
-
   select(id: any) {
     this.ref && this.ref.close(id);
-  }
-
-  edit(p: any) {
-    this.route.navigateByUrl('admin/user/' + p.id + '/edit');
   }
 
   search() {
@@ -110,7 +102,7 @@ export class UsersComponent {
       skip: (this.pageIndex - 1) * this.pageSize,
     };
 
-    this.value ? (query = {...query, filter: {id: this.value}}) : '';
+    this.value ? (query = {...query, keyword: {id: this.value, name: this.value}}) : '';
     this.rs.post('user/search', query).subscribe(
       (res) => {
         this.users = res.data;
