@@ -2,11 +2,11 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {ProjectEditPluginComponent} from "./project-edit-plugin/project-edit-plugin.component";
 import {ProjectEditUserComponent} from "./project-edit-user/project-edit-user.component";
-import {ProjectComponent} from "./project.component";
+import {ProjectsComponent} from "./projects/projects.component";
 import {ProjectDetailComponent} from "./project-detail/project-detail.component";
 import {ProjectEditComponent} from "./project-edit/project-edit.component";
 const routes: Routes = [
-  {path: '', component: ProjectComponent},
+  {path: '', component: ProjectsComponent},
   {path: 'create', component: ProjectEditComponent},
   {path: ':id', component: ProjectDetailComponent},
   {path: ':id/edit', component: ProjectEditComponent},

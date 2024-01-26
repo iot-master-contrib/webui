@@ -37,9 +37,9 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 import { RequestService } from '../../../request.service';
 import { NzAutocompleteModule } from 'ng-zorro-antd/auto-complete';
 import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
-import { GatewayComponent } from '../../gateway/gateway.component';
-import { ProductComponent } from '../../product/product.component';
-import { ProjectComponent } from '../../project/project.component';
+import { GatewaysComponent } from '../../gateway/gateways/gateways.component';
+import { ProductsComponent } from '../../product/products/products.component';
+import { ProjectsComponent } from '../../project/projects/projects.component';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 @Component({
   selector: 'app-device-edit',
@@ -120,7 +120,7 @@ export class DeviceEditComponent {
             nzCentered: true,
             nzMaskClosable: false,
             nzWidth: '800px',
-            nzContent: GatewayComponent,
+            nzContent: GatewaysComponent,
             nzFooter: null,
           })
           .afterClose.subscribe((res) => {
@@ -138,7 +138,7 @@ export class DeviceEditComponent {
             nzCentered: true,
             nzMaskClosable: false,
             nzWidth: '800px',
-            nzContent: ProductComponent,
+            nzContent: ProductsComponent,
             nzFooter: null,
           })
           .afterClose.subscribe((res) => {
@@ -166,8 +166,8 @@ export class DeviceEditComponent {
             nzTitle: '项目选择',
             nzCentered: true,
             nzMaskClosable: false,
-            nzWidth: '800px', 
-            nzContent: ProjectComponent,
+            nzWidth: '800px',
+            nzContent: ProjectsComponent,
             nzFooter: null,
           })
           .afterClose.subscribe((res) => {

@@ -4,12 +4,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { RequestService } from '../../../request.service';
-import { UserComponent } from '../../users/user.component';
+import { UsersComponent } from '../../users/users/users.component';
 import { NzPageHeaderModule } from 'ng-zorro-antd/page-header';
 @Component({
   selector: 'app-project-edit-user',
   standalone: true,
-  imports: [UserComponent,NzPageHeaderModule],
+  imports: [UsersComponent,NzPageHeaderModule],
   templateUrl: './project-edit-user.component.html',
   styleUrl: './project-edit-user.component.scss'
 })

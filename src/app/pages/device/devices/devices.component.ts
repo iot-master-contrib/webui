@@ -8,13 +8,13 @@ import {NzPaginationComponent} from "ng-zorro-antd/pagination";
 import {NzTableComponent, NzTableModule} from "ng-zorro-antd/table";
 import {DatePipe, NgForOf} from "@angular/common";
 import {NzPopconfirmDirective} from "ng-zorro-antd/popconfirm";
-import { RequestService } from '../../request.service';
+import { RequestService } from '../../../request.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { FormsModule } from '@angular/forms';
 import { NzModalRef } from 'ng-zorro-antd/modal';
 import { CommonModule } from '@angular/common';
 @Component({
-  selector: 'app-device',
+  selector: 'app-devices',
   standalone: true,
   imports: [
     CommonModule,
@@ -32,10 +32,10 @@ import { CommonModule } from '@angular/common';
     DatePipe,
     NzPopconfirmDirective,
   ],
-  templateUrl: './device.component.html',
-  styleUrl: './device.component.scss'
+  templateUrl: './devices.component.html',
+  styleUrl: './devices.component.scss'
 })
-export class DeviceComponent {
+export class DevicesComponent {
   total = 0;
   nzPageIndex = 1;
   nzPageSize = 10;

@@ -13,7 +13,7 @@ import { NzButtonComponent } from 'ng-zorro-antd/button';
 import { NzInputDirective, NzInputGroupComponent } from 'ng-zorro-antd/input';
 import { NzSpaceComponent, NzSpaceItemDirective } from 'ng-zorro-antd/space';
 import { Router, RouterLink } from '@angular/router';
-import { RequestService } from '../../request.service';
+import { RequestService } from '../../../request.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { FormsModule } from '@angular/forms';
 import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
@@ -22,7 +22,7 @@ import { CommonModule } from '@angular/common';
 import {NzPopconfirmDirective} from "ng-zorro-antd/popconfirm";
 
 @Component({
-  selector: 'app-product',
+  selector: 'app-products',
   standalone: true,
   imports: [
     CommonModule,
@@ -47,10 +47,10 @@ import {NzPopconfirmDirective} from "ng-zorro-antd/popconfirm";
     NzSpaceItemDirective,
     NzPopconfirmDirective,
   ],
-  templateUrl: './product.component.html',
-  styleUrl: './product.component.scss',
+  templateUrl: './products.component.html',
+  styleUrl: './products.component.scss',
 })
-export class ProductComponent implements OnInit {
+export class ProductsComponent implements OnInit {
   products: any[] = [
     // {id: 1, icon:"/assets/temp.png", name: "温度计", description: "温度计"},
     // {id: 2, icon:"/assets/temp.png", name: "继电器板", description: "4路继电器板"},

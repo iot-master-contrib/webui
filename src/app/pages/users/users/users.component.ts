@@ -4,8 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzTableQueryParams } from 'ng-zorro-antd/table';
 
-import { SearchFormComponent } from '../../components/search-form/search-form.component';
-import { BatchBtnComponent } from '../../modals/batch-btn/batch-btn.component';
+import { SearchFormComponent } from '../../../components/search-form/search-form.component';
+import { BatchBtnComponent } from '../../../modals/batch-btn/batch-btn.component';
 import { NzSpaceModule } from 'ng-zorro-antd/space';
 import { NzUploadModule } from 'ng-zorro-antd/upload';
 import { NzInputModule } from 'ng-zorro-antd/input';
@@ -16,10 +16,10 @@ import { NzTableModule } from 'ng-zorro-antd/table';
 import { CommonModule } from '@angular/common';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
-import {RequestService} from "../../request.service";
+import {RequestService} from "../../../request.service";
 
 @Component({
-  selector: 'app-user',
+  selector: 'app-users',
   standalone: true,
   imports: [NzPopconfirmModule,
     NzIconModule,
@@ -34,10 +34,10 @@ import {RequestService} from "../../request.service";
     NzInputModule,
     FormsModule,
   ],
-  templateUrl: './user.component.html',
-  styleUrl: './user.component.scss',
+  templateUrl: './users.component.html',
+  styleUrl: './users.component.scss',
 })
-export class UserComponent {
+export class UsersComponent {
   @Input() show: Boolean=false;
   id!:any
   href!: string;

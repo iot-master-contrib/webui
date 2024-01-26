@@ -37,7 +37,7 @@ import {NzMessageService} from 'ng-zorro-antd/message';
 import {RequestService} from '../../../request.service';
 import {NzAutocompleteModule} from 'ng-zorro-antd/auto-complete';
 import {NzModalRef, NzModalService} from 'ng-zorro-antd/modal';
-import {DeviceComponent} from '../../device/device.component';
+import {DevicesComponent} from '../../device/devices/devices.component';
 import {NzSelectModule} from 'ng-zorro-antd/select';
 
 @Component({
@@ -119,7 +119,7 @@ export class SpaceEditComponent implements OnInit {
         nzTitle: '设备绑定',
         nzCentered: true,
         nzMaskClosable: false,
-        nzContent: DeviceComponent,
+        nzContent: DevicesComponent,
         nzFooter: null,
       })
       .afterClose.subscribe((res) => {

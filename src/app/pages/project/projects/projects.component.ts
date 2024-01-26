@@ -16,7 +16,7 @@ import { NzSpaceComponent, NzSpaceItemDirective } from 'ng-zorro-antd/space';
 import { NzButtonComponent } from 'ng-zorro-antd/button';
 import { NzInputDirective, NzInputGroupComponent } from 'ng-zorro-antd/input';
 import { NzAffixComponent } from 'ng-zorro-antd/affix';
-import { RequestService } from '../../request.service';
+import { RequestService } from '../../../request.service';
 import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzInputModule } from 'ng-zorro-antd/input';
@@ -26,7 +26,7 @@ import { NzTableModule } from 'ng-zorro-antd/table';
 import { CommonModule } from '@angular/common';
 import {NzEmptyComponent} from "ng-zorro-antd/empty";
 @Component({
-  selector: 'app-project',
+  selector: 'app-projects',
   standalone: true,
   imports: [
     CommonModule,
@@ -57,10 +57,10 @@ import {NzEmptyComponent} from "ng-zorro-antd/empty";
     RouterLink,
     NzEmptyComponent,
   ],
-  templateUrl: './project.component.html',
-  styleUrl: './project.component.scss',
+  templateUrl: './projects.component.html',
+  styleUrl: './projects.component.scss',
 })
-export class ProjectComponent implements OnInit {
+export class ProjectsComponent implements OnInit {
   total = 0;
   nzPageIndex = 1;
   nzPageSize = 10;
