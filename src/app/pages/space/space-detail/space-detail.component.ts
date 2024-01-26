@@ -77,8 +77,8 @@ export class SpaceDetailComponent implements OnInit {
   total = 0;
   query: any = {limit: 20, skip: 0};
 
-  nzPageIndex = 1;
-  nzPageSize = 10;
+  pageIndex = 1;
+  pageSize = 10;
   value = '';
   data: any = {
     id: 1,
@@ -152,13 +152,13 @@ export class SpaceDetailComponent implements OnInit {
     );
   }
 
-  nzPageSizeChange(e: any) {
-    this.nzPageSize = e;
+  pageSizeChange(e: any) {
+    this.pageSize = e;
     this.load();
   }
 
-  nzPageIndexChange(e: any) {
-    this.nzPageIndex = e;
+  pageIndexChange(e: any) {
+    this.pageIndex = e;
     this.load();
   }
 

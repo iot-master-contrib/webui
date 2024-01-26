@@ -85,8 +85,8 @@ export class DeviceDetailComponent implements OnInit {
   ];
 
   total = 0;
-  nzPageIndex = 1;
-  nzPageSize = 10;
+  pageIndex = 1;
+  pageSize = 10;
   value = '';
 
   values: any = {
@@ -187,13 +187,13 @@ export class DeviceDetailComponent implements OnInit {
       });
   }
 
-  nzPageSizeChange(e: any) {
-    this.nzPageSize = e;
+  pageSizeChange(e: any) {
+    this.pageSize = e;
     this.load();
   }
 
-  nzPageIndexChange(e: any) {
-    this.nzPageIndex = e;
+  pageIndexChange(e: any) {
+    this.pageIndex = e;
     this.load();
   }
 

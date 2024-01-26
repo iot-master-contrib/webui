@@ -11,7 +11,7 @@ import { RequestService  } from '../../../request.service';
   styleUrl: './object-attach.component.scss'
 })
 export class ObjectAttachComponent implements OnInit{
-  constructor( 
+  constructor(
     private rs: RequestService,
     private msg: NzMessageService,
     private ms: NzModalService
@@ -20,8 +20,8 @@ export class ObjectAttachComponent implements OnInit{
     throw new Error('Method not implemented.');
   }
   total = 0;
-  nzPageIndex = 1;
-  nzPageSize = 10;
+  pageIndex = 1;
+  pageSize = 10;
   value = '';
   item!:any
   @Input() id: string = '';
@@ -31,17 +31,17 @@ export class ObjectAttachComponent implements OnInit{
     let query;
 
     query = {
-      limit: this.nzPageSize,
-      skip: (this.nzPageIndex - 1) * this.nzPageSize,
+      limit: this.pageSize,
+      skip: (this.pageIndex - 1) * this.pageSize,
     };
 
     this.value ? (query = { ...query, filter: { id: this.value } }) : '';
     this.rs.post(`${this.type}/${this.id}/attach`, query).subscribe(
       (res) => {
-       
+
         this.item = res.data;
         this.total = res.total;
-       
+
       },
       (err) => {
         console.log('err:', err);

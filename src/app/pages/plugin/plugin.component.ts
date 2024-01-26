@@ -49,8 +49,8 @@ import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 })
 export class PluginComponent implements OnInit {
   total = 0;
-  nzPageIndex = 1;
-  nzPageSize = 10;
+  pageIndex = 1;
+  pageSize = 10;
   query:any={limit:20,skip:0}
   value = '';
   constructor(
@@ -109,8 +109,8 @@ export class PluginComponent implements OnInit {
   load() {
     // let query;
     // query = {
-    //   limit: this.nzPageSize,
-    //   skip: (this.nzPageIndex - 1) * this.nzPageSize,
+    //   limit: this.pageSize,
+    //   skip: (this.pageIndex - 1) * this.pageSize,
     // };
 
     // this.query ? (query = { ...query, filter: { username: this.value } }) : '';
@@ -142,7 +142,7 @@ export class PluginComponent implements OnInit {
     this.load();
   }
   refresh() {
-    this.nzPageIndex = 1;
+    this.pageIndex = 1;
     this.load();
   }
   search($event: string) {

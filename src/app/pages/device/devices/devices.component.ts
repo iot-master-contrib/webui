@@ -37,8 +37,8 @@ import { CommonModule } from '@angular/common';
 })
 export class DevicesComponent {
   total = 0;
-  nzPageIndex = 1;
-  nzPageSize = 10;
+  pageIndex = 1;
+  pageSize = 10;
   value = '';
   devices: any[] = [
     // {id:1,name:"1号",product:"温度计",online:new Date()},
@@ -61,7 +61,7 @@ export class DevicesComponent {
     this.ref && this.ref.close(data);
   }
   refresh() {
-    this.nzPageIndex = 1;
+    this.pageIndex = 1;
     this.load();
   }
   open(p: any) {
@@ -87,19 +87,19 @@ export class DevicesComponent {
     );
     this.load();
   }
-  nzPageSizeChange(e: any) {
-    this.nzPageSize = e;
+  pageSizeChange(e: any) {
+    this.pageSize = e;
     this.load();
   }
-  nzPageIndexChange(e: any) {
-    this.nzPageIndex = e;
+  pageIndexChange(e: any) {
+    this.pageIndex = e;
     this.load();
   }
   load() {
     let query;
     query = {
-      limit: this.nzPageSize,
-      skip: (this.nzPageIndex - 1) * this.nzPageSize,
+      limit: this.pageSize,
+      skip: (this.pageIndex - 1) * this.pageSize,
     };
 
     this.value ? (query = { ...query, keyword: { name: this.value } }) : '';

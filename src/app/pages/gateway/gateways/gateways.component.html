@@ -68,7 +68,7 @@
 
 
 <div class="pages" *ngIf="!ref">
-  <nz-pagination [nzPageIndex]="nzPageIndex" [nzPageSize]="nzPageSize" [nzTotal]="total" nzShowSizeChanger
-                 nzShowQuickJumper (nzPageIndexChange)="nzPageIndexChange($event)"
-                 (nzPageSizeChange)="nzPageSizeChange($event)"></nz-pagination>
+  <nz-pagination [nzPageIndex]="pageIndex" [nzPageSize]="pageSize" [nzTotal]="total" nzShowSizeChanger
+                 nzShowQuickJumper (nzPageIndexChange)="pageIndexChange($event)"
+                 (nzPageSizeChange)="pageSizeChange($event)"></nz-pagination>
 </div>

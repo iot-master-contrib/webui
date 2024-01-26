@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {ProjectEditPluginComponent} from "./project-edit-plugin/project-edit-plugin.component";
 import {ProjectEditUserComponent} from "./project-edit-user/project-edit-user.component";
 import {ProjectsComponent} from "./projects/projects.component";
 import {ProjectDetailComponent} from "./project-detail/project-detail.component";
@@ -9,11 +8,8 @@ import {ProjectDashComponent} from "./project-dash/project-dash.component";
 const routes: Routes = [
   {path: '', component: ProjectsComponent},
   {path: 'create', component: ProjectEditComponent},
-  {path: 'dash', component: ProjectDashComponent},
-  {path: 'detail', component: ProjectDetailComponent},
   {path: ':id', component: ProjectDetailComponent},
   {path: ':id/edit', component: ProjectEditComponent},
-  {path: ':id/edit/plugin', component: ProjectEditPluginComponent},
   {path: ':id/edit/user', component: ProjectEditUserComponent},
 ];
 

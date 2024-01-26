@@ -55,7 +55,7 @@
     <i nz-icon nzType="plus"></i>
    绑定
   </button>
-   
+
 </div>
 
 <nz-table #table [nzData]="devices" [nzFrontPagination]="false">
@@ -87,8 +87,8 @@
 
 
 <div class="pages">
-  <nz-pagination [nzPageIndex]="nzPageIndex" [nzPageSize]="nzPageSize" [nzTotal]="total" nzShowSizeChanger
-  nzShowQuickJumper (nzPageIndexChange)="nzPageIndexChange($event)"  (nzPageSizeChange)="nzPageSizeChange($event)"></nz-pagination>
+  <nz-pagination [nzPageIndex]="pageIndex" [nzPageSize]="pageSize" [nzTotal]="total" nzShowSizeChanger
+  nzShowQuickJumper (nzPageIndexChange)="pageIndexChange($event)"  (nzPageSizeChange)="pageSizeChange($event)"></nz-pagination>
 </div>
 
 <!-- <nz-modal [(nzVisible)]="isVisible" nzTitle="绑定设备" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">

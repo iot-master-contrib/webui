@@ -62,15 +62,10 @@ import {NzEmptyComponent} from "ng-zorro-antd/empty";
 })
 export class SpacesComponent implements OnInit {
   total = 0;
-  nzPageIndex = 1;
-  nzPageSize = 10;
+  pageIndex = 1;
+  pageSize = 10;
   value = '';
-  spaces: any[] = [
-    // { id: 1, name: '第一人民医院', description: '放射科室' },
-    // { id: 2, name: '中医院', description: '放射科室' },
-    // { id: 3, name: '第五人民医院', description: '放射科室' },
-    // { id: 4, name: '协和医院', description: '放射科室' },
-  ];
+  spaces: any = [];
 
   constructor(
     private route: Router,
@@ -83,7 +78,7 @@ export class SpacesComponent implements OnInit {
     this.load();
   }
   refresh() {
-    this.nzPageIndex = 1;
+    this.pageIndex = 1;
     this.load();
   }
   open(p: any) {
@@ -112,12 +107,12 @@ export class SpacesComponent implements OnInit {
     );
     this.load();
   }
-  nzPageSizeChange(e: any) {
-    this.nzPageSize = e;
+  pageSizeChange(e: any) {
+    this.pageSize = e;
     this.load();
   }
-  nzPageIndexChange(e: any) {
-    this.nzPageIndex = e;
+  pageIndexChange(e: any) {
+    this.pageIndex = e;
     this.load();
   }
   create() {
@@ -159,8 +154,8 @@ export class SpacesComponent implements OnInit {
     let query;
 
     query = {
-      limit: this.nzPageSize,
-      skip: (this.nzPageIndex - 1) * this.nzPageSize,
+      limit: this.pageSize,
+      skip: (this.pageIndex - 1) * this.pageSize,
     };
 
     this.value ? (query = { ...query, filter: { id: this.value } }) : '';

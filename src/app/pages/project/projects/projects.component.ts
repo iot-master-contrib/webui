@@ -62,8 +62,8 @@ import {NzEmptyComponent} from "ng-zorro-antd/empty";
 })
 export class ProjectsComponent implements OnInit {
   total = 0;
-  nzPageIndex = 1;
-  nzPageSize = 10;
+  pageIndex = 1;
+  pageSize = 10;
   value = '';
   projects: any[] = [
     // { id: 1, name: '第一人民医院', description: '放射科室' },
@@ -83,7 +83,7 @@ export class ProjectsComponent implements OnInit {
     this.load();
   }
   refresh() {
-    this.nzPageIndex = 1;
+    this.pageIndex = 1;
     this.load();
   }
   open(p: any) {
@@ -112,12 +112,12 @@ export class ProjectsComponent implements OnInit {
     );
     this.load();
   }
-  nzPageSizeChange(e: any) {
-    this.nzPageSize = e;
+  pageSizeChange(e: any) {
+    this.pageSize = e;
     this.load();
   }
-  nzPageIndexChange(e: any) {
-    this.nzPageIndex = e;
+  pageIndexChange(e: any) {
+    this.pageIndex = e;
     this.load();
   }
   create() {
@@ -159,8 +159,8 @@ export class ProjectsComponent implements OnInit {
     let query;
 
     query = {
-      limit: this.nzPageSize,
-      skip: (this.nzPageIndex - 1) * this.nzPageSize,
+      limit: this.pageSize,
+      skip: (this.pageIndex - 1) * this.pageSize,
     };
 
     this.value ? (query = { ...query, filter: { id: this.value } }) : '';

@@ -58,8 +58,8 @@ export class ProductsComponent implements OnInit {
     // {id: 4, icon:"/assets/temp.png", name: "光感", description: "光照强度"},
   ];
   total = 0;
-  nzPageIndex = 1;
-  nzPageSize = 10;
+  pageIndex = 1;
+  pageSize = 10;
   value = '';
   constructor(
     private ms: NzModalService,
@@ -72,7 +72,7 @@ export class ProductsComponent implements OnInit {
     this.load();
   }
   refresh() {
-    this.nzPageIndex = 1;
+    this.pageIndex = 1;
     this.load();
   }
 
@@ -147,19 +147,19 @@ export class ProductsComponent implements OnInit {
     );
     this.load();
   }
-  nzPageSizeChange(e: any) {
-    this.nzPageSize = e;
+  pageSizeChange(e: any) {
+    this.pageSize = e;
     this.load();
   }
-  nzPageIndexChange(e: any) {
-    this.nzPageIndex = e;
+  pageIndexChange(e: any) {
+    this.pageIndex = e;
     this.load();
   }
   load() {
     let query;
     query = {
-      limit: this.nzPageSize,
-      skip: (this.nzPageIndex - 1) * this.nzPageSize,
+      limit: this.pageSize,
+      skip: (this.pageIndex - 1) * this.pageSize,
     };
 
     this.value ? (query = { ...query, filter: {name: this.value } }) : '';

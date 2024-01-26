@@ -80,12 +80,12 @@
 
 <div class="pages">
   <nz-pagination
-    [nzPageIndex]="nzPageIndex"
-    [nzPageSize]="nzPageSize"
+    [nzPageIndex]="pageIndex"
+    [nzPageSize]="pageSize"
     [nzTotal]="total"
     nzShowSizeChanger
     nzShowQuickJumper
-    (nzPageIndexChange)="nzPageIndexChange($event)"
-    (nzPageSizeChange)="nzPageSizeChange($event)"
+    (nzPageIndexChange)="pageIndexChange($event)"
+    (nzPageSizeChange)="pageSizeChange($event)"
   ></nz-pagination>
 </div>

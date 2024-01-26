@@ -35,71 +35,6 @@
   </div>
 </nz-space>
 
-<!-- <div class="content" *ngIf="!ref">
-  <nz-empty *ngIf="!spaces || !spaces.length"></nz-empty>
-
-  <nz-row [nzGutter]="[4, 4]">
-    <nz-col
-      *ngFor="let p of spaces; index as i"
-      [nzXs]="24"
-      [nzSm]="12"
-      [nzMd]="8"
-      [nzLg]="8"
-      [nzXl]="6"
-      [nzXXl]="4"
-    >
-      <nz-card
-        [nzTitle]="p.name || '暂无'"
-        nzSize="small"
-        nzHoverable
-        [nzCover]="coverTemplate"
-        [nzActions]="[actionView, actionEdit, actionEllipsis]"
-      >
-        <nz-card-meta [nzDescription]="p.description || '暂无'"></nz-card-meta>
-      </nz-card>
-      <ng-template #coverTemplate>
-        <img
-          alt="example"
-          src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
-        />
-      </ng-template>
-      <ng-template #actionView>
-        <span nz-icon nzType="eye" title="打开" [routerLink]="p.id"></span>
-      </ng-template>
-      <ng-template #actionEdit>
-        <span
-          nz-icon
-          nzType="edit"
-          title="编辑"
-          [routerLink]="p.id + '/edit'"
-        ></span>
-      </ng-template>
-      <ng-template #actionEllipsis>
-        <span
-          nz-icon
-          nzType="ellipsis"
-          nz-dropdown
-          [nzDropdownMenu]="menu"
-          nzTrigger="click"
-        ></span>
-        <nz-dropdown-menu #menu="nzDropdownMenu">
-          <ul nz-menu>
-            <li
-              nz-menu-item
-              nz-popconfirm
-              nzPopconfirmTrigger="click"
-              nzPopconfirmTitle="确认删除"
-              (nzOnConfirm)="delete(p.id)"
-            >
-              <span nz-icon nzType="delete"></span>
-              删除
-            </li>
-          </ul>
-        </nz-dropdown-menu>
-      </ng-template>
-    </nz-col>
-  </nz-row>
-</div> -->
 
 <nz-table #table [nzData]="spaces" [nzFrontPagination]="false" >
   <thead>
@@ -123,7 +58,7 @@
         <a *nzSpaceItem title="删除" nz-popconfirm nzPopconfirmTitle="确认删除" (nzOnConfirm)="delete(data.id)"><i
           nz-icon nzType="delete"></i></a>
       </nz-space>
-      <a *ngIf="ref" title="选择" (click)="select(data)">选择 </a>
+      <a *ngIf="ref" title="选择" (click)="select(data)">选择</a>
     </td>
   </tr>
   </tbody>
@@ -131,12 +66,12 @@
 
 <div class="pages">
   <nz-pagination
-    [nzPageIndex]="nzPageIndex"
-    [nzPageSize]="nzPageSize"
+    [nzPageIndex]="pageIndex"
+    [nzPageSize]="pageSize"
     [nzTotal]="total"
     nzShowSizeChanger
     nzShowQuickJumper
-    (nzPageIndexChange)="nzPageIndexChange($event)"
-    (nzPageSizeChange)="nzPageSizeChange($event)"
+    (nzPageIndexChange)="pageIndexChange($event)"
+    (nzPageSizeChange)="pageSizeChange($event)"
   ></nz-pagination>
 </div>

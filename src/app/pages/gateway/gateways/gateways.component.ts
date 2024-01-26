@@ -38,8 +38,8 @@ import { CommonModule } from '@angular/common';
 export class GatewaysComponent implements OnInit{
   @Input() chooseGateway = false;
   total = 0;
-  nzPageIndex = 1;
-  nzPageSize = 10;
+  pageIndex = 1;
+  pageSize = 10;
   value = '';
   constructor(
     @Optional() protected ref: NzModalRef,
@@ -51,7 +51,7 @@ export class GatewaysComponent implements OnInit{
     this.load();
   }
   refresh() {
-    this.nzPageIndex = 1;
+    this.pageIndex = 1;
     this.load();
   }
 
@@ -81,19 +81,19 @@ export class GatewaysComponent implements OnInit{
     );
     this.load();
   }
-  nzPageSizeChange(e: any) {
-    this.nzPageSize = e;
+  pageSizeChange(e: any) {
+    this.pageSize = e;
     this.load();
   }
-  nzPageIndexChange(e: any) {
-    this.nzPageIndex = e;
+  pageIndexChange(e: any) {
+    this.pageIndex = e;
     this.load();
   }
   load() {
     let query;
     query = {
-      limit: this.nzPageSize,
-      skip: (this.nzPageIndex - 1) * this.nzPageSize,
+      limit: this.pageSize,
+      skip: (this.pageIndex - 1) * this.pageSize,
     };
 
     this.value ? (query = { ...query, keyword: {username: this.value } }) : '';

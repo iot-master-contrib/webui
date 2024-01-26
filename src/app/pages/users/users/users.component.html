@@ -1,13 +1,29 @@
-<div class="top">
-  <app-search-form placeholder="请输入用户名" (onSearch)="search($event)"></app-search-form>
-</div>
+<nz-space class="toolbar">
+  <button *nzSpaceItem nz-button nzType="primary" (click)="refresh()">
+    <span nz-icon nzType="reload"></span>
+    刷新
+  </button>
 
-<ng-template #totalTemplate let-total>总共 {{ total }} 条</ng-template>
-<nz-table class="table" #basicTable [nzData]="datum" [nzLoading]="loading" nzShowPagination
-          [nzFrontPagination]="false" nzShowSizeChanger [nzTotal]="total" [nzShowTotal]="totalTemplate"
-          (nzPageSizeChange)="pageSizeChange($event)" (nzPageIndexChange)="pageIndexChange($event)"
-          [nzPageSize]="pageSize"
-          [nzPageIndex]="pageIndex" (nzQueryParams)="onQuery($event)">
+  <div *nzSpaceItem class="search">
+    <nz-input-group nzSearch [nzAddOnAfter]="suffixButton">
+      <input [(ngModel)]="value" nz-input placeholder="请输入关键字"/>
+    </nz-input-group>
+    <ng-template #suffixButton>
+      <button nz-button nzType="primary" nzSearch (click)="search()">
+        搜索
+      </button>
+    </ng-template>
+  </div>
+
+  <div *nzSpaceItem>
+    <button nz-button nzType="primary" nzShape="round" routerLink="create">
+      <span nz-icon nzType="plus"></span>
+      新建
+    </button>
+  </div>
+</nz-space>
+
+<nz-table class="table" #basicTable [nzData]="users">
   <thead>
   <tr>
     <th nzColumnKey="id" [nzSortFn]="true">ID</th>
@@ -20,8 +36,8 @@
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let data of basicTable.data; let i = index">
-    <td>{{ data.id }}</td>
+  <tr *ngFor="let data of users">
+    <td><a [routerLink]="data.id">{{ data.id }}</a></td>
     <td>{{ data.name }}</td>
     <td>{{ data.cellphone }}</td>
     <td>{{ data.email }}</td>
@@ -31,26 +47,25 @@
     </td>
     <td>{{ data.created | date }}</td>
     <td>
-      <ng-container *ngIf="!show; else elseTemplate">
-        <a (click)="handleEdit(data.id)">
-          <i nz-icon nzType="edit"></i>
-        </a>
-        <nz-divider nzType="vertical"></nz-divider>
-        <a nz-popconfirm nzPopconfirmTitle="确定删除?" (nzOnConfirm)="delete(data.id)" (nzOnCancel)="cancel()"
-           nzPopconfirmPlacement="topLeft">
-          <i nz-icon nzType="delete"></i>
-        </a>
-      </ng-container>
-      <ng-template #elseTemplate>
-
-        <a nz-popconfirm nzPopconfirmTitle="确定绑定?" (nzOnConfirm)="submit(data.id)" (nzOnCancel)="cancel()"
-           nzPopconfirmPlacement="topLeft">
-          绑定
-        </a>
-      </ng-template>
-
-
+      <nz-space *ngIf="!ref">
+        <a *nzSpaceItem title="编辑" [routerLink]="data.id+'/edit'"><i nz-icon nzType="edit"></i></a>
+        <a *nzSpaceItem title="删除" nz-popconfirm nzPopconfirmTitle="确认删除" (nzOnConfirm)="delete(data.id)"><i
+          nz-icon nzType="delete"></i></a>
+      </nz-space>
+      <a *ngIf="ref" title="选择" (click)="select(data)">选择</a>
     </td>
   </tr>
   </tbody>
 </nz-table>
+
+<div class="pages">
+  <nz-pagination
+    [nzPageIndex]="pageIndex"
+    [nzPageSize]="pageSize"
+    [nzTotal]="total"
+    nzShowSizeChanger
+    nzShowQuickJumper
+    (nzPageIndexChange)="pageIndexChange($event)"
+    (nzPageSizeChange)="pageSizeChange($event)"
+  ></nz-pagination>
+</div>
