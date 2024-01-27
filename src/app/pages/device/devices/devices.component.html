@@ -59,10 +59,7 @@
       </ng-container>
       <ng-template #elseTemplate>
         <nz-space>
-          <a *nzSpaceItem title="绑定" nz-popconfirm nzPopconfirmTitle="确认绑定" (nzOnConfirm)="select(1,data.id)"><i
-            nz-icon nzType="link"></i></a>
-          <a *nzSpaceItem title="解绑" nz-popconfirm nzPopconfirmTitle="确认解绑" (nzOnConfirm)="select(0,data.id)"><i
-            nz-icon nzType="disconnect"></i></a>
+          <a *nzSpaceItem (click)="select(data)">选择</a>
         </nz-space>
       </ng-template>
 
