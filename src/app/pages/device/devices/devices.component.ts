@@ -1,4 +1,4 @@
-import {Component, Input, Optional} from '@angular/core';
+import {AfterViewInit, Component, inject, Input, OnInit, Optional} from '@angular/core';
 import {NzSpaceComponent, NzSpaceItemDirective} from "ng-zorro-antd/space";
 import {NzButtonComponent} from "ng-zorro-antd/button";
 import {NzIconDirective} from "ng-zorro-antd/icon";
@@ -11,7 +11,7 @@ import {NzPopconfirmDirective} from "ng-zorro-antd/popconfirm";
 import {RequestService} from '../../../request.service';
 import {NzMessageService} from 'ng-zorro-antd/message';
 import {FormsModule} from '@angular/forms';
-import {NzModalRef} from 'ng-zorro-antd/modal';
+import {NZ_MODAL_DATA, NzModalRef} from 'ng-zorro-antd/modal';
 import {CommonModule} from '@angular/common';
 
 @Component({
@@ -36,7 +36,7 @@ import {CommonModule} from '@angular/common';
   templateUrl: './devices.component.html',
   styleUrl: './devices.component.scss'
 })
-export class DevicesComponent {
+export class DevicesComponent implements OnInit{
   base = '/admin/'
 
   total = 0;
@@ -45,7 +45,9 @@ export class DevicesComponent {
   value = '';
   devices: any = [];
 
-  @Input() project_id: any = ''
+  //从Modal中传参过来
+  readonly data: any = inject(NZ_MODAL_DATA);
+  project_id: any = ''
 
   constructor(
     private router: Router,
@@ -61,6 +63,10 @@ export class DevicesComponent {
       this.project_id = this.route.parent?.snapshot.paramMap.get('project');
       this.base = '/project/' + this.project_id + '/'
     }
+    if (this.data.project_id) {
+      this.project_id = this.data.project_id
+    }
+
     this.load();
   }
 

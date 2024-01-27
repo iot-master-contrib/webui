@@ -43,7 +43,9 @@ import {DevicesComponent} from "../../device/devices/devices.component";
 export class SpaceDeviceComponent {
   base = '/admin/'
 
+  space: any = {}
   space_id: any = ''
+
   project_id: any = ''
 
   devices: any = [];
@@ -93,6 +95,10 @@ export class SpaceDeviceComponent {
   }
 
   load() {
+    this.rs.get(`space/${this.space_id}`).subscribe((res) => {
+      this.space = res.data;
+      this.project_id = this.space.project_id
+    });
     this.rs.get(`space/${this.space_id}/device`).subscribe((res) => {
       this.devices = res.data;
     });

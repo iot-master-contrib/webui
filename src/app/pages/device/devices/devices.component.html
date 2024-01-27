@@ -35,7 +35,7 @@
     <th>名称</th>
     <th>网关</th>
     <th>产品</th>
-    <th>项目</th>
+    <th *ngIf="!project_id">项目</th>
     <th>上线时间</th>
     <th>操作</th>
   </tr>
@@ -46,7 +46,7 @@
     <td>{{ data.name }}</td>
     <td><a [routerLink]="base+'gateway/'+data.gateway_id">{{ data.gateway }}</a></td>
     <td><a [routerLink]="base+'product/'+data.product_id">{{ data.product }}</a></td>
-    <td><a [routerLink]="base+'project/'+data.project_id">{{ data.project }}</a></td>
+    <td *ngIf="!project_id"><a [routerLink]="base+'project/'+data.project_id">{{ data.project }}</a></td>
 
     <td [title]="data.online">{{ data.online | date }}</td>
     <td>
