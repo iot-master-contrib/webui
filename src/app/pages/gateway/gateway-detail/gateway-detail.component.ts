@@ -4,12 +4,10 @@ import {
   NzPageHeaderContentDirective, NzPageHeaderExtraDirective, NzPageHeaderSubtitleDirective,
   NzPageHeaderTitleDirective
 } from "ng-zorro-antd/page-header";
-import {NzBreadCrumbItemComponent} from "ng-zorro-antd/breadcrumb";
 import {NzSpaceComponent, NzSpaceItemDirective} from "ng-zorro-antd/space";
 import {NzButtonComponent} from "ng-zorro-antd/button";
 import {NzDescriptionsComponent, NzDescriptionsItemComponent} from "ng-zorro-antd/descriptions";
 import {DatePipe, NgForOf} from "@angular/common";
-import {PluginsComponent} from "../../../components/plugins/plugins.component";
 import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 import {NzPopconfirmDirective} from "ng-zorro-antd/popconfirm";
 import {NzIconDirective} from "ng-zorro-antd/icon";
@@ -42,7 +40,6 @@ import { RequestService } from '../../../request.service';
     NzDescriptionsComponent,
     NzDescriptionsItemComponent,
     DatePipe,
-    PluginsComponent,
     RouterLink,
     NzPopconfirmDirective,
     NgForOf,
@@ -72,21 +69,10 @@ export class GatewayDetailComponent implements OnInit{
   }
   id!:any
   gateway = {}
-  data: any = {
-    // id: 1,
-    // name: '一厂东',
+  data: any = {  }
 
-    // username: 'test',
-    // password: 'test',
-    // created: new Date()
-  }
+  devices: any[] = [  ]
 
-  devices: any[] = [
-    {id: 1, name: "1号", product: "温度计", online: new Date()},
-    {id: 2, name: "2号", product: "温度计", online: new Date()},
-    {id: 3, name: "3号", product: "温度计", online: new Date()},
-    {id: 4, name: "4号", product: "温度计", online: new Date()},
-  ]
   ngOnInit(): void {
 
     if (this.route.snapshot.paramMap.has('id')) {

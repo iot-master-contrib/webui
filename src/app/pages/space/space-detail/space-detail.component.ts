@@ -13,7 +13,6 @@ import {
   NzDescriptionsItemComponent,
 } from 'ng-zorro-antd/descriptions';
 import {DatePipe, NgForOf} from '@angular/common';
-import {PluginsComponent} from '../../../components/plugins/plugins.component';
 import {ActivatedRoute, Router, RouterLink} from '@angular/router';
 import {NzPopconfirmDirective} from 'ng-zorro-antd/popconfirm';
 import {NzIconDirective} from 'ng-zorro-antd/icon';
@@ -52,7 +51,6 @@ import {NzDividerComponent} from "ng-zorro-antd/divider";
         NzDescriptionsComponent,
         NzDescriptionsItemComponent,
         DatePipe,
-        PluginsComponent,
         RouterLink,
         NzPopconfirmDirective,
         NgForOf,

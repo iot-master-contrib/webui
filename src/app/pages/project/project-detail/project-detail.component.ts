@@ -13,7 +13,6 @@ import {
   NzDescriptionsItemComponent,
 } from 'ng-zorro-antd/descriptions';
 import {DatePipe, NgForOf} from '@angular/common';
-import {PluginsComponent} from '../../../components/plugins/plugins.component';
 import {ActivatedRoute, Router, RouterLink} from '@angular/router';
 import {NzPopconfirmDirective} from 'ng-zorro-antd/popconfirm';
 import {NzIconDirective} from 'ng-zorro-antd/icon';
@@ -56,7 +55,6 @@ import {NzCardComponent} from "ng-zorro-antd/card";
     NzDescriptionsComponent,
     NzDescriptionsItemComponent,
     DatePipe,
-    PluginsComponent,
     RouterLink,
     NzPopconfirmDirective,
     NgForOf,
@@ -86,43 +84,9 @@ export class ProjectDetailComponent implements OnInit {
 
   value = '';
 
-  data: any = {
-    id: 1,
-    name: '人民医院',
-    description: '人民医院智慧大屏项目',
-    version: '3',
-    keywords: ['医院'],
-    icon: '',
-    url: 'https://www.baidu.com',
-    created: new Date(),
-  };
-
-  plugins: any[] = [
-    {
-      id: 'scene',
-      name: '智慧场景',
-      icon: 'assets/app.png',
-      description: '智慧场景，联动控制',
-    },
-    {
-      id: 'screen',
-      name: '数据大屏',
-      icon: 'assets/app.png',
-      description: '',
-    },
-  ];
+  data: any = {  };
 
   spaces: any[] = []
-
-  space: any[] = [
-    {id: 1, name: '1号', product: '温度计', alias: 't1', online: new Date()},
-    {id: 2, name: '2号', product: '温度计', alias: 't2', online: new Date()},
-    {id: 3, name: '3号', product: '温度计', alias: 't3', online: new Date()},
-    {id: 4, name: '4号', product: '温度计', alias: 't4', online: new Date()},
-  ];
-
-
-  deviceOption!: any;
 
   constructor(
     private router: Router,
@@ -133,6 +97,12 @@ export class ProjectDetailComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if (this.route.parent?.snapshot.paramMap.has('project')) {
+      this.id = this.route.parent?.snapshot.paramMap.get('project');
+      this.load();
+      this.loadSpaces();
+      return;
+    }
     if (this.route.snapshot.paramMap.has('id')) {
       this.id = this.route.snapshot.paramMap.get('id');
       this.load();
@@ -160,11 +130,7 @@ export class ProjectDetailComponent implements OnInit {
         if (res.data) {
           this.spaces = res.data;
         }
-      },
-      (err: any) => {
-        console.log('err:', err);
-      }
-    );
+      }    );
   }
 
   delete() {
@@ -172,11 +138,7 @@ export class ProjectDetailComponent implements OnInit {
       (res: any) => {
         this.msg.success('删除成功');
         this.router.navigateByUrl('admin');
-      },
-      (err: any) => {
-        console.log('err:', err);
-      }
-    );
+      }    );
     this.load();
   }
 
@@ -186,11 +148,7 @@ export class ProjectDetailComponent implements OnInit {
       (res: any) => {
         this.msg.success('删除成功');
         this.load();
-      },
-      (err: any) => {
-        console.log('err:', err);
-      }
-    );
+      }    );
     this.load();
   }
 

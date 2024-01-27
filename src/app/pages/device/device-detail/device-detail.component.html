@@ -36,22 +36,6 @@
   </nz-page-header-content>
 </nz-page-header>
 
-<nz-divider nzText="链接" nzOrientation="left"></nz-divider>
-<div class="links">
-  <div
-    *ngFor="let p of link; let i = index"
-    class="link"
-    [title]="p.description"
-    (click)="toLink(i)"
-  >
-    <img [src]="p.icon" />
-    <span> {{ p.name }} </span>
-  </div>
-</div>
-
-<nz-divider nzText="插件列表" nzOrientation="left"></nz-divider>
-<app-plugins [plugins]="plugins"></app-plugins>
-
 <nz-divider nzText="实时变量" nzOrientation="left"></nz-divider>
 <nz-row class="variables" [nzGutter]="[4, 4]">
   <nz-col

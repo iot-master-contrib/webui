@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {NzPageHeaderComponent, NzPageHeaderModule} from "ng-zorro-antd/page-header";
 import {NzSpaceModule} from "ng-zorro-antd/space";
 import {NzDescriptionsModule} from "ng-zorro-antd/descriptions";
-import {PluginsComponent} from "../../../components/plugins/plugins.component";
 import {NzButtonComponent} from "ng-zorro-antd/button";
 import {NzIconDirective} from "ng-zorro-antd/icon";
 import {NzInputDirective, NzInputGroupComponent} from "ng-zorro-antd/input";
@@ -23,7 +22,6 @@ import {WebViewComponent} from "../../../components/web-view/web-view.component"
     NzPageHeaderModule,
     NzDescriptionsModule,
     NzSpaceModule,
-    PluginsComponent,
     NzButtonComponent,
     NzIconDirective,
     NzInputGroupComponent,
