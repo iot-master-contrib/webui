@@ -14,19 +14,19 @@ export const routes: Routes = [
   {path: "", pathMatch: "full", redirectTo: "admin"},
   {path: "login", component: LoginComponent},
   {
-    canActivate: [authGuard],
     path: "select",
+    canActivate: [authGuard],
     component: SelectComponent,
   },
   {
-    canActivate: [authGuard, adminGuard],
     path: "admin",
+    canActivate: [authGuard, adminGuard],
     component: AdminComponent,
     loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)
   },
   {
-    canActivate: [authGuard],
     path: "project/:project",
+    canActivate: [authGuard],
     component: ProjectComponent,
     loadChildren: () => import('./project/project.module').then(m => m.ProjectModule),
   },

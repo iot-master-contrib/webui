@@ -1,11 +1,5 @@
 <nz-space class="toolbar">
-  <button
-    *nzSpaceItem
-    nz-button
-    nzType="primary"
-
-    (click)="refresh()"
-  >
+  <button *nzSpaceItem nz-button nzType="primary" (click)="refresh()">
     <span nz-icon nzType="reload"></span>
     刷新
   </button>
@@ -15,13 +9,7 @@
       <input [(ngModel)]="value" nz-input placeholder="请输入关键字"/>
     </nz-input-group>
     <ng-template #suffixButton>
-      <button
-        nz-button
-        nzType="primary"
-
-        nzSearch
-        (click)="search()"
-      >
+      <button nz-button nzType="primary" nzSearch (click)="search()">
         搜索
       </button>
     </ng-template>
@@ -117,7 +105,8 @@
     <td>{{ data.created| date }}</td>
     <td>
       <nz-space *ngIf="!ref">
-        <a *nzSpaceItem title="打开" [routerLink]="['/project', data.id]"><i nz-icon nzType="export"></i></a>
+        <a *nzSpaceItem title="打开" target="_blank" [routerLink]="['/project', data.id]"><i nz-icon
+                                                                                             nzType="export"></i></a>
         <a *nzSpaceItem title="编辑" [routerLink]="data.id+'/edit'"><i nz-icon nzType="edit"></i></a>
         <a *nzSpaceItem title="删除" nz-popconfirm nzPopconfirmTitle="确认删除" (nzOnConfirm)="delete(data.id)"><i
           nz-icon nzType="delete"></i></a>

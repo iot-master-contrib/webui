@@ -37,6 +37,8 @@ import {CommonModule} from '@angular/common';
   styleUrl: './devices.component.scss'
 })
 export class DevicesComponent {
+  base = '/admin/'
+
   total = 0;
   pageIndex = 1;
   pageSize = 10;
@@ -57,6 +59,7 @@ export class DevicesComponent {
   ngOnInit(): void {
     if (this.route.parent?.snapshot.paramMap.has('project')) {
       this.project_id = this.route.parent?.snapshot.paramMap.get('project');
+      this.base = '/project/'+this.project_id+'/'
     }
     this.load();
   }

@@ -19,7 +19,6 @@ import {GatewayDetailComponent} from "../pages/gateway/gateway-detail/gateway-de
 import {ProjectsComponent} from "../pages/project/projects/projects.component";
 import {ProjectEditComponent} from "../pages/project/project-edit/project-edit.component";
 import {ProjectDetailComponent} from "../pages/project/project-detail/project-detail.component";
-import {ProjectEditUserComponent} from "../pages/project/project-edit-user/project-edit-user.component";
 import {SpacesComponent} from "../pages/space/spaces/spaces.component";
 import {SpaceEditComponent} from "../pages/space/space-edit/space-edit.component";
 import {SpaceDetailComponent} from "../pages/space/space-detail/space-detail.component";
@@ -36,6 +35,7 @@ import {SettingMqttComponent} from "../pages/setting/setting-mqtt/setting-mqtt.c
 import {SettingLogComponent} from "../pages/setting/setting-log/setting-log.component";
 import {SettingBackupComponent} from "../pages/setting/setting-backup/setting-backup.component";
 import {SettingAttachComponent} from "../pages/setting/setting-attach/setting-attach.component";
+import {ProjectUserComponent} from "../pages/project/project-user/project-user.component";
 
 const routes: Routes = [
   {path: "", pathMatch: "full", redirectTo: "dash"},
@@ -72,7 +72,7 @@ const routes: Routes = [
   {path: 'project/create', component: ProjectEditComponent},
   {path: 'project/:id', component: ProjectDetailComponent},
   {path: 'project/:id/edit', component: ProjectEditComponent},
-  {path: 'project/:id/edit/user', component: ProjectEditUserComponent},
+  {path: 'project/:id/user', component: ProjectUserComponent},
 
   {path: 'space', component: SpacesComponent},
   {path: 'space/create', component: SpaceEditComponent},
