@@ -36,36 +36,36 @@ import {NzDividerComponent} from "ng-zorro-antd/divider";
 @Component({
   selector: 'app-space-detail',
   standalone: true,
-    imports: [
-        SearchFormComponent,
-        BatchBtnComponent,
-        NzSelectModule,
-        NzPageHeaderComponent,
-        NzPageHeaderTitleDirective,
-        NzPageHeaderSubtitleDirective,
-        NzPageHeaderContentDirective,
-        NzPageHeaderExtraDirective,
-        NzSpaceComponent,
-        NzSpaceItemDirective,
-        NzButtonComponent,
-        NzDescriptionsComponent,
-        NzDescriptionsItemComponent,
-        DatePipe,
-        RouterLink,
-        NzPopconfirmDirective,
-        NgForOf,
-        NzIconDirective,
-        NzInputDirective,
-        NzInputGroupComponent,
-        NzPaginationComponent,
-        NzTableCellDirective,
-        NzTableComponent,
-        NzTbodyComponent,
-        NzThMeasureDirective,
-        NzTheadComponent,
-        NzTrDirective,
-        NzDividerComponent,
-    ],
+  imports: [
+    SearchFormComponent,
+    BatchBtnComponent,
+    NzSelectModule,
+    NzPageHeaderComponent,
+    NzPageHeaderTitleDirective,
+    NzPageHeaderSubtitleDirective,
+    NzPageHeaderContentDirective,
+    NzPageHeaderExtraDirective,
+    NzSpaceComponent,
+    NzSpaceItemDirective,
+    NzButtonComponent,
+    NzDescriptionsComponent,
+    NzDescriptionsItemComponent,
+    DatePipe,
+    RouterLink,
+    NzPopconfirmDirective,
+    NgForOf,
+    NzIconDirective,
+    NzInputDirective,
+    NzInputGroupComponent,
+    NzPaginationComponent,
+    NzTableCellDirective,
+    NzTableComponent,
+    NzTbodyComponent,
+    NzThMeasureDirective,
+    NzTheadComponent,
+    NzTrDirective,
+    NzDividerComponent,
+  ],
   templateUrl: './space-detail.component.html',
   styleUrl: './space-detail.component.scss'
 })
@@ -86,30 +86,6 @@ export class SpaceDetailComponent implements OnInit {
     created: new Date(),
   };
 
-  plugins: any[] = [
-    {
-      id: 'scene',
-      name: '智慧场景',
-      icon: 'assets/app.png',
-      description: '智慧场景，联动控制',
-    },
-    {
-      id: 'screen',
-      name: '数据大屏',
-      icon: 'assets/app.png',
-      description: '',
-    },
-  ];
-
-  devices: any[] = [
-    // {id: 1, name: '1号', product: '温度计', alias: 't1', online: new Date()},
-    // {id: 2, name: '2号', product: '温度计', alias: 't2', online: new Date()},
-    // {id: 3, name: '3号', product: '温度计', alias: 't3', online: new Date()},
-    // {id: 4, name: '4号', product: '温度计', alias: 't4', online: new Date()},
-  ];
-
-
-  deviceOption!: any;
 
   constructor(
     private router: Router,
@@ -128,80 +104,17 @@ export class SpaceDetailComponent implements OnInit {
   }
 
   load() {
-    this.rs.get(`space/${this.id}`).subscribe(
-      (res: any) => {
-        this.data = res.data;
-      },
-      (err: any) => {
-        console.log('err:', err);
-      }
-    );
-
-    this.rs.get(`space/${this.id}/device`, {}).subscribe(
-      (res: any) => {
-        if (res.data) {
-          this.devices = res.data;
-        }
-        this.total = res.total;
-      },
-      (err: any) => {
-        console.log('err:', err);
-      }
-    );
-  }
-
-  pageSizeChange(e: any) {
-    this.pageSize = e;
-    this.load();
-  }
-
-  pageIndexChange(e: any) {
-    this.pageIndex = e;
-    this.load();
+    this.rs.get(`space/${this.id}`).subscribe((res: any) => {
+      this.data = res.data;
+    });
   }
 
   delete() {
-    this.rs.get(`space/${this.id}/delete`, {}).subscribe(
-      (res: any) => {
-        this.msg.success('删除成功');
-        this.router.navigateByUrl('admin');
-      },
-      (err: any) => {
-        console.log('err:', err);
-      }
-    );
+    this.rs.get(`space/${this.id}/delete`, {}).subscribe((res: any) => {
+      this.msg.success('删除成功');
+      this.router.navigateByUrl('admin');
+    });
     this.load();
   }
 
-  deleteSpace(e: any) {
-    this.rs.get(`space/${e}/delete`, {}).subscribe(
-      (res: any) => {
-        this.msg.success('删除成功');
-        this.load();
-      },
-      (err: any) => {
-        console.log('err:', err);
-      }
-    );
-    this.load();
-  }
-
-  search($event: string) {
-    console.log($event);
-    this.query.keyword = {
-      name: $event,
-    };
-    this.query.skip = 0;
-    this.load();
-  }
-
-  handleEdit() {
-    this.router.navigateByUrl('admin/device/create');
-  }
-
-  handleCancel() {
-  }
-
-  handleOk() {
-  }
 }

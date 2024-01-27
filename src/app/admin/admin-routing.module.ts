@@ -36,6 +36,7 @@ import {SettingLogComponent} from "../pages/setting/setting-log/setting-log.comp
 import {SettingBackupComponent} from "../pages/setting/setting-backup/setting-backup.component";
 import {SettingAttachComponent} from "../pages/setting/setting-attach/setting-attach.component";
 import {ProjectUserComponent} from "../pages/project/project-user/project-user.component";
+import {SpaceDeviceComponent} from "../pages/space/space-device/space-device.component";
 
 const routes: Routes = [
   {path: "", pathMatch: "full", redirectTo: "dash"},
@@ -78,6 +79,7 @@ const routes: Routes = [
   {path: 'space/create', component: SpaceEditComponent},
   {path: 'space/:id', component: SpaceDetailComponent},
   {path: 'space/:id/edit', component: SpaceEditComponent},
+  {path: 'space/:id/device', component: SpaceDeviceComponent},
 
   {path: 'plugin', component: PluginComponent},
   {path: 'plugin/create', component: PluginEditComponent},

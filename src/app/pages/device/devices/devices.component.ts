@@ -1,4 +1,4 @@
-import {Component, Optional} from '@angular/core';
+import {Component, Input, Optional} from '@angular/core';
 import {NzSpaceComponent, NzSpaceItemDirective} from "ng-zorro-antd/space";
 import {NzButtonComponent} from "ng-zorro-antd/button";
 import {NzIconDirective} from "ng-zorro-antd/icon";
@@ -45,7 +45,7 @@ export class DevicesComponent {
   value = '';
   devices: any = [];
 
-  project_id: any = ''
+  @Input() project_id: any = ''
 
   constructor(
     private router: Router,
@@ -59,7 +59,7 @@ export class DevicesComponent {
   ngOnInit(): void {
     if (this.route.parent?.snapshot.paramMap.has('project')) {
       this.project_id = this.route.parent?.snapshot.paramMap.get('project');
-      this.base = '/project/'+this.project_id+'/'
+      this.base = '/project/' + this.project_id + '/'
     }
     this.load();
   }

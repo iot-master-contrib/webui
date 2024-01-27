@@ -23,6 +23,7 @@ import {SpaceEditComponent} from "../pages/space/space-edit/space-edit.component
 import {SpaceDetailComponent} from "../pages/space/space-detail/space-detail.component";
 import {ProjectDashComponent} from "../pages/project/project-dash/project-dash.component";
 import {ProjectUserComponent} from "../pages/project/project-user/project-user.component";
+import {SpaceDeviceComponent} from "../pages/space/space-device/space-device.component";
 
 const routes: Routes = [
   {path: "", pathMatch: "full", redirectTo: "dash"},
@@ -64,6 +65,7 @@ const routes: Routes = [
   {path: 'space/create', component: SpaceEditComponent},
   {path: 'space/:id', component: SpaceDetailComponent},
   {path: 'space/:id/edit', component: SpaceEditComponent},
+  {path: 'space/:id/device', component: SpaceDeviceComponent},
 
   {path: 'user', component: ProjectUserComponent},
   // {path: 'user/create', component: UserEditComponent},
