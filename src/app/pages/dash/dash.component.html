@@ -1,1 +1,32 @@
-<p>dash works!</p>
+<nz-row [nzGutter]="[16,16]">
+  <nz-col nzSpan="8">
+    <nz-card>
+      <app-count model="device" title="设备总数"></app-count>
+    </nz-card>
+  </nz-col>
+  <nz-col nzSpan="8">
+    <nz-card>
+      <app-count model="space" title="空间总数"></app-count>
+    </nz-card>
+  </nz-col>
+  <nz-col nzSpan="8">
+    <nz-card>
+      <app-count model="project" title="项目总数"></app-count>
+    </nz-card>
+  </nz-col>
+  <nz-col nzSpan="8">
+    <nz-card>
+      <app-count model="product" title="产品总数"></app-count>
+    </nz-card>
+  </nz-col>
+  <nz-col nzSpan="8">
+    <nz-card>
+      <app-count model="gateway" title="网关总数"></app-count>
+    </nz-card>
+  </nz-col>
+  <nz-col nzSpan="8">
+    <nz-card>
+      <app-count model="user" title="用户总数"></app-count>
+    </nz-card>
+  </nz-col>
+</nz-row>
