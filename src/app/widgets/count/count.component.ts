@@ -15,6 +15,7 @@ export class CountComponent implements OnInit {
 
   @Input() model = 'device'
   @Input() title = '设备总数'
+  @Input() project = ''
 
   count = 0;
 
@@ -22,7 +23,11 @@ export class CountComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.rs.post(this.model + '/count', {}).subscribe(res => {
+    let query: any = {}
+    if (this.project)
+      query.filter = {project_id: this.project}
+
+    this.rs.post(this.model + '/count', query).subscribe(res => {
       this.count = res.data
     })
   }

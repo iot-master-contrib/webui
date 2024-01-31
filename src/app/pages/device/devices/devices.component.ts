@@ -1,18 +1,17 @@
-import {AfterViewInit, Component, inject, Input, OnInit, Optional} from '@angular/core';
+import {Component, inject, InjectFlags, OnInit, Optional} from '@angular/core';
 import {NzSpaceComponent, NzSpaceItemDirective} from "ng-zorro-antd/space";
 import {NzButtonComponent} from "ng-zorro-antd/button";
 import {NzIconDirective} from "ng-zorro-antd/icon";
 import {NzInputDirective, NzInputGroupComponent} from "ng-zorro-antd/input";
 import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 import {NzPaginationComponent} from "ng-zorro-antd/pagination";
-import {NzTableComponent, NzTableModule} from "ng-zorro-antd/table";
-import {DatePipe, NgForOf} from "@angular/common";
+import {NzTableModule} from "ng-zorro-antd/table";
+import {CommonModule, DatePipe, NgForOf} from "@angular/common";
 import {NzPopconfirmDirective} from "ng-zorro-antd/popconfirm";
 import {RequestService} from '../../../request.service';
 import {NzMessageService} from 'ng-zorro-antd/message';
 import {FormsModule} from '@angular/forms';
 import {NZ_MODAL_DATA, NzModalRef} from 'ng-zorro-antd/modal';
-import {CommonModule} from '@angular/common';
 
 @Component({
   selector: 'app-devices',
@@ -46,7 +45,7 @@ export class DevicesComponent implements OnInit{
   devices: any = [];
 
   //从Modal中传参过来
-  readonly data: any = inject(NZ_MODAL_DATA);
+  readonly data: any = inject(NZ_MODAL_DATA, {optional:true});
   project_id: any = ''
 
   constructor(
@@ -54,7 +53,8 @@ export class DevicesComponent implements OnInit{
     private route: ActivatedRoute,
     private rs: RequestService,
     private msg: NzMessageService,
-    @Optional() protected ref: NzModalRef
+    @Optional() protected ref: NzModalRef,
+    //@Optional() protected  data: NZ_MODAL_DATA
   ) {
   }
 
@@ -63,7 +63,7 @@ export class DevicesComponent implements OnInit{
       this.project_id = this.route.parent?.snapshot.paramMap.get('project');
       this.base = '/project/' + this.project_id + '/'
     }
-    if (this.data.project_id) {
+    if (this.data?.project_id) {
       this.project_id = this.data.project_id
     }
 
