@@ -1,8 +1,8 @@
 package main
 
 import (
+	_ "github.com/iot-master-contrib/webui"
 	"github.com/spf13/viper"
-	_ "github.com/zgwit/iot-master-contrib/webui"
 	"github.com/zgwit/iot-master/v4/config"
 	"github.com/zgwit/iot-master/v4/web"
 )
