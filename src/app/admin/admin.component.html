@@ -35,93 +35,16 @@
 
       <ul nz-menu nzTheme="dark" nzMode="inline" class="menu">
 
-        <li nz-submenu nzIcon="dashboard" nzTitle="控制台" nzOpen>
-          <ul>
-            <li nz-menu-item nzMatchRouter nzMatchRouterExact routerLink="dash">控制台</li>
-          </ul>
-        </li>
-
         <ng-container *ngFor="let menu of menus">
-          <li nz-submenu nzIcon="appstore-add" [nzTitle]="menu.name" *ngIf="menu.first">
+          <li nz-submenu [nzIcon]="menu.icon || 'appstore-add'" [nzTitle]="menu.name" [nzOpen]="menu.open">
             <ul>
               <li nz-menu-item *ngFor="let item of menu.items"
-                  nzMatchRouter nzMatchRouterExact routerLink="web"
-                  [queryParams]="{url: item.url}">{{ item.name }}
+                  nzMatchRouter nzMatchRouterExact [routerLink]="item.link || 'web'"
+                  [queryParams]="item.url && {url: item.url}">{{ item.name }}
               </li>
             </ul>
           </li>
         </ng-container>
-
-        <li nz-submenu nzIcon="apartment" nzTitle="项目管理">
-          <ul>
-            <li nz-menu-item nzMatchRouter nzMatchRouterExact routerLink="project">所有项目</li>
-            <li nz-menu-item nzMatchRouter nzMatchRouterExact routerLink="project/create">创建项目</li>
-          </ul>
-        </li>
-
-        <li nz-submenu nzIcon="appstore" nzTitle="空间管理">
-          <ul>
-            <li nz-menu-item nzMatchRouter nzMatchRouterExact routerLink="space">所有空间</li>
-            <li nz-menu-item nzMatchRouter nzMatchRouterExact routerLink="space/create">创建空间</li>
-          </ul>
-        </li>
-
-        <li nz-submenu nzIcon="block" nzTitle="设备管理">
-          <ul>
-            <li nz-menu-item nzMatchRouter nzMatchRouterExact routerLink="device">所有设备</li>
-            <li nz-menu-item nzMatchRouter nzMatchRouterExact routerLink="device/create">创建设备</li>
-          </ul>
-        </li>
-
-        <li nz-submenu nzIcon="link" nzTitle="网关管理">
-          <ul>
-            <li nz-menu-item nzMatchRouter nzMatchRouterExact routerLink="gateway">所有网关</li>
-            <li nz-menu-item nzMatchRouter nzMatchRouterExact routerLink="gateway/create">创建网关</li>
-            <li nz-menu-item nzMatchRouter nzMatchRouterExact routerLink="gateway/batch" nzDisabled>批量创建</li>
-          </ul>
-        </li>
-
-        <li nz-submenu nzIcon="profile" nzTitle="产品管理">
-          <ul>
-            <li nz-menu-item nzMatchRouter nzMatchRouterExact routerLink="product">所有产品</li>
-            <li nz-menu-item nzMatchRouter nzMatchRouterExact routerLink="product/create">创建产品</li>
-          </ul>
-        </li>
-
-        <li nz-submenu nzIcon="user" nzTitle="用户管理">
-          <ul>
-            <li nz-menu-item nzMatchRouter nzMatchRouterExact routerLink="user">所有用户</li>
-            <li nz-menu-item nzMatchRouter nzMatchRouterExact routerLink="user/create">创建用户</li>
-          </ul>
-        </li>
-
-        <!--        <li nz-submenu nzIcon="appstore" nzTitle="插件管理">-->
-        <!--          <ul>-->
-        <!--            <li nz-menu-item nzMatchRouter nzMatchRouterExact routerLink="plugin">所有插件</li>-->
-        <!--          </ul>-->
-        <!--        </li>-->
-
-        <ng-container *ngFor="let menu of menus">
-          <li nz-submenu nzIcon="appstore-add" [nzTitle]="menu.name" *ngIf="!menu.first">
-            <ul>
-              <li nz-menu-item *ngFor="let item of menu.items"
-                  nzMatchRouter nzMatchRouterExact routerLink="web"
-                  [queryParams]="{url: item.url}">{{ item.name }}
-              </li>
-            </ul>
-          </li>
-        </ng-container>
-
-        <li nz-submenu nzIcon="setting" nzTitle="系统设置">
-          <ul>
-            <li nz-menu-item nzMatchRouter nzMatchRouterExact routerLink="setting/web">Web服务</li>
-            <li nz-menu-item nzMatchRouter nzMatchRouterExact routerLink="setting/database">数据库</li>
-            <li nz-menu-item nzMatchRouter nzMatchRouterExact routerLink="setting/broker">MQTT总线</li>
-            <li nz-menu-item nzMatchRouter nzMatchRouterExact routerLink="setting/mqtt">MQTT连接</li>
-            <li nz-menu-item nzMatchRouter nzMatchRouterExact routerLink="setting/log">系统日志</li>
-            <li nz-menu-item nzMatchRouter nzMatchRouterExact routerLink="setting/attach">附件管理</li>
-          </ul>
-        </li>
 
       </ul>
 
