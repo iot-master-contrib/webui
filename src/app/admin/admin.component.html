@@ -11,7 +11,8 @@
 
     <div class="space">
       <!--临时放这里-->
-      <span nz-icon title="折叠菜单" (click)="isCollapsed = !isCollapsed" [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"></span>
+      <span nz-icon title="折叠菜单" (click)="isCollapsed = !isCollapsed"
+            [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"></span>
 
     </div>
 
@@ -41,9 +42,10 @@
         <ng-container *ngFor="let menu of menus">
           <li nz-submenu [nzIcon]="menu.icon || 'appstore-add'" [nzTitle]="menu.name" [nzOpen]="menu.open">
             <ul>
-              <li nz-menu-item *ngFor="let item of menu.items"
-                  nzMatchRouter nzMatchRouterExact [routerLink]="item.link || 'web'"
-                  [queryParams]="item.url && {url: item.url}">{{ item.name }}
+              <li nz-menu-item *ngFor="let item of menu.items" nzMatchRouter nzMatchRouterExact>
+                <a *ngIf="item.standalone" [href]="item.url" target="_blank">{{ item.name }}</a>
+                <a *ngIf="!item.standalone" [routerLink]="item.link || 'web'"
+                   [queryParams]="item.url && {url: item.url}">{{ item.name }}</a>
               </li>
             </ul>
           </li>
