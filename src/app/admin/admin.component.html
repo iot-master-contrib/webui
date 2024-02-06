@@ -10,6 +10,9 @@
 
 
     <div class="space">
+      <!--临时放这里-->
+      <span nz-icon title="折叠菜单" (click)="isCollapsed = !isCollapsed" [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"></span>
+
     </div>
 
     <ul nz-menu nzTheme="dark" nzMode="horizontal" class="user">
@@ -31,9 +34,9 @@
   </nz-header>
 
   <nz-layout>
-    <nz-sider nzWidth="200px">
+    <nz-sider [nzWidth]="isCollapsed ? '50px':'200px'">
 
-      <ul nz-menu nzTheme="dark" nzMode="inline" class="menu">
+      <ul nz-menu nzTheme="dark" nzMode="inline" class="menu" [nzInlineCollapsed]="isCollapsed">
 
         <ng-container *ngFor="let menu of menus">
           <li nz-submenu [nzIcon]="menu.icon || 'appstore-add'" [nzTitle]="menu.name" [nzOpen]="menu.open">

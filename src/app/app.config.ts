@@ -14,6 +14,8 @@ import {provideAnimations} from '@angular/platform-browser/animations';
 import {NZ_ICONS} from "ng-zorro-antd/icon";
 import { IconDefinition } from '@ant-design/icons-angular';
 import {
+  MenuFoldOutline,
+  MenuUnfoldOutline,
   DashboardOutline,
   PlusOutline,
   BellOutline ,
@@ -40,6 +42,8 @@ import {
   ImportOutline,
 } from '@ant-design/icons-angular/icons';
 const icons: IconDefinition[] = [
+  MenuFoldOutline,
+  MenuUnfoldOutline,
   DashboardOutline,
   PlusOutline,
   BellOutline,

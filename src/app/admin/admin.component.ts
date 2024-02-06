@@ -11,6 +11,7 @@ import {UserService} from "../user.service";
 import {PasswordComponent} from "../modals/password/password.component";
 import {RequestService} from '../request.service';
 import {CommonModule} from '@angular/common';
+import {NzButtonComponent} from "ng-zorro-antd/button";
 
 @Component({
   selector: 'app-admin',
@@ -29,7 +30,7 @@ import {CommonModule} from '@angular/common';
     NzMenuDividerDirective,
     NzMenuItemComponent,
     RouterLink,
-    NzSubMenuComponent, NzSiderComponent,
+    NzSubMenuComponent, NzSiderComponent, NzButtonComponent,
   ],
   templateUrl: './admin.component.html',
   styleUrl: './admin.component.scss'
@@ -100,6 +101,7 @@ export class AdminComponent {
       ]
     },
   ]
+  isCollapsed: boolean = false;
 
   constructor(
     private router: Router,
