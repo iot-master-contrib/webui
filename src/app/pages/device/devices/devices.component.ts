@@ -1,4 +1,4 @@
-import {Component, inject, InjectFlags, OnInit, Optional} from '@angular/core';
+import {Component, Inject, inject, InjectFlags, OnInit, Optional} from '@angular/core';
 import {NzSpaceComponent, NzSpaceItemDirective} from "ng-zorro-antd/space";
 import {NzButtonComponent} from "ng-zorro-antd/button";
 import {NzIconDirective} from "ng-zorro-antd/icon";
@@ -45,7 +45,7 @@ export class DevicesComponent implements OnInit{
   devices: any = [];
 
   //从Modal中传参过来
-  readonly data: any = inject(NZ_MODAL_DATA, {optional:true});
+  //readonly data: any = inject(NZ_MODAL_DATA, {optional:true});
   project_id: any = ''
 
   constructor(
@@ -54,7 +54,7 @@ export class DevicesComponent implements OnInit{
     private rs: RequestService,
     private msg: NzMessageService,
     @Optional() protected ref: NzModalRef,
-    //@Optional() protected  data: NZ_MODAL_DATA
+    @Optional() @Inject(NZ_MODAL_DATA) protected data: any
   ) {
   }
 

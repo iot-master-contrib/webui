@@ -17,9 +17,15 @@ export const authGuard: CanMatchFn = (route, segments) => {
   if (us.getting) {
     //console.log('auth getting')
     const sub = new Subject<any>()
-    us.userSub.subscribe(res => {
-      //console.log('auth getting ok')
-      sub.next(true)
+    us.userSub.subscribe({
+      next: res => {
+        //console.log('auth getting ok')
+        sub.next(true)
+      },
+      error: err => {
+        //console.log('error', err)
+        sub.next(router.parseUrl("/login"))
+      }
     })
     return sub.asObservable()
   }

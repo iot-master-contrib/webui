@@ -14,10 +14,15 @@ export class UserService {
 
   constructor(private rs: RequestService) {
     //console.log("user me")
-    rs.get('user/me').subscribe(res => {
-      //console.log("user me ok")
-      this.setUser(res.data) ;
-    }).add(()=>{
+    rs.get('user/me').subscribe({
+      next: res => {
+        //console.log("user me ok")
+        this.setUser(res.data);
+      }, error: err => {
+        //console.error('user.service.error', err)
+        this.userSub.error(err)
+      }
+    }).add(() => {
       //console.log('getting false')
       this.getting = false;
     })

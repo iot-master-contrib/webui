@@ -99,7 +99,7 @@ export class AdminComponent {
   }
 
   handleExit() {
-    this.rs.get("/logout").subscribe(() => {
+    this.rs.get("logout").subscribe(() => {
       this.us.setUser(undefined)
     })
     this.router.navigateByUrl("/login")
