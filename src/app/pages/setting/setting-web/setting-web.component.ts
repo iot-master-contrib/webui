@@ -82,15 +82,10 @@ export class SettingWebComponent implements OnInit {
     this.buildFromGroup();
   }
   ngOnInit(): void {
-    this.rs.get('setting/web', {}).subscribe(
-      (res) => {
-        // this.projects = res.data;
-        // this.total = res.total;
-      },
-      (err) => {
-        console.log('err:', err);
-      }
-    );
+    this.rs.get('setting/web', {}).subscribe(res => {
+      this.data = res.data
+      this.buildFromGroup()
+    });
   }
 
   buildFromGroup() {

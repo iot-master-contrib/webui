@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core'; 
+import { Component, OnInit } from '@angular/core';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { RequestService } from '../../../request.service'; 
+import { RequestService } from '../../../request.service';
 import {
   FormBuilder,
   FormGroup,
@@ -36,7 +36,7 @@ import {
 } from 'ng-zorro-antd/upload';
 import { NzIconDirective } from 'ng-zorro-antd/icon';
 import { NgIf } from '@angular/common';
-import { Router } from '@angular/router'; 
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-setting-mqtt',
   standalone: true,
@@ -71,7 +71,7 @@ import { Router } from '@angular/router';
 export class SettingMqttComponent implements OnInit{
   formGroup!: FormGroup;
   data: any = {};
-constructor( 
+constructor(
   private fb: FormBuilder,
   private route: Router,
   private rs: RequestService,
@@ -88,15 +88,10 @@ buildFromGroup() {
   //console.log(this.formGroup)
 }
   ngOnInit(): void {
-    this.rs.get('setting/mqtt', {}).subscribe(
-      (res) => {
-        // this.projects = res.data;
-        // this.total = res.total;
-      },
-      (err) => {
-        console.log('err:', err);
-      }
-    );
+    this.rs.get('setting/mqtt', {}).subscribe(res => {
+      this.data = res.data
+      this.buildFromGroup()
+    });
   }
   submit(){
 
@@ -123,6 +118,6 @@ buildFromGroup() {
 
 
 
-    
+
   }
 }

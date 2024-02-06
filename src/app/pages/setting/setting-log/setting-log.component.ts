@@ -49,22 +49,17 @@ export class SettingLogComponent implements OnInit{
 
   data: any = {}
 
-  constructor(private fb: FormBuilder, 
+  constructor(private fb: FormBuilder,
     private route: Router,
     private rs: RequestService,
     private msg: NzMessageService) {
     this.buildFromGroup()
   }
   ngOnInit(): void {
-    this.rs.get('setting/log', {}).subscribe(
-      (res) => {
-        // this.projects = res.data;
-        // this.total = res.total;
-      },
-      (err) => {
-        console.log('err:', err);
-      }
-    );
+    this.rs.get('setting/log', {}).subscribe(res => {
+      this.data = res.data
+      this.buildFromGroup()
+    });
   }
   buildFromGroup() {
     this.formGroup = this.fb.group({
