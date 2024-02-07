@@ -38,7 +38,45 @@ export class ProjectComponent implements OnInit{
   id: any = ''
   project:any = {}
 
-  menus: any = [];
+  menus: any = [
+    {
+      name: '控制台', icon: 'dashboard', open: true,
+      items: [
+        {name: '仪表盘', link: 'dash'},
+        {name: '项目详情', link: 'detail'}
+      ]
+    },
+    {
+      name: '空间管理', icon: 'appstore',
+      items: [
+        {name: '所有空间', link: 'space'},
+        {name: '创建空间', link: 'space/create'},
+      ]
+    },
+    {
+      name: '设备管理', icon: 'block',
+      items: [
+        {name: '所有设备', link: 'device'},
+        {name: '创建设备', link: 'device/create'},
+      ]
+    },
+    {
+      name: '网关管理', icon: 'link',
+      items: [
+        {name: '所有网关', link: 'gateway'},
+        {name: '创建设备', link: 'gateway/create'},
+        //{name: '批量创建', link: 'gateway/batch'},
+      ]
+    },
+    {
+      name: '用户管理', icon: 'user',
+      items: [
+        {name: '项目用户', link: 'user'},
+        //{name: '创建用户', link: 'user/create'},
+      ]
+    },
+  ]
+  isCollapsed: boolean = false;
 
   constructor(
     private router: Router,
@@ -63,8 +101,23 @@ export class ProjectComponent implements OnInit{
   }
 
   loadMenu() {
-    this.rs.get('plugin/menus/project').subscribe(res => {
-      this.menus = res.data
+    this.rs.get('plugin/menus/project').subscribe((res: any) => {
+      //this.menus = res.data
+      //this.menus = this.menus.concat(res.data)
+      res.data.forEach((m: any) => {
+        m.items.forEach((i: any) => i.standalone = true)
+        //先查找同名，找到就合并
+        let has = false
+        this.menus.forEach((m2: any) => {
+          if (m.name == m2.name) {
+            m2.items = m2.items.concat(m.items)
+            has = true
+          }
+        })
+        if (!has) {
+          this.menus.push(m)
+        }
+      })
     })
   }
 
