@@ -38,6 +38,7 @@ import {RequestService} from '../../../request.service';
 import {NzMessageService} from 'ng-zorro-antd/message';
 import {CommonModule} from '@angular/common';
 import {Router} from '@angular/router';
+import {NzCardComponent} from "ng-zorro-antd/card";
 
 @Component({
   selector: 'app-project-edit',
@@ -65,6 +66,7 @@ import {Router} from '@angular/router';
     NzUploadComponent,
     NzIconDirective,
     NzSelectComponent,
+    NzCardComponent,
   ],
   templateUrl: './project-edit.component.html',
   styleUrl: './project-edit.component.scss',
