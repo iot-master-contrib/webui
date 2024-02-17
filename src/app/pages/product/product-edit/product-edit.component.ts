@@ -36,6 +36,7 @@ import {NzIconDirective} from 'ng-zorro-antd/icon';
 import {NzSelectComponent} from 'ng-zorro-antd/select';
 import {RequestService} from '../../../request.service';
 import {NzMessageService} from 'ng-zorro-antd/message';
+import {NzCardComponent} from "ng-zorro-antd/card";
 
 @Component({
   selector: 'app-product-edit',
@@ -63,6 +64,7 @@ import {NzMessageService} from 'ng-zorro-antd/message';
     NzUploadComponent,
     NzIconDirective,
     NzSelectComponent,
+    NzCardComponent,
   ],
   templateUrl: './product-edit.component.html',
   styleUrl: './product-edit.component.scss',

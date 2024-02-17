@@ -44,6 +44,7 @@ import {NzSelectModule} from 'ng-zorro-antd/select';
 import {InputProductComponent} from "../../../components/input-product/input-product.component";
 import {InputGatewayComponent} from "../../../components/input-gateway/input-gateway.component";
 import {InputProjectComponent} from "../../../components/input-project/input-project.component";
+import {NzCardComponent} from "ng-zorro-antd/card";
 
 @Component({
   selector: 'app-device-edit',
@@ -75,6 +76,7 @@ import {InputProjectComponent} from "../../../components/input-project/input-pro
     InputProductComponent,
     InputGatewayComponent,
     InputProjectComponent,
+    NzCardComponent,
   ],
   templateUrl: './device-edit.component.html',
   styleUrl: './device-edit.component.scss',

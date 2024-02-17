@@ -37,6 +37,7 @@ import {
 import { NzIconDirective } from 'ng-zorro-antd/icon';
 import { NgIf } from '@angular/common';
 import { Router } from '@angular/router';
+import {NzCardComponent} from "ng-zorro-antd/card";
 @Component({
   selector: 'app-setting-mqtt',
   standalone: true,
@@ -64,6 +65,7 @@ import { Router } from '@angular/router';
     NzUploadComponent,
     NzIconDirective,
     NgIf,
+    NzCardComponent,
   ],
   templateUrl: './setting-mqtt.component.html',
   styleUrl: './setting-mqtt.component.scss'
@@ -93,7 +95,8 @@ buildFromGroup() {
       this.buildFromGroup()
     });
   }
-  submit(){
+
+  onSubmit(){
 
     if (this.formGroup.valid) {
       this.rs.post('setting/mqtt', this.formGroup.value).subscribe(

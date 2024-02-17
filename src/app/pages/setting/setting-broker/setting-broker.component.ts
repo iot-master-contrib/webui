@@ -15,6 +15,7 @@ import {NgIf} from "@angular/common";
 import {Router} from '@angular/router';
 import {RequestService} from '../../../request.service';
 import {NzMessageService} from 'ng-zorro-antd/message';
+import {NzCardComponent} from "ng-zorro-antd/card";
 
 @Component({
   selector: 'app-setting-broker',
@@ -38,7 +39,8 @@ import {NzMessageService} from 'ng-zorro-antd/message';
     NzSpaceComponent,
     ReactiveFormsModule,
     NzSpaceItemDirective,
-    NgIf
+    NgIf,
+    NzCardComponent
   ],
   templateUrl: './setting-broker.component.html',
   styleUrl: './setting-broker.component.scss'

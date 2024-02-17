@@ -16,6 +16,7 @@ import {NzSwitchComponent} from "ng-zorro-antd/switch";
 import { Router } from '@angular/router';
 import { RequestService } from '../../../request.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import {NzCardComponent} from "ng-zorro-antd/card";
 
 @Component({
   selector: 'app-setting-log',
@@ -39,7 +40,8 @@ import { NzMessageService } from 'ng-zorro-antd/message';
     NzSelectComponent,
     NzSpaceComponent,
     ReactiveFormsModule,
-    NzSwitchComponent
+    NzSwitchComponent,
+    NzCardComponent
   ],
   templateUrl: './setting-log.component.html',
   styleUrl: './setting-log.component.scss'

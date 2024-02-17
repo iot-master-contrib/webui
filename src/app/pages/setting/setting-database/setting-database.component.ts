@@ -17,6 +17,7 @@ import {NzUploadComponent} from "ng-zorro-antd/upload";
 import {Router} from '@angular/router';
 import {RequestService} from '../../../request.service';
 import {NzMessageService} from 'ng-zorro-antd/message';
+import {NzCardComponent} from "ng-zorro-antd/card";
 
 @Component({
   selector: 'app-setting-database',
@@ -43,7 +44,8 @@ import {NzMessageService} from 'ng-zorro-antd/message';
     NzUploadComponent,
     ReactiveFormsModule,
     NzSpaceItemDirective,
-    NgForOf
+    NgForOf,
+    NzCardComponent
   ],
   templateUrl: './setting-database.component.html',
   styleUrl: './setting-database.component.scss'

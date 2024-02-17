@@ -21,6 +21,7 @@ import {NzSpaceComponent, NzSpaceItemDirective} from 'ng-zorro-antd/space';
 import {NzUploadChangeParam, NzUploadComponent} from 'ng-zorro-antd/upload';
 import {RequestService} from '../../../request.service';
 import {NzSwitchModule} from 'ng-zorro-antd/switch';
+import {NzCardComponent} from "ng-zorro-antd/card";
 
 @Component({
   selector: 'app-user-edit',
@@ -49,6 +50,7 @@ import {NzSwitchModule} from 'ng-zorro-antd/switch';
     NzUploadComponent,
     NzIconDirective,
     NzSelectComponent,
+    NzCardComponent,
   ],
   templateUrl: './user-edit.component.html',
   styleUrl: './user-edit.component.scss'

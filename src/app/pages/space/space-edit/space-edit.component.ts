@@ -40,6 +40,7 @@ import {NzModalRef, NzModalService} from 'ng-zorro-antd/modal';
 import {DevicesComponent} from '../../device/devices/devices.component';
 import {NzSelectModule} from 'ng-zorro-antd/select';
 import {InputProjectComponent} from "../../../components/input-project/input-project.component";
+import {NzCardComponent} from "ng-zorro-antd/card";
 
 @Component({
   selector: 'app-space-edit',
@@ -69,6 +70,7 @@ import {InputProjectComponent} from "../../../components/input-project/input-pro
     NzIconDirective,
     NzSelectComponent,
     InputProjectComponent,
+    NzCardComponent,
   ],
   templateUrl: './space-edit.component.html',
   styleUrl: './space-edit.component.scss',

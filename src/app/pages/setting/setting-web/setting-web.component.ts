@@ -36,6 +36,7 @@ import { NgIf } from '@angular/common';
 import { Router } from '@angular/router';
 import { RequestService } from '../../../request.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import {NzCardComponent} from "ng-zorro-antd/card";
 
 @Component({
   selector: 'app-setting-web',
@@ -64,6 +65,7 @@ import { NzMessageService } from 'ng-zorro-antd/message';
     NzUploadComponent,
     NzIconDirective,
     NgIf,
+    NzCardComponent,
   ],
   templateUrl: './setting-web.component.html',
   styleUrl: './setting-web.component.scss',

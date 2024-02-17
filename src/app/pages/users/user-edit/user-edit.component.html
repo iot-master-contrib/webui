@@ -1,12 +1,4 @@
-<nz-page-header>
-  <nz-page-header-title>用户{{this.id?"编辑":"创建"}}</nz-page-header-title>
-  <nz-page-header-extra>
-
-      <button   nz-button nzType="primary" (click)="onSubmit()">保存</button>
-
-  </nz-page-header-extra>
-</nz-page-header>
-
+<nz-card [nzTitle]="'用户'+ (this.id ? '编辑' : '创建') " [nzExtra]="extraTemplate">
 
 <form nz-form [formGroup]="formGroup">
 
@@ -70,3 +62,9 @@
 
 
 </form>
+
+
+</nz-card>
+<ng-template #extraTemplate>
+  <button nz-button nzType="primary" (click)="onSubmit()">保存</button>
+</ng-template>

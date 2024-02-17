@@ -19,6 +19,7 @@ import {NzSelectComponent} from "ng-zorro-antd/select";
 import {NzMessageService} from 'ng-zorro-antd/message';
 import {RequestService} from '../../../request.service';
 import {InputProjectComponent} from "../../../components/input-project/input-project.component";
+import {NzCardComponent} from "ng-zorro-antd/card";
 
 @Component({
   selector: 'app-gateway-edit',
@@ -47,6 +48,7 @@ import {InputProjectComponent} from "../../../components/input-project/input-pro
     NzSelectComponent,
     NgIf,
     InputProjectComponent,
+    NzCardComponent,
   ],
   templateUrl: './gateway-edit.component.html',
   styleUrl: './gateway-edit.component.scss'
