@@ -1,21 +1,21 @@
 <table>
-    <tr>
-      <td>上传路径：</td>
-      <td><input type="text" nz-input [(ngModel)]="name" /></td>
-    </tr>
-    <tr>
-      <td>上传文件：</td>
-      <td>
-        <nz-upload
-          nzAction="api/attach/upload/"
-          [nzShowUploadList]="false"
-          (nzChange)="handleUpload($event)"
-        >
-          <button nz-button>
-            <i nz-icon nzType="upload"></i>
-            上传
-          </button>
-        </nz-upload>
-      </td>
-    </tr>
-  </table>
+  <tr>
+    <td>上传路径：</td>
+    <td><input type="text" nz-input [(ngModel)]="name"/></td>
+  </tr>
+  <tr>
+    <td>上传文件：</td>
+    <td>
+      <nz-upload
+        nzAction="api/attach/upload/"
+        [nzShowUploadList]="false"
+        (nzChange)="handleUpload($event)"
+      >
+        <button nz-button>
+          <i nz-icon nzType="upload"></i>
+          上传
+        </button>
+      </nz-upload>
+    </td>
+  </tr>
+</table>

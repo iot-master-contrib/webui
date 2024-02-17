@@ -1,7 +1,7 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 
-import { GatewayRoutingModule } from './gateway-routing.module';
+import {GatewayRoutingModule} from './gateway-routing.module';
 
 
 @NgModule({
@@ -11,4 +11,5 @@ import { GatewayRoutingModule } from './gateway-routing.module';
     GatewayRoutingModule
   ]
 })
-export class GatewayModule { }
+export class GatewayModule {
+}

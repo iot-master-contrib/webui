@@ -1,11 +1,12 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { FormGroup } from '@angular/forms';
-import { NzMessageService } from 'ng-zorro-antd/message'; 
-import { FormsModule } from '@angular/forms';
-import { NgModule } from '@angular/core';
-import { NzUploadModule } from 'ng-zorro-antd/upload';
-import { NzInputModule } from 'ng-zorro-antd/input'; 
-import { RequestService } from '../../../../request.service';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {FormGroup} from '@angular/forms';
+import {NzMessageService} from 'ng-zorro-antd/message';
+import {FormsModule} from '@angular/forms';
+import {NgModule} from '@angular/core';
+import {NzUploadModule} from 'ng-zorro-antd/upload';
+import {NzInputModule} from 'ng-zorro-antd/input';
+import {RequestService} from '../../../../request.service';
+
 // , FileUploadModule
 @Component({
   selector: 'app-upload',
@@ -18,21 +19,23 @@ import { RequestService } from '../../../../request.service';
 export class UploadComponent {
   group!: FormGroup;
   name!: '';
-   
+
   isSuccess: boolean = false
-  @Input() set inputValue(value: any){
+
+  @Input() set inputValue(value: any) {
     this.name = value || '';
   }
+
   @Output() load = new EventEmitter<number>();
 
   constructor(
     private msg: NzMessageService
   ) {
-     
+
     this.isSuccess = false;
-    
+
   }
-   
+
   handleUpload(info: any): void {
     if (info.type === 'error') {
       this.msg.error(`上传失败`);
@@ -49,5 +52,5 @@ export class UploadComponent {
     }
   }
 
-  
+
 }

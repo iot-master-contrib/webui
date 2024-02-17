@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
 import {ProductEditEventComponent} from "./product-edit-event/product-edit-event.component";
 import {ProductEditActionComponent} from "./product-edit-action/product-edit-action.component";
 import {ProductsComponent} from "./products/products.component";
@@ -21,4 +21,5 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class ProductRoutingModule { }
+export class ProductRoutingModule {
+}

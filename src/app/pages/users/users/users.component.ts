@@ -1,6 +1,6 @@
 import {Component, Optional} from '@angular/core';
 import {NzModalRef,} from 'ng-zorro-antd/modal';
-import { Router, RouterLink} from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
 import {NzMessageService} from 'ng-zorro-antd/message';
 
 import {SearchFormComponent} from '../../../components/search-form/search-form.component';

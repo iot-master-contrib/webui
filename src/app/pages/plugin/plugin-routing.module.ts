@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
 import {PluginComponent} from "./plugin.component";
 import {PluginDetailComponent} from "./plugin-detail/plugin-detail.component";
 import {PluginEditComponent} from "./plugin-edit/plugin-edit.component";
@@ -15,4 +15,5 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class PluginRoutingModule { }
+export class PluginRoutingModule {
+}

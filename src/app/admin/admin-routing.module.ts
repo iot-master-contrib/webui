@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
 import {WebViewComponent} from "../components/web-view/web-view.component";
 import {AlarmComponent} from "../pages/alarm/alarm.component";
 import {UnknownComponent} from "../unknown/unknown.component";
@@ -108,4 +108,5 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class AdminRoutingModule { }
+export class AdminRoutingModule {
+}

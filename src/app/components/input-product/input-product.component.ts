@@ -25,7 +25,7 @@ import {RequestService} from "../../request.service";
 })
 export class InputProductComponent implements OnInit, ControlValueAccessor {
   id = ""
-  product:any = {}
+  product: any = {}
 
   private onChange!: any;
 
@@ -51,9 +51,9 @@ export class InputProductComponent implements OnInit, ControlValueAccessor {
     }
   }
 
-  load(){
+  load() {
     console.log('load product', this.id)
-    this.rs.get('product/'+this.id).subscribe(res=>{
+    this.rs.get('product/' + this.id).subscribe(res => {
       if (res.data) {
         this.product = res.data;
       }

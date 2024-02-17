@@ -1,57 +1,57 @@
 <nz-card [nzTitle]="'网关'+ (this.id ? '编辑' : '创建') " [nzExtra]="extraTemplate">
 
-<form nz-form [formGroup]="formGroup">
+  <form nz-form [formGroup]="formGroup">
 
-  <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="id">ID</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="">
-      <input nz-input formControlName="id" placeholder="选填，默认随机"/>
-    </nz-form-control>
-  </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="id">ID</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="">
+        <input nz-input formControlName="id" placeholder="选填，默认随机"/>
+      </nz-form-control>
+    </nz-form-item>
 
-  <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">名称</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="">
-      <input nz-input formControlName="name"/>
-    </nz-form-control>
-  </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">名称</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="">
+        <input nz-input formControlName="name"/>
+      </nz-form-control>
+    </nz-form-item>
 
-  <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="project_id">项目</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="">
-      <app-input-project formControlName="project_id"></app-input-project>
-    </nz-form-control>
-  </nz-form-item>
-
-
-  <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="username">用户名</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24">
-      <input nz-input formControlName="username" placeholder="请输入用户名"/>
-      <ng-template #nameErrorTpl let-control>
-        <ng-container *ngIf="control.hasError('required')">请输入名称!</ng-container>
-      </ng-template>
-    </nz-form-control>
-  </nz-form-item>
-
-  <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="password">密码</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="">
-      <input nz-input formControlName="password" placeholder="请输入密码"/>
-    </nz-form-control>
-  </nz-form-item>
-
-  <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="description">说明</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="">
-      <nz-textarea-count [nzMaxCharacterCount]="200">
-        <textarea rows="4" nz-input formControlName="description"></textarea>
-      </nz-textarea-count>
-    </nz-form-control>
-  </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="project_id">项目</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="">
+        <app-input-project formControlName="project_id"></app-input-project>
+      </nz-form-control>
+    </nz-form-item>
 
 
-</form>
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="username">用户名</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24">
+        <input nz-input formControlName="username" placeholder="请输入用户名"/>
+        <ng-template #nameErrorTpl let-control>
+          <ng-container *ngIf="control.hasError('required')">请输入名称!</ng-container>
+        </ng-template>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="password">密码</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="">
+        <input nz-input formControlName="password" placeholder="请输入密码"/>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="description">说明</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="">
+        <nz-textarea-count [nzMaxCharacterCount]="200">
+          <textarea rows="4" nz-input formControlName="description"></textarea>
+        </nz-textarea-count>
+      </nz-form-control>
+    </nz-form-item>
+
+
+  </form>
 
 
 </nz-card>

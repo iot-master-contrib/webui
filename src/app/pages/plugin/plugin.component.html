@@ -1,15 +1,15 @@
-<div class="top"  >
+<div class="top">
   <app-search-form
     placeholder="请输入名称"
     (onSearch)="search($event)"
   ></app-search-form>
-  <app-batch-btn   
-  [showExportBtn]="false"
-  [showImportBtn]="false"
-  [showDelBtn]="false"
-    (add)="handleEdit()" 
+  <app-batch-btn
+    [showExportBtn]="false"
+    [showImportBtn]="false"
+    [showDelBtn]="false"
+    (add)="handleEdit()"
   ></app-batch-btn>
-</div>  
+</div>
 <div class="content">
   <nz-row [nzGutter]="[4,4]">
     <nz-col *ngFor="let p of plugins; index as i"
@@ -26,31 +26,31 @@
       <ng-template #actionSetting>
         <i nz-icon nzType="setting"></i>
       </ng-template>
-      <ng-template #actionEdit  >
+      <ng-template #actionEdit>
         <i nz-icon nzType="edit" [routerLink]="p.id+'/edit'"></i>
       </ng-template>
       <ng-template #actionEllipsis>
         <span
-        nz-icon
-        nzType="ellipsis"
-        nz-dropdown
-        [nzDropdownMenu]="menu"
-        nzTrigger="click"
-      ></span>
-      <nz-dropdown-menu #menu="nzDropdownMenu">
-        <ul nz-menu>
-          <li
-            nz-menu-item
-            nz-popconfirm
-            nzPopconfirmTrigger="click"
-            nzPopconfirmTitle="确认删除"
-            (nzOnConfirm)="delete(p.id)"
-          >
-            <span nz-icon nzType="delete"></span>
-            删除
-          </li>
-        </ul>
-      </nz-dropdown-menu>
+          nz-icon
+          nzType="ellipsis"
+          nz-dropdown
+          [nzDropdownMenu]="menu"
+          nzTrigger="click"
+        ></span>
+        <nz-dropdown-menu #menu="nzDropdownMenu">
+          <ul nz-menu>
+            <li
+              nz-menu-item
+              nz-popconfirm
+              nzPopconfirmTrigger="click"
+              nzPopconfirmTitle="确认删除"
+              (nzOnConfirm)="delete(p.id)"
+            >
+              <span nz-icon nzType="delete"></span>
+              删除
+            </li>
+          </ul>
+        </nz-dropdown-menu>
       </ng-template>
     </nz-col>
   </nz-row>

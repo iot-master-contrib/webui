@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {
   NzPageHeaderComponent,
   NzPageHeaderContentDirective, NzPageHeaderExtraDirective, NzPageHeaderSubtitleDirective,
@@ -21,9 +21,9 @@ import {
   NzThMeasureDirective, NzTrDirective
 } from "ng-zorro-antd/table";
 import {NzDividerComponent} from "ng-zorro-antd/divider";
-import { FormBuilder  } from '@angular/forms';
-import { NzMessageService } from 'ng-zorro-antd/message';
-import { RequestService } from '../../../request.service';
+import {FormBuilder} from '@angular/forms';
+import {NzMessageService} from 'ng-zorro-antd/message';
+import {RequestService} from '../../../request.service';
 
 @Component({
   selector: 'app-gateway-detail',
@@ -58,7 +58,7 @@ import { RequestService } from '../../../request.service';
   templateUrl: './gateway-detail.component.html',
   styleUrl: './gateway-detail.component.scss'
 })
-export class GatewayDetailComponent implements OnInit{
+export class GatewayDetailComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private router: Router,
@@ -67,11 +67,12 @@ export class GatewayDetailComponent implements OnInit{
     private route: ActivatedRoute
   ) {
   }
-  id!:any
-  gateway = {}
-  data: any = {  }
 
-  devices: any[] = [  ]
+  id!: any
+  gateway = {}
+  data: any = {}
+
+  devices: any[] = []
 
   ngOnInit(): void {
 
@@ -81,11 +82,11 @@ export class GatewayDetailComponent implements OnInit{
     }
 
   }
+
   load() {
-    this.rs.get(`gateway/${this.id}`, {
-    }).subscribe(
+    this.rs.get(`gateway/${this.id}`, {}).subscribe(
       (res) => {
-      this.data=res.data
+        this.data = res.data
       },
       (err) => {
         console.log('err:', err);
@@ -98,7 +99,7 @@ export class GatewayDetailComponent implements OnInit{
     this.rs.get(`gateway/${i}/delete`, {}).subscribe(
       (res) => {
         this.msg.success('删除成功');
-        this.router.navigateByUrl('admin/gateway' );
+        this.router.navigateByUrl('admin/gateway');
       },
       (err) => {
         console.log('err:', err);

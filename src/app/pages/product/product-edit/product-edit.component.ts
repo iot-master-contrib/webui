@@ -108,7 +108,7 @@ export class ProductEditComponent implements OnInit {
   }
 
   load() {
-    this.rs.get(`product/${this.id}` ).subscribe(
+    this.rs.get(`product/${this.id}`).subscribe(
       (res) => {
         this.buildFromGroup(res.data);
       },
@@ -120,7 +120,7 @@ export class ProductEditComponent implements OnInit {
 
   onSubmit() {
     if (this.formGroup.valid) {
-      let url = `product/${this.id||'create'}`;
+      let url = `product/${this.id || 'create'}`;
       this.rs.post(url, this.formGroup.value).subscribe((res) => {
         this.router.navigateByUrl('/admin/product/' + res.data.id);
         this.msg.success('保存成功');

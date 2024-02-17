@@ -7,18 +7,19 @@ import {registerLocaleData} from '@angular/common';
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
 import zh from '@angular/common/locales/zh';
+
 registerLocaleData(zh);
 
 import {provideAnimations} from '@angular/platform-browser/animations';
 
 import {NZ_ICONS} from "ng-zorro-antd/icon";
-import { IconDefinition } from '@ant-design/icons-angular';
+import {IconDefinition} from '@ant-design/icons-angular';
 import {
   MenuFoldOutline,
   MenuUnfoldOutline,
   DashboardOutline,
   PlusOutline,
-  BellOutline ,
+  BellOutline,
   SettingOutline,
   EditOutline,
   ApartmentOutline,
@@ -41,6 +42,7 @@ import {
   ExportOutline,
   ImportOutline,
 } from '@ant-design/icons-angular/icons';
+
 const icons: IconDefinition[] = [
   MenuFoldOutline,
   MenuUnfoldOutline,
@@ -77,7 +79,7 @@ export const appConfig: ApplicationConfig = {
     importProvidersFrom(FormsModule),
     importProvidersFrom(HttpClientModule),
     provideAnimations(),
-    {provide: NZ_ICONS, useValue:icons},
+    {provide: NZ_ICONS, useValue: icons},
     {provide: LOCALE_ID, useValue: "zh_CN"}
   ]
 };

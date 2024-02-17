@@ -83,7 +83,7 @@ export class ProductDetailComponent implements OnInit {
   }
 
   loadPlugins() {
-    this.rs.get("plugin/pages/product").subscribe(res=>{
+    this.rs.get("plugin/pages/product").subscribe(res => {
       this.plugins = res.data
     })
   }

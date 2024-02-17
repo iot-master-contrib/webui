@@ -1,7 +1,7 @@
 <nz-space>
-  <nz-input-group  nzSize="large" nzSearch *nzSpaceItem [nzAddOnAfter]="suffixButton">
+  <nz-input-group nzSize="large" nzSearch *nzSpaceItem [nzAddOnAfter]="suffixButton">
     <input
-    
+
       type="text"
       nz-input
       [placeholder]="placeholder"
@@ -14,7 +14,7 @@
       {{ searchText }}
     </button>
   </ng-template>
-  <button  nzSize="large" nz-button *nzSpaceItem nzType="default" (click)="handleClear()">
+  <button nzSize="large" nz-button *nzSpaceItem nzType="default" (click)="handleClear()">
     清空搜索条件
   </button>
 </nz-space>

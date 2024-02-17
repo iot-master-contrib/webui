@@ -25,7 +25,7 @@ import {ProjectsComponent} from "../../pages/project/projects/projects.component
 })
 export class InputProjectComponent implements OnInit, ControlValueAccessor {
   id = ""
-  project:any = {}
+  project: any = {}
 
   private onChange!: any;
 
@@ -51,9 +51,9 @@ export class InputProjectComponent implements OnInit, ControlValueAccessor {
     }
   }
 
-  load(){
+  load() {
     console.log('load project', this.id)
-    this.rs.get('project/'+this.id).subscribe(res=>{
+    this.rs.get('project/' + this.id).subscribe(res => {
       if (res.data) {
         this.project = res.data;
       }

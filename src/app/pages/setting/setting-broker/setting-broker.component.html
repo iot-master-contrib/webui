@@ -1,54 +1,54 @@
 <nz-card nzTitle="设置 MQTT总线" [nzExtra]="extraTemplate">
 
-<form nz-form [formGroup]="formGroup">
+  <form nz-form [formGroup]="formGroup">
 
-  <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="type">类型</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="">
-      <nz-select formControlName="type">
-        <nz-option nzLabel="内置" nzValue="internal"></nz-option>
-        <nz-option nzLabel="外置" nzValue="external"></nz-option>
-      </nz-select>
-    </nz-form-control>
-  </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="type">类型</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="">
+        <nz-select formControlName="type">
+          <nz-option nzLabel="内置" nzValue="internal"></nz-option>
+          <nz-option nzLabel="外置" nzValue="external"></nz-option>
+        </nz-select>
+      </nz-form-control>
+    </nz-form-item>
 
-  <nz-form-item *ngIf="formGroup.controls['type'].value==='external'">
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="address">地址</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="">
-      <input nz-input formControlName="address"/>
-    </nz-form-control>
-  </nz-form-item>
+    <nz-form-item *ngIf="formGroup.controls['type'].value==='external'">
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="address">地址</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="">
+        <input nz-input formControlName="address"/>
+      </nz-form-control>
+    </nz-form-item>
 
-  <nz-form-item *ngIf="formGroup.controls['type'].value==='external'">
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="port">端口</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="">
-      <input nz-input type="number" formControlName="port"/>
-    </nz-form-control>
-  </nz-form-item>
+    <nz-form-item *ngIf="formGroup.controls['type'].value==='external'">
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="port">端口</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="">
+        <input nz-input type="number" formControlName="port"/>
+      </nz-form-control>
+    </nz-form-item>
 
-  <nz-form-item *ngIf="formGroup.controls['type'].value==='external'">
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="username">用户名</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="">
-      <input nz-input formControlName="username"/>
-    </nz-form-control>
-  </nz-form-item>
+    <nz-form-item *ngIf="formGroup.controls['type'].value==='external'">
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="username">用户名</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="">
+        <input nz-input formControlName="username"/>
+      </nz-form-control>
+    </nz-form-item>
 
-  <nz-form-item *ngIf="formGroup.controls['type'].value==='external'">
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="password">密码</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="">
-      <input nz-input formControlName="password"/>
-    </nz-form-control>
-  </nz-form-item>
+    <nz-form-item *ngIf="formGroup.controls['type'].value==='external'">
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="password">密码</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="">
+        <input nz-input formControlName="password"/>
+      </nz-form-control>
+    </nz-form-item>
 
-  <nz-form-item *ngIf="formGroup.controls['type'].value==='external'">
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="client_id">客户端ID</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="">
-      <input nz-input formControlName="client_id"/>
-    </nz-form-control>
-  </nz-form-item>
+    <nz-form-item *ngIf="formGroup.controls['type'].value==='external'">
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="client_id">客户端ID</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="">
+        <input nz-input formControlName="client_id"/>
+      </nz-form-control>
+    </nz-form-item>
 
 
-</form>
+  </form>
 
 
 </nz-card>

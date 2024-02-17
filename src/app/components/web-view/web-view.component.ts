@@ -32,7 +32,7 @@ export class WebViewComponent implements OnInit, OnDestroy {
   ngOnInit() {
     //this.url = this.route.snapshot.queryParamMap.get("url") || ''
     //this.tm = setInterval(this.onLoad, 1000)
-    this.route.queryParams.subscribe(qs=>{
+    this.route.queryParams.subscribe(qs => {
       if (qs.hasOwnProperty('url'))
         this.url = qs['url']
     })

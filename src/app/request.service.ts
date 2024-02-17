@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { catchError, filter, map } from 'rxjs/operators';
-import { Observable, of, throwError } from 'rxjs';
-import { Router } from '@angular/router';
-import { NzNotificationService } from "ng-zorro-antd/notification";
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {catchError, filter, map} from 'rxjs/operators';
+import {Observable, of, throwError} from 'rxjs';
+import {Router} from '@angular/router';
+import {NzNotificationService} from "ng-zorro-antd/notification";
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +15,7 @@ export class RequestService {
 
   constructor(private http: HttpClient, private message: NzNotificationService, private route: Router) {
   }
+
   request(method: string, uri: string, options: any): Observable<any> {
     // 携带Cookie，保持session会话
     options.withCredentials = true;
@@ -23,13 +24,13 @@ export class RequestService {
       // 捕捉异常，数据转换
       catchError(err => {
         if (err.status === 404) {
-          return of({ error: '无效接口 ' + method + ' ' + uri });
+          return of({error: '无效接口 ' + method + ' ' + uri});
         } else if (err.status === 401) {
           // window.location.href = '/login';
           //this.route.navigate(['/login']);
-          return of({ error: '未登录' });
+          return of({error: '未登录'});
         }
-        return of({ error: err.message });
+        return of({error: err.message});
       }),
       // 统一错误处理
       map((ret: any) => {
@@ -47,22 +48,22 @@ export class RequestService {
   }
 
   get(uri: string, params?: { [k: string]: any }): Observable<any> {
-    return this.request('GET', uri, { params });
+    return this.request('GET', uri, {params});
   }
 
   put(uri: string, body: any | null, params?: { [k: string]: any }): Observable<any> {
-    return this.request('PUT', uri, { params, body });
+    return this.request('PUT', uri, {params, body});
   }
 
   post(uri: string, body: any | null, params?: { [k: string]: any }): Observable<any> {
-    return this.request('POST', uri, { params, body });
+    return this.request('POST', uri, {params, body});
   }
 
   patch(uri: string, body: any | null, params?: { [k: string]: any }): Observable<any> {
-    return this.request('PATCH', uri, { params, body });
+    return this.request('PATCH', uri, {params, body});
   }
 
   delete(uri: string, params?: { [k: string]: any }): Observable<any> {
-    return this.request('DELETE', uri, { params });
+    return this.request('DELETE', uri, {params});
   }
 }

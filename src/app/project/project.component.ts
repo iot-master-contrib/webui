@@ -34,9 +34,9 @@ import {CommonModule} from '@angular/common';
   templateUrl: './project.component.html',
   styleUrl: './project.component.scss'
 })
-export class ProjectComponent implements OnInit{
+export class ProjectComponent implements OnInit {
   id: any = ''
-  project:any = {}
+  project: any = {}
 
   menus: any = [
     {
@@ -94,8 +94,8 @@ export class ProjectComponent implements OnInit{
     this.loadProject()
   }
 
-  loadProject(){
-    this.rs.get('project/'+this.id).subscribe(res=>{
+  loadProject() {
+    this.rs.get('project/' + this.id).subscribe(res => {
       this.project = res.data
     })
   }

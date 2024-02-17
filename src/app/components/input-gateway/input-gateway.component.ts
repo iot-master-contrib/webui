@@ -25,7 +25,7 @@ import {RequestService} from "../../request.service";
 })
 export class InputGatewayComponent implements OnInit, ControlValueAccessor {
   id = ""
-  gateway:any = {}
+  gateway: any = {}
 
   private onChange!: any;
 
@@ -51,9 +51,9 @@ export class InputGatewayComponent implements OnInit, ControlValueAccessor {
     }
   }
 
-  load(){
+  load() {
     console.log('load gateway', this.id)
-    this.rs.get('gateway/'+this.id).subscribe(res=>{
+    this.rs.get('gateway/' + this.id).subscribe(res => {
       if (res.data) {
         this.gateway = res.data;
       }

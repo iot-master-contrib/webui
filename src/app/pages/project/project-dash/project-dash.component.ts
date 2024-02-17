@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {CountComponent} from "../../../widgets/count/count.component";
 import {NzCardComponent} from "ng-zorro-antd/card";
 import {NzColDirective, NzRowDirective} from "ng-zorro-antd/grid";
@@ -9,12 +9,12 @@ import {RequestService} from "../../../request.service";
 @Component({
   selector: 'app-project-dash',
   standalone: true,
-    imports: [
-        CountComponent,
-        NzCardComponent,
-        NzColDirective,
-        NzRowDirective
-    ],
+  imports: [
+    CountComponent,
+    NzCardComponent,
+    NzColDirective,
+    NzRowDirective
+  ],
   templateUrl: './project-dash.component.html',
   styleUrl: './project-dash.component.scss'
 })

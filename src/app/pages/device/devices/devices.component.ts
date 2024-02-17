@@ -35,7 +35,7 @@ import {NZ_MODAL_DATA, NzModalRef} from 'ng-zorro-antd/modal';
   templateUrl: './devices.component.html',
   styleUrl: './devices.component.scss'
 })
-export class DevicesComponent implements OnInit{
+export class DevicesComponent implements OnInit {
   base = '/admin/'
 
   total = 0;

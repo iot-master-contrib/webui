@@ -25,7 +25,7 @@ import {RequestService} from "../../request.service";
 })
 export class InputDeviceComponent implements OnInit, ControlValueAccessor {
   id = ""
-  device:any = {}
+  device: any = {}
 
   private onChange!: any;
 
@@ -51,9 +51,9 @@ export class InputDeviceComponent implements OnInit, ControlValueAccessor {
     }
   }
 
-  load(){
+  load() {
     console.log('load device', this.id)
-    this.rs.get('device/'+this.id).subscribe(res=>{
+    this.rs.get('device/' + this.id).subscribe(res => {
       if (res.data) {
         this.device = res.data;
       }

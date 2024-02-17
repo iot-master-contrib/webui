@@ -84,7 +84,7 @@ export class ProjectDetailComponent implements OnInit {
 
   value = '';
 
-  data: any = {  };
+  data: any = {};
 
   spaces: any[] = []
 
@@ -130,7 +130,7 @@ export class ProjectDetailComponent implements OnInit {
         if (res.data) {
           this.spaces = res.data;
         }
-      }    );
+      });
   }
 
   delete() {
@@ -138,7 +138,7 @@ export class ProjectDetailComponent implements OnInit {
       (res: any) => {
         this.msg.success('删除成功');
         this.router.navigateByUrl('admin');
-      }    );
+      });
     this.load();
   }
 
@@ -148,7 +148,7 @@ export class ProjectDetailComponent implements OnInit {
       (res: any) => {
         this.msg.success('删除成功');
         this.load();
-      }    );
+      });
     this.load();
   }
 

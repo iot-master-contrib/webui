@@ -1,13 +1,14 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { BrowserModule } from '@angular/platform-browser';
-import { NzMessageService } from 'ng-zorro-antd/message';
-import { NzSpaceModule } from 'ng-zorro-antd/space';
-import { NzInputModule } from 'ng-zorro-antd/input';
-import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { NzButtonModule } from 'ng-zorro-antd/button';
-import { NzUploadModule } from 'ng-zorro-antd/upload';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {BrowserModule} from '@angular/platform-browser';
+import {NzMessageService} from 'ng-zorro-antd/message';
+import {NzSpaceModule} from 'ng-zorro-antd/space';
+import {NzInputModule} from 'ng-zorro-antd/input';
+import {NgModule} from '@angular/core';
+import {FormsModule} from '@angular/forms';
+import {NzButtonModule} from 'ng-zorro-antd/button';
+import {NzUploadModule} from 'ng-zorro-antd/upload';
+
 @Component({
   selector: 'app-batch-btn',
   standalone: true,
@@ -32,7 +33,10 @@ export class BatchBtnComponent {
   @Output() onLoad = new EventEmitter<string>();
   @Output() add = new EventEmitter<string>();
   @Output() batchDel = new EventEmitter<string>();
-  constructor(private msg: NzMessageService) {}
+
+  constructor(private msg: NzMessageService) {
+  }
+
   handleUpload(info: any): void {
     if (info.type === 'error') {
       this.msg.error(`上传失败`);

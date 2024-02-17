@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { NzMessageService } from 'ng-zorro-antd/message';
-import { RequestService } from '../../../request.service';
+import {Component, OnInit} from '@angular/core';
+import {NzMessageService} from 'ng-zorro-antd/message';
+import {RequestService} from '../../../request.service';
 import {
   FormBuilder,
   FormGroup,
@@ -8,8 +8,8 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { NzButtonComponent } from 'ng-zorro-antd/button';
-import { NzColDirective, NzRowDirective } from 'ng-zorro-antd/grid';
+import {NzButtonComponent} from 'ng-zorro-antd/button';
+import {NzColDirective, NzRowDirective} from 'ng-zorro-antd/grid';
 import {
   NzFormControlComponent,
   NzFormDirective,
@@ -26,18 +26,19 @@ import {
   NzPageHeaderSubtitleDirective,
   NzPageHeaderTitleDirective,
 } from 'ng-zorro-antd/page-header';
-import { NzOptionComponent, NzSelectComponent } from 'ng-zorro-antd/select';
-import { NzSpaceComponent, NzSpaceItemDirective } from 'ng-zorro-antd/space';
-import { NzSwitchComponent } from 'ng-zorro-antd/switch';
+import {NzOptionComponent, NzSelectComponent} from 'ng-zorro-antd/select';
+import {NzSpaceComponent, NzSpaceItemDirective} from 'ng-zorro-antd/space';
+import {NzSwitchComponent} from 'ng-zorro-antd/switch';
 import {
   NzUploadChangeParam,
   NzUploadComponent,
   NzUploadModule,
 } from 'ng-zorro-antd/upload';
-import { NzIconDirective } from 'ng-zorro-antd/icon';
-import { NgIf } from '@angular/common';
-import { Router } from '@angular/router';
+import {NzIconDirective} from 'ng-zorro-antd/icon';
+import {NgIf} from '@angular/common';
+import {Router} from '@angular/router';
 import {NzCardComponent} from "ng-zorro-antd/card";
+
 @Component({
   selector: 'app-setting-mqtt',
   standalone: true,
@@ -70,25 +71,29 @@ import {NzCardComponent} from "ng-zorro-antd/card";
   templateUrl: './setting-mqtt.component.html',
   styleUrl: './setting-mqtt.component.scss'
 })
-export class SettingMqttComponent implements OnInit{
+export class SettingMqttComponent implements OnInit {
   formGroup!: FormGroup;
   data: any = {};
-constructor(
-  private fb: FormBuilder,
-  private route: Router,
-  private rs: RequestService,
-  private msg: NzMessageService
-){ this.buildFromGroup();}
 
-buildFromGroup() {
-  this.formGroup = this.fb.group({
-    ClientId: ['', [Validators.required]],
+  constructor(
+    private fb: FormBuilder,
+    private route: Router,
+    private rs: RequestService,
+    private msg: NzMessageService
+  ) {
+    this.buildFromGroup();
+  }
+
+  buildFromGroup() {
+    this.formGroup = this.fb.group({
+      ClientId: ['', [Validators.required]],
       Username: ['', [Validators.required]],
       Url: ['', [Validators.required]],
       Password: ['', [Validators.required]],
-  });
-  //console.log(this.formGroup)
-}
+    });
+    //console.log(this.formGroup)
+  }
+
   ngOnInit(): void {
     this.rs.get('setting/mqtt', {}).subscribe(res => {
       this.data = res.data
@@ -96,7 +101,7 @@ buildFromGroup() {
     });
   }
 
-  onSubmit(){
+  onSubmit() {
 
     if (this.formGroup.valid) {
       this.rs.post('setting/mqtt', this.formGroup.value).subscribe(
@@ -114,12 +119,10 @@ buildFromGroup() {
       Object.values(this.formGroup.controls).forEach((control) => {
         if (control.invalid) {
           control.markAsDirty();
-          control.updateValueAndValidity({ onlySelf: true });
+          control.updateValueAndValidity({onlySelf: true});
         }
       });
     }
-
-
 
 
   }

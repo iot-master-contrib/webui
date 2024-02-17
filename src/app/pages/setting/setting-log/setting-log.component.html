@@ -1,85 +1,84 @@
 <nz-card nzTitle="设置 系统日志" [nzExtra]="extraTemplate">
 
-<form nz-form [formGroup]="formGroup">
+  <form nz-form [formGroup]="formGroup">
 
-  <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="type">等级</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="">
-      <nz-select formControlName="level">
-        <nz-option nzLabel="跟踪 trace" nzValue="trace"></nz-option>
-        <nz-option nzLabel="调试 debug" nzValue="debug"></nz-option>
-        <nz-option nzLabel="信息 info" nzValue="info"></nz-option>
-        <nz-option nzLabel="警告 warn" nzValue="warn"></nz-option>
-        <nz-option nzLabel="错误 error" nzValue="error"></nz-option>
-        <nz-option nzLabel="严重 fatal" nzValue="fatal"></nz-option>
-      </nz-select>
-    </nz-form-control>
-  </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="type">等级</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="">
+        <nz-select formControlName="level">
+          <nz-option nzLabel="跟踪 trace" nzValue="trace"></nz-option>
+          <nz-option nzLabel="调试 debug" nzValue="debug"></nz-option>
+          <nz-option nzLabel="信息 info" nzValue="info"></nz-option>
+          <nz-option nzLabel="警告 warn" nzValue="warn"></nz-option>
+          <nz-option nzLabel="错误 error" nzValue="error"></nz-option>
+          <nz-option nzLabel="严重 fatal" nzValue="fatal"></nz-option>
+        </nz-select>
+      </nz-form-control>
+    </nz-form-item>
 
-  <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="caller">显示函数调用</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="">
-      <nz-switch formControlName="caller"></nz-switch>
-    </nz-form-control>
-  </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="caller">显示函数调用</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="">
+        <nz-switch formControlName="caller"></nz-switch>
+      </nz-form-control>
+    </nz-form-item>
 
-  <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="text">使用文本格式</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="">
-      <nz-switch formControlName="text"></nz-switch>
-    </nz-form-control>
-  </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="text">使用文本格式</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="">
+        <nz-switch formControlName="text"></nz-switch>
+      </nz-form-control>
+    </nz-form-item>
 
-  <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="type">输出方式</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="">
-      <nz-select formControlName="output">
-        <nz-option nzLabel="文件" nzValue="file"></nz-option>
-        <nz-option nzLabel="标准输出" nzValue="stdout"></nz-option>
-        <nz-option nzLabel="滚动文件" nzValue="fileRotate"></nz-option>
-      </nz-select>
-    </nz-form-control>
-  </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="type">输出方式</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="">
+        <nz-select formControlName="output">
+          <nz-option nzLabel="文件" nzValue="file"></nz-option>
+          <nz-option nzLabel="标准输出" nzValue="stdout"></nz-option>
+          <nz-option nzLabel="滚动文件" nzValue="fileRotate"></nz-option>
+        </nz-select>
+      </nz-form-control>
+    </nz-form-item>
 
-  <nz-form-item *ngIf="formGroup.controls['output'].value!=='stdout'">
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="filename">日志文件</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="">
-      <input nz-input formControlName="filename"/>
-    </nz-form-control>
-  </nz-form-item>
-
-
-  <nz-form-item *ngIf="formGroup.controls['output'].value==='fileRotate'">
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="max_size">最大尺寸 MB</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="">
-      <input nz-input type="number" formControlName="max_size"/>
-    </nz-form-control>
-  </nz-form-item>
-
-  <nz-form-item *ngIf="formGroup.controls['output'].value==='fileRotate'">
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="max_backups">最大保留天数</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="">
-      <input nz-input type="number" formControlName="max_backups"/>
-    </nz-form-control>
-  </nz-form-item>
-
-  <nz-form-item *ngIf="formGroup.controls['output'].value==='fileRotate'">
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="max_age">保留数量（滚动删除）</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="">
-      <input nz-input type="number" formControlName="max_age"/>
-    </nz-form-control>
-  </nz-form-item>
-
-  <nz-form-item *ngIf="formGroup.controls['output'].value==='fileRotate'">
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="compress">文件压缩</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="">
-      <nz-switch formControlName="compress"></nz-switch>
-    </nz-form-control>
-  </nz-form-item>
+    <nz-form-item *ngIf="formGroup.controls['output'].value!=='stdout'">
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="filename">日志文件</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="">
+        <input nz-input formControlName="filename"/>
+      </nz-form-control>
+    </nz-form-item>
 
 
+    <nz-form-item *ngIf="formGroup.controls['output'].value==='fileRotate'">
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="max_size">最大尺寸 MB</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="">
+        <input nz-input type="number" formControlName="max_size"/>
+      </nz-form-control>
+    </nz-form-item>
 
-</form>
+    <nz-form-item *ngIf="formGroup.controls['output'].value==='fileRotate'">
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="max_backups">最大保留天数</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="">
+        <input nz-input type="number" formControlName="max_backups"/>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item *ngIf="formGroup.controls['output'].value==='fileRotate'">
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="max_age">保留数量（滚动删除）</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="">
+        <input nz-input type="number" formControlName="max_age"/>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item *ngIf="formGroup.controls['output'].value==='fileRotate'">
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="compress">文件压缩</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="">
+        <nz-switch formControlName="compress"></nz-switch>
+      </nz-form-control>
+    </nz-form-item>
+
+
+  </form>
 
 
 </nz-card>

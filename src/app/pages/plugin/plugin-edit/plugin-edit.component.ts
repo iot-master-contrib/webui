@@ -1,4 +1,4 @@
-import { Component, signal, OnInit } from '@angular/core';
+import {Component, signal, OnInit} from '@angular/core';
 import {DatePipe} from "@angular/common";
 import {NzButtonComponent} from "ng-zorro-antd/button";
 import {NzDescriptionsComponent, NzDescriptionsItemComponent} from "ng-zorro-antd/descriptions";
@@ -16,8 +16,8 @@ import {NzInputDirective, NzTextareaCountComponent} from "ng-zorro-antd/input";
 import {NzUploadChangeParam, NzUploadComponent} from "ng-zorro-antd/upload";
 import {NzIconDirective} from "ng-zorro-antd/icon";
 import {NzSelectComponent} from "ng-zorro-antd/select";
-import { NzMessageService } from 'ng-zorro-antd/message';
-import { RequestService } from '../../../request.service';
+import {NzMessageService} from 'ng-zorro-antd/message';
+import {RequestService} from '../../../request.service';
 
 @Component({
   selector: 'app-plugin-edit',
@@ -48,10 +48,11 @@ import { RequestService } from '../../../request.service';
   templateUrl: './plugin-edit.component.html',
   styleUrl: './plugin-edit.component.scss'
 })
-export class PluginEditComponent implements OnInit{
+export class PluginEditComponent implements OnInit {
 
   formGroup!: FormGroup;
- id!:any
+  id!: any
+
   constructor(
     private fb: FormBuilder,
     private router: Router,
@@ -61,10 +62,11 @@ export class PluginEditComponent implements OnInit{
   ) {
     this.buildFromGroup();
   }
+
   buildFromGroup(data?: any) {
     data = data || {};
     this.formGroup = this.fb.group({
-      id: [this.id  , []],
+      id: [this.id, []],
       name: [data.name || '', []],
       description: [data.description || '', []],
       icon: [data.icon || '', []],
@@ -72,7 +74,7 @@ export class PluginEditComponent implements OnInit{
       url: [data.url || '', []],
       keywords: [data.keywords || [], []],
     });
-    console.log( this.formGroup.value)
+    console.log(this.formGroup.value)
   }
 
   ngOnInit(): void {
@@ -84,9 +86,9 @@ export class PluginEditComponent implements OnInit{
     this.buildFromGroup();
 
   }
+
   load() {
-    this.rs.get(`plugin/${this.id}`, {
-    }).subscribe(
+    this.rs.get(`plugin/${this.id}`, {}).subscribe(
       (res) => {
         this.buildFromGroup(res.data);
       },
@@ -97,6 +99,7 @@ export class PluginEditComponent implements OnInit{
 
 
   }
+
   onSubmit() {
     if (this.formGroup.valid) {
       let url = this.id ? `plugin/${this.id}` : `plugin/create`;
@@ -110,7 +113,7 @@ export class PluginEditComponent implements OnInit{
       Object.values(this.formGroup.controls).forEach((control) => {
         if (control.invalid) {
           control.markAsDirty();
-          control.updateValueAndValidity({ onlySelf: true });
+          control.updateValueAndValidity({onlySelf: true});
         }
       });
     }

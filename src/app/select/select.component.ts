@@ -33,7 +33,7 @@ export class SelectComponent {
       if (this.projects.length === 1) {
         this.router.navigateByUrl('/project/' + this.projects[0].id)
       }
-    }).add(()=>{
+    }).add(() => {
       this.loading = false
     })
   }

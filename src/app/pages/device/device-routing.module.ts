@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
 import {DevicesComponent} from "./devices/devices.component";
 import {DeviceDetailComponent} from "./device-detail/device-detail.component";
 import {DeviceEditComponent} from "./device-edit/device-edit.component";
@@ -15,4 +15,5 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class DeviceRoutingModule { }
+export class DeviceRoutingModule {
+}

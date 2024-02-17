@@ -1,7 +1,7 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 
-import { ProjectRoutingModule } from './project-routing.module';
+import {ProjectRoutingModule} from './project-routing.module';
 import {NzModalModule} from "ng-zorro-antd/modal";
 
 
@@ -13,4 +13,5 @@ import {NzModalModule} from "ng-zorro-antd/modal";
     NzModalModule,
   ]
 })
-export class ProjectModule { }
+export class ProjectModule {
+}

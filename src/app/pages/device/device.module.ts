@@ -1,7 +1,7 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 
-import { DeviceRoutingModule } from './device-routing.module';
+import {DeviceRoutingModule} from './device-routing.module';
 import {NzModalModule} from "ng-zorro-antd/modal";
 
 
@@ -13,4 +13,5 @@ import {NzModalModule} from "ng-zorro-antd/modal";
     NzModalModule,
   ]
 })
-export class DeviceModule { }
+export class DeviceModule {
+}

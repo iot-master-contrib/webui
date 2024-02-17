@@ -22,12 +22,12 @@ import {NzInputDirective} from "ng-zorro-antd/input";
 
 
 export interface EditTableItem {
-    name: string
-    label: string
-    type?: string
-    placeholder?: string
-    default?: any
-    options?: NzSelectOptionInterface[]
+  name: string
+  label: string
+  type?: string
+  placeholder?: string
+  default?: any
+  options?: NzSelectOptionInterface[]
 }
 
 
@@ -65,86 +65,86 @@ export interface EditTableItem {
   ]
 })
 export class EditTableComponent implements OnInit, ControlValueAccessor {
-    group!: FormGroup
-    formArray!: FormArray;
+  group!: FormGroup
+  formArray!: FormArray;
 
-    row: any = {};
-    _items: any = [];
+  row: any = {};
+  _items: any = [];
 
-    onChanged: any = () => {
+  onChanged: any = () => {
+  }
+  onTouched: any = () => {
+  }
+
+  @Input()
+  set items(data: EditTableItem[]) {
+    //TODO 创建默认group
+    const row: any = {};
+    data.forEach(item => {
+      //if (item.hasOwnProperty("default"))
+      row[item.name] = item.default
+      //TODO 需要补充缺失的控件
+
+    })
+    this.row = row;
+    this._items = data;
+  };
+
+  constructor(
+    private msg: NzMessageService,
+    private fb: FormBuilder
+  ) {
+  }
+
+  ngOnInit(): void {
+    this.formArray = this.fb.array([]);
+    //this.formArray.value
+    this.group = this.fb.group({
+      array: this.formArray
+    })
+  }
+
+  writeValue(data: any): void {
+    const itemObj = JSON.parse(JSON.stringify(this.row));
+    if (data && data.length) {
+      data.forEach((item: any) => {
+        const newGroup = this.fb.group(Object.assign(itemObj, item));
+        this.formArray.push(newGroup);
+      });
     }
-    onTouched: any = () => {
-    }
+  }
 
-    @Input()
-    set items(data: EditTableItem[]) {
-        //TODO 创建默认group
-        const row: any = {};
-        data.forEach(item => {
-            //if (item.hasOwnProperty("default"))
-            row[item.name] = item.default
-            //TODO 需要补充缺失的控件
+  registerOnChange(fn: any): void {
+    this.onChanged = fn;
+  }
 
-        })
-        this.row = row;
-        this._items = data;
-    };
+  registerOnTouched(fn: any): void {
+    this.onTouched = fn;
+  }
 
-    constructor(
-        private msg: NzMessageService,
-        private fb: FormBuilder
-    ) {
-    }
+  change() {
+    const data = this.formArray.controls.map((item) => item.value);
+    this.onChanged(data);
+  }
 
-    ngOnInit(): void {
-        this.formArray = this.fb.array([]);
-        //this.formArray.value
-        this.group = this.fb.group({
-            array: this.formArray
-        })
-    }
+  handleCopyProperTy(index: number) {
+    const old = this.formArray.controls[index].value;
+    this.formArray.insert(index, this.fb.group(old));
+    this.msg.success("复制成功");
+    this.change();
+  }
 
-    writeValue(data: any): void {
-        const itemObj = JSON.parse(JSON.stringify(this.row));
-        if (data && data.length) {
-            data.forEach((item: any) => {
-                const newGroup = this.fb.group(Object.assign(itemObj, item));
-                this.formArray.push(newGroup);
-            });
-        }
-    }
+  propertyDel(i: number) {
+    this.formArray.removeAt(i);
+    this.change();
+  }
 
-    registerOnChange(fn: any): void {
-        this.onChanged = fn;
-    }
+  drop(event: CdkDragDrop<string[]>): void {
+    moveItemInArray(this.formArray.controls, event.previousIndex, event.currentIndex);
+    this.change();
+  }
 
-    registerOnTouched(fn: any): void {
-        this.onTouched = fn;
-    }
-
-    change() {
-        const data = this.formArray.controls.map((item) => item.value);
-        this.onChanged(data);
-    }
-
-    handleCopyProperTy(index: number) {
-        const old = this.formArray.controls[index].value;
-        this.formArray.insert(index, this.fb.group(old));
-        this.msg.success("复制成功");
-        this.change();
-    }
-
-    propertyDel(i: number) {
-        this.formArray.removeAt(i);
-        this.change();
-    }
-
-    drop(event: CdkDragDrop<string[]>): void {
-        moveItemInArray(this.formArray.controls, event.previousIndex, event.currentIndex);
-        this.change();
-    }
-
-    propertyAdd() {
-        this.formArray.insert(0, this.fb.group(this.row));
-    }
+  propertyAdd() {
+    this.formArray.insert(0, this.fb.group(this.row));
+  }
 }

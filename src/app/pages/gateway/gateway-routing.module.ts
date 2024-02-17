@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
 import {GatewaysComponent} from "./gateways/gateways.component";
 import {GatewayEditComponent} from "./gateway-edit/gateway-edit.component";
 import {GatewayDetailComponent} from "./gateway-detail/gateway-detail.component";
@@ -15,4 +15,5 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class GatewayRoutingModule { }
+export class GatewayRoutingModule {
+}

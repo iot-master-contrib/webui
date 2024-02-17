@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
   FormsModule,
   ReactiveFormsModule,
 } from '@angular/forms';
-import { NzButtonComponent } from 'ng-zorro-antd/button';
-import { NzColDirective, NzRowDirective } from 'ng-zorro-antd/grid';
+import {NzButtonComponent} from 'ng-zorro-antd/button';
+import {NzColDirective, NzRowDirective} from 'ng-zorro-antd/grid';
 import {
   NzFormControlComponent,
   NzFormDirective,
@@ -23,19 +23,19 @@ import {
   NzPageHeaderSubtitleDirective,
   NzPageHeaderTitleDirective,
 } from 'ng-zorro-antd/page-header';
-import { NzOptionComponent, NzSelectComponent } from 'ng-zorro-antd/select';
-import { NzSpaceComponent, NzSpaceItemDirective } from 'ng-zorro-antd/space';
-import { NzSwitchComponent } from 'ng-zorro-antd/switch';
+import {NzOptionComponent, NzSelectComponent} from 'ng-zorro-antd/select';
+import {NzSpaceComponent, NzSpaceItemDirective} from 'ng-zorro-antd/space';
+import {NzSwitchComponent} from 'ng-zorro-antd/switch';
 import {
   NzUploadChangeParam,
   NzUploadComponent,
   NzUploadModule,
 } from 'ng-zorro-antd/upload';
-import { NzIconDirective } from 'ng-zorro-antd/icon';
-import { NgIf } from '@angular/common';
-import { Router } from '@angular/router';
-import { RequestService } from '../../../request.service';
-import { NzMessageService } from 'ng-zorro-antd/message';
+import {NzIconDirective} from 'ng-zorro-antd/icon';
+import {NgIf} from '@angular/common';
+import {Router} from '@angular/router';
+import {RequestService} from '../../../request.service';
+import {NzMessageService} from 'ng-zorro-antd/message';
 import {NzCardComponent} from "ng-zorro-antd/card";
 
 @Component({
@@ -83,6 +83,7 @@ export class SettingWebComponent implements OnInit {
   ) {
     this.buildFromGroup();
   }
+
   ngOnInit(): void {
     this.rs.get('setting/web', {}).subscribe(res => {
       this.data = res.data
@@ -100,8 +101,9 @@ export class SettingWebComponent implements OnInit {
     });
     //console.log(this.formGroup)
   }
+
   onSubmit() {
-    this.rs.post('setting/web',  this.formGroup.value).subscribe(
+    this.rs.post('setting/web', this.formGroup.value).subscribe(
       (res) => {
         // this.projects = res.data;
         // this.total = res.total;
@@ -112,7 +114,9 @@ export class SettingWebComponent implements OnInit {
     );
   }
 
-  onCertChange($event: NzUploadChangeParam) {}
+  onCertChange($event: NzUploadChangeParam) {
+  }
 
-  onKeyChange($event: NzUploadChangeParam) {}
+  onKeyChange($event: NzUploadChangeParam) {
+  }
 }

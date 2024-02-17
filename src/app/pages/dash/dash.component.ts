@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {CountComponent} from "../../widgets/count/count.component";
 import {NzColDirective, NzRowDirective} from "ng-zorro-antd/grid";
 import {NzCardComponent} from "ng-zorro-antd/card";

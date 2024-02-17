@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+
 @Component({
   selector: 'app-setting-backup',
   standalone: true,
-  imports: [
-  ],
+  imports: [],
   templateUrl: './setting-backup.component.html',
   styleUrl: './setting-backup.component.scss'
 })

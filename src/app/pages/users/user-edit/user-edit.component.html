@@ -1,15 +1,15 @@
 <nz-card [nzTitle]="'用户'+ (this.id ? '编辑' : '创建') " [nzExtra]="extraTemplate">
 
-<form nz-form [formGroup]="formGroup">
+  <form nz-form [formGroup]="formGroup">
 
-    <nz-form-item >
+    <nz-form-item>
       <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="id">ID(用户名)</nz-form-label>
       <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="">
         <input nz-input formControlName="id" placeholder="选填"/>
       </nz-form-control>
     </nz-form-item>
 
-    <nz-form-item  >
+    <nz-form-item>
       <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">姓名</nz-form-label>
       <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="">
         <input nz-input formControlName="name"/>
@@ -17,8 +17,8 @@
     </nz-form-item>
 
 
-    <nz-form-item  >
-      <nz-form-label [nzSm]="6" [nzXs]="24"  nzFor="cellphone">电话</nz-form-label>
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="cellphone">电话</nz-form-label>
       <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="">
         <input nz-input placeholder="电话" formControlName="cellphone"/>
 
@@ -26,42 +26,34 @@
     </nz-form-item>
 
 
-    <nz-form-item  >
-      <nz-form-label [nzSm]="6" [nzXs]="24"   nzFor="email">邮箱</nz-form-label>
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="email">邮箱</nz-form-label>
       <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="">
         <input nz-input placeholder="邮箱" formControlName="email"/>
 
       </nz-form-control>
     </nz-form-item>
 
-    <nz-form-item  >
-      <nz-form-label [nzSm]="6" [nzXs]="24"   nzFor="disabled">禁用</nz-form-label>
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="disabled">禁用</nz-form-label>
       <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="">
         <nz-switch formControlName="disabled"></nz-switch>
       </nz-form-control>
     </nz-form-item>
 
 
-
-
-    <nz-form-item  >
-      <nz-form-label [nzSm]="6" [nzXs]="24"   nzFor="admin">平台管理员</nz-form-label>
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="admin">平台管理员</nz-form-label>
       <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="">
         <nz-switch formControlName="admin"></nz-switch>
       </nz-form-control>
     </nz-form-item>
 
 
+    <!-- </ng-template> -->
 
 
-
-  <!-- </ng-template> -->
-
-
-
-
-
-</form>
+  </form>
 
 
 </nz-card>

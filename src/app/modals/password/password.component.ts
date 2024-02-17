@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {FormBuilder, Validators, FormGroup, ReactiveFormsModule} from "@angular/forms";
-import { NzMessageService } from "ng-zorro-antd/message";
-import { Md5 } from "ts-md5";
+import {NzMessageService} from "ng-zorro-antd/message";
+import {Md5} from "ts-md5";
 import {Router} from "@angular/router";
 import {RequestService} from "../../request.service";
 import {NzInputDirective} from "ng-zorro-antd/input";
@@ -49,7 +49,7 @@ export class PasswordComponent {
 
     return new Promise((resolve, reject) => {
       if (this.group.valid) {
-        const { old, repeat } = this.group.value;
+        const {old, repeat} = this.group.value;
         const newPassword = this.group.value.new;
         if (newPassword !== repeat) {
           this.msg.warning("两次密码输入不一致，请确认");
@@ -61,7 +61,8 @@ export class PasswordComponent {
         }
         this.rs.post("password", body).subscribe(res => {
           //清空session
-          this.rs.get("logout").subscribe(res => { })
+          this.rs.get("logout").subscribe(res => {
+          })
           this.router.navigateByUrl("/login");
           this.msg.success("保存成功");
           resolve(true);
@@ -70,7 +71,7 @@ export class PasswordComponent {
         Object.values(this.group.controls).forEach((control) => {
           if (control.invalid) {
             control.markAsDirty();
-            control.updateValueAndValidity({ onlySelf: true });
+            control.updateValueAndValidity({onlySelf: true});
             reject();
           }
         });

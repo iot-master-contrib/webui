@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import { Title } from '@angular/platform-browser';
+import {Injectable} from '@angular/core';
+import {Title} from '@angular/platform-browser';
 import {Subject} from "rxjs";
 import {RequestService} from "./request.service";
 
@@ -15,9 +15,9 @@ export class OemService {
     copyright: '©2016-2024'
   }
 
-  constructor(private rs: RequestService, private title:Title) {
+  constructor(private rs: RequestService, private title: Title) {
     //优先从缓存中读取，避免闪烁
-    let oem :any= localStorage.getItem("oem");
+    let oem: any = localStorage.getItem("oem");
     if (oem) {
       oem = JSON.parse(oem)
       Object.assign(this.oem, oem)
@@ -27,7 +27,7 @@ export class OemService {
     rs.get('oem').subscribe(res => {
       let oem = res.data;
       localStorage.setItem("oem", JSON.stringify(oem));
-      Object.assign(this.oem,oem)
+      Object.assign(this.oem, oem)
       this.title.setTitle(oem.title)
     })
   }
