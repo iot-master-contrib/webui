@@ -1,18 +1,20 @@
 <div class="toolbar">
   <nz-space>
     <button *nzSpaceItem nz-button nzType="primary" (click)="refresh()">
-      <span nz-icon nzType="reload"></span>
+      <span nz-icon nzType="reload" [nzSpin]="loading"></span>
       刷新
     </button>
 
     <!--搜索框-->
     <div *nzSpaceItem class="search">
-      <nz-input-group nzSearch [nzAddOnAfter]="suffixButton">
-        <input type="text" [(ngModel)]="keyword" nz-input placeholder="请输入关键字"/>
-      </nz-input-group>
-      <ng-template #suffixButton>
-        <button nz-button nzType="primary" nzSearch (click)="search()">搜索</button>
-      </ng-template>
+      <form (submit)="search()">
+        <nz-input-group nzSearch [nzAddOnAfter]="suffixButton">
+          <input type="text" [(ngModel)]="keyword" [ngModelOptions]="{standalone:true}" nz-input placeholder="请输入关键字"/>
+        </nz-input-group>
+        <ng-template #suffixButton>
+          <button nz-button nzType="primary" nzSearch (click)="search()">搜索</button>
+        </ng-template>
+      </form>
     </div>
   </nz-space>
 
@@ -21,16 +23,16 @@
   <!--按钮区-->
 
   <nz-space>
-    <span *ngFor="let b of buttons">
-  <button nz-button
-          nzType="primary"
-          nzShape="round"
-          [routerLink]="b.link"
-          (click)="b.action?.()">
-    <span *ngIf="b.icon" nz-icon [nzType]="b.icon"></span>
-    {{ b.text }}
-  </button>
-    </span>
+    <ng-container *ngFor="let b of buttons">
+      <button *nzSpaceItem nz-button
+              nzType="primary"
+              nzShape="round"
+              [routerLink]="b.link"
+              (click)="b.action?.()">
+        <span *ngIf="b.icon" nz-icon [nzType]="b.icon"></span>
+        {{ b.text }}
+      </button>
+    </ng-container>
   </nz-space>
 
 </div>

@@ -105,7 +105,7 @@ export class TableViewComponent implements OnInit {
   }
 
   search() {
-    console.log(this.keyword);
+    //console.log(this.keyword);
     this.body.keyword = {}
 
     if (this.keyword) {
@@ -120,8 +120,7 @@ export class TableViewComponent implements OnInit {
   }
 
   onQuery(query: NzTableQueryParams) {
-    console.log("table view onQuery", query)
-
+    //console.log("table view onQuery", query)
     //过滤器
     query.filter.forEach(f => {
       if (f.value) {
