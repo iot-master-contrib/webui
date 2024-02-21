@@ -1,0 +1,123 @@
+<div class="toolbar">
+  <nz-space>
+    <button *nzSpaceItem nz-button nzType="primary" (click)="refresh()">
+      <span nz-icon nzType="reload"></span>
+      刷新
+    </button>
+
+    <!--搜索框-->
+    <div *nzSpaceItem class="search">
+      <nz-input-group nzSearch [nzAddOnAfter]="suffixButton">
+        <input type="text" [(ngModel)]="keyword" nz-input placeholder="请输入关键字"/>
+      </nz-input-group>
+      <ng-template #suffixButton>
+        <button nz-button nzType="primary" nzSearch (click)="search()">搜索</button>
+      </ng-template>
+    </div>
+  </nz-space>
+
+  <div class="fill"></div>
+
+  <!--按钮区-->
+
+  <nz-space>
+    <span *ngFor="let b of buttons">
+  <button nz-button
+          nzType="primary"
+          nzShape="round"
+          [routerLink]="b.link"
+          (click)="b.action?.()">
+    <span *ngIf="b.icon" nz-icon [nzType]="b.icon"></span>
+    {{ b.text }}
+  </button>
+    </span>
+  </nz-space>
+
+</div>
+
+
+<nz-table #table
+          [nzData]="datum"
+          [nzLoading]="loading"
+          [nzShowPagination]="true"
+          [nzFrontPagination]="false"
+          [nzPageIndex]="pageIndex"
+          [nzPageSize]="pageSize"
+          [nzTotal]="total"
+          [nzShowQuickJumper]="true"
+          [nzShowSizeChanger]="true"
+          (nzQueryParams)="onQuery($event)">
+  <thead>
+  <tr>
+    <th *ngFor="let item of columns"
+        [nzColumnKey]="item.key"
+        [nzShowSort]="item.sortable"
+        [nzSortFn]="true"
+        [nzShowFilter]="!!item.filter"
+        [nzFilterFn]="true"
+        [nzFilters]="item.filter || []">
+      {{ item.text }}
+    </th>
+    <th>操作</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let data of table.data">
+
+    <td *ngFor="let item of columns">
+      <ng-container *ngIf="item.date; else temp">
+        {{ data[item.key] | date }}
+      </ng-container>
+      <ng-template #temp>
+        <a *ngIf="item.link; else elseTemplate" [routerLink]="item.link(data)">
+          {{ data[item.key] }}
+        </a>
+        <ng-template #elseTemplate>
+          {{ data[item.key] }}
+        </ng-template>
+      </ng-template>
+    </td>
+
+    <td>
+        <span class="operator" *ngFor="let o of operators">
+
+          <!--外部链接-->
+          <a *ngIf="o.link && o.external"
+             [title]="o.title"
+             [target]="o.external ? '_blank' : ''"
+             [routerLink]="o.link?.(data)">
+            <i *ngIf="o.icon" nz-icon [nzType]="o.icon"></i>
+            {{ o.text }}
+          </a>
+
+          <!--链接-->
+          <a *ngIf="o.link && !o.external"
+             [title]="o.title"
+             [routerLink]="o.link?.(data)">
+            <i *ngIf="o.icon" nz-icon [nzType]="o.icon"></i>
+            {{ o.text }}
+          </a>
+
+          <!--确认调用，比如删除-->
+          <a *ngIf="o.action && o.confirm"
+             [title]="o.title"
+             nz-popconfirm
+             [nzPopconfirmTitle]="o.confirm"
+             (nzOnConfirm)="o.action?.(data)">
+            <i *ngIf="o.icon" nz-icon [nzType]="o.icon"></i>
+            {{ o.text }}
+          </a>
+
+          <!--调用-->
+          <a *ngIf="o.action && !o.confirm"
+             [title]="o.title"
+             (click)="o.action?.(data)">
+            <i *ngIf="o.icon" nz-icon [nzType]="o.icon"></i>
+            {{ o.text }}
+          </a>
+
+        </span>
+    </td>
+  </tr>
+  </tbody>
+</nz-table>

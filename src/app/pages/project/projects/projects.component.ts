@@ -25,6 +25,12 @@ import {NzModalRef, NzModalService, NzModalModule} from 'ng-zorro-antd/modal';
 import {NzTableModule} from 'ng-zorro-antd/table';
 import {CommonModule} from '@angular/common';
 import {NzEmptyComponent} from "ng-zorro-antd/empty";
+import {
+  ParamSearch,
+  TableViewButton,
+  TableViewColumn,
+  TableViewComponent, TableViewOperator
+} from "../../../components/table-view/table-view.component";
 
 @Component({
   selector: 'app-projects',
@@ -57,6 +63,7 @@ import {NzEmptyComponent} from "ng-zorro-antd/empty";
     NzAffixComponent,
     RouterLink,
     NzEmptyComponent,
+    TableViewComponent,
   ],
   templateUrl: './projects.component.html',
   styleUrl: './projects.component.scss',
@@ -72,6 +79,40 @@ export class ProjectsComponent implements OnInit {
     // { id: 3, name: '第五人民医院', description: '放射科室' },
     // { id: 4, name: '协和医院', description: '放射科室' },
   ];
+
+  buttons: TableViewButton[] = [
+    {
+      icon: "plus",
+      text: "创建"
+    }
+  ];
+
+  columns: TableViewColumn[] = [
+    {key: "id", sortable: true, text: "ID", keyword: true, link: (data) => `/admin/project/${data.id}`},
+    {key: "name", sortable: true, text: "名称", keyword: true},
+    {key: "created", sortable: true, text: "创建时间", date: true},
+  ];
+
+  operators: TableViewOperator[] = [
+    {icon: 'export', title: '打开', link: data => `/project/${data.id}`, external: true},
+    {icon: 'edit', title: '编辑', link: data => `/admin/project/${data.id}/edit`},
+    {
+      icon: 'delete', title: '删除', confirm: "确认删除？", action: data => {
+        this.rs.get(`project/${data.id}/delete`).subscribe(res => {
+          //refresh
+        })
+      }
+    },
+  ];
+
+  onQuery(query: ParamSearch) {
+    console.log('onQuery', query)
+    this.rs.post('project/search', query).subscribe(
+      (res) => {
+        this.projects = res.data;
+        this.total = res.total;
+      });
+  }
 
   constructor(
     private route: Router,

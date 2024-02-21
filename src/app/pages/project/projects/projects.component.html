@@ -1,3 +1,13 @@
+<app-table-view
+  [buttons]="buttons"
+  [columns]="columns"
+  [operators]="operators"
+  [datum]="projects"
+  [total]="total"
+  (query)="onQuery($event)"
+></app-table-view>
+
+
 <nz-space class="toolbar">
   <button *nzSpaceItem nz-button nzType="primary" (click)="refresh()">
     <span nz-icon nzType="reload"></span>
