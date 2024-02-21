@@ -32,9 +32,9 @@ export interface EditTableItem {
 
 
 @Component({
-  selector: 'app-edit-table',
-  templateUrl: './edit-table.component.html',
-  styleUrls: ['./edit-table.component.scss'],
+  selector: 'app-table-edit',
+  templateUrl: './table-edit.component.html',
+  styleUrls: ['./table-edit.component.scss'],
   standalone: true,
   imports: [
     NzButtonComponent,
@@ -59,12 +59,12 @@ export interface EditTableItem {
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => EditTableComponent),
+      useExisting: forwardRef(() => TableEditComponent),
       multi: true
     }
   ]
 })
-export class EditTableComponent implements OnInit, ControlValueAccessor {
+export class TableEditComponent implements OnInit, ControlValueAccessor {
   group!: FormGroup
   formArray!: FormArray;
 
