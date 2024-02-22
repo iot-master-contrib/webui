@@ -75,8 +75,8 @@ export interface ParamSearch {
   styleUrl: './table-view.component.scss'
 })
 export class TableViewComponent implements OnInit {
+  @Input() pageSize = 20;
   pageIndex = 1;
-  pageSize = 10;
 
   keyword = '';
 
