@@ -1,51 +1,22 @@
-import {Component, OnInit, Optional} from '@angular/core';
-import {NgForOf} from '@angular/common';
-import {NzCardComponent, NzCardMetaComponent} from 'ng-zorro-antd/card';
-import {NzColDirective, NzRowDirective} from 'ng-zorro-antd/grid';
-import {
-  NzDropDownDirective,
-  NzDropdownMenuComponent,
-} from 'ng-zorro-antd/dropdown';
-import {NzIconDirective} from 'ng-zorro-antd/icon';
-import {NzMenuDirective, NzMenuItemComponent} from 'ng-zorro-antd/menu';
-import {NzPaginationComponent} from 'ng-zorro-antd/pagination';
-import {NzButtonComponent} from 'ng-zorro-antd/button';
-import {NzInputDirective, NzInputGroupComponent} from 'ng-zorro-antd/input';
-import {NzSpaceComponent, NzSpaceItemDirective} from 'ng-zorro-antd/space';
+import {Component, OnInit, Optional} from '@angular/core'; 
 import {Router, RouterLink} from '@angular/router';
 import {RequestService} from '../../../request.service';
-import {NzMessageService} from 'ng-zorro-antd/message';
-import {FormsModule} from '@angular/forms';
-import {NzModalRef, NzModalService} from 'ng-zorro-antd/modal';
-import {NzTableComponent, NzTableModule} from 'ng-zorro-antd/table';
-import {CommonModule} from '@angular/common';
-import {NzPopconfirmDirective} from "ng-zorro-antd/popconfirm";
-
+import {NzMessageService} from 'ng-zorro-antd/message'; 
+import {NzModalRef, NzModalService} from 'ng-zorro-antd/modal'; 
+import {CommonModule} from '@angular/common'; 
+import {
+  ParamSearch,
+  TableViewButton,
+  TableViewColumn,
+  TableViewComponent,
+  TableViewOperator,
+} from '../../../components/table-view/table-view.component';
 @Component({
   selector: 'app-products',
   standalone: true,
   imports: [
     CommonModule,
-    NzTableModule,
-    FormsModule,
-    NgForOf,
-    NzCardComponent,
-    NzCardMetaComponent,
-    NzColDirective,
-    NzDropDownDirective,
-    NzDropdownMenuComponent,
-    NzIconDirective,
-    NzMenuDirective,
-    NzMenuItemComponent,
-    NzPaginationComponent,
-    NzRowDirective,
-    NzButtonComponent,
-    NzInputDirective,
-    NzInputGroupComponent,
-    NzSpaceComponent,
-    RouterLink,
-    NzSpaceItemDirective,
-    NzPopconfirmDirective,
+    TableViewComponent,  
   ],
   templateUrl: './products.component.html',
   styleUrl: './products.component.scss',
@@ -67,76 +38,78 @@ export class ProductsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.load();
+     
   }
+   
+ 
 
-  refresh() {
-    this.pageIndex = 1;
-    this.load();
-  }
-
-  search() {
-    let query
-
-    this.value ? query = {filter: {name: this.value}} : query = {}
-    this.rs.post(`product/search`, query).subscribe(
-      (res) => {
-        this.products = res.data;
-        this.total = res.total;
-      },
-      (err) => {
-        console.log('err:', err);
-      }
-    );
-  }
-
-  delete(i: any) {
-    this.rs.get(`product/${i}/delete`, {}).subscribe(
-      (res) => {
-        this.msg.success('删除成功');
-        this.load();
-      },
-      (err) => {
-        console.log('err:', err);
-      }
-    );
-    this.load();
-  }
-
-  pageSizeChange(e: any) {
-    this.pageSize = e;
-    this.load();
-  }
-
-  pageIndexChange(e: any) {
-    this.pageIndex = e;
-    this.load();
-  }
-
-  load() {
-    let query;
-    query = {
-      limit: this.pageSize,
-      skip: (this.pageIndex - 1) * this.pageSize,
-    };
-
+  load(query?: any) { 
+    
     this.value ? (query = {...query, keyword: {id: this.value, name: this.value}}) : '';
-
-    this.rs.post('product/search', query).subscribe(
-      (res) => {
-
-        this.products = res.data;
+    this.loading = true;
+    this.rs
+      .post('product/search', query)
+      .subscribe((res) => {
+        this.datum = res.data;
         this.total = res.total;
+      })
+      .add(() => {
+        this.loading = false;
+      });
+  }
 
+  datum: any[] = [];
+  loading = false;
 
+  buttons: TableViewButton[] = [
+    { icon: 'plus', text: '创建', link: `/admin/product/create` },
+  ];
+
+  columns: TableViewColumn[] = [
+    {
+      key: 'id',
+      sortable: true,
+      text: 'ID',
+      keyword: true,
+      link: (data) => `/admin/product/${data.id}`,
+    },
+    { key: 'name', sortable: true, text: '名称', keyword: true },
+    { key: 'version', sortable: true, text: '版本', keyword: true }, 
+    { key: 'created', sortable: true, text: '创建时间', date: true },
+  ];
+
+  columns2: TableViewColumn[] = [
+    { key: 'id', text: 'ID', keyword: true },
+    { key: 'name', text: '名称', keyword: true },
+  ];
+
+  operators: TableViewOperator[] = [
+    {
+      icon: 'edit',
+      title: '编辑',
+      link: (data) => `/admin/product/${data.id}/edit`,
+    },
+    {
+      icon: 'delete',
+      title: '删除',
+      confirm: '确认删除？',
+      action: (data) => {
+        this.rs.get(`product/${data.id}/delete`).subscribe((res) => { 
+          this.load({})
+          //refresh
+        });
       },
-      (err) => {
-        console.log('err:', err);
-      }
-    );
+    },
+  ];
+
+  operators2: TableViewOperator[] = [
+    { text: '选择', action: (data) => this.ref.close(data) },
+  ];
+
+  onQuery(query: ParamSearch) {
+    console.log('onQuery', query);
+    this.load(query)
   }
 
-  select(id: any) {
-    this.ref && this.ref.close(id);
-  }
+
 }

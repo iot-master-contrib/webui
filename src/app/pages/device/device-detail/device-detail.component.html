@@ -64,7 +64,11 @@
 
 <nz-divider nzText="告警日志" nzOrientation="left"></nz-divider>
 
-<nz-table #table [nzData]="alarms" [nzFrontPagination]="false">
+<app-alarm
+[device_id]="id"
+></app-alarm>
+
+<!-- <nz-table #table [nzData]="alarms" [nzFrontPagination]="false">
   <thead>
   <tr>
     <th>等级</th>
@@ -105,4 +109,4 @@
     (nzPageIndexChange)="pageIndexChange($event)"
     (nzPageSizeChange)="pageSizeChange($event)"
   ></nz-pagination>
-</div>
+</div> -->

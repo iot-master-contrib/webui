@@ -1,39 +1,21 @@
 import {Component, Optional} from '@angular/core';
 import {NzModalRef,} from 'ng-zorro-antd/modal';
 import {Router, RouterLink} from '@angular/router';
-import {NzMessageService} from 'ng-zorro-antd/message';
-
-import {SearchFormComponent} from '../../../components/search-form/search-form.component';
-import {BatchBtnComponent} from '../../../modals/batch-btn/batch-btn.component';
-import {NzUploadModule} from 'ng-zorro-antd/upload';
-import {NzInputModule} from 'ng-zorro-antd/input';
-import {FormsModule} from '@angular/forms';
-import {NzDividerModule} from 'ng-zorro-antd/divider';
-import {NzTagModule} from 'ng-zorro-antd/tag';
-import {NzTableModule} from 'ng-zorro-antd/table';
-import {CommonModule} from '@angular/common';
-import {NzIconModule} from 'ng-zorro-antd/icon';
-import {NzPopconfirmModule} from 'ng-zorro-antd/popconfirm';
-import {RequestService} from "../../../request.service";
-import {NzPaginationComponent} from "ng-zorro-antd/pagination";
-import {NzButtonComponent} from "ng-zorro-antd/button";
-import {NzSpaceModule} from "ng-zorro-antd/space";
-
+import {NzMessageService} from 'ng-zorro-antd/message'; 
+import {CommonModule} from '@angular/common'; 
+import {RequestService} from "../../../request.service"; 
+import {
+  ParamSearch,
+  TableViewButton,
+  TableViewColumn,
+  TableViewComponent,
+  TableViewOperator,
+} from '../../../components/table-view/table-view.component';
 @Component({
   selector: 'app-users',
   standalone: true,
-  imports: [NzPopconfirmModule,
-    NzIconModule,
-    CommonModule,
-    NzTableModule,
-    NzTagModule,
-    NzDividerModule,
-    BatchBtnComponent,
-    SearchFormComponent,
-    NzSpaceModule,
-    NzUploadModule,
-    NzInputModule,
-    FormsModule, RouterLink, NzPaginationComponent, NzButtonComponent,
+  imports: [ 
+    CommonModule,  TableViewComponent,  
   ],
   templateUrl: './users.component.html',
   styleUrl: './users.component.scss',
@@ -54,60 +36,94 @@ export class UsersComponent {
   }
 
   ngOnInit(): void {
-    this.load();
+    
   }
 
-  refresh() {
-    this.pageIndex = 1;
-    this.load();
-  }
-
-  select(id: any) {
-    this.ref && this.ref.close(id);
-  }
-
-  search() {
-    console.log(this.value);
-    this.load();
-  }
-
-  delete(i: any) {
-    this.rs.get(`user/${i}/delete`, {}).subscribe(
-      (res) => {
-        this.msg.success('删除成功');
-        this.load();
-      },
-      (err) => {
-        console.log('err:', err);
-      }
-    );
-    this.load();
-  }
-
-  pageSizeChange(e: any) {
-    this.pageSize = e;
-    this.load();
-  }
-
-  pageIndexChange(e: any) {
-    this.pageIndex = e;
-    this.load();
-  }
-
-  load() {
-    let query;
-
-    query = {
-      limit: this.pageSize,
-      skip: (this.pageIndex - 1) * this.pageSize,
-    };
-
-    this.value ? (query = {...query, keyword: {id: this.value, name: this.value}}) : '';
-    this.rs.post('user/search', query).subscribe(
-      (res) => {
-        this.users = res.data;
+    
+  load(query?: any) {  
+    if (this.value) query.keyword = { id: this.value, name: this.value };
+    this.loading = true;
+    this.rs
+      .post('user/search', query)
+      .subscribe((res) => {
+        this.datum = res.data;
         this.total = res.total;
-
+      })
+      .add(() => {
+        this.loading = false;
       });
   }
+
+  datum: any[] = [];
+  loading = false;
+
+  buttons: TableViewButton[] = [
+    { icon: 'plus', text: '创建', link: `/admin/user/create` },
+  ];
+
+  columns: TableViewColumn[] = [
+    {
+      key: 'id',
+      sortable: true,
+      text: 'ID',
+      keyword: true, 
+    },
+    { key: 'name', sortable: true, text: '姓名', keyword: true },
+    {
+      key: 'cellphone',
+      sortable: true,
+      text: '手机',
+      keyword: true, 
+    },{
+      key: 'email',
+      sortable: true,
+      text: '邮箱',
+      keyword: true, 
+    },{
+      key: 'disabled',
+      sortable: true,
+      text: '状态',
+      keyword: true, 
+    },
+    { key: 'created', sortable: true, text: '创建时间', date: true },
+  ];
+
+  columns2: TableViewColumn[] = [
+    { key: 'id', text: 'ID', keyword: true },
+    { key: 'name', text: '名称', keyword: true },
+  ];
+
+  operators: TableViewOperator[] = [
+    {
+      icon: 'edit',
+      title: '编辑',
+      link: (data) => `/admin/user/${data.id}/edit`,
+    },
+    {
+      icon: 'delete',
+      title: '删除',
+      confirm: '确认删除？',
+      action: (data) => {
+        this.rs.get(`user/${data.id}/delete`).subscribe((res) => {
+          this.load({});
+          //refresh
+        });
+      },
+    },
+  ];
+
+  operators2: TableViewOperator[] = [
+    { text: '选择', action: (data) => this.ref.close(data) },
+  ];
+
+  onQuery(query: ParamSearch) {
+    console.log('onQuery', query);
+    this.load(query)
+  }
+ 
+   
+
+  
+ 
+
 }

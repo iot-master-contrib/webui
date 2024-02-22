@@ -26,7 +26,7 @@ import {
 import {FormBuilder} from '@angular/forms';
 import {NzMessageService} from 'ng-zorro-antd/message';
 import {RequestService} from '../../../request.service';
-
+import { AlarmComponent } from '../../alarm/alarm.component';
 @Component({
   selector: 'app-device-detail',
   standalone: true,
@@ -53,6 +53,7 @@ import {RequestService} from '../../../request.service';
     NzThMeasureDirective,
     NzTheadComponent,
     NzTrDirective,
+    AlarmComponent
   ],
   templateUrl: './device-detail.component.html',
   styleUrl: './device-detail.component.scss',

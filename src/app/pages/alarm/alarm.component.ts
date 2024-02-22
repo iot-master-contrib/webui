@@ -1,5 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {DatePipe, NgForOf} from "@angular/common";
+import {Component, Input, OnInit} from '@angular/core';
+import {CommonModule, DatePipe, NgForOf} from "@angular/common";
 import {NzButtonComponent} from "ng-zorro-antd/button";
 import {NzIconDirective} from "ng-zorro-antd/icon";
 import {NzInputDirective, NzInputGroupComponent} from "ng-zorro-antd/input";
@@ -15,8 +15,14 @@ import {
 } from "ng-zorro-antd/table";
 import {Router, RouterLink} from "@angular/router";
 import {RequestService} from '../../request.service';
-import {NzMessageService} from 'ng-zorro-antd/message';
-
+import {NzMessageService} from 'ng-zorro-antd/message'; 
+import {
+  ParamSearch,
+  TableViewButton,
+  TableViewColumn,
+  TableViewComponent,
+  TableViewOperator,
+} from '../../components/table-view/table-view.component';
 @Component({
   selector: 'app-alarm',
   standalone: true,
@@ -37,7 +43,9 @@ import {NzMessageService} from 'ng-zorro-antd/message';
     NzTheadComponent,
     NzTrDirective,
     RouterLink,
-    NzSpaceItemDirective
+    NzSpaceItemDirective,
+    CommonModule,
+    TableViewComponent, 
   ],
   templateUrl: './alarm.component.html',
   styleUrl: './alarm.component.scss'
@@ -46,12 +54,11 @@ export class AlarmComponent implements OnInit {
   ngOnInit(): void {
     this.load();
   }
-
+  @Input() device_id?='';
   total = 0;
   pageIndex = 1;
   pageSize = 10;
-  value = '';
-
+  value = ''; 
   constructor(
     private route: Router,
     private rs: RequestService,
@@ -59,43 +66,64 @@ export class AlarmComponent implements OnInit {
   ) {
   }
 
-  load() {
-    let query;
-    query = {
-      limit: this.pageSize,
-      skip: (this.pageIndex - 1) * this.pageSize,
-    };
+ 
+ 
 
-    this.value ? (query = {...query, filter: {name: this.value}}) : '';
-
+  load(query?: any) { 
+    
+    this.device_id ? (query = {...query, filter: { device_id: this.device_id}}) : '';
+    this.loading = true;
     this.rs
       .get('alarm/list', query)
-      .subscribe(
-        (res) => {
-          this.alarms = res.data;
-          this.total = res.total;
-        },
-        (err) => {
-          console.log('err:', err);
-        }
-      );
+      .subscribe((res) => {
+        this.datum = res.data;
+        this.total = res.total;
+      })
+      .add(() => {
+        this.loading = false;
+      });
   }
 
-  pageSizeChange(e: any) {
-    this.pageSize = e;
-    this.load();
-  }
+  datum: any[] = [];
+  loading = false;
 
-  pageIndexChange(e: any) {
-    this.pageIndex = e;
-    this.load();
-  }
+  
+  columns: TableViewColumn[] = [
+    {
+      key: 'project_id',
+      sortable: true,
+      text: '项目',
+      keyword: true, 
+    },
+    { key: 'device_id', sortable: true, text: '设备', keyword: true },
+    { key: 'level', sortable: true, text: '等级', keyword: true }, 
+    { key: 'title', sortable: true, text: '标题', keyword: true }, 
+    { key: 'message', sortable: true, text: '内容', keyword: true }, 
 
-  alarms: any[] = [
-    // {id:1,project:"第一人民医院",device:"1号温度计",level:1,title:"1号温度过高",message:"温度计",created:new Date()},
-    // {id:2,project:"第一人民医院",device:"2号温度计",level:1,title:"2号温度过高",message:"温度计",created:new Date()},
-    // {id:3,project:"第一人民医院",device:"3号温度计",level:1,title:"3号温度过高",message:"温度计",created:new Date()},
-    // {id:4,project:"第一人民医院",device:"4号温度计",level:1,title:"4号温度过高",message:"温度计",created:new Date()},
-  ]
+    { key: 'created', sortable: true, text: '创建时间', date: true },
+  ];
+
+  
+
+  operators: TableViewOperator[] = [ 
+    {
+      icon: 'delete',
+      title: '解绑',
+      confirm: '确认解绑？',
+      action: (data) => {
+        this.rs.get(`alarm/${data.id}/delete`).subscribe((res) => { 
+          this.load({})
+          //refresh
+        });
+      },
+    },
+  ];
+
+ 
+
+  onQuery(query: ParamSearch) {
+    console.log('onQuery', query);
+    this.load(query)
+  }
 
 }

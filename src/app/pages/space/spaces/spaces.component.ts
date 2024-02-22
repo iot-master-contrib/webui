@@ -1,62 +1,22 @@
-import {Component, OnInit, Optional} from '@angular/core';
-import {NzColDirective, NzRowDirective} from 'ng-zorro-antd/grid';
-import {NzCardComponent, NzCardMetaComponent} from 'ng-zorro-antd/card';
-import {NzIconDirective} from 'ng-zorro-antd/icon';
+import {Component, OnInit, Optional} from '@angular/core'; 
+import {ActivatedRoute, Router, RouterLink} from '@angular/router'; 
+import {RequestService} from '../../../request.service'; 
+import {NzMessageService} from 'ng-zorro-antd/message'; 
+import {NzModalRef, NzModalService, NzModalModule} from 'ng-zorro-antd/modal'; 
+import {CommonModule} from '@angular/common'; 
 import {
-  NzDropDownDirective,
-  NzDropdownMenuComponent,
-  NzDropDownModule,
-} from 'ng-zorro-antd/dropdown';
-import {NzMenuDirective, NzMenuItemComponent} from 'ng-zorro-antd/menu';
-import {NgForOf} from '@angular/common';
-import {NzPaginationComponent} from 'ng-zorro-antd/pagination';
-import {NzPopconfirmDirective} from 'ng-zorro-antd/popconfirm';
-import {ActivatedRoute, Router, RouterLink} from '@angular/router';
-import {NzSpaceComponent, NzSpaceItemDirective} from 'ng-zorro-antd/space';
-import {NzButtonComponent} from 'ng-zorro-antd/button';
-import {NzInputDirective, NzInputGroupComponent} from 'ng-zorro-antd/input';
-import {NzAffixComponent} from 'ng-zorro-antd/affix';
-import {RequestService} from '../../../request.service';
-import {NzPopconfirmModule} from 'ng-zorro-antd/popconfirm';
-import {NzMessageService} from 'ng-zorro-antd/message';
-import {NzInputModule} from 'ng-zorro-antd/input';
-import {FormsModule} from '@angular/forms';
-import {NzModalRef, NzModalService, NzModalModule} from 'ng-zorro-antd/modal';
-import {NzTableModule} from 'ng-zorro-antd/table';
-import {CommonModule} from '@angular/common';
-import {NzEmptyComponent} from "ng-zorro-antd/empty";
-
+  ParamSearch,
+  TableViewButton,
+  TableViewColumn,
+  TableViewComponent,
+  TableViewOperator,
+} from '../../../components/table-view/table-view.component';
 @Component({
   selector: 'app-spaces',
   standalone: true,
   imports: [
-    CommonModule,
-    NzTableModule,
-    NzModalModule,
-    FormsModule,
-    NzInputModule,
-    NzPopconfirmModule,
-    NzRowDirective,
-    NzColDirective,
-    NzCardComponent,
-    NzCardMetaComponent,
-    NzIconDirective,
-    NzDropdownMenuComponent,
-    NzDropDownDirective,
-    NzDropDownModule,
-    NzMenuDirective,
-    NzMenuItemComponent,
-    NgForOf,
-    NzPaginationComponent,
-    NzPopconfirmDirective,
-    NzSpaceComponent,
-    NzButtonComponent,
-    NzInputDirective,
-    NzInputGroupComponent,
-    NzSpaceItemDirective,
-    NzAffixComponent,
-    RouterLink,
-    NzEmptyComponent,
+    CommonModule, 
+    TableViewComponent, 
   ],
   templateUrl: './spaces.component.html',
   styleUrl: './spaces.component.scss',
@@ -83,61 +43,83 @@ export class SpacesComponent implements OnInit {
     if (this.route.parent?.snapshot.paramMap.has('project')) {
       this.project_id = this.route.parent?.snapshot.paramMap.get('project');
     }
-    this.load();
+   
   }
 
-  refresh() {
-    this.pageIndex = 1;
-    this.load();
-  }
+  
 
-
-  select(id: any) {
-    this.ref && this.ref.close(id);
-  }
-
-  search() {
-    console.log(this.value);
-    this.load();
-  }
-
-  delete(i: any) {
-    this.rs.get(`space/${i}/delete`, {}).subscribe(
-      (res) => {
-        this.msg.success('删除成功');
-        this.load();
-      });
-    this.load();
-  }
-
-  pageSizeChange(e: any) {
-    this.pageSize = e;
-    this.load();
-  }
-
-  pageIndexChange(e: any) {
-    this.pageIndex = e;
-    this.load();
-  }
-
-  load() {
-    let query: any;
-
-    query = {
-      limit: this.pageSize,
-      skip: (this.pageIndex - 1) * this.pageSize,
-    };
-
+  load(query?: any) { 
     if (this.project_id)
-      query.filter = {project_id: this.project_id}
-    if (this.value)
-      query.keyword = {id: this.value, name: this.value}
-
-    this.rs.post('space/search', query).subscribe(
-      (res) => {
-        this.spaces = res.data;
+    query.filter = {project_id: this.project_id}
+    if (this.value) query.keyword = { id: this.value, name: this.value };
+    this.loading = true;
+    this.rs
+      .post('space/search', query)
+      .subscribe((res) => {
+        this.datum = res.data;
         this.total = res.total;
-      }
-    );
+      })
+      .add(() => {
+        this.loading = false;
+      });
+  }
+
+  datum: any[] = [];
+  loading = false;
+
+  buttons: TableViewButton[] = [
+    { icon: 'plus', text: '创建', link: `/admin/space/create` },
+  ];
+
+  columns: TableViewColumn[] = [
+    {
+      key: 'id',
+      sortable: true,
+      text: 'ID',
+      keyword: true,
+      link: (data) => `/admin/space/${data.id}`,
+    },
+    { key: 'name', sortable: true, text: '名称', keyword: true },
+    {
+      key: 'project_id',
+      sortable: true,
+      text: '项目',
+      keyword: true,
+      link: (data) => `/admin/project/${data.project_id}`,
+    },
+    { key: 'created', sortable: true, text: '创建时间', date: true },
+  ];
+
+  columns2: TableViewColumn[] = [
+    { key: 'id', text: 'ID', keyword: true },
+    { key: 'name', text: '名称', keyword: true },
+  ];
+
+  operators: TableViewOperator[] = [
+    {
+      icon: 'edit',
+      title: '编辑',
+      link: (data) => `/admin/space/${data.id}/edit`,
+    },
+    {
+      icon: 'delete',
+      title: '删除',
+      confirm: '确认删除？',
+      action: (data) => {
+        this.rs.get(`space/${data.id}/delete`).subscribe((res) => { 
+          this.load({})
+          //refresh
+        });
+      },
+    },
+  ];
+
+  operators2: TableViewOperator[] = [
+    { text: '选择', action: (data) => this.ref.close(data) },
+  ];
+
+  onQuery(query: ParamSearch) {
+    console.log('onQuery', query);
+    this.load(query)
   }
 }

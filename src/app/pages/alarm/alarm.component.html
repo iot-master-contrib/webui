@@ -1,56 +1,10 @@
-<div class="toolbar">
-  <nz-space>
-    <button *nzSpaceItem nz-button nzType="primary">
-      <span nz-icon nzType="reload"></span>
-      刷新
-    </button>
-
-    <div *nzSpaceItem class="search">
-      <nz-input-group nzSearch [nzAddOnAfter]="suffixButton">
-        <input type="text" nz-input placeholder="请输入关键字"/>
-      </nz-input-group>
-      <ng-template #suffixButton>
-        <button nz-button nzType="primary" nzSearch>搜索</button>
-      </ng-template>
-    </div>
-
-  </nz-space>
-
-</div>
-
-
-<nz-table #table [nzData]="alarms" [nzFrontPagination]="false">
-  <thead>
-  <tr>
-    <th>项目</th>
-    <th>设备</th>
-    <th>等级</th>
-    <th>标题</th>
-    <th>内容</th>
-    <th>创建时间</th>
-    <th>操作</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let data of table.data">
-    <td>{{ data.project }}</td>
-    <td>{{ data.device }}</td>
-    <td>{{ data.level }}</td>
-    <td>{{ data.title }}</td>
-    <td>{{ data.message }}</td>
-    <td [title]="data.created">{{ data.created | date }}</td>
-    <td>
-      <nz-space>
-        <a *nzSpaceItem title="删除" nz-popconfirm nzPopconfirmTitle="确认解绑"><i nz-icon nzType="delete"></i></a>
-      </nz-space>
-    </td>
-  </tr>
-  </tbody>
-</nz-table>
-
-
-<div class="pages">
-  <nz-pagination [nzPageIndex]="pageIndex" [nzPageSize]="pageSize" [nzTotal]="total" nzShowSizeChanger
-                 nzShowQuickJumper (nzPageIndexChange)="pageIndexChange($event)"
-                 (nzPageSizeChange)="pageSizeChange($event)"></nz-pagination>
-</div>
+ 
+<app-table-view
+  [buttons]="[]"
+  [columns]="columns"
+  [operators]="operators"
+  [datum]="datum"
+  [total]="total"
+  [loading]="loading"
+  (query)="onQuery($event)"
+></app-table-view>
