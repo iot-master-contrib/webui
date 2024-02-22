@@ -1,0 +1,101 @@
+<form nz-form [formGroup]="group">
+
+
+  <nz-form-item *ngFor="let f of _fields">
+    <nz-form-label [nzSm]="6" [nzXs]="24" [nzFor]="f.key">{{ f.label }}</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <ng-container [ngSwitch]="f.type">
+
+        <!--文本-->
+        <input nz-input *ngSwitchCase="'text'"
+               [formControlName]="f.key"
+               [placeholder]="f.placeholder || ''"
+               [disabled]="!!f.disabled"/>
+
+        <!--密码-->
+        <input nz-input type="password" *ngSwitchCase="'password'"
+               [formControlName]="f.key"
+               [placeholder]="f.placeholder || ''"
+               [disabled]="!!f.disabled"/>
+
+        <!--数值-->
+        <nz-input-number *ngSwitchCase="'number'"
+                         [formControlName]="f.key"
+                         [nzMax]="f.max || 100" [nzMin]="f.min || 0" [nzStep]="f.step || 1"
+                         [nzPlaceHolder]="f.placeholder || ''"
+                         [nzDisabled]="!!f.disabled"></nz-input-number>
+
+        <!--选项-->
+        <nz-select *ngSwitchCase="'select'"
+                   [nzOptions]="f.options || empty"
+                   [formControlName]="f.key"
+                   [nzPlaceHolder]="f.placeholder || ''"
+                   [nzDisabled]="!!f.disabled"></nz-select>
+
+        <!--颜色-->
+        <nz-color-picker *ngSwitchCase="'color'"
+                         [formControlName]="f.key"
+                         [nzDisabled]="!!f.disabled"
+                         nzShowText></nz-color-picker>
+
+        <!--开关-->
+        <nz-switch *ngSwitchCase="'switch'"
+                   [formControlName]="f.key"
+                   [nzDisabled]="!!f.disabled"></nz-switch>
+
+        <!--多行文本-->
+        <nz-textarea-count *ngSwitchCase="'textarea'" [nzMaxCharacterCount]="f.max || 200">
+          <textarea rows="4" nz-input [formControlName]="f.key" [disabled]="!!f.disabled"></textarea>
+        </nz-textarea-count>
+
+        <!--进度条-->
+        <nz-slider *ngSwitchCase="'slider'"
+                   [formControlName]="f.key"
+                   [nzMax]="f.max" [nzMin]="f.min" [nzStep]="f.step"
+                   [nzDisabled]="!!f.disabled"></nz-slider>
+
+        <!--日期-->
+        <nz-date-picker *ngSwitchCase="'date'"
+                        [formControlName]="f.key"
+                        [nzShowTime]="!!f.time"
+                        [nzPlaceHolder]="f.placeholder || ''"
+                        [nzDisabled]="!!f.disabled"></nz-date-picker>
+
+        <!--时间-->
+        <nz-time-picker *ngSwitchCase="'time'"
+                        [formControlName]="f.key"
+                        [nzPlaceHolder]="f.placeholder || ''"
+                        [nzDisabled]="!!f.disabled"></nz-time-picker>
+
+        <!--文件-->
+        <nz-upload *ngSwitchCase="'file'"
+                   [nzAction]="f.action"
+                   (nzChange)="handleUpload($event)">
+          <button nz-button>
+            <span nz-icon nzType="upload"></span>
+            上传文件
+          </button>
+        </nz-upload>
+
+        <!--默认 用文本-->
+        <span *ngSwitchDefault>
+          不支持的控件类型：{{f.type}}
+        </span>
+
+        
+
+
+      </ng-container>
+    </nz-form-control>
+  </nz-form-item>
+
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="project_id">项目</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="">
+      <app-input-project formControlName="project_id"></app-input-project>
+    </nz-form-control>
+  </nz-form-item>
+
+
+</form>
