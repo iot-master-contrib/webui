@@ -60,7 +60,7 @@ export class DevicesComponent implements OnInit {
   load(query?: any) {
     if (this.project_id) query.filter = { project_id: this.project_id };
      if (this.value)  (query = { ...query, keyword: { id: this.value, name: this.value } })
-    
+
     this.loading = true;
     this.rs
       .post('device/search', query)
@@ -90,21 +90,21 @@ export class DevicesComponent implements OnInit {
     },
     { key: 'name', sortable: true, text: '名称', keyword: true },
     {
-      key: 'gateway_id',
+      key: 'gateway',
       sortable: true,
       text: '网关',
       keyword: true,
       link: (data) => `/admin/gateway/${data.gateway_id}`,
     },
     {
-      key: 'product_id',
+      key: 'product',
       sortable: true,
       text: '产品',
       keyword: true,
       link: (data) => `/admin/product/${data.product_id}`,
     },
     {
-      key: 'project_id',
+      key: 'project',
       sortable: true,
       text: '项目',
       keyword: true,

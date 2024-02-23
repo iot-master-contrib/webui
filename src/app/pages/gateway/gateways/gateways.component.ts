@@ -1,7 +1,7 @@
-import { Component, Input, OnInit, Optional } from '@angular/core';  
-import { ActivatedRoute, Router, RouterLink } from '@angular/router'; 
+import { Component, Input, OnInit, Optional } from '@angular/core';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { RequestService } from '../../../request.service';
-import { NzMessageService } from 'ng-zorro-antd/message'; 
+import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzModalRef } from 'ng-zorro-antd/modal';
 import { CommonModule } from '@angular/common';
 import {
@@ -16,7 +16,7 @@ import {
   standalone: true,
   imports: [
     CommonModule,
-    TableViewComponent, 
+    TableViewComponent,
   ],
   templateUrl: './gateways.component.html',
   styleUrl: './gateways.component.scss',
@@ -42,11 +42,11 @@ export class GatewaysComponent implements OnInit {
     if (this.route.parent?.snapshot.paramMap.has('project')) {
       this.project_id = this.route.parent?.snapshot.paramMap.get('project');
     }
-    
-  }
- 
 
-  load(query?: any) { 
+  }
+
+
+  load(query?: any) {
     if (this.project_id) query.filter = { project_id: this.project_id };
     if (this.value) query.keyword = { id: this.value, name: this.value };
     this.loading = true;
@@ -78,7 +78,7 @@ export class GatewaysComponent implements OnInit {
     },
     { key: 'name', sortable: true, text: '名称', keyword: true },
     {
-      key: 'project_id',
+      key: 'project',
       sortable: true,
       text: '项目',
       keyword: true,
