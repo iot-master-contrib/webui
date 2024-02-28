@@ -1,5 +1,5 @@
-import {Component, Optional, signal} from '@angular/core';
-import {NzModalRef, NzModalService,} from 'ng-zorro-antd/modal';
+import {Component, Inject, Optional, signal} from '@angular/core';
+import {NZ_MODAL_DATA, NzModalRef, NzModalService,} from 'ng-zorro-antd/modal';
 import {ActivatedRoute, Router, RouterLink} from '@angular/router';
 import {NzMessageService} from 'ng-zorro-antd/message';
 
@@ -19,6 +19,14 @@ import {NzPaginationComponent} from "ng-zorro-antd/pagination";
 import {NzButtonComponent} from "ng-zorro-antd/button";
 import {NzSpaceModule} from "ng-zorro-antd/space";
 import {UsersComponent} from "../../users/users/users.component";
+import {
+  ParamSearch,
+  TableViewButton,
+  TableViewColumn,
+  TableViewComponent,
+  TableViewOperator
+} from "../../../components/table-view/table-view.component";
+import {NzNotificationService} from "ng-zorro-antd/notification";
 
 @Component({
   selector: 'app-project-user',
@@ -34,39 +42,86 @@ import {UsersComponent} from "../../users/users/users.component";
     NzSpaceModule,
     NzUploadModule,
     NzInputModule,
-    FormsModule, RouterLink, NzPaginationComponent, NzButtonComponent,
+    FormsModule, RouterLink, NzPaginationComponent, NzButtonComponent, TableViewComponent,
   ],
   templateUrl: './project-user.component.html',
   styleUrl: './project-user.component.scss',
 })
 export class ProjectUserComponent {
-  base = '/admin/'
+  //从Modal中传参过来
+  //readonly data: any = inject(NZ_MODAL_DATA, {optional:true});
+  project_id: any = '';
 
-  project_id: any = ''
-  users: any = [];
 
-  constructor(
-    private route: ActivatedRoute,
-    private rs: RequestService,
-    private msg: NzMessageService,
-    private ms: NzModalService,
+  datum: any[] = [];
+  total = 0;
+  loading = false;
+
+
+  buttons: TableViewButton[] = [
+    {icon: 'plus', text: '绑定用户', action: () => this.bind()}, //应该只有平台管理员可以操作吧
+  ];
+
+  columns: TableViewColumn[] = [
+    {key: 'user_id', sortable: true, text: 'ID', keyword: true},
+    {key: 'user', sortable: true, text: '名称', keyword: true},
+    {key: 'disabled', sortable: true, text: '状态'},
+    {key: 'created', sortable: true, text: '创建时间', date: true},
+  ];
+
+  columnsSelect: TableViewColumn[] = [
+    {key: 'user_id', sortable: true, text: 'ID', keyword: true},
+    {key: 'user', sortable: true, text: '名称', keyword: true},
+    {key: 'disabled', sortable: true, text: '状态'},
+  ];
+
+  operators: TableViewOperator[] = [
+    {icon: 'disconnect', text: '解绑', confirm: '确认解绑？', action: (data) => this.unbind(data.user_id)},
+  ];
+
+  operatorsSelect: TableViewOperator[] = [
+    {text: '选择', action: (data) => this.ref.close(data)},
+  ];
+
+  constructor(private route: ActivatedRoute,
+              private rs: RequestService,
+              private msg: NzNotificationService,
+              private ms: NzModalService,
+              @Optional() protected ref: NzModalRef,
+              @Optional() @Inject(NZ_MODAL_DATA) protected data: any
   ) {
+    this.project_id = data?.project_id;
   }
 
   ngOnInit(): void {
     if (this.route.parent?.snapshot.paramMap.has('project')) {
       this.project_id = this.route.parent?.snapshot.paramMap.get('project');
-      this.base = '/project/' + this.project_id + '/'
+      //console.log("project_id", this.project_id)
     }
-    if (this.route.snapshot.paramMap.has('id')) {
-      this.project_id = this.route.snapshot.paramMap.get('id');
-      this.base = '/admin/'
-    }
-    this.load();
   }
 
+  query!: ParamSearch
+
   refresh() {
-    this.load();
+    this.search(this.query)
+  }
+
+  search(query: ParamSearch) {
+    //console.log('onQuery', query)
+    this.query = query
+
+    if (this.project_id)
+      query.filter['project_id'] = this.project_id;
+
+    this.loading = true;
+    this.rs.get(`project/${this.project_id}/user`).subscribe((res) => {
+      this.datum = res.data;
+      //this.total = res.data.length
+    }).add(() => this.loading = false);
+    // this.rs.post('gateway/search', query).subscribe((res) => {
+    //   this.datum = res.data;
+    //   this.total = res.total;
+    // }).add(() => this.loading = false);
   }
 
   bind() {
@@ -76,22 +131,16 @@ export class ProjectUserComponent {
     }).afterClose.subscribe(res => {
       if (!res) return
       this.rs.get(`project/${this.project_id}/user/${res.id}/bind`, {}).subscribe((res) => {
-        this.msg.success('绑定成功');
-        this.load();
+        this.msg.success('提示', '绑定成功');
+        this.refresh();
       });
     })
   }
 
   unbind(i: any) {
     this.rs.get(`project/${this.project_id}/user/${i}/unbind`, {}).subscribe((res) => {
-      this.msg.success('删除成功');
-      this.load();
-    });
-  }
-
-  load() {
-    this.rs.get(`project/${this.project_id}/user`).subscribe((res) => {
-      this.users = res.data;
+      this.msg.success('提示', '删除成功');
+      this.refresh();
     });
   }
 }

@@ -1,5 +1,4 @@
 import {Component, Optional} from '@angular/core';
-import {Router} from '@angular/router';
 import {RequestService} from '../../../request.service';
 import {NzModalRef} from 'ng-zorro-antd/modal';
 import {CommonModule} from '@angular/common';
@@ -24,7 +23,7 @@ export class ProjectsComponent {
   loading = false;
 
   buttons: TableViewButton[] = [
-    {icon: "plus", text: "创建", link: `/admin/project/create`}
+    {icon: "plus", text: "创建", link: () => `/admin/project/create`}
   ];
 
   columns: TableViewColumn[] = [
@@ -33,7 +32,7 @@ export class ProjectsComponent {
     {key: "created", sortable: true, text: "创建时间", date: true},
   ];
 
-  columns2: TableViewColumn[] = [
+  columnsSelect: TableViewColumn[] = [
     {key: "id", text: "ID", keyword: true},
     {key: "name", text: "名称", keyword: true},
   ];
@@ -43,34 +42,33 @@ export class ProjectsComponent {
     {icon: 'edit', title: '编辑', link: data => `/admin/project/${data.id}/edit`},
     {
       icon: 'delete', title: '删除', confirm: "确认删除？", action: data => {
-        this.rs.get(`project/${data.id}/delete`).subscribe(res => {
-          //refresh
-        })
+        this.rs.get(`project/${data.id}/delete`).subscribe(res => this.refresh())
       }
     },
   ];
 
-  operators2: TableViewOperator[] = [
+  operatorsSelect: TableViewOperator[] = [
     {text: "选择", action: data => this.ref.close(data)},
   ];
 
-  constructor(
-    private route: Router,
-    private rs: RequestService,
-    @Optional() protected ref: NzModalRef
-  ) {
+  constructor(private rs: RequestService, @Optional() protected ref: NzModalRef) {
   }
 
-  onQuery(query: ParamSearch) {
-    console.log('onQuery', query)
+
+  query!: ParamSearch
+
+  refresh() {
+    this.search(this.query)
+  }
+
+  search(query: ParamSearch) {
+    //console.log('onQuery', query)
+    this.query = query
     this.loading = true
-    this.rs.post('project/search', query).subscribe(
-      (res) => {
-        this.datum = res.data;
-        this.total = res.total;
-      }).add(() => {
-      this.loading = false
-    });
+    this.rs.post('project/search', query).subscribe((res) => {
+      this.datum = res.data;
+      this.total = res.total;
+    }).add(() => this.loading = false);
   }
 
 }

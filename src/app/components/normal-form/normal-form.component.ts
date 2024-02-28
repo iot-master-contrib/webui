@@ -1,7 +1,7 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, ViewContainerRef} from '@angular/core';
 import {NzFormModule} from "ng-zorro-antd/form";
 import {CommonModule} from "@angular/common";
-import {FormBuilder, FormGroup, ReactiveFormsModule} from "@angular/forms";
+import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {NzInputModule} from "ng-zorro-antd/input";
 import {NzInputNumberComponent} from "ng-zorro-antd/input-number";
 import {NzSelectComponent} from "ng-zorro-antd/select";
@@ -14,24 +14,36 @@ import {NzUploadChangeParam, NzUploadComponent} from "ng-zorro-antd/upload";
 import {NzButtonComponent} from "ng-zorro-antd/button";
 import {NzIconDirective} from "ng-zorro-antd/icon";
 import {NzSelectOptionInterface} from "ng-zorro-antd/select/select.types";
+import {InputProjectComponent} from "../input-project/input-project.component";
+import {InputProductComponent} from "../input-product/input-product.component";
+import {InputGatewayComponent} from "../input-gateway/input-gateway.component";
+import {InputSpaceComponent} from "../input-space/input-space.component";
+import {InputDeviceComponent} from "../input-device/input-device.component";
 
-export interface FromItem {
 
-}
-
-export interface FromItem {
+export interface NormalFormItem {
+  type: string
   key: string
   label: string
-  default: any
-  type: string
+  default?: any
   placeholder?: string
+
   disabled?: boolean
+  hidden?: boolean //隐藏
+
+  required?: boolean
   max?: number
   min?: number
   step?: number
-  time?: boolean
-  action?: string
+
+  time?: boolean //显示时间
+
+  action?: string //文件上传
+
   options?: NzSelectOptionInterface
+
+  pattern?: string | RegExp
+  validators?: any[];
 }
 
 function getValue(val: any, def: any): any {
@@ -54,13 +66,18 @@ function getValue(val: any, def: any): any {
     NzInputNumberComponent,
     NzSelectComponent,
     NzSwitchComponent,
-    NzColorPickerModule,
     NzSliderComponent,
     NzDatePickerComponent,
     NzTimePickerComponent,
     NzUploadComponent,
     NzButtonComponent,
     NzIconDirective,
+    InputProjectComponent,
+    InputProductComponent,
+    InputGatewayComponent,
+    InputSpaceComponent,
+    InputDeviceComponent,
+    NzColorPickerModule,
   ],
   templateUrl: './normal-form.component.html',
   styleUrl: './normal-form.component.scss'
@@ -68,26 +85,63 @@ function getValue(val: any, def: any): any {
 export class NormalFormComponent {
   group!: FormGroup
 
-  _fields: FromItem[] = []
-  _values: any = {}
+  _fields: NormalFormItem[] = []
+  _value: any = {}
 
   empty: any = []
 
-  @Input() set fields(fs: FromItem[]) {
+
+  @Input() set fields(fs: NormalFormItem[]) {
     this._fields = fs
     this.buildForm()
   }
 
-  @Input() set values(vs: any) {
-    this._values = vs
+  get fields() {
+    return this._fields
+  }
+
+  @Input() set value(v: any) {
+    this._value = v
     //this.buildForm()
-    this.group.patchValue(vs)
+    this.group.patchValue(v)
+  }
+
+  get value() {
+    return this._value
   }
 
   buildForm() {
     let fs: any = {}
     this._fields.forEach(f => {
-      fs[f.key] = [getValue(this._values[f.key], f.default), []]
+      let validators = [];
+
+      if (f.required)
+        validators.push(Validators.required)
+
+      if (f.min !== undefined) {
+        if (f.type === "number")
+          validators.push(Validators.min(f.min))
+        else if (f.type === "text" || f.type === "password")
+          validators.push(Validators.minLength(f.min))
+      }
+
+      if (f.max !== undefined) {
+        if (f.type === "number")
+          validators.push(Validators.max(f.max))
+        else if (f.type === "text" || f.type === "password")
+          validators.push(Validators.maxLength(f.max))
+      }
+
+      if (f.pattern && f.type === "text")
+        validators.push(Validators.pattern(f.pattern))
+
+      //拼接默认校验器
+      if (f.validators)
+        validators = validators.concat(f.validators)
+
+      let value = getValue(this._value[f.key], f.default)
+
+      fs[f.key] = [value, validators]
     })
     this.group = this.fb.group(fs)
   }
@@ -96,7 +150,23 @@ export class NormalFormComponent {
 
   }
 
-  constructor(private fb: FormBuilder) {
+  public Validate() :boolean {
+    //检查
+    for (const i in this.group.controls) {
+      this.group.controls[i].markAsDirty();
+      this.group.controls[i].updateValueAndValidity();
+    }
+    return this.group.valid
+  }
+
+  public Value(): any {
+    // if (!this.Validate()) {
+    //   return undefined;
+    // }
+    return this.group.value
+  }
+
+  constructor(private fb: FormBuilder, private viewContainerRef: ViewContainerRef) {
   }
 
 
@@ -105,4 +175,7 @@ export class NormalFormComponent {
   }
 
 
+  onSubmit() {
+
+  }
 }

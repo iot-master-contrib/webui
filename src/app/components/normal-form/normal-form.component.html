@@ -1,101 +1,121 @@
-<form nz-form [formGroup]="group">
+<form nz-form [formGroup]="group" (ngSubmit)="onSubmit()">
 
+  <ng-template #errorTip let-control>
+    <ng-container *ngIf="control.hasError('required')">必填项</ng-container>
+    <ng-container *ngIf="control.hasError('pattern')">格式不对</ng-container>
+    <ng-container *ngIf="control.hasError('min')">太小了</ng-container>
+    <ng-container *ngIf="control.hasError('max')">太大了</ng-container>
+    <ng-container *ngIf="control.hasError('minlength')">太短了</ng-container>
+    <ng-container *ngIf="control.hasError('maxlength')">太长了</ng-container>
+  </ng-template>
 
-  <nz-form-item *ngFor="let f of _fields">
-    <nz-form-label [nzSm]="6" [nzXs]="24" [nzFor]="f.key">{{ f.label }}</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24">
-      <ng-container [ngSwitch]="f.type">
+  <ng-container *ngFor="let f of fields">
 
-        <!--文本-->
-        <input nz-input *ngSwitchCase="'text'"
-               [formControlName]="f.key"
-               [placeholder]="f.placeholder || ''"
-               [disabled]="!!f.disabled"/>
+    <nz-form-item *ngIf="!f.hidden">
+      <nz-form-label [nzSm]="6" [nzXs]="24"
+                     [nzRequired]="f.required"
+                     [nzFor]="f.key">{{ f.label }}
+      </nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" [nzErrorTip]="errorTip">
+        <ng-container [ngSwitch]="f.type">
 
-        <!--密码-->
-        <input nz-input type="password" *ngSwitchCase="'password'"
-               [formControlName]="f.key"
-               [placeholder]="f.placeholder || ''"
-               [disabled]="!!f.disabled"/>
+          <!--文本-->
+          <input nz-input *ngSwitchCase="'text'"
+                 [formControlName]="f.key"
+                 [minlength]="f.min || 0" [maxlength]="f.max || 200"
+                 [placeholder]="f.placeholder || ''"
+                 [disabled]="!!f.disabled"/>
 
-        <!--数值-->
-        <nz-input-number *ngSwitchCase="'number'"
-                         [formControlName]="f.key"
-                         [nzMax]="f.max || 100" [nzMin]="f.min || 0" [nzStep]="f.step || 1"
-                         [nzPlaceHolder]="f.placeholder || ''"
-                         [nzDisabled]="!!f.disabled"></nz-input-number>
+          <!--密码-->
+          <input nz-input type="password" *ngSwitchCase="'password'"
+                 [formControlName]="f.key"
+                 [minlength]="f.min || 0" [maxlength]="f.max || 200"
+                 [placeholder]="f.placeholder || ''"
+                 [disabled]="!!f.disabled"/>
 
-        <!--选项-->
-        <nz-select *ngSwitchCase="'select'"
-                   [nzOptions]="f.options || empty"
-                   [formControlName]="f.key"
-                   [nzPlaceHolder]="f.placeholder || ''"
-                   [nzDisabled]="!!f.disabled"></nz-select>
+          <!--数值-->
+          <nz-input-number *ngSwitchCase="'number'"
+                           [formControlName]="f.key"
+                           [nzMax]="f.max || 100" [nzMin]="f.min || 0" [nzStep]="f.step || 1"
+                           [nzPlaceHolder]="f.placeholder || ''"
+                           [nzDisabled]="!!f.disabled"></nz-input-number>
 
-        <!--颜色-->
-        <nz-color-picker *ngSwitchCase="'color'"
-                         [formControlName]="f.key"
-                         [nzDisabled]="!!f.disabled"
-                         nzShowText></nz-color-picker>
+          <!--选项-->
+          <nz-select *ngSwitchCase="'select'"
+                     [nzOptions]="f.options || empty"
+                     [formControlName]="f.key"
+                     [nzPlaceHolder]="f.placeholder || ''"
+                     [nzDisabled]="!!f.disabled"></nz-select>
 
-        <!--开关-->
-        <nz-switch *ngSwitchCase="'switch'"
-                   [formControlName]="f.key"
-                   [nzDisabled]="!!f.disabled"></nz-switch>
+          <!--标签-->
+          <nz-select *ngSwitchCase="'tags'" nzMode="tags"
+                     [nzTokenSeparators]="[',','，', ' ', ';']"
+                     [nzOptions]="f.options || empty"
+                     [formControlName]="f.key"
+                     [nzPlaceHolder]="f.placeholder || ''"
+                     [nzDisabled]="!!f.disabled"></nz-select>
 
-        <!--多行文本-->
-        <nz-textarea-count *ngSwitchCase="'textarea'" [nzMaxCharacterCount]="f.max || 200">
-          <textarea rows="4" nz-input [formControlName]="f.key" [disabled]="!!f.disabled"></textarea>
-        </nz-textarea-count>
+          <!--颜色-->
+          <nz-color-picker *ngSwitchCase="'color'"
+                           [formControlName]="f.key"
+                           [nzDisabled]="!!f.disabled"
+                           nzShowText></nz-color-picker>
 
-        <!--进度条-->
-        <nz-slider *ngSwitchCase="'slider'"
-                   [formControlName]="f.key"
-                   [nzMax]="f.max" [nzMin]="f.min" [nzStep]="f.step"
-                   [nzDisabled]="!!f.disabled"></nz-slider>
+          <!--开关-->
+          <nz-switch *ngSwitchCase="'switch'"
+                     [formControlName]="f.key"
+                     [nzDisabled]="!!f.disabled"></nz-switch>
 
-        <!--日期-->
-        <nz-date-picker *ngSwitchCase="'date'"
-                        [formControlName]="f.key"
-                        [nzShowTime]="!!f.time"
-                        [nzPlaceHolder]="f.placeholder || ''"
-                        [nzDisabled]="!!f.disabled"></nz-date-picker>
+          <!--多行文本-->
+          <nz-textarea-count *ngSwitchCase="'textarea'" [nzMaxCharacterCount]="f.max || 200">
+            <textarea rows="4" nz-input [formControlName]="f.key" [disabled]="!!f.disabled"></textarea>
+          </nz-textarea-count>
 
-        <!--时间-->
-        <nz-time-picker *ngSwitchCase="'time'"
-                        [formControlName]="f.key"
-                        [nzPlaceHolder]="f.placeholder || ''"
-                        [nzDisabled]="!!f.disabled"></nz-time-picker>
+          <!--进度条-->
+          <nz-slider *ngSwitchCase="'slider'"
+                     [formControlName]="f.key"
+                     [nzMax]="f.max" [nzMin]="f.min" [nzStep]="f.step"
+                     [nzDisabled]="!!f.disabled"></nz-slider>
 
-        <!--文件-->
-        <nz-upload *ngSwitchCase="'file'"
-                   [nzAction]="f.action"
-                   (nzChange)="handleUpload($event)">
-          <button nz-button>
-            <span nz-icon nzType="upload"></span>
-            上传文件
-          </button>
-        </nz-upload>
+          <!--日期-->
+          <nz-date-picker *ngSwitchCase="'date'"
+                          [formControlName]="f.key"
+                          [nzShowTime]="!!f.time"
+                          [nzPlaceHolder]="f.placeholder || ''"
+                          [nzDisabled]="!!f.disabled"></nz-date-picker>
 
-        <!--默认 用文本-->
-        <span *ngSwitchDefault>
-          不支持的控件类型：{{f.type}}
+          <!--时间-->
+          <nz-time-picker *ngSwitchCase="'time'"
+                          [formControlName]="f.key"
+                          [nzPlaceHolder]="f.placeholder || ''"
+                          [nzDisabled]="!!f.disabled"></nz-time-picker>
+
+          <!--文件-->
+          <nz-upload *ngSwitchCase="'file'"
+                     [nzAction]="f.action"
+                     (nzChange)="handleUpload($event)">
+            <button nz-button>
+              <span nz-icon nzType="upload"></span>
+              上传文件
+            </button>
+          </nz-upload>
+
+          <!--默认 用文本-->
+          <span *ngSwitchDefault>
+          不支持的控件类型：{{ f.type }}
         </span>
 
-        
+          <!--扩展类型-->
+          <app-input-project *ngSwitchCase="'project'" [formControlName]="f.key"></app-input-project>
+          <app-input-device *ngSwitchCase="'device'" [formControlName]="f.key"></app-input-device>
+          <app-input-product *ngSwitchCase="'product'" [formControlName]="f.key"></app-input-product>
+          <app-input-gateway *ngSwitchCase="'gateway'" [formControlName]="f.key"></app-input-gateway>
+          <app-input-space *ngSwitchCase="'space'" [formControlName]="f.key"></app-input-space>
 
+        </ng-container>
+      </nz-form-control>
+    </nz-form-item>
 
-      </ng-container>
-    </nz-form-control>
-  </nz-form-item>
-
-
-  <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="project_id">项目</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="">
-      <app-input-project formControlName="project_id"></app-input-project>
-    </nz-form-control>
-  </nz-form-item>
-
+  </ng-container>
 
 </form>

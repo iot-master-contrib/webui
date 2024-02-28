@@ -1,8 +1,8 @@
-import {Component, OnInit, Optional} from '@angular/core';
+import {Component, Inject, OnInit, Optional} from '@angular/core';
 import {ActivatedRoute, Router, RouterLink} from '@angular/router';
 import {RequestService} from '../../../request.service';
 import {NzMessageService} from 'ng-zorro-antd/message';
-import {NzModalRef, NzModalService, NzModalModule} from 'ng-zorro-antd/modal';
+import {NzModalRef, NzModalService, NzModalModule, NZ_MODAL_DATA} from 'ng-zorro-antd/modal';
 import {CommonModule} from '@angular/common';
 import {
   ParamSearch,
@@ -11,6 +11,7 @@ import {
   TableViewComponent,
   TableViewOperator,
 } from '../../../components/table-view/table-view.component';
+
 @Component({
   selector: 'app-spaces',
   standalone: true,
@@ -22,104 +23,106 @@ import {
   styleUrl: './spaces.component.scss',
 })
 export class SpacesComponent implements OnInit {
+  //从Modal中传参过来
+  //readonly data: any = inject(NZ_MODAL_DATA, {optional:true});
+  project_id: any = '';
+
+
+  datum: any[] = [];
   total = 0;
-  pageIndex = 1;
-  pageSize = 10;
-  value = '';
-  spaces: any = [];
+  loading = false;
 
-  project_id: any = ''
 
-  constructor(
-    private router: Router,
-    private route: ActivatedRoute,
-    private rs: RequestService,
-    private msg: NzMessageService,
-    @Optional() protected ref: NzModalRef
+  buttons: TableViewButton[] = [
+    {icon: 'plus', text: '创建', link: () => `/admin/space/create`},
+  ];
+
+  buttonsProject: TableViewButton[] = [
+    {icon: 'plus', text: '创建', link: () => `/project/${this.project_id}/space/create`},
+  ];
+
+  columns: TableViewColumn[] = [
+    {
+      key: 'id', sortable: true, text: 'ID', keyword: true,
+      link: (data) => `/admin/space/${data.id}`,
+    },
+    {key: 'name', sortable: true, text: '名称', keyword: true},
+    {
+      key: 'project', sortable: true, text: '项目', keyword: true,
+      link: (data) => `/admin/project/${data.project_id}`,
+    },
+    {key: 'created', sortable: true, text: '创建时间', date: true},
+  ];
+
+  columnsProject: TableViewColumn[] = [
+    {
+      key: 'id', sortable: true, text: 'ID', keyword: true,
+      link: (data) => `/admin/space/${data.id}`,
+    },
+    {key: 'name', sortable: true, text: '名称', keyword: true},
+    {key: 'created', sortable: true, text: '创建时间', date: true},
+  ];
+  columnsSelect: TableViewColumn[] = [
+    {key: 'id', text: 'ID', keyword: true},
+    {key: 'name', text: '名称', keyword: true},
+  ];
+
+  operators: TableViewOperator[] = [
+    {icon: 'edit', title: '编辑', link: (data) => `/admin/space/${data.id}/edit`,},
+    {
+      icon: 'delete', title: '删除', confirm: '确认删除？',
+      action: (data) => {
+        this.rs.get(`space/${data.id}/delete`).subscribe((res) => this.refresh())
+      },
+    },
+  ];
+
+  operatorsProject: TableViewOperator[] = [
+    {icon: 'edit', title: '编辑', link: (data) => `/project/${this.project_id}/space/${data.id}/edit`,},
+    {
+      icon: 'delete', title: '删除', confirm: '确认删除？',
+      action: (data) => {
+        this.rs.get(`space/${data.id}/delete`).subscribe((res) => this.refresh())
+      },
+    },
+  ];
+
+  operatorsSelect: TableViewOperator[] = [
+    {text: '选择', action: (data) => this.ref.close(data)},
+  ];
+
+  constructor(private route: ActivatedRoute,
+              private rs: RequestService,
+              @Optional() protected ref: NzModalRef,
+              @Optional() @Inject(NZ_MODAL_DATA) protected data: any
   ) {
+    this.project_id = data?.project_id;
   }
 
   ngOnInit(): void {
     if (this.route.parent?.snapshot.paramMap.has('project')) {
       this.project_id = this.route.parent?.snapshot.paramMap.get('project');
+      //console.log("project_id", this.project_id)
     }
-
   }
 
+  query!: ParamSearch
 
+  refresh() {
+    this.search(this.query)
+  }
 
-  load(query?: any) {
+  search(query: ParamSearch) {
+    //console.log('onQuery', query)
+    this.query = query
+
     if (this.project_id)
-    query.filter = {project_id: this.project_id}
-    if (this.value) query.keyword = { id: this.value, name: this.value };
+      query.filter['project_id'] = this.project_id;
+
     this.loading = true;
-    this.rs
-      .post('space/search', query)
-      .subscribe((res) => {
-        this.datum = res.data;
-        this.total = res.total;
-      })
-      .add(() => {
-        this.loading = false;
-      });
-  }
-
-  datum: any[] = [];
-  loading = false;
-
-  buttons: TableViewButton[] = [
-    { icon: 'plus', text: '创建', link: `/admin/space/create` },
-  ];
-
-  columns: TableViewColumn[] = [
-    {
-      key: 'id',
-      sortable: true,
-      text: 'ID',
-      keyword: true,
-      link: (data) => `/admin/space/${data.id}`,
-    },
-    { key: 'name', sortable: true, text: '名称', keyword: true },
-    {
-      key: 'project',
-      sortable: true,
-      text: '项目',
-      keyword: true,
-      link: (data) => `/admin/project/${data.project_id}`,
-    },
-    { key: 'created', sortable: true, text: '创建时间', date: true },
-  ];
-
-  columns2: TableViewColumn[] = [
-    { key: 'id', text: 'ID', keyword: true },
-    { key: 'name', text: '名称', keyword: true },
-  ];
-
-  operators: TableViewOperator[] = [
-    {
-      icon: 'edit',
-      title: '编辑',
-      link: (data) => `/admin/space/${data.id}/edit`,
-    },
-    {
-      icon: 'delete',
-      title: '删除',
-      confirm: '确认删除？',
-      action: (data) => {
-        this.rs.get(`space/${data.id}/delete`).subscribe((res) => {
-          this.load({})
-          //refresh
-        });
-      },
-    },
-  ];
-
-  operators2: TableViewOperator[] = [
-    { text: '选择', action: (data) => this.ref.close(data) },
-  ];
-
-  onQuery(query: ParamSearch) {
-    console.log('onQuery', query);
-    this.load(query)
+    this.rs.post('space/search', query).subscribe((res) => {
+      this.datum = res.data;
+      this.total = res.total;
+    }).add(() => this.loading = false);
   }
 }

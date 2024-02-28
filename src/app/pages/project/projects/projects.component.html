@@ -1,9 +1,9 @@
 <app-table-view
   [buttons]="ref ? [] : buttons"
-  [columns]="ref ? columns2 : columns"
-  [operators]="ref ? operators2 : operators"
+  [columns]="ref ? columnsSelect : columns"
+  [operators]="ref ? operatorsSelect : operators"
   [datum]="datum"
   [total]="total"
   [loading]="loading"
-  (query)="onQuery($event)"
+  (query)="search($event)"
 ></app-table-view>

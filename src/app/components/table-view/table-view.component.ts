@@ -31,7 +31,7 @@ export interface TableViewOperator {
 }
 
 export interface TableViewButton {
-  link?: string
+  link?: () => string
   action?: () => void
   text: string
   icon?: string
