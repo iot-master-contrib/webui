@@ -1,24 +1,8 @@
-import {Component, Inject, Optional, signal} from '@angular/core';
+import {Component, Inject, Optional} from '@angular/core';
 import {NZ_MODAL_DATA, NzModalRef, NzModalService,} from 'ng-zorro-antd/modal';
-import {ActivatedRoute, Router, RouterLink} from '@angular/router';
-import {NzMessageService} from 'ng-zorro-antd/message';
-
-import {SearchFormComponent} from '../../../components/search-form/search-form.component';
-import {BatchBtnComponent} from '../../../modals/batch-btn/batch-btn.component';
-import {NzUploadModule} from 'ng-zorro-antd/upload';
-import {NzInputModule} from 'ng-zorro-antd/input';
-import {FormsModule} from '@angular/forms';
-import {NzDividerModule} from 'ng-zorro-antd/divider';
-import {NzTagModule} from 'ng-zorro-antd/tag';
-import {NzTableModule} from 'ng-zorro-antd/table';
+import {ActivatedRoute} from '@angular/router';
 import {CommonModule} from '@angular/common';
-import {NzIconModule} from 'ng-zorro-antd/icon';
-import {NzPopconfirmModule} from 'ng-zorro-antd/popconfirm';
 import {RequestService} from "../../../request.service";
-import {NzPaginationComponent} from "ng-zorro-antd/pagination";
-import {NzButtonComponent} from "ng-zorro-antd/button";
-import {NzSpaceModule} from "ng-zorro-antd/space";
-import {UsersComponent} from "../../users/users/users.component";
 import {
   ParamSearch,
   TableViewButton,
@@ -32,18 +16,9 @@ import {DevicesComponent} from "../../device/devices/devices.component";
 @Component({
   selector: 'app-space-device',
   standalone: true,
-  imports: [NzPopconfirmModule,
-    NzIconModule,
+  imports: [
     CommonModule,
-    NzTableModule,
-    NzTagModule,
-    NzDividerModule,
-    BatchBtnComponent,
-    SearchFormComponent,
-    NzSpaceModule,
-    NzUploadModule,
-    NzInputModule,
-    FormsModule, RouterLink, NzPaginationComponent, NzButtonComponent, TableViewComponent,
+    TableViewComponent,
   ],
   templateUrl: './space-device.component.html',
   styleUrl: './space-device.component.scss'
@@ -83,7 +58,7 @@ export class SpaceDeviceComponent {
 
   constructor(private route: ActivatedRoute,
               private rs: RequestService,
-              private msg: NzMessageService,
+              private msg: NzNotificationService,
               private ms: NzModalService,
               @Optional() protected ref: NzModalRef,
               @Optional() @Inject(NZ_MODAL_DATA) protected data: any
@@ -133,7 +108,7 @@ export class SpaceDeviceComponent {
     }).afterClose.subscribe(res => {
       if (!res) return
       this.rs.get(`space/${this.space_id}/device/${res.id}/bind`, {}).subscribe((res) => {
-        this.msg.success('绑定成功');
+        this.msg.success('提示', '绑定成功');
         this.refresh();
       });
     })
@@ -141,7 +116,7 @@ export class SpaceDeviceComponent {
 
   unbind(i: any) {
     this.rs.get(`space/${this.space_id}/device/${i}/unbind`, {}).subscribe((res) => {
-      this.msg.success('解绑成功');
+      this.msg.success('提示', '解绑成功');
       this.refresh();
     });
   }

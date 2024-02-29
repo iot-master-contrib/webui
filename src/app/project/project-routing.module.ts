@@ -28,8 +28,8 @@ import {SpaceDeviceComponent} from "../pages/space/space-device/space-device.com
 const routes: Routes = [
   {path: "", pathMatch: "full", redirectTo: "dash"},
 
-  {path: 'dash', component: ProjectDashComponent},
-  {path: 'detail', component: ProjectDetailComponent},
+  {path: 'dash', component: ProjectDashComponent, title: "项目控制台"},
+  {path: 'detail', component: ProjectDetailComponent, title: "项目详情"},
 
   // {path: 'device', loadChildren: () => import('../pages/device/device.module').then(m => m.DeviceModule)},
   // {path: 'gateway', loadChildren: () => import('../pages/gateway/gateway.module').then(m => m.GatewayModule)},
@@ -37,44 +37,28 @@ const routes: Routes = [
   // {path: 'space', loadChildren: () => import('../pages/space/space.module').then(m => m.SpaceModule)},
   // {path: 'user', loadChildren: () => import('../pages/users/user.module').then(m => m.UserModule)},
 
-  {path: 'product', component: ProductsComponent},
-  {path: 'product/create', component: ProductEditComponent},
-  {path: 'product/:id', component: ProductDetailComponent},
-  {path: 'product/:id/edit', component: ProductEditComponent},
-  {path: 'product/:id/edit/property', component: ProductEditPropertyComponent},
-  {path: 'product/:id/edit/event', component: ProductEditEventComponent},
-  {path: 'product/:id/edit/action', component: ProductEditActionComponent},
 
-  {path: 'device', component: DevicesComponent},
-  {path: 'device/create', component: DeviceEditComponent},
-  {path: 'device/:id', component: DeviceDetailComponent},
-  {path: 'device/:id/edit', component: DeviceEditComponent},
+  {path: 'device', component: DevicesComponent, title: "设备列表"},
+  {path: 'device/create', component: DeviceEditComponent, title: "创建设备"},
+  {path: 'device/:id', component: DeviceDetailComponent, title: "设备详情"},
+  {path: 'device/:id/edit', component: DeviceEditComponent, title: "编辑设备"},
 
-  {path: 'gateway', component: GatewaysComponent},
-  {path: 'gateway/create', component: GatewayEditComponent},
-  {path: 'gateway/:id', component: GatewayDetailComponent},
-  {path: 'gateway/:id/edit', component: GatewayEditComponent},
+  {path: 'gateway', component: GatewaysComponent, title: "网关列表"},
+  {path: 'gateway/create', component: GatewayEditComponent, title: "创建网关"},
+  {path: 'gateway/:id', component: GatewayDetailComponent, title: "网关详情"},
+  {path: 'gateway/:id/edit', component: GatewayEditComponent, title: "编辑网关"},
 
-  {path: 'project', component: ProjectsComponent},
-  {path: 'project/create', component: ProjectEditComponent},
-  {path: 'project/:id', component: ProjectDetailComponent},
-  {path: 'project/:id/edit', component: ProjectEditComponent},
-  {path: 'project/:id/user', component: ProjectUserComponent},
+  {path: 'space', component: SpacesComponent, title: "空间列表"},
+  {path: 'space/create', component: SpaceEditComponent, title: "创建空间"},
+  {path: 'space/:id', component: SpaceDetailComponent, title: "空间详情"},
+  {path: 'space/:id/edit', component: SpaceEditComponent, title: "空间编辑"},
+  {path: 'space/:id/device', component: SpaceDeviceComponent, title: "绑定设备"},
 
-  {path: 'space', component: SpacesComponent},
-  {path: 'space/create', component: SpaceEditComponent},
-  {path: 'space/:id', component: SpaceDetailComponent},
-  {path: 'space/:id/edit', component: SpaceEditComponent},
-  {path: 'space/:id/device', component: SpaceDeviceComponent},
-
-  {path: 'user', component: ProjectUserComponent},
-  // {path: 'user/create', component: UserEditComponent},
-  // {path: 'user/:id', component: UserDetailComponent},
-  // {path: 'user/:id/edit', component: UserEditComponent},
+  {path: 'user', component: ProjectUserComponent, title: "用户列表"},
 
 
-  {path: "web", component: WebViewComponent},
-  {path: "alarm", component: AlarmComponent},
+  {path: "web", component: WebViewComponent, title: "-"},
+  {path: "alarm", component: AlarmComponent, title: "告警日志"},
   {path: "**", component: UnknownComponent},
 ];
 

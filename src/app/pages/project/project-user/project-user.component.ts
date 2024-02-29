@@ -1,23 +1,8 @@
-import {Component, Inject, Optional, signal} from '@angular/core';
+import {Component, Inject, Optional} from '@angular/core';
 import {NZ_MODAL_DATA, NzModalRef, NzModalService,} from 'ng-zorro-antd/modal';
-import {ActivatedRoute, Router, RouterLink} from '@angular/router';
-import {NzMessageService} from 'ng-zorro-antd/message';
-
-import {SearchFormComponent} from '../../../components/search-form/search-form.component';
-import {BatchBtnComponent} from '../../../modals/batch-btn/batch-btn.component';
-import {NzUploadModule} from 'ng-zorro-antd/upload';
-import {NzInputModule} from 'ng-zorro-antd/input';
-import {FormsModule} from '@angular/forms';
-import {NzDividerModule} from 'ng-zorro-antd/divider';
-import {NzTagModule} from 'ng-zorro-antd/tag';
-import {NzTableModule} from 'ng-zorro-antd/table';
+import {ActivatedRoute} from '@angular/router';
 import {CommonModule} from '@angular/common';
-import {NzIconModule} from 'ng-zorro-antd/icon';
-import {NzPopconfirmModule} from 'ng-zorro-antd/popconfirm';
 import {RequestService} from "../../../request.service";
-import {NzPaginationComponent} from "ng-zorro-antd/pagination";
-import {NzButtonComponent} from "ng-zorro-antd/button";
-import {NzSpaceModule} from "ng-zorro-antd/space";
 import {UsersComponent} from "../../users/users/users.component";
 import {
   ParamSearch,
@@ -31,25 +16,14 @@ import {NzNotificationService} from "ng-zorro-antd/notification";
 @Component({
   selector: 'app-project-user',
   standalone: true,
-  imports: [NzPopconfirmModule,
-    NzIconModule,
+  imports: [
     CommonModule,
-    NzTableModule,
-    NzTagModule,
-    NzDividerModule,
-    BatchBtnComponent,
-    SearchFormComponent,
-    NzSpaceModule,
-    NzUploadModule,
-    NzInputModule,
-    FormsModule, RouterLink, NzPaginationComponent, NzButtonComponent, TableViewComponent,
+    TableViewComponent,
   ],
   templateUrl: './project-user.component.html',
   styleUrl: './project-user.component.scss',
 })
 export class ProjectUserComponent {
-  //从Modal中传参过来
-  //readonly data: any = inject(NZ_MODAL_DATA, {optional:true});
   project_id: any = '';
 
 
@@ -96,7 +70,6 @@ export class ProjectUserComponent {
   ngOnInit(): void {
     if (this.route.parent?.snapshot.paramMap.has('project')) {
       this.project_id = this.route.parent?.snapshot.paramMap.get('project');
-      //console.log("project_id", this.project_id)
     }
   }
 
@@ -118,7 +91,7 @@ export class ProjectUserComponent {
       this.datum = res.data;
       //this.total = res.data.length
     }).add(() => this.loading = false);
-    // this.rs.post('gateway/search', query).subscribe((res) => {
+    // this.rs.post('user/search', query).subscribe((res) => {
     //   this.datum = res.data;
     //   this.total = res.total;
     // }).add(() => this.loading = false);
