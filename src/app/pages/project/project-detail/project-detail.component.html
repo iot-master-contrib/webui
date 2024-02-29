@@ -3,6 +3,7 @@
   <nz-page-header-subtitle>{{ data.name }}</nz-page-header-subtitle>
   <nz-page-header-extra>
     <nz-space>
+      <a nz-button *nzSpaceItem [routerLink]="'/project/'+data.id" target="_blank">打开</a>
       <button *nzSpaceItem nz-button routerLink="edit">编辑</button>
       <button *nzSpaceItem nz-button nz-popconfirm nzPopconfirmTitle="确认删除" (nzOnConfirm)="delete()">删除</button>
     </nz-space>
@@ -20,8 +21,6 @@
 
 
 <nz-divider nzText="空间列表" nzOrientation="left"></nz-divider>
-
-<button nz-button routerLink="/admin/space/create" [queryParams]="{project:this.id}">新建空间</button>
 
 <div nz-row [nzGutter]="[16,16]">
   <div nz-col [nzXXl]="8" [nzXl]="4" [nzLg]="6" [nzMd]="6" [nzSm]="12" [nzXs]="24" *ngFor="let s of spaces">

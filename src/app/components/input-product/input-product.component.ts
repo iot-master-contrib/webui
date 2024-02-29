@@ -45,9 +45,10 @@ export class InputProductComponent implements OnInit, ControlValueAccessor {
   }
 
   writeValue(obj: any): void {
-    this.id = obj
-    if (this.id) {
-      this.load()
+    if (this.id !== obj) {
+      this.id = obj
+      if (this.id)
+        this.load()
     }
   }
 

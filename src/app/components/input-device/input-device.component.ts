@@ -29,6 +29,7 @@ export class InputDeviceComponent implements OnInit, ControlValueAccessor {
 
   private onChange!: any;
 
+  @Input() data: any
   @Input() placeholder = ''
 
   constructor(private ms: NzModalService, private rs: RequestService) {
@@ -45,9 +46,10 @@ export class InputDeviceComponent implements OnInit, ControlValueAccessor {
   }
 
   writeValue(obj: any): void {
-    this.id = obj
-    if (this.id) {
-      this.load()
+    if (this.id !== obj) {
+      this.id = obj
+      if (this.id)
+        this.load()
     }
   }
 
@@ -63,7 +65,8 @@ export class InputDeviceComponent implements OnInit, ControlValueAccessor {
   select() {
     this.ms.create({
       nzTitle: "选择",
-      nzContent: DevicesComponent
+      nzContent: DevicesComponent,
+      nzData: this.data,
     }).afterClose.subscribe(res => {
       console.log(res)
       if (res) {

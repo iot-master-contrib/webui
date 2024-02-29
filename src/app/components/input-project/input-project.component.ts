@@ -11,7 +11,7 @@ import {ProjectsComponent} from "../../pages/project/projects/projects.component
   standalone: true,
   imports: [
     NzInputDirective,
-    NzButtonComponent
+    NzButtonComponent,
   ],
   templateUrl: './input-project.component.html',
   styleUrl: './input-project.component.scss',
@@ -31,6 +31,8 @@ export class InputProjectComponent implements OnInit, ControlValueAccessor {
 
   @Input() placeholder = ''
 
+  protected disabled = false;
+
   constructor(private ms: NzModalService, private rs: RequestService) {
   }
 
@@ -45,10 +47,15 @@ export class InputProjectComponent implements OnInit, ControlValueAccessor {
   }
 
   writeValue(obj: any): void {
-    this.id = obj
-    if (this.id) {
-      this.load()
+    if (this.id !== obj) {
+      this.id = obj
+      if (this.id)
+        this.load()
     }
+  }
+
+  setDisabledState(isDisabled: boolean) {
+    this.disabled = isDisabled
   }
 
   load() {

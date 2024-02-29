@@ -42,6 +42,8 @@ export interface NormalFormItem {
 
   options?: NzSelectOptionInterface[]
 
+  data?: any; //控件参数
+
   pattern?: string | RegExp
   validators?: any[];
 }
@@ -141,13 +143,16 @@ export class NormalFormComponent {
 
       let value = getValue(this._value[f.key], f.default)
 
-      fs[f.key] = [value, validators]
+      fs[f.key] = [{value, disabled: !!f.disabled}, validators]
     })
     this.group = this.fb.group(fs)
   }
 
   patchValues(value: any) {
-    this.group.patchValue(value)
+    setTimeout(()=>{
+      this.group.patchValue(value)
+    })
+
   }
 
   public Validate(): boolean {

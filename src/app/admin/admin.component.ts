@@ -71,7 +71,7 @@ export class AdminComponent {
       name: '网关管理', icon: 'link',
       items: [
         {name: '所有网关', link: 'gateway'},
-        {name: '创建设备', link: 'gateway/create'},
+        {name: '创建网关', link: 'gateway/create'},
         {name: '批量创建', link: 'gateway/batch'},
       ]
     },

@@ -25,13 +25,15 @@ export class DeviceEditComponent implements OnInit, AfterViewInit {
   id: any = '';
   project_id: any = '';
 
+  data:any = {}
+
   @ViewChild('form') form!: NormalFormComponent
 
   fields: NormalFormItem[] = [
     {key: "id", label: "ID", type: "text", min: 2, max: 30, placeholder: "选填"},
     {key: "name", label: "名称", type: "text", required: true, default: '新设备'},
     {key: "keywords", label: "关键字", type: "tags", default: []},
-    {key: "gateway_id", label: "网关", type: "gateway"},
+    {key: "gateway_id", label: "网关", type: "gateway", data: this.data},
     {key: "product_id", label: "产品", type: "product"},
     {key: "project_id", label: "项目", type: "project"},
     {key: "description", label: "说明", type: "textarea"},
@@ -57,7 +59,10 @@ export class DeviceEditComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     if (this.route.parent?.snapshot.paramMap.has('project')) {
       this.project_id = this.route.parent?.snapshot.paramMap.get('project');
+      this.data.project_id = this.project_id
       this.form.patchValues({project_id: this.project_id})
+      //this.fields[5].disabled = true
+      this.form.group.get('project_id')?.disable()
     }
   }
 
