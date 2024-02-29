@@ -88,8 +88,8 @@ export class GatewaysComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
               private rs: RequestService,
-    @Optional() protected ref: NzModalRef,
-    @Optional() @Inject(NZ_MODAL_DATA) protected data: any
+              @Optional() protected ref: NzModalRef,
+              @Optional() @Inject(NZ_MODAL_DATA) protected data: any
   ) {
     this.project_id = data?.project_id;
   }

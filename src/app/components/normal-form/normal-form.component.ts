@@ -40,7 +40,7 @@ export interface NormalFormItem {
 
   action?: string //文件上传
 
-  options?: NzSelectOptionInterface
+  options?: NzSelectOptionInterface[]
 
   pattern?: string | RegExp
   validators?: any[];
@@ -146,11 +146,11 @@ export class NormalFormComponent {
     this.group = this.fb.group(fs)
   }
 
-  patchValues() {
-
+  patchValues(value: any) {
+    this.group.patchValue(value)
   }
 
-  public Validate() :boolean {
+  public Validate(): boolean {
     //检查
     for (const i in this.group.controls) {
       this.group.controls[i].markAsDirty();

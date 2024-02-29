@@ -1,146 +1,81 @@
-import {Component, OnInit, signal} from '@angular/core';
-import {DatePipe} from '@angular/common';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {NzButtonComponent} from 'ng-zorro-antd/button';
-import {
-  NzDescriptionsComponent,
-  NzDescriptionsItemComponent,
-} from 'ng-zorro-antd/descriptions';
-import {
-  NzPageHeaderComponent,
-  NzPageHeaderContentDirective,
-  NzPageHeaderExtraDirective,
-  NzPageHeaderSubtitleDirective,
-  NzPageHeaderTitleDirective,
-} from 'ng-zorro-antd/page-header';
-import {NzPopconfirmDirective} from 'ng-zorro-antd/popconfirm';
-import {NzSpaceComponent, NzSpaceItemDirective} from 'ng-zorro-antd/space';
-import {ActivatedRoute, Router, RouterLink} from '@angular/router';
-import {
-  NzFormDirective,
-  NzFormItemComponent,
-  NzFormModule,
-} from 'ng-zorro-antd/form';
-import {
-  FormBuilder,
-  FormGroup,
-  FormsModule,
-  ReactiveFormsModule,
-} from '@angular/forms';
-import {
-  NzInputDirective,
-  NzTextareaCountComponent,
-} from 'ng-zorro-antd/input';
-import {NzUploadChangeParam, NzUploadComponent} from 'ng-zorro-antd/upload';
-import {NzIconDirective} from 'ng-zorro-antd/icon';
-import {NzSelectComponent} from 'ng-zorro-antd/select';
-import {NzMessageService} from 'ng-zorro-antd/message';
+import {ActivatedRoute, RouterLink} from '@angular/router';
 import {RequestService} from '../../../request.service';
-import {NzAutocompleteModule} from 'ng-zorro-antd/auto-complete';
-import {NzModalRef, NzModalService} from 'ng-zorro-antd/modal';
-import {DevicesComponent} from '../../device/devices/devices.component';
-import {NzSelectModule} from 'ng-zorro-antd/select';
-import {InputProjectComponent} from "../../../components/input-project/input-project.component";
+import {NzMessageService} from 'ng-zorro-antd/message';
+import {CommonModule} from '@angular/common';
+import {Router} from '@angular/router';
 import {NzCardComponent} from "ng-zorro-antd/card";
+import {NormalFormComponent, NormalFormItem} from "../../../components/normal-form/normal-form.component";
 
 @Component({
   selector: 'app-space-edit',
   standalone: true,
   imports: [
-    NzSelectModule,
-    NzAutocompleteModule,
-    DatePipe,
+    CommonModule,
     NzButtonComponent,
-    NzDescriptionsComponent,
-    NzDescriptionsItemComponent,
-    NzPageHeaderComponent,
-    NzPageHeaderContentDirective,
-    NzPageHeaderExtraDirective,
-    NzPageHeaderSubtitleDirective,
-    NzPageHeaderTitleDirective,
-    NzPopconfirmDirective,
-    NzSpaceComponent,
     RouterLink,
-    NzSpaceItemDirective,
-    FormsModule,
-    ReactiveFormsModule,
-    NzFormModule,
-    NzInputDirective,
-    NzTextareaCountComponent,
-    NzUploadComponent,
-    NzIconDirective,
-    NzSelectComponent,
-    InputProjectComponent,
     NzCardComponent,
+    NormalFormComponent,
   ],
   templateUrl: './space-edit.component.html',
   styleUrl: './space-edit.component.scss',
 })
 export class SpaceEditComponent implements OnInit {
-  data: any = {
-    name: '新设备',
-  };
+  id: any = '';
+  project_id: any = '';
 
-  id!: any;
-  formGroup!: FormGroup;
+  @ViewChild('form') form!: NormalFormComponent
 
-  constructor(
-    private fb: FormBuilder,
-    private router: Router,
-    private msg: NzMessageService,
-    private rs: RequestService,
-    private route: ActivatedRoute,
-    private ms: NzModalService
+  fields: NormalFormItem[] = [
+    {key: "id", label: "ID", type: "text", min: 2, max: 30, placeholder: "选填"},
+    {key: "name", label: "名称", type: "text", required: true, default: '新空间'},
+    {key: "project_id", label: "项目", type: "project"},
+    {key: "description", label: "说明", type: "textarea"},
+  ]
+
+  values: any = {}
+
+
+  constructor(private router: Router,
+              private msg: NzMessageService,
+              private rs: RequestService,
+              private route: ActivatedRoute
   ) {
-  }
-
-  buildFromGroup(data?: any) {
-    data = data || {};
-    this.formGroup = this.fb.group({
-      id: [data.id || null, []],
-      project_id: [data.project_id || '', []],
-      name: [data.name || '', []],
-      description: [data.description || '', []],
-    });
   }
 
   ngOnInit(): void {
     if (this.route.snapshot.paramMap.has('id')) {
       this.id = this.route.snapshot.paramMap.get('id');
-      this.load();
+      this.load()
     }
-
-
-    this.buildFromGroup();
-
-    if (this.route.snapshot.queryParamMap.has('project')) {
-      let project = this.route.snapshot.queryParamMap.get('project');
-      this.formGroup.patchValue({project_id: project})
-    }
-
   }
+
+  ngAfterViewInit(): void {
+    if (this.route.parent?.snapshot.paramMap.has('project')) {
+      this.project_id = this.route.parent?.snapshot.paramMap.get('project');
+      this.form.patchValues({project_id: this.project_id})
+    }
+  }
+
 
   load() {
     this.rs.get(`space/${this.id}`).subscribe((res) => {
-      this.buildFromGroup(res.data);
+      this.values = res.data
     });
   }
 
   onSubmit() {
-    if (this.formGroup.valid) {
-      let url = this.id ? `space/${this.id}` : `space/create`;
-      this.rs.post(url, this.formGroup.value).subscribe((res) => {
-        this.router.navigateByUrl('/admin/space/' + res.data.id);
-        this.msg.success('保存成功');
-      });
+    if (!this.form.Validate())
+      return
 
-      return;
-    } else {
-      Object.values(this.formGroup.controls).forEach((control) => {
-        if (control.invalid) {
-          control.markAsDirty();
-          control.updateValueAndValidity({onlySelf: true});
-        }
-      });
-    }
+    let url = `space/${this.id || 'create'}`
+    this.rs.post(url, this.form.Value()).subscribe((res) => {
+      if (this.project_id)
+        this.router.navigateByUrl('/project/' + this.project_id + '/space/' + res.data.id);
+      else
+        this.router.navigateByUrl('/admin/space/' + res.data.id);
+      this.msg.success('保存成功');
+    });
   }
 }

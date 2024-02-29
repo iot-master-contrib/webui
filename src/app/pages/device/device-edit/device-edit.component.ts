@@ -1,155 +1,84 @@
-import {Component, signal} from '@angular/core';
-import {DatePipe} from '@angular/common';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {NzButtonComponent} from 'ng-zorro-antd/button';
-import {
-  NzDescriptionsComponent,
-  NzDescriptionsItemComponent,
-} from 'ng-zorro-antd/descriptions';
-import {
-  NzPageHeaderComponent,
-  NzPageHeaderContentDirective,
-  NzPageHeaderExtraDirective,
-  NzPageHeaderSubtitleDirective,
-  NzPageHeaderTitleDirective,
-} from 'ng-zorro-antd/page-header';
-import {NzPopconfirmDirective} from 'ng-zorro-antd/popconfirm';
-import {NzSpaceComponent, NzSpaceItemDirective} from 'ng-zorro-antd/space';
-import {ActivatedRoute, Router, RouterLink} from '@angular/router';
-import {
-  NzFormDirective,
-  NzFormItemComponent,
-  NzFormModule,
-} from 'ng-zorro-antd/form';
-import {
-  FormBuilder,
-  FormGroup,
-  FormsModule,
-  ReactiveFormsModule,
-} from '@angular/forms';
-import {
-  NzInputDirective,
-  NzTextareaCountComponent,
-} from 'ng-zorro-antd/input';
-import {NzUploadChangeParam, NzUploadComponent} from 'ng-zorro-antd/upload';
-import {NzIconDirective} from 'ng-zorro-antd/icon';
-import {NzSelectComponent} from 'ng-zorro-antd/select';
-import {NzMessageService} from 'ng-zorro-antd/message';
+import {ActivatedRoute, RouterLink} from '@angular/router';
 import {RequestService} from '../../../request.service';
-import {NzAutocompleteModule} from 'ng-zorro-antd/auto-complete';
-import {NzModalRef, NzModalService} from 'ng-zorro-antd/modal';
-import {GatewaysComponent} from '../../gateway/gateways/gateways.component';
-import {ProductsComponent} from '../../product/products/products.component';
-import {ProjectsComponent} from '../../project/projects/projects.component';
-import {NzSelectModule} from 'ng-zorro-antd/select';
-import {InputProductComponent} from "../../../components/input-product/input-product.component";
-import {InputGatewayComponent} from "../../../components/input-gateway/input-gateway.component";
-import {InputProjectComponent} from "../../../components/input-project/input-project.component";
+import {NzMessageService} from 'ng-zorro-antd/message';
+import {CommonModule} from '@angular/common';
+import {Router} from '@angular/router';
 import {NzCardComponent} from "ng-zorro-antd/card";
+import {NormalFormComponent, NormalFormItem} from "../../../components/normal-form/normal-form.component";
 
 @Component({
   selector: 'app-device-edit',
   standalone: true,
   imports: [
-    NzSelectModule,
-    NzAutocompleteModule,
-    DatePipe,
+    CommonModule,
     NzButtonComponent,
-    NzDescriptionsComponent,
-    NzDescriptionsItemComponent,
-    NzPageHeaderComponent,
-    NzPageHeaderContentDirective,
-    NzPageHeaderExtraDirective,
-    NzPageHeaderSubtitleDirective,
-    NzPageHeaderTitleDirective,
-    NzPopconfirmDirective,
-    NzSpaceComponent,
     RouterLink,
-    NzSpaceItemDirective,
-    FormsModule,
-    ReactiveFormsModule,
-    NzFormModule,
-    NzInputDirective,
-    NzTextareaCountComponent,
-    NzUploadComponent,
-    NzIconDirective,
-    NzSelectComponent,
-    InputProductComponent,
-    InputGatewayComponent,
-    InputProjectComponent,
     NzCardComponent,
+    NormalFormComponent,
   ],
   templateUrl: './device-edit.component.html',
   styleUrl: './device-edit.component.scss',
 })
-export class DeviceEditComponent {
-  data: any = {
-    name: '新设备',
-  };
+export class DeviceEditComponent implements OnInit, AfterViewInit {
+  id: any = '';
+  project_id: any = '';
+
+  @ViewChild('form') form!: NormalFormComponent
+
+  fields: NormalFormItem[] = [
+    {key: "id", label: "ID", type: "text", min: 2, max: 30, placeholder: "选填"},
+    {key: "name", label: "名称", type: "text", required: true, default: '新设备'},
+    {key: "keywords", label: "关键字", type: "tags", default: []},
+    {key: "gateway_id", label: "网关", type: "gateway"},
+    {key: "product_id", label: "产品", type: "product"},
+    {key: "project_id", label: "项目", type: "project"},
+    {key: "description", label: "说明", type: "textarea"},
+  ]
+
+  values: any = {}
 
 
-  id!: any;
-  formGroup!: FormGroup;
-
-  constructor(
-    private fb: FormBuilder,
-    private router: Router,
-    private msg: NzMessageService,
-    private rs: RequestService,
-    private route: ActivatedRoute,
-    private ms: NzModalService
+  constructor(private router: Router,
+              private msg: NzMessageService,
+              private rs: RequestService,
+              private route: ActivatedRoute
   ) {
-  }
-
-  onInputChange() {
-    console.log(this.formGroup.value.gateway_id);
-  }
-
-  buildFromGroup(data?: any) {
-    data = data || {};
-    this.formGroup = this.fb.group({
-      id: [data.id || '', []],
-      name: [data.name || '', []],
-      description: [data.description || '', []],
-      gateway_id: [data.gateway_id || '', []],
-      product_id: [data.product_id || '', []],
-      project_id: [data.project_id || '', []],
-      keywords: [data.keywords || [], []],
-    });
   }
 
   ngOnInit(): void {
     if (this.route.snapshot.paramMap.has('id')) {
       this.id = this.route.snapshot.paramMap.get('id');
-      this.load();
+      this.load()
     }
-    this.buildFromGroup();
   }
+
+  ngAfterViewInit(): void {
+    if (this.route.parent?.snapshot.paramMap.has('project')) {
+      this.project_id = this.route.parent?.snapshot.paramMap.get('project');
+      this.form.patchValues({project_id: this.project_id})
+    }
+  }
+
 
   load() {
     this.rs.get(`device/${this.id}`).subscribe(res => {
-      this.buildFromGroup(res.data);
+      this.values = res.data
     });
   }
 
   onSubmit() {
-    if (this.formGroup.valid) {
-      let data = this.formGroup.value
-      let url = `device/${this.id || 'create'}`;
-      this.rs.post(url, data).subscribe((res) => {
+    if (!this.form.Validate())
+      return
+
+    let url = `device/${this.id || 'create'}`
+    this.rs.post(url, this.form.Value()).subscribe((res) => {
+      if (this.project_id)
+        this.router.navigateByUrl('/project/' + this.project_id + '/device/' + res.data.id);
+      else
         this.router.navigateByUrl('/admin/device/' + res.data.id);
-        this.msg.success('保存成功');
-      });
-      return;
-    }
-
-    Object.values(this.formGroup.controls).forEach((control) => {
-      if (control.invalid) {
-        control.markAsDirty();
-        control.updateValueAndValidity({onlySelf: true});
-      }
+      this.msg.success('保存成功');
     });
-  }
-
-  onIconChange($event: NzUploadChangeParam) {
   }
 }

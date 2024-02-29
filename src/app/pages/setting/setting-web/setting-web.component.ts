@@ -1,122 +1,66 @@
-import {Component, OnInit} from '@angular/core';
-import {
-  FormBuilder,
-  FormGroup,
-  FormsModule,
-  ReactiveFormsModule,
-} from '@angular/forms';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {NzButtonComponent} from 'ng-zorro-antd/button';
-import {NzColDirective, NzRowDirective} from 'ng-zorro-antd/grid';
-import {
-  NzFormControlComponent,
-  NzFormDirective,
-  NzFormItemComponent,
-  NzFormLabelComponent,
-} from 'ng-zorro-antd/form';
-import {
-  NzInputDirective,
-  NzTextareaCountComponent,
-} from 'ng-zorro-antd/input';
-import {
-  NzPageHeaderComponent,
-  NzPageHeaderExtraDirective,
-  NzPageHeaderSubtitleDirective,
-  NzPageHeaderTitleDirective,
-} from 'ng-zorro-antd/page-header';
-import {NzOptionComponent, NzSelectComponent} from 'ng-zorro-antd/select';
-import {NzSpaceComponent, NzSpaceItemDirective} from 'ng-zorro-antd/space';
-import {NzSwitchComponent} from 'ng-zorro-antd/switch';
-import {
-  NzUploadChangeParam,
-  NzUploadComponent,
-  NzUploadModule,
-} from 'ng-zorro-antd/upload';
-import {NzIconDirective} from 'ng-zorro-antd/icon';
-import {NgIf} from '@angular/common';
-import {Router} from '@angular/router';
+import {RouterLink} from '@angular/router';
 import {RequestService} from '../../../request.service';
 import {NzMessageService} from 'ng-zorro-antd/message';
+import {CommonModule} from '@angular/common';
 import {NzCardComponent} from "ng-zorro-antd/card";
+import {NormalFormComponent, NormalFormItem} from "../../../components/normal-form/normal-form.component";
 
 @Component({
   selector: 'app-setting-web',
   standalone: true,
   imports: [
-    FormsModule,
+    CommonModule,
     NzButtonComponent,
-    NzColDirective,
-    NzFormControlComponent,
-    NzFormDirective,
-    NzFormItemComponent,
-    NzFormLabelComponent,
-    NzInputDirective,
-    NzPageHeaderComponent,
-    NzPageHeaderExtraDirective,
-    NzPageHeaderSubtitleDirective,
-    NzPageHeaderTitleDirective,
-    NzRowDirective,
-    NzSelectComponent,
-    NzSpaceComponent,
-    NzTextareaCountComponent,
-    ReactiveFormsModule,
-    NzSpaceItemDirective,
-    NzSwitchComponent,
-    NzOptionComponent,
-    NzUploadComponent,
-    NzIconDirective,
-    NgIf,
+    RouterLink,
     NzCardComponent,
+    NormalFormComponent,
   ],
   templateUrl: './setting-web.component.html',
   styleUrl: './setting-web.component.scss',
 })
 export class SettingWebComponent implements OnInit {
-  formGroup!: FormGroup;
 
-  data: any = {};
+  @ViewChild('form') form!: NormalFormComponent
 
-  constructor(
-    private fb: FormBuilder,
-    private route: Router,
-    private rs: RequestService,
-    private msg: NzMessageService
-  ) {
-    this.buildFromGroup();
+  fields: NormalFormItem[] = [
+    {key: "port", label: "端口", type: "number", required: true, default: 8080, min: 1, max: 65535},
+    {key: "debug", label: "调试模式", type: "switch"},
+    {key: "cors", label: "跨域请求", type: "switch"},
+    {key: "gzip", label: "压缩模式", type: "switch"},
+    {
+      key: "https", label: "HTTPS", type: "select",
+      options: [
+        {label: '禁用', value: ''},
+        {label: 'TLS', value: 'TLS'},
+        {label: 'LetsEncrypt', value: 'LetsEncrypt'},
+      ]
+    },
+    {key: "cert", label: "证书cert", type: "file"},
+    {key: "key", label: "证书key", type: "file"},
+    {key: "email", label: "E-Mail", type: "text"},
+    {key: "hosts", label: "域名", type: "tags", default: []},
+    //{key: "id", label: "ID规则", type: "select", default: []},
+  ]
+
+  values: any = {}
+
+  constructor(private msg: NzMessageService, private rs: RequestService,) {
   }
 
   ngOnInit(): void {
     this.rs.get('setting/web', {}).subscribe(res => {
-      this.data = res.data
-      this.buildFromGroup()
+      this.values = res.data
     });
   }
-
-  buildFromGroup() {
-    this.formGroup = this.fb.group({
-      port: [this.data.port || 8080, []],
-      https: [this.data.https || '', []],
-      cert: [this.data.cert || '', []],
-      key: [this.data.key || '', []],
-      email: [this.data.email || '', []],
-    });
-    //console.log(this.formGroup)
-  }
-
   onSubmit() {
-    this.rs.post('setting/web', this.formGroup.value).subscribe(
-      (res) => {
-        // this.projects = res.data;
-        // this.total = res.total;
-      },
-      (err) => {
-        console.log('err:', err);
-      }
-    );
-  }
+    if (!this.form.Validate())
+      return
 
-  onCertChange($event: NzUploadChangeParam) {
-  }
-
-  onKeyChange($event: NzUploadChangeParam) {
+    let url = `setting/web`
+    this.rs.post(url, this.form.Value()).subscribe((res) => {
+      this.msg.success('保存成功');
+    });
   }
 }

@@ -1,58 +1,7 @@
 <nz-card [nzTitle]="'设备'+ (this.id ? '编辑' : '创建') " [nzExtra]="extraTemplate">
-
-  <form nz-form [formGroup]="formGroup">
-
-    <nz-form-item>
-      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="id">ID</nz-form-label>
-      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="">
-        <input nz-input formControlName="id" placeholder="选填，默认随机"/>
-      </nz-form-control>
-    </nz-form-item>
-
-    <nz-form-item>
-      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">名称</nz-form-label>
-      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="">
-        <input nz-input formControlName="name"/>
-      </nz-form-control>
-    </nz-form-item>
-
-
-    <nz-form-item>
-      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="gateway_id">网关</nz-form-label>
-      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="">
-        <app-input-gateway formControlName="gateway_id"></app-input-gateway>
-      </nz-form-control>
-    </nz-form-item>
-
-    <nz-form-item>
-      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="product_id">产品</nz-form-label>
-      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="">
-        <app-input-product formControlName="product_id"></app-input-product>
-      </nz-form-control>
-    </nz-form-item>
-
-
-    <nz-form-item>
-      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="project_id">项目</nz-form-label>
-      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="">
-        <app-input-project formControlName="project_id"></app-input-project>
-      </nz-form-control>
-    </nz-form-item>
-
-    <nz-form-item>
-      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="description">说明</nz-form-label>
-      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="">
-        <nz-textarea-count [nzMaxCharacterCount]="200">
-          <textarea rows="4" nz-input formControlName="description"></textarea>
-        </nz-textarea-count>
-      </nz-form-control>
-    </nz-form-item>
-
-
-  </form>
-
-
+  <app-normal-form #form [fields]="fields" [value]="values"></app-normal-form>
 </nz-card>
+
 <ng-template #extraTemplate>
   <button nz-button nzType="primary" (click)="onSubmit()">保存</button>
 </ng-template>

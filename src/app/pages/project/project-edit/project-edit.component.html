@@ -1,9 +1,5 @@
 <nz-card [nzTitle]="'项目'+ (this.id ? '编辑' : '创建') " [nzExtra]="extraTemplate">
-  <app-normal-form #form
-    [fields]="fields"
-    [value]="values"
-  ></app-normal-form>
-
+  <app-normal-form #form [fields]="fields" [value]="values"></app-normal-form>
 </nz-card>
 
 <ng-template #extraTemplate>

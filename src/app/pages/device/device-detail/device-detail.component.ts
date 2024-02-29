@@ -26,7 +26,8 @@ import {
 import {FormBuilder} from '@angular/forms';
 import {NzMessageService} from 'ng-zorro-antd/message';
 import {RequestService} from '../../../request.service';
-import { AlarmComponent } from '../../alarm/alarm.component';
+import {AlarmComponent} from '../../alarm/alarm.component';
+
 @Component({
   selector: 'app-device-detail',
   standalone: true,

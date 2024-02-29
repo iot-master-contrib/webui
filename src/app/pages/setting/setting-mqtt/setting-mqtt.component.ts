@@ -1,129 +1,54 @@
-import {Component, OnInit} from '@angular/core';
-import {NzMessageService} from 'ng-zorro-antd/message';
-import {RequestService} from '../../../request.service';
-import {
-  FormBuilder,
-  FormGroup,
-  FormsModule,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {NzButtonComponent} from 'ng-zorro-antd/button';
-import {NzColDirective, NzRowDirective} from 'ng-zorro-antd/grid';
-import {
-  NzFormControlComponent,
-  NzFormDirective,
-  NzFormItemComponent,
-  NzFormLabelComponent,
-} from 'ng-zorro-antd/form';
-import {
-  NzInputDirective,
-  NzTextareaCountComponent,
-} from 'ng-zorro-antd/input';
-import {
-  NzPageHeaderComponent,
-  NzPageHeaderExtraDirective,
-  NzPageHeaderSubtitleDirective,
-  NzPageHeaderTitleDirective,
-} from 'ng-zorro-antd/page-header';
-import {NzOptionComponent, NzSelectComponent} from 'ng-zorro-antd/select';
-import {NzSpaceComponent, NzSpaceItemDirective} from 'ng-zorro-antd/space';
-import {NzSwitchComponent} from 'ng-zorro-antd/switch';
-import {
-  NzUploadChangeParam,
-  NzUploadComponent,
-  NzUploadModule,
-} from 'ng-zorro-antd/upload';
-import {NzIconDirective} from 'ng-zorro-antd/icon';
-import {NgIf} from '@angular/common';
-import {Router} from '@angular/router';
+import {RouterLink} from '@angular/router';
+import {RequestService} from '../../../request.service';
+import {NzMessageService} from 'ng-zorro-antd/message';
+import {CommonModule} from '@angular/common';
 import {NzCardComponent} from "ng-zorro-antd/card";
+import {NormalFormComponent, NormalFormItem} from "../../../components/normal-form/normal-form.component";
 
 @Component({
   selector: 'app-setting-mqtt',
   standalone: true,
   imports: [
-    FormsModule,
+    CommonModule,
     NzButtonComponent,
-    NzColDirective,
-    NzFormControlComponent,
-    NzFormDirective,
-    NzFormItemComponent,
-    NzFormLabelComponent,
-    NzInputDirective,
-    NzPageHeaderComponent,
-    NzPageHeaderExtraDirective,
-    NzPageHeaderSubtitleDirective,
-    NzPageHeaderTitleDirective,
-    NzRowDirective,
-    NzSelectComponent,
-    NzSpaceComponent,
-    NzTextareaCountComponent,
-    ReactiveFormsModule,
-    NzSpaceItemDirective,
-    NzSwitchComponent,
-    NzOptionComponent,
-    NzUploadComponent,
-    NzIconDirective,
-    NgIf,
+    RouterLink,
     NzCardComponent,
+    NormalFormComponent,
   ],
   templateUrl: './setting-mqtt.component.html',
   styleUrl: './setting-mqtt.component.scss'
 })
 export class SettingMqttComponent implements OnInit {
-  formGroup!: FormGroup;
-  data: any = {};
 
-  constructor(
-    private fb: FormBuilder,
-    private route: Router,
-    private rs: RequestService,
-    private msg: NzMessageService
-  ) {
-    this.buildFromGroup();
-  }
+  @ViewChild('form') form!: NormalFormComponent
 
-  buildFromGroup() {
-    this.formGroup = this.fb.group({
-      ClientId: ['', [Validators.required]],
-      Username: ['', [Validators.required]],
-      Url: ['', [Validators.required]],
-      Password: ['', [Validators.required]],
-    });
-    //console.log(this.formGroup)
+  fields: NormalFormItem[] = [
+    {key: "url", label: "地址", type: "text", required: true, default: ''},
+    {key: "username", label: "用户名", type: "text"},
+    {key: "password", label: "密码", type: "text"},
+    {key: "client_id", label: "客户端ID", type: "text"},
+  ]
+
+  values: any = {}
+
+  constructor(private msg: NzMessageService, private rs: RequestService,) {
   }
 
   ngOnInit(): void {
     this.rs.get('setting/mqtt', {}).subscribe(res => {
-      this.data = res.data
-      this.buildFromGroup()
+      this.values = res.data
     });
   }
 
   onSubmit() {
+    if (!this.form.Validate())
+      return
 
-    if (this.formGroup.valid) {
-      this.rs.post('setting/mqtt', this.formGroup.value).subscribe(
-        (res) => {
-          // this.projects = res.data;
-          // this.total = res.total;
-        },
-        (err) => {
-          console.log('err:', err);
-        }
-      );
-
-      return;
-    } else {
-      Object.values(this.formGroup.controls).forEach((control) => {
-        if (control.invalid) {
-          control.markAsDirty();
-          control.updateValueAndValidity({onlySelf: true});
-        }
-      });
-    }
-
-
+    let url = `setting/mqtt`
+    this.rs.post(url, this.form.Value()).subscribe((res) => {
+      this.msg.success('保存成功');
+    });
   }
 }

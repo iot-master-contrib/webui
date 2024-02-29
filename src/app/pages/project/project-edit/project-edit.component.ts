@@ -22,17 +22,13 @@ import {NormalFormComponent, NormalFormItem} from "../../../components/normal-fo
   styleUrl: './project-edit.component.scss',
 })
 export class ProjectEditComponent implements OnInit {
-  data: any = {
-    name: '新项目',
-  };
-
   id: any = '';
 
   @ViewChild('form') form!: NormalFormComponent
 
   fields: NormalFormItem[] = [
     {key: "id", label: "ID", type: "text", min: 2, max: 30, placeholder: "选填"},
-    {key: "name", label: "名称", type: "text", required: true},
+    {key: "name", label: "名称", type: "text", required: true, default: '新项目'},
     {key: "keywords", label: "关键字", type: "tags", default: []},
     {key: "version", label: "版本", type: "text"},
     {key: "url", label: "链接", type: "text"},
