@@ -67,8 +67,10 @@ export class SpaceEditComponent implements OnInit {
   }
 
   onSubmit() {
-    if (!this.form.Validate())
+    if (!this.form.Validate()) {
+      this.msg.error('请检查数据')
       return
+    }
 
     let url = `space/${this.id || 'create'}`
     this.rs.post(url, this.form.Value()).subscribe((res) => {

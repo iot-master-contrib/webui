@@ -1,94 +1,78 @@
-import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {NgIf} from "@angular/common";
-import {NzButtonComponent} from "ng-zorro-antd/button";
-import {NzColDirective, NzRowDirective} from "ng-zorro-antd/grid";
-import {NzFormControlComponent, NzFormDirective, NzFormItemComponent, NzFormLabelComponent} from "ng-zorro-antd/form";
-import {NzInputDirective} from "ng-zorro-antd/input";
-import {NzOptionComponent, NzSelectComponent} from "ng-zorro-antd/select";
-import {
-  NzPageHeaderComponent,
-  NzPageHeaderExtraDirective,
-  NzPageHeaderSubtitleDirective, NzPageHeaderTitleDirective
-} from "ng-zorro-antd/page-header";
-import {NzSpaceComponent} from "ng-zorro-antd/space";
-import {NzSwitchComponent} from "ng-zorro-antd/switch";
-import {Router} from '@angular/router';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {NzButtonComponent} from 'ng-zorro-antd/button';
+import {RouterLink} from '@angular/router';
 import {RequestService} from '../../../request.service';
 import {NzMessageService} from 'ng-zorro-antd/message';
+import {CommonModule} from '@angular/common';
 import {NzCardComponent} from "ng-zorro-antd/card";
+import {NormalFormComponent, NormalFormItem} from "../../../components/normal-form/normal-form.component";
 
 @Component({
   selector: 'app-setting-log',
   standalone: true,
   imports: [
-    FormsModule,
-    NgIf,
+    CommonModule,
     NzButtonComponent,
-    NzColDirective,
-    NzFormControlComponent,
-    NzFormDirective,
-    NzFormItemComponent,
-    NzFormLabelComponent,
-    NzInputDirective,
-    NzOptionComponent,
-    NzPageHeaderComponent,
-    NzPageHeaderExtraDirective,
-    NzPageHeaderSubtitleDirective,
-    NzPageHeaderTitleDirective,
-    NzRowDirective,
-    NzSelectComponent,
-    NzSpaceComponent,
-    ReactiveFormsModule,
-    NzSwitchComponent,
-    NzCardComponent
+    RouterLink,
+    NzCardComponent,
+    NormalFormComponent,
   ],
   templateUrl: './setting-log.component.html',
   styleUrl: './setting-log.component.scss'
 })
 export class SettingLogComponent implements OnInit {
-  formGroup!: FormGroup;
 
-  data: any = {}
+  @ViewChild('form') form!: NormalFormComponent
 
-  constructor(private fb: FormBuilder,
-              private route: Router,
-              private rs: RequestService,
-              private msg: NzMessageService) {
-    this.buildFromGroup()
+  fields: NormalFormItem[] = [
+    {key: "caller", label: "显示函数调用", type: "switch"},
+    {key: "text", label: "使用文本格式", type: "switch"},
+    {
+      key: "level", label: "等级", type: "select", default: 'info',
+      options: [
+        {label: '跟踪 trace', value: 'trace'},
+        {label: '调试 debug', value: 'debug'},
+        {label: '信息 info', value: 'info'},
+        {label: '警告 warn', value: 'warn'},
+        {label: '错误 error', value: 'error'},
+        {label: '严重 fatal', value: 'fatal'},
+      ]
+    },
+    {
+      key: "type", label: "输出方式", type: "select", default: 'stdout',
+      options: [
+        {label: '文件', value: 'file'},
+        {label: '多文件', value: 'files'},
+        {label: '标准输出', value: 'stdout'},
+      ]
+    },
+    {key: "filename", label: "日志文件", type: "text", default: 'log.txt'},
+    {key: "compress", label: "日志文件压缩", type: "switch"},
+    {key: "max_size", label: "最大尺寸 MB", type: "number", default: 10, min: 1},
+    {key: "max_backups", label: "保留数量（滚动删除）", type: "number", default: 100, min: 1},
+    {key: "max_age", label: "最大保留天数", type: "number", default: 30, min: 1},
+  ]
+
+  values: any = {}
+
+  constructor(private msg: NzMessageService, private rs: RequestService,) {
   }
 
   ngOnInit(): void {
     this.rs.get('setting/log', {}).subscribe(res => {
-      this.data = res.data
-      this.buildFromGroup()
+      this.values = res.data
     });
   }
 
-  buildFromGroup() {
-    this.formGroup = this.fb.group({
-      level: [this.data.level || 'info', []],
-      caller: [this.data.caller || true, []],
-      text: [this.data.text || true, []],
-      output: [this.data.output || "stdout", []],
-      filename: [this.data.filename || "log.txt", []],
-      max_size: [this.data.max_size || 10, []],  //MB
-      max_backups: [this.data.max_backups || 3, []], //保留文件数
-      max_age: [this.data.max_age || 30, []],   //天
-      compress: [this.data.compress || true, []], //gzip压缩
-    })
-    //console.log(this.formGroup)
-  }
-
   onSubmit() {
-    this.rs.post('setting/log', this.formGroup.value).subscribe(
-      (res) => {
-        // this.projects = res.data;
-        // this.total = res.total;
-      },
-      (err) => {
-        console.log('err:', err);
-      }
-    );
+    if (!this.form.Validate()) {
+      this.msg.error('请检查数据')
+      return
+    }
+
+    let url = `setting/log`
+    this.rs.post(url, this.form.Value()).subscribe((res) => {
+      this.msg.success('保存成功');
+    });
   }
 }

@@ -149,7 +149,7 @@ export class NormalFormComponent {
   }
 
   patchValues(value: any) {
-    setTimeout(()=>{
+    setTimeout(() => {
       this.group.patchValue(value)
     })
 

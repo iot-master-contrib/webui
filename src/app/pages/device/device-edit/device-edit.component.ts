@@ -25,7 +25,7 @@ export class DeviceEditComponent implements OnInit, AfterViewInit {
   id: any = '';
   project_id: any = '';
 
-  data:any = {}
+  data: any = {}
 
   @ViewChild('form') form!: NormalFormComponent
 
@@ -61,7 +61,6 @@ export class DeviceEditComponent implements OnInit, AfterViewInit {
       this.project_id = this.route.parent?.snapshot.paramMap.get('project');
       this.data.project_id = this.project_id
       this.form.patchValues({project_id: this.project_id})
-      //this.fields[5].disabled = true
       this.form.group.get('project_id')?.disable()
     }
   }
@@ -74,8 +73,10 @@ export class DeviceEditComponent implements OnInit, AfterViewInit {
   }
 
   onSubmit() {
-    if (!this.form.Validate())
+    if (!this.form.Validate()) {
+      this.msg.error('请检查数据')
       return
+    }
 
     let url = `device/${this.id || 'create'}`
     this.rs.post(url, this.form.Value()).subscribe((res) => {

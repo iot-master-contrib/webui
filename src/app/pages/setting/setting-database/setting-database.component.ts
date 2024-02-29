@@ -1,105 +1,84 @@
-import {Component} from '@angular/core';
-import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {NgForOf, NgIf} from "@angular/common";
-import {NzButtonComponent} from "ng-zorro-antd/button";
-import {NzColDirective, NzRowDirective} from "ng-zorro-antd/grid";
-import {NzFormControlComponent, NzFormDirective, NzFormItemComponent, NzFormLabelComponent} from "ng-zorro-antd/form";
-import {NzIconDirective} from "ng-zorro-antd/icon";
-import {NzInputDirective} from "ng-zorro-antd/input";
-import {NzOptionComponent, NzSelectComponent} from "ng-zorro-antd/select";
-import {
-  NzPageHeaderComponent,
-  NzPageHeaderExtraDirective,
-  NzPageHeaderSubtitleDirective, NzPageHeaderTitleDirective
-} from "ng-zorro-antd/page-header";
-import {NzSpaceComponent, NzSpaceItemDirective} from "ng-zorro-antd/space";
-import {NzUploadComponent} from "ng-zorro-antd/upload";
-import {Router} from '@angular/router';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {NzButtonComponent} from 'ng-zorro-antd/button';
+import {RouterLink} from '@angular/router';
 import {RequestService} from '../../../request.service';
 import {NzMessageService} from 'ng-zorro-antd/message';
+import {CommonModule} from '@angular/common';
 import {NzCardComponent} from "ng-zorro-antd/card";
+import {NormalFormComponent, NormalFormItem} from "../../../components/normal-form/normal-form.component";
+import {NzTableComponent, NzTableModule} from "ng-zorro-antd/table";
 
 @Component({
   selector: 'app-setting-database',
   standalone: true,
   imports: [
-    FormsModule,
-    NgIf,
+    CommonModule,
     NzButtonComponent,
-    NzColDirective,
-    NzFormControlComponent,
-    NzFormDirective,
-    NzFormItemComponent,
-    NzFormLabelComponent,
-    NzIconDirective,
-    NzInputDirective,
-    NzOptionComponent,
-    NzPageHeaderComponent,
-    NzPageHeaderExtraDirective,
-    NzPageHeaderSubtitleDirective,
-    NzPageHeaderTitleDirective,
-    NzRowDirective,
-    NzSelectComponent,
-    NzSpaceComponent,
-    NzUploadComponent,
-    ReactiveFormsModule,
-    NzSpaceItemDirective,
-    NgForOf,
-    NzCardComponent
+    RouterLink,
+    NzCardComponent,
+    NormalFormComponent,
+    NzTableComponent,
+    NzTableModule,
   ],
   templateUrl: './setting-database.component.html',
   styleUrl: './setting-database.component.scss'
 })
 export class SettingDatabaseComponent {
-  formGroup!: FormGroup;
 
-  data: any = {}
+  urls: any[] = [
+    {label: 'SQLite', type: 'sqlite', url: "master.db"},
+    {label: 'MySQL', type: 'mysql', url: "root:123456@tcp(127.0.0.1)/master?charset=utf8"},
+    {label: 'Postgres SQL', type: 'postgres', url: "postgres://root:123456@127.0.0.1/master?sslmode=verify-full"},
+    {
+      label: 'MS SQL Server',
+      type: 'sqlserver',
+      url: "sqlserver://sa:123456@127.0.0.1?database=master&connection+timeout=30"
+    },
+    {label: 'Oracle', type: 'godror', url: 'user="root" password="123456" connectString="127.0.0.1:1521/master"'},
+  ]
 
-  urls: any = {
-    sqlite: "master.db",
-    mysql: "root:123456@tcp(127.0.0.1)/master?charset=utf8",
-    postgres: "postgres://root:123456@127.0.0.1/master?sslmode=verify-full",
-    sqlserver: "sqlserver://sa:123456@127.0.0.1?database=master&connection+timeout=30",
-    godror: 'user="root" password="123456" connectString="127.0.0.1:1521/master"',
-  }
+  @ViewChild('form') form!: NormalFormComponent
 
-  constructor(private fb: FormBuilder,
-              private route: Router,
-              private rs: RequestService,
-              private msg: NzMessageService) {
-    this.buildFromGroup()
+  fields: NormalFormItem[] = [
+    {
+      key: "type", label: "数据库类型", type: "select",
+      options: [
+        {label: 'SQLite（内置）', value: 'sqlite'},
+        {label: 'MySQL', value: 'mysql'},
+        {label: 'Postgres SQL', value: 'postgres'},
+        {label: 'MS SQL Server', value: 'sqlserver'},
+        {label: 'Oracle', value: 'godror'},
+      ]
+    },
+    {key: "url", label: "连接字符串", type: "text"},
+    {key: "debug", label: "调试模式", type: "switch"},
+  ]
+
+  values: any = {}
+
+  constructor(private msg: NzMessageService, private rs: RequestService,) {
   }
 
   ngOnInit(): void {
-    this.rs.get('setting/database', {}).subscribe((res) => {
-      this.data = res.data
-      this.buildFromGroup()
+    this.rs.get('setting/database', {}).subscribe(res => {
+      this.values = res.data
     });
   }
 
-  buildFromGroup() {
-    this.formGroup = this.fb.group({
-      type: [this.data.type || 'sqlite', []],
-      url: [this.data.url || 'master.db', []],
-      debug: [this.data.debug || false, []],
-    })
-    //console.log(this.formGroup)
-  }
-
   onSubmit() {
-    this.rs.post('setting/database', this.formGroup.value).subscribe(
-      (res) => {
-        // this.projects = res.data;
-        // this.total = res.total;
-      },
-      (err) => {
-        console.log('err:', err);
-      }
-    );
+    if (!this.form.Validate()) {
+      this.msg.error('请检查数据')
+      return
+    }
+
+    let url = `setting/database`
+    this.rs.post(url, this.form.Value()).subscribe((res) => {
+      this.msg.success('保存成功');
+    });
   }
 
-  writeExample() {
-    this.formGroup.patchValue({url: this.urls[this.formGroup.controls['type'].value]})
+  writeExample(url: string) {
+    this.form.patchValues({url})
   }
 
 

@@ -1,31 +1,22 @@
 <nz-card nzTitle="设置 数据库" [nzExtra]="extraTemplate">
+  <app-normal-form #form [fields]="fields" [value]="values"></app-normal-form>
 
-  <form nz-form [formGroup]="formGroup">
-
-    <nz-form-item>
-      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="type">数据库类型</nz-form-label>
-      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="">
-        <nz-select formControlName="type">
-          <nz-option nzLabel="SQLite（内置）" nzValue="sqlite"></nz-option>
-          <nz-option nzLabel="MySQL" nzValue="mysql"></nz-option>
-          <nz-option nzLabel="Postgres" nzValue="postgres"></nz-option>
-          <nz-option nzLabel="Microsoft SQL Server" nzValue="sqlserver"></nz-option>
-          <nz-option nzLabel="Oracle" nzValue="godror"></nz-option>
-        </nz-select>
-      </nz-form-control>
-    </nz-form-item>
-
-    <nz-form-item>
-      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="url">连接字符串</nz-form-label>
-      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="">
-        <input nz-input formControlName="url"/>
-        示例：{{ urls[formGroup.controls['type'].value] }} <a (click)="writeExample()">写入</a>
-      </nz-form-control>
-    </nz-form-item>
-
-
-  </form>
-
+  <nz-table [nzNoResult]="' '">
+    <thead>
+    <tr>
+      <th>类型</th>
+      <th>示例</th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let u of urls">
+      <td>{{ u.label }}</td>
+      <td>{{ u.url }}</td>
+      <td><a (click)="writeExample(u.url)">写入</a></td>
+    </tr>
+    </tbody>
+  </nz-table>
 
 </nz-card>
 <ng-template #extraTemplate>

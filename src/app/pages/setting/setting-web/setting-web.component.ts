@@ -54,9 +54,12 @@ export class SettingWebComponent implements OnInit {
       this.values = res.data
     });
   }
+
   onSubmit() {
-    if (!this.form.Validate())
+    if (!this.form.Validate()) {
+      this.msg.error('请检查数据')
       return
+    }
 
     let url = `setting/web`
     this.rs.post(url, this.form.Value()).subscribe((res) => {
