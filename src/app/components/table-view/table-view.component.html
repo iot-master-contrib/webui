@@ -88,7 +88,7 @@
 
           <!--外部链接-->
           <a *ngIf="o.link && o.external"
-             [title]="o.title"
+             [title]="o.title||''"
              [target]="o.external ? '_blank' : ''"
              [routerLink]="o.link?.(data)">
             <i *ngIf="o.icon" nz-icon [nzType]="o.icon"></i>
@@ -97,7 +97,7 @@
 
           <!--链接-->
           <a *ngIf="o.link && !o.external"
-             [title]="o.title"
+             [title]="o.title||''"
              [routerLink]="o.link?.(data)">
             <i *ngIf="o.icon" nz-icon [nzType]="o.icon"></i>
             {{ o.text }}
@@ -105,7 +105,7 @@
 
           <!--确认调用，比如删除-->
           <a *ngIf="o.action && o.confirm"
-             [title]="o.title"
+             [title]="o.title||''"
              nz-popconfirm
              [nzPopconfirmTitle]="o.confirm"
              (nzOnConfirm)="o.action?.(data)">
@@ -115,7 +115,7 @@
 
           <!--调用-->
           <a *ngIf="o.action && !o.confirm"
-             [title]="o.title"
+             [title]="o.title||''"
              (click)="o.action?.(data)">
             <i *ngIf="o.icon" nz-icon [nzType]="o.icon"></i>
             {{ o.text }}
