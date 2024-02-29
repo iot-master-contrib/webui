@@ -59,7 +59,7 @@ export class ProjectUserComponent {
 
 
   buttons: TableViewButton[] = [
-    {icon: 'plus', text: '绑定用户', action: () => this.bind()}, //应该只有平台管理员可以操作吧
+    {icon: 'link', text: '绑定用户', action: () => this.bind()}, //应该只有平台管理员可以操作吧
   ];
 
   columns: TableViewColumn[] = [
@@ -139,7 +139,7 @@ export class ProjectUserComponent {
 
   unbind(i: any) {
     this.rs.get(`project/${this.project_id}/user/${i}/unbind`, {}).subscribe((res) => {
-      this.msg.success('提示', '删除成功');
+      this.msg.success('提示', '解绑成功');
       this.refresh();
     });
   }
