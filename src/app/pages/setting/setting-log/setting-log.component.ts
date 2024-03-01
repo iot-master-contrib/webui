@@ -5,7 +5,7 @@ import {RequestService} from '../../../request.service';
 import {NzMessageService} from 'ng-zorro-antd/message';
 import {CommonModule} from '@angular/common';
 import {NzCardComponent} from "ng-zorro-antd/card";
-import {NormalFormComponent, NormalFormItem} from "../../../components/normal-form/normal-form.component";
+import {SmartFormComponent, SmartFormItem} from "../../../components/smart-form/smart-form.component";
 
 @Component({
   selector: 'app-setting-log',
@@ -15,16 +15,16 @@ import {NormalFormComponent, NormalFormItem} from "../../../components/normal-fo
     NzButtonComponent,
     RouterLink,
     NzCardComponent,
-    NormalFormComponent,
+    SmartFormComponent,
   ],
   templateUrl: './setting-log.component.html',
   styleUrl: './setting-log.component.scss'
 })
 export class SettingLogComponent implements OnInit {
 
-  @ViewChild('form') form!: NormalFormComponent
+  @ViewChild('form') form!: SmartFormComponent
 
-  fields: NormalFormItem[] = [
+  fields: SmartFormItem[] = [
     {key: "caller", label: "显示函数调用", type: "switch"},
     {key: "text", label: "使用文本格式", type: "switch"},
     {

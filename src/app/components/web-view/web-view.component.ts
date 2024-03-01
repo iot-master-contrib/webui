@@ -66,8 +66,11 @@ export class WebViewComponent implements OnInit, OnDestroy {
         return
     }
     ref.afterClose.subscribe((res: any) => {
-      if (res)
-        this.iframe.nativeElement.postMessage(JSON.stringify({type: msg.type, data: res}))
+      if (res) {
+        let m = JSON.stringify({type: msg.type, data: res})
+        this.iframe.nativeElement.postMessage(m)
+        //window.parent?.postMessage(m)
+      }
     })
   }
 

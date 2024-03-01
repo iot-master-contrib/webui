@@ -5,7 +5,7 @@ import {RequestService} from '../../../request.service';
 import {NzMessageService} from 'ng-zorro-antd/message';
 import {CommonModule} from '@angular/common';
 import {NzCardComponent} from "ng-zorro-antd/card";
-import {NormalFormComponent, NormalFormItem} from "../../../components/normal-form/normal-form.component";
+import {SmartFormComponent, SmartFormItem} from "../../../components/smart-form/smart-form.component";
 
 @Component({
   selector: 'app-setting-broker',
@@ -15,16 +15,16 @@ import {NormalFormComponent, NormalFormItem} from "../../../components/normal-fo
     NzButtonComponent,
     RouterLink,
     NzCardComponent,
-    NormalFormComponent,
+    SmartFormComponent,
   ],
   templateUrl: './setting-broker.component.html',
   styleUrl: './setting-broker.component.scss'
 })
 export class SettingBrokerComponent implements OnInit {
 
-  @ViewChild('form') form!: NormalFormComponent
+  @ViewChild('form') form!: SmartFormComponent
 
-  fields: NormalFormItem[] = [
+  fields: SmartFormItem[] = [
     {key: "enable", label: "启用", type: "switch", default: true},
     {key: "port", label: "端口", type: "number", default: 1843},
   ]

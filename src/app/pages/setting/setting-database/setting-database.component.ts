@@ -5,7 +5,7 @@ import {RequestService} from '../../../request.service';
 import {NzMessageService} from 'ng-zorro-antd/message';
 import {CommonModule} from '@angular/common';
 import {NzCardComponent} from "ng-zorro-antd/card";
-import {NormalFormComponent, NormalFormItem} from "../../../components/normal-form/normal-form.component";
+import {SmartFormComponent, SmartFormItem} from "../../../components/smart-form/smart-form.component";
 import {NzTableComponent, NzTableModule} from "ng-zorro-antd/table";
 
 @Component({
@@ -16,7 +16,7 @@ import {NzTableComponent, NzTableModule} from "ng-zorro-antd/table";
     NzButtonComponent,
     RouterLink,
     NzCardComponent,
-    NormalFormComponent,
+    SmartFormComponent,
     NzTableComponent,
     NzTableModule,
   ],
@@ -37,9 +37,9 @@ export class SettingDatabaseComponent {
     {label: 'Oracle', type: 'godror', url: 'user="root" password="123456" connectString="127.0.0.1:1521/master"'},
   ]
 
-  @ViewChild('form') form!: NormalFormComponent
+  @ViewChild('form') form!: SmartFormComponent
 
-  fields: NormalFormItem[] = [
+  fields: SmartFormItem[] = [
     {
       key: "type", label: "数据库类型", type: "select",
       options: [

@@ -21,7 +21,7 @@ import {InputSpaceComponent} from "../input-space/input-space.component";
 import {InputDeviceComponent} from "../input-device/input-device.component";
 
 
-export interface NormalFormItem {
+export interface SmartFormItem {
   type: string
   key: string
   label: string
@@ -58,7 +58,7 @@ function getValue(val: any, def: any): any {
 }
 
 @Component({
-  selector: 'app-normal-form',
+  selector: 'app-smart-form',
   standalone: true,
   imports: [
     CommonModule,
@@ -81,19 +81,19 @@ function getValue(val: any, def: any): any {
     InputDeviceComponent,
     NzColorPickerModule,
   ],
-  templateUrl: './normal-form.component.html',
-  styleUrl: './normal-form.component.scss'
+  templateUrl: './smart-form.component.html',
+  styleUrl: './smart-form.component.scss'
 })
-export class NormalFormComponent {
+export class SmartFormComponent {
   group!: FormGroup
 
-  _fields: NormalFormItem[] = []
+  _fields: SmartFormItem[] = []
   _value: any = {}
 
   empty: any = []
 
 
-  @Input() set fields(fs: NormalFormItem[]) {
+  @Input() set fields(fs: SmartFormItem[]) {
     this._fields = fs
     this.buildForm()
   }

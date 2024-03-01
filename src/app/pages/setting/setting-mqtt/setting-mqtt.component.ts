@@ -5,7 +5,7 @@ import {RequestService} from '../../../request.service';
 import {NzMessageService} from 'ng-zorro-antd/message';
 import {CommonModule} from '@angular/common';
 import {NzCardComponent} from "ng-zorro-antd/card";
-import {NormalFormComponent, NormalFormItem} from "../../../components/normal-form/normal-form.component";
+import {SmartFormComponent, SmartFormItem} from "../../../components/smart-form/smart-form.component";
 
 @Component({
   selector: 'app-setting-mqtt',
@@ -15,16 +15,16 @@ import {NormalFormComponent, NormalFormItem} from "../../../components/normal-fo
     NzButtonComponent,
     RouterLink,
     NzCardComponent,
-    NormalFormComponent,
+    SmartFormComponent,
   ],
   templateUrl: './setting-mqtt.component.html',
   styleUrl: './setting-mqtt.component.scss'
 })
 export class SettingMqttComponent implements OnInit {
 
-  @ViewChild('form') form!: NormalFormComponent
+  @ViewChild('form') form!: SmartFormComponent
 
-  fields: NormalFormItem[] = [
+  fields: SmartFormItem[] = [
     {key: "url", label: "地址", type: "text", required: true, default: ''},
     {key: "username", label: "用户名", type: "text"},
     {key: "password", label: "密码", type: "text"},

@@ -6,7 +6,7 @@ import {NzMessageService} from 'ng-zorro-antd/message';
 import {CommonModule} from '@angular/common';
 import {Router} from '@angular/router';
 import {NzCardComponent} from "ng-zorro-antd/card";
-import {NormalFormComponent, NormalFormItem} from "../../../components/normal-form/normal-form.component";
+import {SmartFormComponent, SmartFormItem} from "../../../components/smart-form/smart-form.component";
 
 @Component({
   selector: 'app-device-edit',
@@ -16,7 +16,7 @@ import {NormalFormComponent, NormalFormItem} from "../../../components/normal-fo
     NzButtonComponent,
     RouterLink,
     NzCardComponent,
-    NormalFormComponent,
+    SmartFormComponent,
   ],
   templateUrl: './device-edit.component.html',
   styleUrl: './device-edit.component.scss',
@@ -27,9 +27,9 @@ export class DeviceEditComponent implements OnInit, AfterViewInit {
 
   data: any = {}
 
-  @ViewChild('form') form!: NormalFormComponent
+  @ViewChild('form') form!: SmartFormComponent
 
-  fields: NormalFormItem[] = [
+  fields: SmartFormItem[] = [
     {key: "id", label: "ID", type: "text", min: 2, max: 30, placeholder: "选填"},
     {key: "name", label: "名称", type: "text", required: true, default: '新设备'},
     {key: "keywords", label: "关键字", type: "tags", default: []},

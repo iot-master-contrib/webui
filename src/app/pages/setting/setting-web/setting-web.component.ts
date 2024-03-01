@@ -5,7 +5,7 @@ import {RequestService} from '../../../request.service';
 import {NzMessageService} from 'ng-zorro-antd/message';
 import {CommonModule} from '@angular/common';
 import {NzCardComponent} from "ng-zorro-antd/card";
-import {NormalFormComponent, NormalFormItem} from "../../../components/normal-form/normal-form.component";
+import {SmartFormComponent, SmartFormItem} from "../../../components/smart-form/smart-form.component";
 
 @Component({
   selector: 'app-setting-web',
@@ -15,16 +15,16 @@ import {NormalFormComponent, NormalFormItem} from "../../../components/normal-fo
     NzButtonComponent,
     RouterLink,
     NzCardComponent,
-    NormalFormComponent,
+    SmartFormComponent,
   ],
   templateUrl: './setting-web.component.html',
   styleUrl: './setting-web.component.scss',
 })
 export class SettingWebComponent implements OnInit {
 
-  @ViewChild('form') form!: NormalFormComponent
+  @ViewChild('form') form!: SmartFormComponent
 
-  fields: NormalFormItem[] = [
+  fields: SmartFormItem[] = [
     {key: "port", label: "端口", type: "number", required: true, default: 8080, min: 1, max: 65535},
     {key: "debug", label: "调试模式", type: "switch"},
     {key: "cors", label: "跨域请求", type: "switch"},
