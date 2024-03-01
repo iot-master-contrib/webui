@@ -5,11 +5,11 @@ import {CommonModule} from '@angular/common';
 import {RequestService} from "../../../request.service";
 import {
   ParamSearch,
-  TableViewButton,
-  TableViewColumn,
-  TableViewComponent,
-  TableViewOperator
-} from "../../../components/table-view/table-view.component";
+  SmartTableButton,
+  SmartTableColumn,
+  SmartTableComponent,
+  SmartTableOperator
+} from "../../../components/table-view/smart-table.component";
 import {NzNotificationService} from "ng-zorro-antd/notification";
 import {DevicesComponent} from "../../device/devices/devices.component";
 
@@ -18,7 +18,7 @@ import {DevicesComponent} from "../../device/devices/devices.component";
   standalone: true,
   imports: [
     CommonModule,
-    TableViewComponent,
+    SmartTableComponent,
   ],
   templateUrl: './space-device.component.html',
   styleUrl: './space-device.component.scss'
@@ -33,26 +33,26 @@ export class SpaceDeviceComponent {
   loading = false;
 
 
-  buttons: TableViewButton[] = [
+  buttons: SmartTableButton[] = [
     {icon: 'link', text: '绑定设备', action: () => this.bind()}, //应该只有平台管理员可以操作吧
   ];
 
-  columns: TableViewColumn[] = [
+  columns: SmartTableColumn[] = [
     {key: 'device_id', sortable: true, text: 'ID', keyword: true},
     {key: 'device', sortable: true, text: '名称', keyword: true},
     {key: 'created', sortable: true, text: '创建时间', date: true},
   ];
 
-  columnsSelect: TableViewColumn[] = [
+  columnsSelect: SmartTableColumn[] = [
     {key: 'device_id', sortable: true, text: 'ID', keyword: true},
     {key: 'device', sortable: true, text: '名称', keyword: true},
   ];
 
-  operators: TableViewOperator[] = [
+  operators: SmartTableOperator[] = [
     {icon: 'disconnect', text: '解绑', confirm: '确认解绑？', action: (data) => this.unbind(data.device_id)},
   ];
 
-  operatorsSelect: TableViewOperator[] = [
+  operatorsSelect: SmartTableOperator[] = [
     {text: '选择', action: (data) => this.ref.close(data)},
   ];
 

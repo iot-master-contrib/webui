@@ -10,7 +10,7 @@ import {CommonModule, DatePipe, NgForOf} from "@angular/common";
 import {NzPopconfirmDirective} from "ng-zorro-antd/popconfirm";
 import {FormsModule} from '@angular/forms';
 
-export interface TableViewColumn {
+export interface SmartTableColumn {
   key: string
   text: string
   keyword?: boolean
@@ -20,7 +20,7 @@ export interface TableViewColumn {
   link?: (data: any) => string
 }
 
-export interface TableViewOperator {
+export interface SmartTableOperator {
   link?: (data: any) => string
   action?: (data: any) => void
   icon?: string
@@ -30,7 +30,7 @@ export interface TableViewOperator {
   external?: boolean
 }
 
-export interface TableViewButton {
+export interface SmartTableButton {
   link?: () => string
   action?: () => void
   text: string
@@ -38,10 +38,10 @@ export interface TableViewButton {
 }
 
 
-export interface TableViewParams {
-  buttons?: TableViewButton[];
-  columns: TableViewColumn[]
-  operators: TableViewOperator[]
+export interface SmartTableParams {
+  buttons?: SmartTableButton[];
+  columns: SmartTableColumn[]
+  operators: SmartTableOperator[]
 }
 
 export interface ParamSearch {
@@ -53,7 +53,7 @@ export interface ParamSearch {
 }
 
 @Component({
-  selector: 'app-table-view',
+  selector: 'app-smart-table',
   standalone: true,
   imports: [
     CommonModule,
@@ -71,18 +71,18 @@ export interface ParamSearch {
     DatePipe,
     NzPopconfirmDirective,
   ],
-  templateUrl: './table-view.component.html',
-  styleUrl: './table-view.component.scss'
+  templateUrl: './smart-table.component.html',
+  styleUrl: './smart-table.component.scss'
 })
-export class TableViewComponent implements OnInit {
+export class SmartTableComponent implements OnInit {
   @Input() pageSize = 20;
   pageIndex = 1;
 
   keyword = '';
 
-  @Input() buttons?: TableViewButton[];
-  @Input() columns: TableViewColumn[] = []
-  @Input() operators?: TableViewOperator[]
+  @Input() buttons?: SmartTableButton[];
+  @Input() columns: SmartTableColumn[] = []
+  @Input() operators?: SmartTableOperator[]
 
   @Input() datum: any[] = [];
   @Input() total: number = 0;

@@ -6,11 +6,11 @@ import {RequestService} from "../../../request.service";
 import {UsersComponent} from "../../users/users/users.component";
 import {
   ParamSearch,
-  TableViewButton,
-  TableViewColumn,
-  TableViewComponent,
-  TableViewOperator
-} from "../../../components/table-view/table-view.component";
+  SmartTableButton,
+  SmartTableColumn,
+  SmartTableComponent,
+  SmartTableOperator
+} from "../../../components/table-view/smart-table.component";
 import {NzNotificationService} from "ng-zorro-antd/notification";
 
 @Component({
@@ -18,7 +18,7 @@ import {NzNotificationService} from "ng-zorro-antd/notification";
   standalone: true,
   imports: [
     CommonModule,
-    TableViewComponent,
+    SmartTableComponent,
   ],
   templateUrl: './project-user.component.html',
   styleUrl: './project-user.component.scss',
@@ -32,28 +32,28 @@ export class ProjectUserComponent {
   loading = false;
 
 
-  buttons: TableViewButton[] = [
+  buttons: SmartTableButton[] = [
     {icon: 'link', text: '绑定用户', action: () => this.bind()}, //应该只有平台管理员可以操作吧
   ];
 
-  columns: TableViewColumn[] = [
+  columns: SmartTableColumn[] = [
     {key: 'user_id', sortable: true, text: 'ID', keyword: true},
     {key: 'user', sortable: true, text: '名称', keyword: true},
     {key: 'disabled', sortable: true, text: '状态'},
     {key: 'created', sortable: true, text: '创建时间', date: true},
   ];
 
-  columnsSelect: TableViewColumn[] = [
+  columnsSelect: SmartTableColumn[] = [
     {key: 'user_id', sortable: true, text: 'ID', keyword: true},
     {key: 'user', sortable: true, text: '名称', keyword: true},
     {key: 'disabled', sortable: true, text: '状态'},
   ];
 
-  operators: TableViewOperator[] = [
+  operators: SmartTableOperator[] = [
     {icon: 'disconnect', text: '解绑', confirm: '确认解绑？', action: (data) => this.unbind(data.user_id)},
   ];
 
-  operatorsSelect: TableViewOperator[] = [
+  operatorsSelect: SmartTableOperator[] = [
     {text: '选择', action: (data) => this.ref.close(data)},
   ];
 

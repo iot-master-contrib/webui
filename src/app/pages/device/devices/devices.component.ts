@@ -13,16 +13,16 @@ import {NzMessageService} from 'ng-zorro-antd/message';
 import {NZ_MODAL_DATA, NzModalRef} from 'ng-zorro-antd/modal';
 import {
   ParamSearch,
-  TableViewButton,
-  TableViewColumn,
-  TableViewComponent,
-  TableViewOperator,
-} from '../../../components/table-view/table-view.component';
+  SmartTableButton,
+  SmartTableColumn,
+  SmartTableComponent,
+  SmartTableOperator,
+} from '../../../components/table-view/smart-table.component';
 
 @Component({
   selector: 'app-devices',
   standalone: true,
-  imports: [CommonModule, TableViewComponent],
+  imports: [CommonModule, SmartTableComponent],
   templateUrl: './devices.component.html',
   styleUrl: './devices.component.scss',
 })
@@ -37,15 +37,15 @@ export class DevicesComponent implements OnInit {
   loading = false;
 
 
-  buttons: TableViewButton[] = [
+  buttons: SmartTableButton[] = [
     {icon: 'plus', text: '创建', link: () => `/admin/device/create`},
   ];
 
-  buttonsProject: TableViewButton[] = [
+  buttonsProject: SmartTableButton[] = [
     {icon: 'plus', text: '创建', link: () => `/project/${this.project_id}/device/create`},
   ];
 
-  columns: TableViewColumn[] = [
+  columns: SmartTableColumn[] = [
     {
       key: 'id', sortable: true, text: 'ID', keyword: true,
       link: (data) => `/admin/device/${data.id}`,
@@ -66,7 +66,7 @@ export class DevicesComponent implements OnInit {
     {key: 'online', sortable: true, text: '上线时间', date: true},
   ];
 
-  columnsProject: TableViewColumn[] = [
+  columnsProject: SmartTableColumn[] = [
     {
       key: 'id', sortable: true, text: 'ID', keyword: true,
       link: (data) => `/project/${this.project_id}/device/${data.id}`,
@@ -84,12 +84,12 @@ export class DevicesComponent implements OnInit {
   ];
 
 
-  columnsSelect: TableViewColumn[] = [
+  columnsSelect: SmartTableColumn[] = [
     {key: 'id', text: 'ID', keyword: true},
     {key: 'name', text: '名称', keyword: true},
   ];
 
-  operators: TableViewOperator[] = [
+  operators: SmartTableOperator[] = [
     {icon: 'edit', title: '编辑', link: (data) => `/admin/device/${data.id}/edit`,},
     {
       icon: 'delete', title: '删除', confirm: '确认删除？', action: (data) => {
@@ -98,7 +98,7 @@ export class DevicesComponent implements OnInit {
     },
   ];
 
-  operatorsProject: TableViewOperator[] = [
+  operatorsProject: SmartTableOperator[] = [
     {icon: 'edit', title: '编辑', link: (data) => `/project/${this.project_id}/device/${data.id}/edit`,},
     {
       icon: 'delete', title: '删除', confirm: '确认删除？',
@@ -108,7 +108,7 @@ export class DevicesComponent implements OnInit {
     },
   ];
 
-  operatorsSelect: TableViewOperator[] = [
+  operatorsSelect: SmartTableOperator[] = [
     {text: '选择', action: (data) => this.ref.close(data)},
   ];
 

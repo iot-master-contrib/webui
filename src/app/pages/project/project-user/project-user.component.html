@@ -1,4 +1,4 @@
-<app-table-view
+<app-smart-table
   [buttons]="ref ? [] : buttons"
   [columns]="ref ? columnsSelect : columns"
   [operators]="ref ? operatorsSelect : operators"
@@ -6,4 +6,4 @@
   [total]="total"
   [loading]="loading"
   (query)="search($event)"
-></app-table-view>
+></app-smart-table>

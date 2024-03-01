@@ -6,18 +6,18 @@ import {NzModalRef, NzModalService} from 'ng-zorro-antd/modal';
 import {CommonModule} from '@angular/common';
 import {
   ParamSearch,
-  TableViewButton,
-  TableViewColumn,
-  TableViewComponent,
-  TableViewOperator,
-} from '../../../components/table-view/table-view.component';
+  SmartTableButton,
+  SmartTableColumn,
+  SmartTableComponent,
+  SmartTableOperator,
+} from '../../../components/table-view/smart-table.component';
 
 @Component({
   selector: 'app-products',
   standalone: true,
   imports: [
     CommonModule,
-    TableViewComponent,
+    SmartTableComponent,
   ],
   templateUrl: './products.component.html',
   styleUrl: './products.component.scss',
@@ -27,11 +27,11 @@ export class ProductsComponent {
   total = 0;
   loading = false;
 
-  buttons: TableViewButton[] = [
+  buttons: SmartTableButton[] = [
     {icon: 'plus', text: '创建', link: () => `/admin/product/create`},
   ];
 
-  columns: TableViewColumn[] = [
+  columns: SmartTableColumn[] = [
     {
       key: 'id', sortable: true, text: 'ID', keyword: true,
       link: (data) => `/admin/product/${data.id}`,
@@ -41,12 +41,12 @@ export class ProductsComponent {
     {key: 'created', sortable: true, text: '创建时间', date: true},
   ];
 
-  columnsSelect: TableViewColumn[] = [
+  columnsSelect: SmartTableColumn[] = [
     {key: 'id', text: 'ID', keyword: true},
     {key: 'name', text: '名称', keyword: true},
   ];
 
-  operators: TableViewOperator[] = [
+  operators: SmartTableOperator[] = [
     {icon: 'edit', title: '编辑', link: (data) => `/admin/product/${data.id}/edit`,},
     {
       icon: 'delete', title: '删除', confirm: "确认删除？", action: data => {
@@ -55,7 +55,7 @@ export class ProductsComponent {
     },
   ];
 
-  operatorsSelect: TableViewOperator[] = [
+  operatorsSelect: SmartTableOperator[] = [
     {text: '选择', action: (data) => this.ref.close(data)},
   ];
 

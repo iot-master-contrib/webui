@@ -18,11 +18,11 @@ import {RequestService} from '../../request.service';
 import {NzMessageService} from 'ng-zorro-antd/message';
 import {
   ParamSearch,
-  TableViewButton,
-  TableViewColumn,
-  TableViewComponent,
-  TableViewOperator,
-} from '../../components/table-view/table-view.component';
+  SmartTableButton,
+  SmartTableColumn,
+  SmartTableComponent,
+  SmartTableOperator,
+} from '../../components/table-view/smart-table.component';
 
 @Component({
   selector: 'app-alarm',
@@ -46,7 +46,7 @@ import {
     RouterLink,
     NzSpaceItemDirective,
     CommonModule,
-    TableViewComponent,
+    SmartTableComponent,
   ],
   templateUrl: './alarm.component.html',
   styleUrl: './alarm.component.scss'
@@ -89,7 +89,7 @@ export class AlarmComponent implements OnInit {
   loading = false;
 
 
-  columns: TableViewColumn[] = [
+  columns: SmartTableColumn[] = [
     {
       key: 'project_id',
       sortable: true,
@@ -105,7 +105,7 @@ export class AlarmComponent implements OnInit {
   ];
 
 
-  operators: TableViewOperator[] = [
+  operators: SmartTableOperator[] = [
     {
       icon: 'delete',
       title: '解绑',

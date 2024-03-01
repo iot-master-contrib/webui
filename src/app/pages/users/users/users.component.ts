@@ -4,17 +4,17 @@ import {CommonModule} from '@angular/common';
 import {RequestService} from "../../../request.service";
 import {
   ParamSearch,
-  TableViewButton,
-  TableViewColumn,
-  TableViewComponent,
-  TableViewOperator,
-} from '../../../components/table-view/table-view.component';
+  SmartTableButton,
+  SmartTableColumn,
+  SmartTableComponent,
+  SmartTableOperator,
+} from '../../../components/table-view/smart-table.component';
 
 @Component({
   selector: 'app-users',
   standalone: true,
   imports: [
-    CommonModule, TableViewComponent,
+    CommonModule, SmartTableComponent,
   ],
   templateUrl: './users.component.html',
   styleUrl: './users.component.scss',
@@ -24,11 +24,11 @@ export class UsersComponent {
   total = 0;
   loading = false;
 
-  buttons: TableViewButton[] = [
+  buttons: SmartTableButton[] = [
     {icon: 'plus', text: '创建', link: () => `/admin/user/create`},
   ];
 
-  columns: TableViewColumn[] = [
+  columns: SmartTableColumn[] = [
     {key: 'id', sortable: true, text: 'ID', keyword: true,},
     {key: 'name', sortable: true, text: '姓名', keyword: true},
     {key: 'cellphone', sortable: true, text: '手机', keyword: true,},
@@ -37,12 +37,12 @@ export class UsersComponent {
     {key: 'created', sortable: true, text: '创建时间', date: true},
   ];
 
-  columnsSelect: TableViewColumn[] = [
+  columnsSelect: SmartTableColumn[] = [
     {key: 'id', text: 'ID', keyword: true},
     {key: 'name', text: '名称', keyword: true},
   ];
 
-  operators: TableViewOperator[] = [
+  operators: SmartTableOperator[] = [
     {icon: 'edit', title: '编辑', link: (data) => `/admin/user/${data.id}/edit`,},
     {
       icon: 'delete', title: '删除', confirm: '确认删除？', action: (data) => {
@@ -51,7 +51,7 @@ export class UsersComponent {
     },
   ];
 
-  operatorsSelect: TableViewOperator[] = [
+  operatorsSelect: SmartTableOperator[] = [
     {text: '选择', action: (data) => this.ref.close(data)},
   ];
 

@@ -6,18 +6,18 @@ import {NzModalRef, NzModalService, NzModalModule, NZ_MODAL_DATA} from 'ng-zorro
 import {CommonModule} from '@angular/common';
 import {
   ParamSearch,
-  TableViewButton,
-  TableViewColumn,
-  TableViewComponent,
-  TableViewOperator,
-} from '../../../components/table-view/table-view.component';
+  SmartTableButton,
+  SmartTableColumn,
+  SmartTableComponent,
+  SmartTableOperator,
+} from '../../../components/table-view/smart-table.component';
 
 @Component({
   selector: 'app-spaces',
   standalone: true,
   imports: [
     CommonModule,
-    TableViewComponent,
+    SmartTableComponent,
   ],
   templateUrl: './spaces.component.html',
   styleUrl: './spaces.component.scss',
@@ -33,15 +33,15 @@ export class SpacesComponent implements OnInit {
   loading = false;
 
 
-  buttons: TableViewButton[] = [
+  buttons: SmartTableButton[] = [
     {icon: 'plus', text: '创建', link: () => `/admin/space/create`},
   ];
 
-  buttonsProject: TableViewButton[] = [
+  buttonsProject: SmartTableButton[] = [
     {icon: 'plus', text: '创建', link: () => `/project/${this.project_id}/space/create`},
   ];
 
-  columns: TableViewColumn[] = [
+  columns: SmartTableColumn[] = [
     {
       key: 'id', sortable: true, text: 'ID', keyword: true,
       link: (data) => `/admin/space/${data.id}`,
@@ -54,7 +54,7 @@ export class SpacesComponent implements OnInit {
     {key: 'created', sortable: true, text: '创建时间', date: true},
   ];
 
-  columnsProject: TableViewColumn[] = [
+  columnsProject: SmartTableColumn[] = [
     {
       key: 'id', sortable: true, text: 'ID', keyword: true,
       link: (data) => `/admin/space/${data.id}`,
@@ -62,12 +62,12 @@ export class SpacesComponent implements OnInit {
     {key: 'name', sortable: true, text: '名称', keyword: true},
     {key: 'created', sortable: true, text: '创建时间', date: true},
   ];
-  columnsSelect: TableViewColumn[] = [
+  columnsSelect: SmartTableColumn[] = [
     {key: 'id', text: 'ID', keyword: true},
     {key: 'name', text: '名称', keyword: true},
   ];
 
-  operators: TableViewOperator[] = [
+  operators: SmartTableOperator[] = [
     {icon: 'edit', title: '编辑', link: (data) => `/admin/space/${data.id}/edit`,},
     {
       icon: 'delete', title: '删除', confirm: '确认删除？',
@@ -77,7 +77,7 @@ export class SpacesComponent implements OnInit {
     },
   ];
 
-  operatorsProject: TableViewOperator[] = [
+  operatorsProject: SmartTableOperator[] = [
     {icon: 'edit', title: '编辑', link: (data) => `/project/${this.project_id}/space/${data.id}/edit`,},
     {
       icon: 'delete', title: '删除', confirm: '确认删除？',
@@ -87,7 +87,7 @@ export class SpacesComponent implements OnInit {
     },
   ];
 
-  operatorsSelect: TableViewOperator[] = [
+  operatorsSelect: SmartTableOperator[] = [
     {text: '选择', action: (data) => this.ref.close(data)},
   ];
 
