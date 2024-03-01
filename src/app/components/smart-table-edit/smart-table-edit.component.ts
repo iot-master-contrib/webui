@@ -21,7 +21,7 @@ import {NzSpaceComponent, NzSpaceItemDirective} from "ng-zorro-antd/space";
 import {NzInputDirective} from "ng-zorro-antd/input";
 
 
-export interface EditTableItem {
+export interface SmartTableEditItem {
   name: string
   label: string
   type?: string
@@ -32,9 +32,9 @@ export interface EditTableItem {
 
 
 @Component({
-  selector: 'app-table-edit',
-  templateUrl: './table-edit.component.html',
-  styleUrls: ['./table-edit.component.scss'],
+  selector: 'app-smart-table-edit',
+  templateUrl: './smart-table-edit.component.html',
+  styleUrls: ['./smart-table-edit.component.scss'],
   standalone: true,
   imports: [
     NzButtonComponent,
@@ -59,12 +59,12 @@ export interface EditTableItem {
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => TableEditComponent),
+      useExisting: forwardRef(() => SmartTableEditComponent),
       multi: true
     }
   ]
 })
-export class TableEditComponent implements OnInit, ControlValueAccessor {
+export class SmartTableEditComponent implements OnInit, ControlValueAccessor {
   group!: FormGroup
   formArray!: FormArray;
 
@@ -77,7 +77,7 @@ export class TableEditComponent implements OnInit, ControlValueAccessor {
   }
 
   @Input()
-  set items(data: EditTableItem[]) {
+  set items(data: SmartTableEditItem[]) {
     //TODO 创建默认group
     const row: any = {};
     data.forEach(item => {

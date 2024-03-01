@@ -16,7 +16,7 @@ import {NzUploadComponent} from "ng-zorro-antd/upload";
 import {NzTableModule} from "ng-zorro-antd/table";
 import {CdkDrag, CdkDragHandle, CdkDropList} from "@angular/cdk/drag-drop";
 import {NgForOf} from "@angular/common";
-import {TableEditComponent, EditTableItem} from "../../../components/table-edit/table-edit.component";
+import {SmartTableEditComponent, SmartTableEditItem} from "../../../components/smart-table-edit/smart-table-edit.component";
 import {RequestService} from "../../../request.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {NzNotificationService} from "ng-zorro-antd/notification";
@@ -50,7 +50,7 @@ import {NzNotificationService} from "ng-zorro-antd/notification";
     NgForOf,
     CdkDrag,
     CdkDragHandle,
-    TableEditComponent
+    SmartTableEditComponent
   ],
   templateUrl: './product-edit-property.component.html',
   styleUrl: './product-edit-property.component.scss'
@@ -61,7 +61,7 @@ export class ProductEditPropertyComponent implements OnInit {
   }
   formGroup!: FormGroup;
 
-  items: EditTableItem[] = [{
+  items: SmartTableEditItem[] = [{
     label: '变量',
     name: 'name'
   }, {
