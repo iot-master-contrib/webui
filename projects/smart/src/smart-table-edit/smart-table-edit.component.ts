@@ -32,7 +32,7 @@ export interface SmartTableEditItem {
 
 
 @Component({
-  selector: 'app-smart-table-edit',
+  selector: 'im-smart-table-edit',
   templateUrl: './smart-table-edit.component.html',
   styleUrls: ['./smart-table-edit.component.scss'],
   standalone: true,

@@ -125,7 +125,7 @@
       "projectType": "library",
       "root": "projects/smart",
       "sourceRoot": "projects/smart/src",
-      "prefix": "smart",
+      "prefix": "im",
       "schematics": {
         "@schematics/angular:component": {
           "style": "scss",

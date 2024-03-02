@@ -4,7 +4,7 @@ import {NzEmptyComponent} from "ng-zorro-antd/empty";
 import {NzButtonComponent} from "ng-zorro-antd/button";
 
 @Component({
-  selector: 'app-unknown',
+  selector: 'im-unknown',
   standalone: true,
   imports: [
     RouterLink,

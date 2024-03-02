@@ -2,7 +2,7 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {WebViewComponent} from "../components/web-view/web-view.component";
 import {AlarmComponent} from "../pages/alarm/alarm.component";
-import {UnknownComponent} from "../unknown/unknown.component";
+import {UnknownComponent} from "../../../projects/smart/src/unknown/unknown.component";
 import {DashComponent} from "../pages/dash/dash.component";
 import {ProductsComponent} from "../pages/product/products/products.component";
 import {ProductEditComponent} from "../pages/product/product-edit/product-edit.component";

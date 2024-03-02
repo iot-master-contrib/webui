@@ -53,7 +53,7 @@ export interface ParamSearch {
 }
 
 @Component({
-  selector: 'app-smart-table',
+  selector: 'im-smart-table',
   standalone: true,
   imports: [
     CommonModule,

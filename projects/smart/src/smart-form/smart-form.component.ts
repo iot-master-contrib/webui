@@ -58,7 +58,7 @@ function getValue(val: any, def: any): any {
 }
 
 @Component({
-  selector: 'app-smart-form',
+  selector: 'im-smart-form',
   standalone: true,
   imports: [
     CommonModule,
