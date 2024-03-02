@@ -9,7 +9,7 @@ import {
   SmartTableColumn,
   SmartTableComponent,
   SmartTableOperator
-} from "../../../components/smart-table/smart-table.component";
+} from "../../../../../projects/smart/src/smart-table/smart-table.component";
 import {NzNotificationService} from "ng-zorro-antd/notification";
 import {DevicesComponent} from "../../device/devices/devices.component";
 

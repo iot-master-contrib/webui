@@ -6,7 +6,7 @@ import {NzMessageService} from 'ng-zorro-antd/message';
 import {CommonModule} from '@angular/common';
 import {Router} from '@angular/router';
 import {NzCardComponent} from "ng-zorro-antd/card";
-import {SmartFormComponent, SmartFormItem} from "../../../components/smart-form/smart-form.component";
+import {SmartFormComponent, SmartFormItem} from "../../../../../projects/smart/src/smart-form/smart-form.component";
 
 @Component({
   selector: 'app-user-edit',

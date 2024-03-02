@@ -10,7 +10,7 @@ import {
   SmartTableColumn,
   SmartTableComponent,
   SmartTableOperator,
-} from '../../../components/smart-table/smart-table.component';
+} from '../../../../../projects/smart/src/smart-table/smart-table.component';
 
 @Component({
   selector: 'app-products',
