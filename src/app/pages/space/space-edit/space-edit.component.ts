@@ -76,6 +76,7 @@ export class SpaceEditComponent implements OnInit {
       this.project_id = this.route.parent?.snapshot.paramMap.get('project');
       this.form.patchValues({project_id: this.project_id})
       this.form.group.get('project_id')?.disable()
+      this.fields[2].disabled = true
     }
   }
 

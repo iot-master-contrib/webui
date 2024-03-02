@@ -79,6 +79,7 @@ export class GatewayEditComponent implements OnInit, AfterViewInit {
       this.project_id = this.route.parent?.snapshot.paramMap.get('project');
       this.form.patchValues({project_id: this.project_id})
       this.form.group.get('project_id')?.disable()
+      this.fields[3].disabled = true
     }
   }
 

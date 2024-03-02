@@ -118,6 +118,7 @@ export class DeviceEditComponent implements OnInit, AfterViewInit {
       this.data.project_id = this.project_id
       this.form.patchValues({project_id: this.project_id})
       this.form.group.get('project_id')?.disable()
+      this.fields[5].disabled = true
     }
   }
 

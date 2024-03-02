@@ -103,7 +103,7 @@
                      #box (change)="f.change?.(box.value)"/>
             </nz-input-group>
             <ng-template #suffixButton>
-              <button nz-button nzType="primary" (click)="f.choose?.()">选择</button>
+              <button nz-button nzType="primary" (click)="f.choose?.()" [disabled]="!!f.disabled">选择</button>
             </ng-template>
           </ng-container>
 
