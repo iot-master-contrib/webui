@@ -14,11 +14,6 @@ import {NzUploadChangeParam, NzUploadComponent} from "ng-zorro-antd/upload";
 import {NzButtonComponent} from "ng-zorro-antd/button";
 import {NzIconDirective} from "ng-zorro-antd/icon";
 import {NzSelectOptionInterface} from "ng-zorro-antd/select/select.types";
-import {InputProjectComponent} from "../input-project/input-project.component";
-import {InputProductComponent} from "../input-product/input-product.component";
-import {InputGatewayComponent} from "../input-gateway/input-gateway.component";
-import {InputSpaceComponent} from "../input-space/input-space.component";
-import {InputDeviceComponent} from "../input-device/input-device.component";
 
 
 export interface SmartFormItem {
@@ -27,6 +22,7 @@ export interface SmartFormItem {
   label: string
   default?: any
   placeholder?: string
+  tips?: string
 
   disabled?: boolean
   hidden?: boolean //隐藏
@@ -36,13 +32,17 @@ export interface SmartFormItem {
   min?: number
   step?: number
 
-  time?: boolean //显示时间
-
-  action?: string //文件上传
-
   options?: NzSelectOptionInterface[]
 
-  data?: any; //控件参数
+
+  change?: (value: any)=>void //监测变化
+
+  time?: boolean //日期控件 显示时间
+
+  upload?: string //文件上传
+
+  choose?: ()=>void //选择操作
+  //data?: any; //控件参数
 
   pattern?: string | RegExp
   validators?: any[];
@@ -74,11 +74,6 @@ function getValue(val: any, def: any): any {
     NzUploadComponent,
     NzButtonComponent,
     NzIconDirective,
-    InputProjectComponent,
-    InputProductComponent,
-    InputGatewayComponent,
-    InputSpaceComponent,
-    InputDeviceComponent,
     NzColorPickerModule,
   ],
   templateUrl: './smart-form.component.html',

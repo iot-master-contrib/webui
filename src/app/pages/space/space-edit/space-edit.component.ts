@@ -7,6 +7,8 @@ import {CommonModule} from '@angular/common';
 import {Router} from '@angular/router';
 import {NzCardComponent} from "ng-zorro-antd/card";
 import {SmartFormComponent, SmartFormItem} from "../../../components/smart-form/smart-form.component";
+import {NzModalService} from "ng-zorro-antd/modal";
+import {ProjectsComponent} from "../../project/projects/projects.component";
 
 @Component({
   selector: 'app-space-edit',
@@ -30,7 +32,24 @@ export class SpaceEditComponent implements OnInit {
   fields: SmartFormItem[] = [
     {key: "id", label: "ID", type: "text", min: 2, max: 30, placeholder: "选填"},
     {key: "name", label: "名称", type: "text", required: true, default: '新空间'},
-    {key: "project_id", label: "项目", type: "project"},
+    {
+      key: "project_id", label: "项目", type: "choose",
+      choose: () => {
+        this.ms.create({
+          nzTitle: "选择", nzContent: ProjectsComponent,
+        }).afterClose.subscribe(res => {
+          if (res) {
+            this.form.patchValues({project_id: res.id})
+            this.fields[2].tips = res.name
+          }
+        })
+      },
+      change: id => {
+        this.rs.get('project/' + id, {field: 'name'}).subscribe(res => {
+          this.fields[2].tips = res.data?.name || ''
+        })
+      }
+    },
     {key: "description", label: "说明", type: "textarea"},
   ]
 
@@ -38,6 +57,7 @@ export class SpaceEditComponent implements OnInit {
 
 
   constructor(private router: Router,
+              private ms: NzModalService,
               private msg: NzMessageService,
               private rs: RequestService,
               private route: ActivatedRoute
@@ -63,6 +83,8 @@ export class SpaceEditComponent implements OnInit {
   load() {
     this.rs.get(`space/${this.id}`).subscribe((res) => {
       this.values = res.data
+      if (res.data.project_id)
+        this.fields[2].change?.(res.data.project_id)
     });
   }
 

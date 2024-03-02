@@ -7,6 +7,8 @@ import {CommonModule} from '@angular/common';
 import {Router} from '@angular/router';
 import {NzCardComponent} from "ng-zorro-antd/card";
 import {SmartFormComponent, SmartFormItem} from "../../../components/smart-form/smart-form.component";
+import {NzModalService} from "ng-zorro-antd/modal";
+import {ProjectsComponent} from "../../project/projects/projects.component";
 
 @Component({
   selector: 'app-gateway-edit',
@@ -31,8 +33,24 @@ export class GatewayEditComponent implements OnInit, AfterViewInit {
     {key: "id", label: "ID", type: "text", min: 2, max: 30, placeholder: "选填"},
     {key: "name", label: "名称", type: "text", required: true, default: '新网关'},
     {key: "keywords", label: "关键字", type: "tags", default: []},
-
-    {key: "project_id", label: "项目", type: "project"},
+    {
+      key: "project_id", label: "项目", type: "choose",
+      choose: () => {
+        this.ms.create({
+          nzTitle: "选择", nzContent: ProjectsComponent,
+        }).afterClose.subscribe(res => {
+          if (res) {
+            this.form.patchValues({project_id: res.id})
+            this.fields[3].tips = res.name
+          }
+        })
+      },
+      change: id => {
+        this.rs.get('project/' + id, {field: 'name'}).subscribe(res => {
+          this.fields[3].tips = res.data?.name || ''
+        })
+      }
+    },
     {key: "description", label: "说明", type: "textarea"},
     {key: "username", label: "MQTT用户名", type: "text"},
     {key: "password", label: "MQTT密码", type: "text"},
@@ -42,6 +60,7 @@ export class GatewayEditComponent implements OnInit, AfterViewInit {
 
 
   constructor(private router: Router,
+              private ms: NzModalService,
               private msg: NzMessageService,
               private rs: RequestService,
               private route: ActivatedRoute
@@ -67,6 +86,8 @@ export class GatewayEditComponent implements OnInit, AfterViewInit {
   load() {
     this.rs.get(`gateway/${this.id}`).subscribe(res => {
       this.values = res.data
+      if (res.data.project_id)
+        this.fields[3].change?.(res.data.project_id)
     });
   }
 
