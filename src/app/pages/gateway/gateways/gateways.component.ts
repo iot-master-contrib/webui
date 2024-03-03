@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit, Optional} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {RequestService} from '../../../request.service';
+import {RequestService} from '../../../../../projects/smart/src/request.service';
 import {NZ_MODAL_DATA, NzModalRef} from 'ng-zorro-antd/modal';
 import {CommonModule} from '@angular/common';
 import {

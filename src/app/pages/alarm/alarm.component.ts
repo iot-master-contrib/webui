@@ -14,7 +14,7 @@ import {
   NzThMeasureDirective, NzTrDirective
 } from "ng-zorro-antd/table";
 import {Router, RouterLink} from "@angular/router";
-import {RequestService} from '../../request.service';
+import {RequestService} from '../../../../projects/smart/src/request.service';
 import {NzMessageService} from 'ng-zorro-antd/message';
 import {
   ParamSearch,

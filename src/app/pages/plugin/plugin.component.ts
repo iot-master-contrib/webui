@@ -14,7 +14,7 @@ import {NzPaginationComponent} from 'ng-zorro-antd/pagination';
 import {NzPopconfirmDirective} from 'ng-zorro-antd/popconfirm';
 import {NzSpaceComponent} from 'ng-zorro-antd/space';
 import {Router, RouterLink} from '@angular/router';
-import {RequestService} from '../../request.service';
+import {RequestService} from '../../../../projects/smart/src/request.service';
 import {NzMessageService} from 'ng-zorro-antd/message';
 import {NzModalRef, NzModalService} from 'ng-zorro-antd/modal';
 import {SearchFormComponent} from '../../components/search-form/search-form.component';

@@ -9,7 +9,7 @@ import {FormsModule} from '@angular/forms';
 import {OemService} from "../oem.service";
 import {UserService} from "../user.service";
 import {PasswordComponent} from "../modals/password/password.component";
-import {RequestService} from '../request.service';
+import {RequestService} from '../../../projects/smart/src/request.service';
 import {CommonModule} from '@angular/common';
 import {NzButtonComponent} from "ng-zorro-antd/button";
 

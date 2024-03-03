@@ -8,7 +8,7 @@ import {
 } from '@angular/core';
 import {ActivatedRoute, Router, RouterLink} from '@angular/router';
 import {CommonModule, DatePipe, NgForOf} from '@angular/common';
-import {RequestService} from '../../../request.service';
+import {RequestService} from '../../../../../projects/smart/src/request.service';
 import {NzMessageService} from 'ng-zorro-antd/message';
 import {NZ_MODAL_DATA, NzModalRef} from 'ng-zorro-antd/modal';
 import {

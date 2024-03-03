@@ -5,7 +5,7 @@ import {FormsModule} from '@angular/forms';
 import {NgModule} from '@angular/core';
 import {NzUploadModule} from 'ng-zorro-antd/upload';
 import {NzInputModule} from 'ng-zorro-antd/input';
-import {RequestService} from '../../../../request.service';
+import {RequestService} from '../../../../../../projects/smart/src/request.service';
 
 // , FileUploadModule
 @Component({

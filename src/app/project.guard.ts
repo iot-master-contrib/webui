@@ -9,7 +9,7 @@ import {
 import {inject} from "@angular/core";
 import {UserService} from "./user.service";
 import {Subject} from "rxjs";
-import {RequestService} from "./request.service";
+import {RequestService} from "../../projects/smart/src/request.service";
 
 export const projectGuard: CanMatchFn = () => {
   const us = inject(UserService);

@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {RequestService} from "../request.service";
+import {RequestService} from "../../../projects/smart/src/request.service";
 import {Router, RouterLink} from "@angular/router";
 import {UserService} from "../user.service";
 import {NzListModule} from "ng-zorro-antd/list";

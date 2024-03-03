@@ -2,7 +2,7 @@ import {Component, Inject, Optional} from '@angular/core';
 import {NZ_MODAL_DATA, NzModalRef, NzModalService,} from 'ng-zorro-antd/modal';
 import {ActivatedRoute} from '@angular/router';
 import {CommonModule} from '@angular/common';
-import {RequestService} from "../../../request.service";
+import {RequestService} from "../../../../../projects/smart/src/request.service";
 import {
   ParamSearch,
   SmartTableButton,

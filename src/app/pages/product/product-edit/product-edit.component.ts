@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {NzButtonComponent} from 'ng-zorro-antd/button';
 import {ActivatedRoute, RouterLink} from '@angular/router';
-import {RequestService} from '../../../request.service';
+import {RequestService} from '../../../../../projects/smart/src/request.service';
 import {NzMessageService} from 'ng-zorro-antd/message';
 import {CommonModule} from '@angular/common';
 import {Router} from '@angular/router';

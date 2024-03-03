@@ -1,9 +1,11 @@
-import {Injectable} from '@angular/core';
+import {Inject, Injectable, InjectionToken, Optional} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {catchError, filter, map} from 'rxjs/operators';
 import {Observable, of, throwError} from 'rxjs';
 import {Router} from '@angular/router';
 import {NzNotificationService} from "ng-zorro-antd/notification";
+
+export const API_BASE = new InjectionToken<string>('api_base');
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +15,13 @@ export class RequestService {
   public base = '/api/'; //使用ng brokers proxy.config.json
   //public base = environment.host;
 
-  constructor(private http: HttpClient, private message: NzNotificationService, private route: Router) {
+  constructor(private ns: NzNotificationService,
+              private http: HttpClient,
+              private route: Router,
+              @Optional() @Inject(API_BASE) base?: string,
+              ) {
+    if (base)
+      this.base = base
   }
 
   request(method: string, uri: string, options: any): Observable<any> {
@@ -39,7 +47,7 @@ export class RequestService {
             this.route.navigate(['/login']);
           }
           // 有错误统一显示并不是好的做法
-          this.message.error('错误', ret.error);
+          this.ns.error('错误', ret.error);
           throw ret.error; //不抛出Error类型，方便外面直接处理
         }
         return ret;

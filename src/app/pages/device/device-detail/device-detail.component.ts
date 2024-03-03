@@ -25,7 +25,7 @@ import {
 } from 'ng-zorro-antd/table';
 import {FormBuilder} from '@angular/forms';
 import {NzMessageService} from 'ng-zorro-antd/message';
-import {RequestService} from '../../../request.service';
+import {RequestService} from '../../../../../projects/smart/src/request.service';
 import {AlarmComponent} from '../../alarm/alarm.component';
 
 @Component({

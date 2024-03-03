@@ -9,7 +9,7 @@ import {DatePipe, NgForOf} from "@angular/common";
 import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 import {NzPopconfirmDirective} from "ng-zorro-antd/popconfirm";
 import {NzStatisticComponent} from "ng-zorro-antd/statistic";
-import {RequestService} from '../../../request.service';
+import {RequestService} from '../../../../../projects/smart/src/request.service';
 import {NzMessageService} from 'ng-zorro-antd/message';
 import {FormBuilder} from '@angular/forms';
 import {NzTabComponent, NzTabDirective, NzTabSetComponent} from "ng-zorro-antd/tabs";
