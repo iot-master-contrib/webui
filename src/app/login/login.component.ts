@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
-import {RequestService} from '../../../projects/smart/src/request.service';
+import {RequestService} from '../../../projects/smart/src/lib/request.service';
 import {UserService} from "../user.service";
 
 import {Md5} from 'ts-md5';

@@ -4,7 +4,7 @@ import {NzInputDirective} from "ng-zorro-antd/input";
 import {NzButtonComponent} from "ng-zorro-antd/button";
 import {NzModalService} from "ng-zorro-antd/modal";
 import {GatewaysComponent} from "../../pages/gateway/gateways/gateways.component";
-import {RequestService} from "../../../../projects/smart/src/request.service";
+import {RequestService} from "../../../../projects/smart/src/lib/request.service";
 
 @Component({
   selector: 'app-input-gateway',

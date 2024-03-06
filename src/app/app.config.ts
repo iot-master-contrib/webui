@@ -42,7 +42,7 @@ import {
   ExportOutline,
   ImportOutline,
 } from '@ant-design/icons-angular/icons';
-import {API_BASE} from "../../projects/smart/src/request.service";
+import {API_BASE} from "../../projects/smart/src/lib/request.service";
 
 const icons: IconDefinition[] = [
   MenuFoldOutline,

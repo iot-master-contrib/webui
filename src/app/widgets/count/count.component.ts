@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {NzStatisticComponent} from "ng-zorro-antd/statistic";
-import {RequestService} from "../../../../projects/smart/src/request.service";
+import {RequestService} from "../../../../projects/smart/src/lib/request.service";
 
 @Component({
   selector: 'app-count',

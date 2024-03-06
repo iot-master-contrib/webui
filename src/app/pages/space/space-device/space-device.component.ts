@@ -2,14 +2,14 @@ import {Component, Inject, Optional} from '@angular/core';
 import {NZ_MODAL_DATA, NzModalRef, NzModalService,} from 'ng-zorro-antd/modal';
 import {ActivatedRoute} from '@angular/router';
 import {CommonModule} from '@angular/common';
-import {RequestService} from "../../../../../projects/smart/src/request.service";
+import {RequestService} from "../../../../../projects/smart/src/lib/request.service";
 import {
   ParamSearch,
   SmartTableButton,
   SmartTableColumn,
   SmartTableComponent,
   SmartTableOperator
-} from "../../../../../projects/smart/src/smart-table/smart-table.component";
+} from "../../../../../projects/smart/src/lib/smart-table/smart-table.component";
 import {NzNotificationService} from "ng-zorro-antd/notification";
 import {DevicesComponent} from "../../device/devices/devices.component";
 

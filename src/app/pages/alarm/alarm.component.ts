@@ -14,7 +14,7 @@ import {
   NzThMeasureDirective, NzTrDirective
 } from "ng-zorro-antd/table";
 import {Router, RouterLink} from "@angular/router";
-import {RequestService} from '../../../../projects/smart/src/request.service';
+import {RequestService} from '../../../../projects/smart/src/lib/request.service';
 import {NzMessageService} from 'ng-zorro-antd/message';
 import {
   ParamSearch,
@@ -22,7 +22,7 @@ import {
   SmartTableColumn,
   SmartTableComponent,
   SmartTableOperator,
-} from '../../../../projects/smart/src/smart-table/smart-table.component';
+} from '../../../../projects/smart/src/lib/smart-table/smart-table.component';
 
 @Component({
   selector: 'app-alarm',

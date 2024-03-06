@@ -23,7 +23,7 @@ import {
 import {NzDividerComponent} from "ng-zorro-antd/divider";
 import {FormBuilder} from '@angular/forms';
 import {NzMessageService} from 'ng-zorro-antd/message';
-import {RequestService} from '../../../../../projects/smart/src/request.service';
+import {RequestService} from '../../../../../projects/smart/src/lib/request.service';
 
 @Component({
   selector: 'app-gateway-detail',

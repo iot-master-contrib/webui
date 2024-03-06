@@ -16,8 +16,8 @@ import {NzUploadComponent} from "ng-zorro-antd/upload";
 import {NzTableModule} from "ng-zorro-antd/table";
 import {CdkDrag, CdkDragHandle, CdkDropList} from "@angular/cdk/drag-drop";
 import {NgForOf} from "@angular/common";
-import {SmartTableEditComponent, SmartTableEditItem} from "../../../../../projects/smart/src/smart-table-edit/smart-table-edit.component";
-import {RequestService} from "../../../../../projects/smart/src/request.service";
+import {SmartTableEditComponent, SmartTableEditItem} from "../../../../../projects/smart/src/lib/smart-table-edit/smart-table-edit.component";
+import {RequestService} from "../../../../../projects/smart/src/lib/request.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {NzNotificationService} from "ng-zorro-antd/notification";
 

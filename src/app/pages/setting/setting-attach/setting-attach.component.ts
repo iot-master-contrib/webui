@@ -1,7 +1,7 @@
 import {Component, ViewContainerRef} from '@angular/core';
 import {NzMessageService} from 'ng-zorro-antd/message';
 import {NzModalRef, NzModalService} from 'ng-zorro-antd/modal';
-import {RequestService} from '../../../../../projects/smart/src/request.service';
+import {RequestService} from '../../../../../projects/smart/src/lib/request.service';
 import {RenameComponent} from './rename/rename.component';
 import {UploadComponent} from './upload/upload.component';
 import {NzTableModule} from 'ng-zorro-antd/table';

@@ -8,7 +8,7 @@ import {
 } from '@angular/core';
 import {ActivatedRoute, Router, RouterLink} from '@angular/router';
 import {CommonModule, DatePipe, NgForOf} from '@angular/common';
-import {RequestService} from '../../../../../projects/smart/src/request.service';
+import {RequestService} from '../../../../../projects/smart/src/lib/request.service';
 import {NzMessageService} from 'ng-zorro-antd/message';
 import {NZ_MODAL_DATA, NzModalRef} from 'ng-zorro-antd/modal';
 import {
@@ -17,7 +17,7 @@ import {
   SmartTableColumn,
   SmartTableComponent,
   SmartTableOperator,
-} from '../../../../../projects/smart/src/smart-table/smart-table.component';
+} from '../../../../../projects/smart/src/lib/smart-table/smart-table.component';
 
 @Component({
   selector: 'app-devices',

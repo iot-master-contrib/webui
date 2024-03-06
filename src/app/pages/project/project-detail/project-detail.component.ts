@@ -26,7 +26,7 @@ import {
   NzThMeasureDirective,
   NzTrDirective,
 } from 'ng-zorro-antd/table';
-import {RequestService} from '../../../../../projects/smart/src/request.service';
+import {RequestService} from '../../../../../projects/smart/src/lib/request.service';
 import {NzMessageService} from 'ng-zorro-antd/message';
 import {NzSelectModule} from 'ng-zorro-antd/select';
 import {SearchFormComponent} from '../../../components/search-form/search-form.component';

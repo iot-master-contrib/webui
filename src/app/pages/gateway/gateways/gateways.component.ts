@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit, Optional} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {RequestService} from '../../../../../projects/smart/src/request.service';
+import {RequestService} from '../../../../../projects/smart/src/lib/request.service';
 import {NZ_MODAL_DATA, NzModalRef} from 'ng-zorro-antd/modal';
 import {CommonModule} from '@angular/common';
 import {
@@ -9,7 +9,7 @@ import {
   SmartTableColumn,
   SmartTableComponent,
   SmartTableOperator,
-} from '../../../../../projects/smart/src/smart-table/smart-table.component';
+} from '../../../../../projects/smart/src/lib/smart-table/smart-table.component';
 
 @Component({
   selector: 'app-gateways',

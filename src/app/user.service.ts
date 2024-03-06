@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Subject} from "rxjs";
-import {RequestService} from "../../projects/smart/src/request.service";
+import {RequestService} from "../../projects/smart/src/lib/request.service";
 
 @Injectable({
   providedIn: 'root'

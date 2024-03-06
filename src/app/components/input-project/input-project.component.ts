@@ -3,7 +3,7 @@ import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
 import {NzInputDirective} from "ng-zorro-antd/input";
 import {NzButtonComponent} from "ng-zorro-antd/button";
 import {NzModalService} from "ng-zorro-antd/modal";
-import {RequestService} from "../../../../projects/smart/src/request.service";
+import {RequestService} from "../../../../projects/smart/src/lib/request.service";
 import {ProjectsComponent} from "../../pages/project/projects/projects.component";
 
 @Component({
