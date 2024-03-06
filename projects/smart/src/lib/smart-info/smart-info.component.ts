@@ -6,7 +6,7 @@ import {RouterLink} from "@angular/router";
 
 
 export interface SmartInfoItem {
-  type: string
+  type?: string
   key: string
   label: string
   span?: number
