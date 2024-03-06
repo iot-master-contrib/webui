@@ -1,0 +1,15 @@
+<nz-descriptions [nzTitle]="title" nzBordered>
+  <ng-container *ngFor="let f of fields">
+    <ng-container [ngSwitch]="f.type">
+      <nz-descriptions-item [nzTitle]="f.label" [nzSpan]="f.span || 1">
+        <ng-container *ngSwitchCase="'text'">{{ value[f.key] }}</ng-container>
+        <ng-container *ngSwitchCase="'select'">{{ f.options?.[value[f.key]] }}</ng-container>
+        <ng-container *ngSwitchCase="'date'">{{ value[f.key] | date }}</ng-container>
+        <ng-container *ngSwitchCase="'progress'"><nz-progress [nzPercent]="value[f.key]"></nz-progress></ng-container>
+        <ng-container *ngSwitchCase="'tags'">{{ value[f.key].join(', ') }}</ng-container>
+        <ng-container *ngSwitchCase="'link'"><a [routerLink]="f.link?.()">{{ value[f.key] }}</a></ng-container>
+        <ng-container *ngSwitchDefault>{{ value[f.key] }}</ng-container>
+      </nz-descriptions-item>
+    </ng-container>
+  </ng-container>
+</nz-descriptions>
