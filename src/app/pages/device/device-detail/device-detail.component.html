@@ -1,45 +1,26 @@
-<nz-page-header>
-  <nz-page-header-title>设备详情</nz-page-header-title>
-  <nz-page-header-subtitle>{{ data.name }}</nz-page-header-subtitle>
-  <nz-page-header-extra>
-    <nz-space>
-      <button *nzSpaceItem nz-button routerLink="edit">编辑</button>
-      <button
-        *nzSpaceItem
-        nz-button
-        nz-popconfirm
-        nzPopconfirmTitle="确认删除"
-        (nzOnConfirm)="delete()"
-      >
-        删除
-      </button>
-    </nz-space>
-  </nz-page-header-extra>
-  <nz-page-header-content>
-    <nz-descriptions nzSize="small" [nzColumn]="3">
-      <nz-descriptions-item nzTitle="ID" [nzSpan]="1">{{
-          data.id
-        }}
-      </nz-descriptions-item>
-      <nz-descriptions-item nzTitle="名称" [nzSpan]="1">{{
-          data.name
-        }}
-      </nz-descriptions-item>
-      <nz-descriptions-item nzTitle="版本" [nzSpan]="1">{{
-          data.version
-        }}
-      </nz-descriptions-item>
-      <nz-descriptions-item nzTitle="创建时间" [nzSpan]="1">{{
-          data.created | date
-        }}
-      </nz-descriptions-item>
-      <nz-descriptions-item nzTitle="说明" [nzSpan]="2">{{
-          data.description
-        }}
-      </nz-descriptions-item>
-    </nz-descriptions>
-  </nz-page-header-content>
-</nz-page-header>
+<nz-card nzTitle="设备详情" [nzExtra]="extra">
+  <im-smart-info [fields]="fields" [value]="data"></im-smart-info>
+
+  <nz-tabset>
+    <nz-tab nzTitle="实时状态">
+      <ng-template nz-tab>
+
+      </ng-template>
+    </nz-tab>
+    <nz-tab nzTitle="报警日志">
+      <ng-template nz-tab>
+
+      </ng-template>
+    </nz-tab>
+  </nz-tabset>
+
+</nz-card>
+<ng-template #extra>
+  <nz-space>
+    <button *nzSpaceItem nz-button routerLink="edit">编辑</button>
+    <button *nzSpaceItem nz-button nz-popconfirm nzPopconfirmTitle="确认删除" (nzOnConfirm)="delete()">删除</button>
+  </nz-space>
+</ng-template>
 
 <nz-divider nzText="实时变量" nzOrientation="left"></nz-divider>
 <nz-row class="variables" [nzGutter]="[4, 4]">
@@ -62,51 +43,8 @@
   </nz-col>
 </nz-row>
 
-<nz-divider nzText="告警日志" nzOrientation="left"></nz-divider>
+<!--<nz-divider nzText="告警日志" nzOrientation="left"></nz-divider>-->
 
-<app-alarm
-  [device_id]="id"
-></app-alarm>
-
-<!-- <nz-table #table [nzData]="alarms" [nzFrontPagination]="false">
-  <thead>
-  <tr>
-    <th>等级</th>
-    <th>标题</th>
-    <th>内容</th>
-    <th>时间</th>
-    <th>操作</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let data of table.data">
-    <td>{{ data.level }}</td>
-    <td>{{ data.title }}</td>
-    <td>{{ data.message }}</td>
-    <td [title]="data.created">{{ data.created | date }}</td>
-    <td>
-      <nz-space>
-        <a
-          *nzSpaceItem
-          title="删除"
-          nz-popconfirm
-          nzPopconfirmTitle="确认删除"
-        ><i nz-icon nzType="delete"></i
-        ></a>
-      </nz-space>
-    </td>
-  </tr>
-  </tbody>
-</nz-table>
-
-<div class="pages">
-  <nz-pagination
-    [nzPageIndex]="pageIndex"
-    [nzPageSize]="pageSize"
-    [nzTotal]="total"
-    nzShowSizeChanger
-    nzShowQuickJumper
-    (nzPageIndexChange)="pageIndexChange($event)"
-    (nzPageSizeChange)="pageSizeChange($event)"
-  ></nz-pagination>
-</div> -->
+<!--<app-alarm-->
+<!--  [device_id]="id"-->
+<!--&gt;</app-alarm>-->

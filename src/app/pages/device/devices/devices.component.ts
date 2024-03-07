@@ -31,7 +31,6 @@ export class DevicesComponent implements OnInit {
   //readonly data: any = inject(NZ_MODAL_DATA, {optional:true});
   @Input() project_id: any = '';
   @Input() gateway_id: any = '';
-  @Input() space_id: any = '';
 
 
   datum: any[] = [];
@@ -63,7 +62,7 @@ export class DevicesComponent implements OnInit {
     },
     {
       key: 'project', sortable: true, text: '项目', keyword: true,
-      link: (data) => `/admin/project_id/${data.project_id}`,
+      link: (data) => `/admin/project/${data.project_id}`,
     },
     {key: 'online', sortable: true, text: '上线时间', date: true},
   ];

@@ -1,4 +1,4 @@
-import {Component, Inject, Optional} from '@angular/core';
+import {Component, Inject, Input, Optional} from '@angular/core';
 import {NZ_MODAL_DATA, NzModalRef, NzModalService,} from 'ng-zorro-antd/modal';
 import {ActivatedRoute} from '@angular/router';
 import {CommonModule} from '@angular/common';
@@ -24,8 +24,8 @@ import {DevicesComponent} from "../../device/devices/devices.component";
   styleUrl: './space-device.component.scss'
 })
 export class SpaceDeviceComponent {
-  space_id: any = '';
-  project_id: any = '';
+  @Input() space_id: any = '';
+  @Input() project_id: any = '';
 
 
   datum: any[] = [];
@@ -38,7 +38,10 @@ export class SpaceDeviceComponent {
   ];
 
   columns: SmartTableColumn[] = [
-    {key: 'device_id', sortable: true, text: 'ID', keyword: true},
+    {
+      key: 'device_id', sortable: true, text: 'ID', keyword: true,
+      link: (data) => `/admin/device/${data.device_id}`,
+    },
     {key: 'device', sortable: true, text: '名称', keyword: true},
     {key: 'created', sortable: true, text: '创建时间', date: true},
   ];
@@ -70,6 +73,8 @@ export class SpaceDeviceComponent {
   ngOnInit(): void {
     if (this.route.snapshot.paramMap.has('id')) {
       this.space_id = this.route.snapshot.paramMap.get('id');
+    }
+    if (this.space_id && !this.project_id) {
       this.rs.get("space/" + this.space_id).subscribe(res => {
         this.project_id = res.data.project_id
       })

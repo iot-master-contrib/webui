@@ -13,6 +13,7 @@ import {NzCardComponent} from "ng-zorro-antd/card";
 import {SmartInfoComponent, SmartInfoItem} from "../../../../../projects/smart/src/lib/smart-info/smart-info.component";
 import {NzTabsModule} from "ng-zorro-antd/tabs";
 import {DevicesComponent} from "../../device/devices/devices.component";
+import {SpaceDeviceComponent} from "../space-device/space-device.component";
 
 @Component({
   selector: 'app-space-detail',
@@ -32,6 +33,7 @@ import {DevicesComponent} from "../../device/devices/devices.component";
     NzPopconfirmDirective,
     NzTabsModule,
     DevicesComponent,
+    SpaceDeviceComponent,
   ],
   templateUrl: './space-detail.component.html',
   styleUrl: './space-detail.component.scss'

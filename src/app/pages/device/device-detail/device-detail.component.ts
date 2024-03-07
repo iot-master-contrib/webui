@@ -1,68 +1,67 @@
 import {Component, OnInit} from '@angular/core';
-import {
-  NzPageHeaderComponent,
-  NzPageHeaderModule,
-} from 'ng-zorro-antd/page-header';
-import {NzSpaceModule} from 'ng-zorro-antd/space';
-import {NzDescriptionsModule} from 'ng-zorro-antd/descriptions';
+import {NzSpaceComponent, NzSpaceItemDirective} from 'ng-zorro-antd/space';
 import {NzButtonComponent} from 'ng-zorro-antd/button';
-import {NzIconDirective} from 'ng-zorro-antd/icon';
-import {NzInputDirective, NzInputGroupComponent} from 'ng-zorro-antd/input';
-import {DatePipe, NgForOf} from '@angular/common';
+import {CommonModule} from '@angular/common';
 import {ActivatedRoute, Router, RouterLink} from '@angular/router';
 import {NzPopconfirmDirective} from 'ng-zorro-antd/popconfirm';
-import {NzStatisticComponent} from 'ng-zorro-antd/statistic';
-import {NzColDirective, NzRowDirective} from 'ng-zorro-antd/grid';
-import {NzDividerComponent} from 'ng-zorro-antd/divider';
-import {NzPaginationComponent} from 'ng-zorro-antd/pagination';
-import {
-  NzTableCellDirective,
-  NzTableComponent,
-  NzTbodyComponent,
-  NzTheadComponent,
-  NzThMeasureDirective,
-  NzTrDirective,
-} from 'ng-zorro-antd/table';
-import {FormBuilder} from '@angular/forms';
-import {NzMessageService} from 'ng-zorro-antd/message';
 import {RequestService} from '../../../../../projects/smart/src/lib/request.service';
-import {AlarmComponent} from '../../alarm/alarm.component';
+import {NzMessageService} from 'ng-zorro-antd/message';
+import {NzDividerComponent} from "ng-zorro-antd/divider";
+import {NzColDirective, NzRowDirective} from "ng-zorro-antd/grid";
+import {NzStatisticComponent} from "ng-zorro-antd/statistic";
+import {NzCardComponent} from "ng-zorro-antd/card";
+import {SmartInfoComponent, SmartInfoItem} from "../../../../../projects/smart/src/lib/smart-info/smart-info.component";
+import {NzTabsModule} from "ng-zorro-antd/tabs";
+import {SmartTableColumn} from "../../../../../projects/smart/src/lib/smart-table/smart-table.component";
 
 @Component({
   selector: 'app-device-detail',
   standalone: true,
   imports: [
-    NzPageHeaderModule,
-    NzDescriptionsModule,
-    NzSpaceModule,
-    NzButtonComponent,
-    NzIconDirective,
-    NzInputGroupComponent,
-    NzInputDirective,
-    NgForOf,
-    RouterLink,
-    NzPopconfirmDirective,
-    DatePipe,
-    NzStatisticComponent,
+    CommonModule,
+    SmartInfoComponent,
+    NzDividerComponent,
     NzRowDirective,
     NzColDirective,
-    NzDividerComponent,
-    NzPaginationComponent,
-    NzTableCellDirective,
-    NzTableComponent,
-    NzTbodyComponent,
-    NzThMeasureDirective,
-    NzTheadComponent,
-    NzTrDirective,
-    AlarmComponent
+    NzStatisticComponent,
+    NzCardComponent,
+    NzSpaceComponent,
+    NzSpaceItemDirective,
+    NzButtonComponent,
+    RouterLink,
+    NzPopconfirmDirective,
+    NzTabsModule,
   ],
   templateUrl: './device-detail.component.html',
   styleUrl: './device-detail.component.scss',
 })
 export class DeviceDetailComponent implements OnInit {
+  id!: any;
+
+
+  data: any = {};
+
+  fields: SmartInfoItem[] = [
+    {key: 'id', label: 'ID'},
+    {key: 'name', label: '名称'},
+    {
+      key: 'gateway', label: '网关', type: 'link',
+      link: () => `/admin/gateway/${this.data.gateway_id}`,
+    },
+    {
+      key: 'product', label: '产品', type: 'link',
+      link: () => `/admin/product/${this.data.product_id}`,
+    },
+    {
+      key: 'project', label: '项目', type: 'link',
+      link: () => `/admin/project/${this.data.project_id}`,
+    },
+    //{key: 'online',  label: '上线时间', type: 'date'},
+    {key: 'created', label: '创建时间', type: 'date'},
+    {key: 'description', label: '说明', span: 2},
+  ];
 
   constructor(
-    private fb: FormBuilder,
     private router: Router,
     private msg: NzMessageService,
     private rs: RequestService,
@@ -70,30 +69,13 @@ export class DeviceDetailComponent implements OnInit {
   ) {
   }
 
-  id!: any;
-
-  itemId = [
-    {label: 'product_id', value: '产品'},
-    {label: 'project_id', value: '项目'},
-    {label: 'gateway_id', value: '网关'},
-  ];
-
-  data: any = {};
-
   product: any = {};
 
   properties: any = [];
 
-  total = 0;
-  pageIndex = 1;
-  pageSize = 10;
-  value = '';
+  values: any = {};
 
-  values: any = {
-    temp: 30,
-    hum: 71,
-  };
-
+  loading = false;
 
   ngOnInit(): void {
     if (this.route.snapshot.paramMap.has('project')) {
@@ -103,24 +85,21 @@ export class DeviceDetailComponent implements OnInit {
       this.id = this.route.snapshot.paramMap.get('id');
       this.load();
       this.loadValues();
-      return;
     }
   }
 
-  alarms: any[] = [];
-
   load() {
-    this.rs.get(`device/${this.id}`, {}).subscribe((res) => {
-      this.data = res.data;
+    // this.rs.get(`device/${this.id}`, {}).subscribe((res) => {
+    //   this.data = res.data;
+    //   this.loadProduct();
+    //   this.loadProperties();
+    // });
+    this.loading = true
+    this.rs.post('device/search', {filter:{id:this.id}}).subscribe((res) => {
+      this.data = res.data[0];
       this.loadProduct();
       this.loadProperties();
-    });
-
-    this.rs.get('alarm/list', {}).subscribe(
-      (res) => {
-        this.alarms = res.data;
-        this.total = res.total;
-      });
+    }).add(() => this.loading = false);
   }
 
   loadValues() {
@@ -136,29 +115,16 @@ export class DeviceDetailComponent implements OnInit {
   }
 
   loadProperties() {
-    this.rs
-      .get('product/' + this.data.product_id + '/attach/read/property.json')
-      .subscribe((res) => {
-        console.log('property', res);
-        this.properties = res;
-      });
-  }
-
-  pageSizeChange(e: any) {
-    this.pageSize = e;
-    this.load();
-  }
-
-  pageIndexChange(e: any) {
-    this.pageIndex = e;
-    this.load();
+    this.rs.get('product/' + this.data.product_id + '/attach/read/property.json').subscribe((res) => {
+      console.log('property', res);
+      this.properties = res;
+    });
   }
 
   delete() {
-    this.rs.get(`device/${this.id}/delete`, {}).subscribe(
-      (res) => {
-        this.msg.success('删除成功');
-        this.router.navigateByUrl('admin/device');
-      });
+    this.rs.get(`device/${this.id}/delete`, {}).subscribe((res) => {
+      this.msg.success('删除成功');
+      this.router.navigateByUrl('admin/device');
+    });
   }
 }
