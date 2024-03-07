@@ -140,10 +140,10 @@ export class DevicesComponent implements OnInit {
     //console.log('onQuery', query)
     this.query = query
 
-    if (this.project_id)
-      query.filter['project_id'] = this.project_id;
-    else if (this.gateway_id)
+    if (this.gateway_id)
       query.filter['gateway_id'] = this.gateway_id;
+    else if (this.project_id)
+      query.filter['project_id'] = this.project_id;
 
     this.loading = true;
     this.rs.post('device/search', query).subscribe((res) => {
