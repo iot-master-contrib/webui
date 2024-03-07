@@ -1,20 +1,25 @@
 <nz-card nzTitle="项目详情" [nzExtra]="extra">
   <im-smart-info [fields]="fields" [value]="data"></im-smart-info>
+
+  <nz-tabset>
+    <nz-tab nzTitle="空间">
+      <ng-template nz-tab>
+        <app-spaces [project_id]="id"></app-spaces>
+      </ng-template>
+    </nz-tab>
+    <nz-tab nzTitle="设备">
+      <ng-template nz-tab>
+        <app-devices [project_id]="id"></app-devices>
+      </ng-template>
+    </nz-tab>
+  </nz-tabset>
+
 </nz-card>
 <ng-template #extra>
   <nz-space>
-    <a nz-button *nzSpaceItem [routerLink]="'/project/'+data.id" target="_blank">打开</a>
+    <a nz-button *nzSpaceItem [routerLink]="'/project/'+id" target="_blank">打开</a>
     <button *nzSpaceItem nz-button routerLink="edit">编辑</button>
     <button *nzSpaceItem nz-button nz-popconfirm nzPopconfirmTitle="确认删除" (nzOnConfirm)="delete()">删除</button>
   </nz-space>
 </ng-template>
 
-<nz-divider nzText="空间列表" nzOrientation="left"></nz-divider>
-
-<div nz-row [nzGutter]="[16,16]">
-  <div nz-col [nzXXl]="8" [nzXl]="4" [nzLg]="6" [nzMd]="6" [nzSm]="12" [nzXs]="24" *ngFor="let s of spaces">
-    <nz-card nzHoverable (click)="open(s)">
-      {{ s.name }}
-    </nz-card>
-  </div>
-</div>

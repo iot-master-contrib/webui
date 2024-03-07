@@ -2,7 +2,7 @@ import {
   Component,
   Inject,
   inject,
-  InjectFlags,
+  InjectFlags, Input,
   OnInit,
   Optional,
 } from '@angular/core';
@@ -29,7 +29,7 @@ import {
 export class DevicesComponent implements OnInit {
   //从Modal中传参过来
   //readonly data: any = inject(NZ_MODAL_DATA, {optional:true});
-  project_id: any = '';
+  @Input() project_id: any = '';
 
 
   datum: any[] = [];
