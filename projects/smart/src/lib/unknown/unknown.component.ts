@@ -2,6 +2,8 @@ import {Component} from '@angular/core';
 import {RouterLink} from "@angular/router";
 import {NzEmptyComponent} from "ng-zorro-antd/empty";
 import {NzButtonComponent} from "ng-zorro-antd/button";
+import {NzResultNotFoundComponent} from "ng-zorro-antd/result/partial/not-found";
+import {NzResultComponent} from "ng-zorro-antd/result";
 
 @Component({
   selector: 'im-unknown',
@@ -9,7 +11,8 @@ import {NzButtonComponent} from "ng-zorro-antd/button";
   imports: [
     RouterLink,
     NzEmptyComponent,
-    NzButtonComponent
+    NzButtonComponent,
+    NzResultComponent
   ],
   templateUrl: './unknown.component.html',
   styleUrl: './unknown.component.scss'

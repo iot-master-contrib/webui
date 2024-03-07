@@ -2,14 +2,24 @@
   <im-smart-info [fields]="fields" [value]="data"></im-smart-info>
 
   <nz-tabset>
-    <nz-tab nzTitle="空间">
+    <nz-tab nzTitle="项目空间">
       <ng-template nz-tab>
         <app-spaces [project_id]="id"></app-spaces>
       </ng-template>
     </nz-tab>
-    <nz-tab nzTitle="设备">
+    <nz-tab nzTitle="项目设备">
       <ng-template nz-tab>
         <app-devices [project_id]="id"></app-devices>
+      </ng-template>
+    </nz-tab>
+    <nz-tab nzTitle="项目网关">
+      <ng-template nz-tab>
+        <app-gateways [project_id]="id"></app-gateways>
+      </ng-template>
+    </nz-tab>
+    <nz-tab nzTitle="项目用户">
+      <ng-template nz-tab>
+        <app-project-user [project_id]="id"></app-project-user>
       </ng-template>
     </nz-tab>
   </nz-tabset>

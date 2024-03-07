@@ -1,91 +1,56 @@
 import {Component, OnInit} from '@angular/core';
-import {
-  NzPageHeaderComponent,
-  NzPageHeaderContentDirective,
-  NzPageHeaderExtraDirective,
-  NzPageHeaderSubtitleDirective,
-  NzPageHeaderTitleDirective,
-} from 'ng-zorro-antd/page-header';
 import {NzSpaceComponent, NzSpaceItemDirective} from 'ng-zorro-antd/space';
 import {NzButtonComponent} from 'ng-zorro-antd/button';
-import {
-  NzDescriptionsComponent,
-  NzDescriptionsItemComponent,
-} from 'ng-zorro-antd/descriptions';
-import {DatePipe, NgForOf} from '@angular/common';
+import {CommonModule} from '@angular/common';
 import {ActivatedRoute, Router, RouterLink} from '@angular/router';
 import {NzPopconfirmDirective} from 'ng-zorro-antd/popconfirm';
-import {NzIconDirective} from 'ng-zorro-antd/icon';
-import {NzInputDirective, NzInputGroupComponent} from 'ng-zorro-antd/input';
-import {NzPaginationComponent} from 'ng-zorro-antd/pagination';
-import {
-  NzTableCellDirective,
-  NzTableComponent,
-  NzTbodyComponent,
-  NzTheadComponent,
-  NzThMeasureDirective,
-  NzTrDirective,
-} from 'ng-zorro-antd/table';
 import {RequestService} from '../../../../../projects/smart/src/lib/request.service';
 import {NzMessageService} from 'ng-zorro-antd/message';
-import {NzSelectModule} from 'ng-zorro-antd/select';
-import {SearchFormComponent} from '../../../components/search-form/search-form.component';
-import {BatchBtnComponent} from '../../../modals/batch-btn/batch-btn.component';
 import {NzDividerComponent} from "ng-zorro-antd/divider";
+import {NzColDirective, NzRowDirective} from "ng-zorro-antd/grid";
+import {NzStatisticComponent} from "ng-zorro-antd/statistic";
+import {NzCardComponent} from "ng-zorro-antd/card";
+import {SmartInfoComponent, SmartInfoItem} from "../../../../../projects/smart/src/lib/smart-info/smart-info.component";
+import {NzTabsModule} from "ng-zorro-antd/tabs";
+import {DevicesComponent} from "../../device/devices/devices.component";
 
 @Component({
   selector: 'app-space-detail',
   standalone: true,
   imports: [
-    SearchFormComponent,
-    BatchBtnComponent,
-    NzSelectModule,
-    NzPageHeaderComponent,
-    NzPageHeaderTitleDirective,
-    NzPageHeaderSubtitleDirective,
-    NzPageHeaderContentDirective,
-    NzPageHeaderExtraDirective,
+    CommonModule,
+    SmartInfoComponent,
+    NzDividerComponent,
+    NzRowDirective,
+    NzColDirective,
+    NzStatisticComponent,
+    NzCardComponent,
     NzSpaceComponent,
-    NzSpaceItemDirective,
     NzButtonComponent,
-    NzDescriptionsComponent,
-    NzDescriptionsItemComponent,
-    DatePipe,
+    NzSpaceItemDirective,
     RouterLink,
     NzPopconfirmDirective,
-    NgForOf,
-    NzIconDirective,
-    NzInputDirective,
-    NzInputGroupComponent,
-    NzPaginationComponent,
-    NzTableCellDirective,
-    NzTableComponent,
-    NzTbodyComponent,
-    NzThMeasureDirective,
-    NzTheadComponent,
-    NzTrDirective,
-    NzDividerComponent,
+    NzTabsModule,
+    DevicesComponent,
   ],
   templateUrl: './space-detail.component.html',
   styleUrl: './space-detail.component.scss'
 })
 export class SpaceDetailComponent implements OnInit {
-  isVisible = false;
   id!: any;
-  total = 0;
-  query: any = {limit: 20, skip: 0};
 
-  pageIndex = 1;
-  pageSize = 10;
   value = '';
-  data: any = {
-    id: 1,
-    name: '默认空间',
-    description: '',
 
-    created: new Date(),
-  };
+  data: any = {};
 
+  spaces: any[] = []
+
+  fields: SmartInfoItem[] = [
+    {label: 'ID', key: 'id'},
+    {label: '名称', key: 'name'},
+    {label: '创建时间', key: 'created', type: 'date'},
+    {label: '说明', key: 'description', span: 2},
+  ];
 
   constructor(
     private router: Router,
@@ -98,7 +63,7 @@ export class SpaceDetailComponent implements OnInit {
   ngOnInit(): void {
     if (this.route.snapshot.paramMap.has('id')) {
       this.id = this.route.snapshot.paramMap.get('id');
-      this.query.filter = {project_id: this.id};
+      //this.query.filter = {project_id: this.id};
       this.load();
     }
   }
@@ -114,7 +79,5 @@ export class SpaceDetailComponent implements OnInit {
       this.msg.success('删除成功');
       this.router.navigateByUrl('admin');
     });
-    this.load();
   }
-
 }

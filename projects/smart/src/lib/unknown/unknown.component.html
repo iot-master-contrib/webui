@@ -1,5 +1,5 @@
-<nz-empty nzNotFoundContent="未知页面" [nzNotFoundFooter]="footer"></nz-empty>
-<ng-template #footer>
-  <a nz-button nzType="primary" routerLink="/">返回首页</a>
-</ng-template>
-
+<nz-result nzStatus="404" nzTitle="找不到页面">
+  <div nz-result-extra>
+    <a nz-button nzType="primary" routerLink="/">返回首页</a>
+  </div>
+</nz-result>

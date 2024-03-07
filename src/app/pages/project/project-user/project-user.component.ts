@@ -1,4 +1,4 @@
-import {Component, Inject, Optional} from '@angular/core';
+import {Component, Inject, Input, Optional} from '@angular/core';
 import {NZ_MODAL_DATA, NzModalRef, NzModalService,} from 'ng-zorro-antd/modal';
 import {ActivatedRoute} from '@angular/router';
 import {CommonModule} from '@angular/common';
@@ -24,7 +24,7 @@ import {NzNotificationService} from "ng-zorro-antd/notification";
   styleUrl: './project-user.component.scss',
 })
 export class ProjectUserComponent {
-  project_id: any = '';
+  @Input() project_id: any = '';
 
 
   datum: any[] = [];

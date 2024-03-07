@@ -30,6 +30,8 @@ export class DevicesComponent implements OnInit {
   //从Modal中传参过来
   //readonly data: any = inject(NZ_MODAL_DATA, {optional:true});
   @Input() project_id: any = '';
+  @Input() gateway_id: any = '';
+  @Input() space_id: any = '';
 
 
   datum: any[] = [];
@@ -141,6 +143,8 @@ export class DevicesComponent implements OnInit {
 
     if (this.project_id)
       query.filter['project_id'] = this.project_id;
+    else if (this.gateway_id)
+      query.filter['gateway_id'] = this.gateway_id;
 
     this.loading = true;
     this.rs.post('device/search', query).subscribe((res) => {

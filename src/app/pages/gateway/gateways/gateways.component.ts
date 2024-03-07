@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit, Optional} from '@angular/core';
+import {Component, Inject, Input, OnInit, Optional} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {RequestService} from '../../../../../projects/smart/src/lib/request.service';
 import {NZ_MODAL_DATA, NzModalRef} from 'ng-zorro-antd/modal';
@@ -24,7 +24,7 @@ import {
 export class GatewaysComponent implements OnInit {
   //从Modal中传参过来
   //readonly data: any = inject(NZ_MODAL_DATA, {optional:true});
-  project_id: any = '';
+  @Input() project_id: any = '';
 
 
   datum: any[] = [];

@@ -14,6 +14,8 @@ import {SmartInfoComponent, SmartInfoItem} from "../../../../../projects/smart/s
 import {NzTabsModule} from "ng-zorro-antd/tabs";
 import {SpacesComponent} from "../../space/spaces/spaces.component";
 import {DevicesComponent} from "../../device/devices/devices.component";
+import {GatewaysComponent} from "../../gateway/gateways/gateways.component";
+import {ProjectUserComponent} from "../project-user/project-user.component";
 
 @Component({
   selector: 'app-project-detail',
@@ -33,7 +35,9 @@ import {DevicesComponent} from "../../device/devices/devices.component";
     NzPopconfirmDirective,
     NzTabsModule,
     SpacesComponent,
-    DevicesComponent
+    DevicesComponent,
+    GatewaysComponent,
+    ProjectUserComponent
   ],
   templateUrl: './project-detail.component.html',
   styleUrl: './project-detail.component.scss',
@@ -82,8 +86,7 @@ export class ProjectDetailComponent implements OnInit {
   }
 
   delete() {
-    this.rs.get(`project/${this.id}/delete`, {}).subscribe(
-      (res: any) => {
+    this.rs.get(`project/${this.id}/delete`, {}).subscribe((res: any) => {
         this.msg.success('删除成功');
         this.router.navigateByUrl('admin');
       });
