@@ -49,8 +49,6 @@ export class ProjectDetailComponent implements OnInit {
 
   data: any = {};
 
-  spaces: any[] = []
-
   fields: SmartInfoItem[] = [
     {label: 'ID', key: 'id'},
     {label: '名称', key: 'name'},

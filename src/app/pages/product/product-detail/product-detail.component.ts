@@ -1,66 +1,61 @@
 import {Component, OnInit} from '@angular/core';
-import {NzPageHeaderComponent, NzPageHeaderModule} from "ng-zorro-antd/page-header";
-import {NzSpaceModule} from "ng-zorro-antd/space";
-import {NzDescriptionsModule} from "ng-zorro-antd/descriptions";
-import {NzButtonComponent} from "ng-zorro-antd/button";
-import {NzIconDirective} from "ng-zorro-antd/icon";
-import {NzInputDirective, NzInputGroupComponent} from "ng-zorro-antd/input";
-import {DatePipe, NgForOf} from "@angular/common";
-import {ActivatedRoute, Router, RouterLink} from "@angular/router";
-import {NzPopconfirmDirective} from "ng-zorro-antd/popconfirm";
-import {NzStatisticComponent} from "ng-zorro-antd/statistic";
+import {NzSpaceComponent, NzSpaceItemDirective} from 'ng-zorro-antd/space';
+import {NzButtonComponent} from 'ng-zorro-antd/button';
+import {CommonModule} from '@angular/common';
+import {ActivatedRoute, Router, RouterLink} from '@angular/router';
+import {NzPopconfirmDirective} from 'ng-zorro-antd/popconfirm';
 import {RequestService} from '../../../../../projects/smart/src/lib/request.service';
 import {NzMessageService} from 'ng-zorro-antd/message';
-import {FormBuilder} from '@angular/forms';
-import {NzTabComponent, NzTabDirective, NzTabSetComponent} from "ng-zorro-antd/tabs";
+import {NzDividerComponent} from "ng-zorro-antd/divider";
+import {NzColDirective, NzRowDirective} from "ng-zorro-antd/grid";
+import {NzStatisticComponent} from "ng-zorro-antd/statistic";
+import {NzCardComponent} from "ng-zorro-antd/card";
+import {SmartInfoComponent, SmartInfoItem} from "../../../../../projects/smart/src/lib/smart-info/smart-info.component";
+import {NzTabsModule} from "ng-zorro-antd/tabs";
+import {DevicesComponent} from "../../device/devices/devices.component";
 import {WebViewComponent} from "../../../components/web-view/web-view.component";
 
 @Component({
   selector: 'app-product-detail',
   standalone: true,
   imports: [
-    NzPageHeaderModule,
-    NzDescriptionsModule,
-    NzSpaceModule,
+    CommonModule,
+    SmartInfoComponent,
+    NzCardComponent,
+    NzSpaceComponent,
     NzButtonComponent,
-    NzIconDirective,
-    NzInputGroupComponent,
-    NzInputDirective,
-    NgForOf,
+    NzSpaceItemDirective,
     RouterLink,
     NzPopconfirmDirective,
-    DatePipe,
-    NzStatisticComponent,
-    NzTabSetComponent,
-    NzTabComponent,
-    NzTabDirective,
+    NzTabsModule,
+    DevicesComponent,
+    WebViewComponent,
     WebViewComponent,
   ],
   templateUrl: './product-detail.component.html',
   styleUrl: './product-detail.component.scss'
 })
 export class ProductDetailComponent implements OnInit {
-  id!: any
-  data: any = {
-    id: 1,
-    name: '温度计',
-    description: '标准485温度计',
-    version: '3',
-    keywords: ['modbus'],
-    icon: '',
-    url: 'https://www.baidu.com',
-    created: new Date(),
-    properties: [
-      {name: "temp", label: "温度", unit: '℃'},
-      {name: "hum", label: "湿度", unit: '%'},
-    ]
-  }
+  id!: any;
 
-  constructor(private fb: FormBuilder,
-              private router: Router,
-              private msg: NzMessageService,
-              private rs: RequestService,
-              private route: ActivatedRoute) {
+  value = '';
+
+  data: any = {};
+
+  fields: SmartInfoItem[] = [
+    {label: 'ID', key: 'id'},
+    {label: '名称', key: 'name'},
+    {label: '版本', key: 'version'},
+    {label: '创建时间', key: 'created', type: 'date'},
+    {label: '说明', key: 'description', span: 2},
+  ];
+
+  constructor(
+    private router: Router,
+    private msg: NzMessageService,
+    private rs: RequestService,
+    private route: ActivatedRoute
+  ) {
   }
 
   plugins: any[] = [];
@@ -74,10 +69,8 @@ export class ProductDetailComponent implements OnInit {
   }
 
   load() {
-    this.rs.get(`product/${this.id}`, {}).subscribe(
-      (res) => {
+    this.rs.get(`product/${this.id}`, {}).subscribe(      (res) => {
         this.data = res.data
-
       }
     );
   }
@@ -90,15 +83,10 @@ export class ProductDetailComponent implements OnInit {
 
 
   delete() {
-    this.rs.get(`product/${this.id}/delete`, {}).subscribe(
-      (res) => {
+    this.rs.get(`product/${this.id}/delete`, {}).subscribe(      (res) => {
         this.msg.success('删除成功');
         this.router.navigateByUrl('admin/product');
-      },
-      (err) => {
-        console.log('err:', err);
-      }
-    );
+      }    );
     this.load();
   }
 }

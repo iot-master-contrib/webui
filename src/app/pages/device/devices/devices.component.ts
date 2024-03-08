@@ -31,6 +31,7 @@ export class DevicesComponent implements OnInit {
   //readonly data: any = inject(NZ_MODAL_DATA, {optional:true});
   @Input() project_id: any = '';
   @Input() gateway_id: any = '';
+  @Input() product_id: any = '';
 
 
   datum: any[] = [];
@@ -142,6 +143,8 @@ export class DevicesComponent implements OnInit {
 
     if (this.gateway_id)
       query.filter['gateway_id'] = this.gateway_id;
+    else if (this.product_id)
+      query.filter['product_id'] = this.product_id;
     else if (this.project_id)
       query.filter['project_id'] = this.project_id;
 

@@ -1,4 +1,4 @@
-<nz-descriptions [nzTitle]="title" nzBordered nzSize="small">
+<nz-descriptions [nzTitle]="title" nzBordered nzSize="small" [nzColumn]="{ xs: 1, sm: 1, md: 2, lg:2, xl:3, xxl:3}">
   <ng-container *ngFor="let f of fields">
     <ng-container [ngSwitch]="f.type">
       <nz-descriptions-item [nzTitle]="f.label" [nzSpan]="f.span || 1">
