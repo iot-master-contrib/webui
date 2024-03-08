@@ -61,6 +61,7 @@ export class DevicesComponent implements OnInit {
       key: 'product', sortable: true, text: '产品', keyword: true,
       link: (data) => `/admin/product/${data.product_id}`,
     },
+    {key: 'product_version', sortable: true, text: '版本'},
     {
       key: 'project', sortable: true, text: '项目', keyword: true,
       link: (data) => `/admin/project/${data.project_id}`,
@@ -82,6 +83,7 @@ export class DevicesComponent implements OnInit {
       key: 'product', sortable: true, text: '产品', keyword: true,
       link: (data) => `/project/${this.project_id}/product/${data.product_id}`,
     },
+    {key: 'product_version', sortable: true, text: '版本'},
     {key: 'online', sortable: true, text: '上线时间', date: true},
   ];
 

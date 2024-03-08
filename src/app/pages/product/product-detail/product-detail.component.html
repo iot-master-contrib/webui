@@ -2,6 +2,11 @@
   <im-smart-info [fields]="fields" [value]="data"></im-smart-info>
 
   <nz-tabset>
+    <nz-tab nzTitle="产品版本">
+      <ng-template nz-tab>
+        <app-product-version [product_id]="id"></app-product-version>
+      </ng-template>
+    </nz-tab>
     <nz-tab nzTitle="产品设备">
       <ng-template nz-tab>
         <app-devices [product_id]="id"></app-devices>

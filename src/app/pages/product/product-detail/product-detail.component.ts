@@ -14,6 +14,7 @@ import {SmartInfoComponent, SmartInfoItem} from "../../../../../projects/smart/s
 import {NzTabsModule} from "ng-zorro-antd/tabs";
 import {DevicesComponent} from "../../device/devices/devices.component";
 import {WebViewComponent} from "../../../components/web-view/web-view.component";
+import {ProductVersionComponent} from "../product-version/product-version.component";
 
 @Component({
   selector: 'app-product-detail',
@@ -31,6 +32,7 @@ import {WebViewComponent} from "../../../components/web-view/web-view.component"
     DevicesComponent,
     WebViewComponent,
     WebViewComponent,
+    ProductVersionComponent,
   ],
   templateUrl: './product-detail.component.html',
   styleUrl: './product-detail.component.scss'
