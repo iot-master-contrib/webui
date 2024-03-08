@@ -3,10 +3,7 @@ import {NgForOf, NgOptimizedImage} from '@angular/common';
 import {NzButtonComponent} from 'ng-zorro-antd/button';
 import {NzCardComponent, NzCardMetaComponent} from 'ng-zorro-antd/card';
 import {NzColDirective, NzRowDirective} from 'ng-zorro-antd/grid';
-import {
-  NzDropDownDirective,
-  NzDropdownMenuComponent,
-} from 'ng-zorro-antd/dropdown';
+import {NzDropDownDirective, NzDropdownMenuComponent} from 'ng-zorro-antd/dropdown';
 import {NzIconDirective} from 'ng-zorro-antd/icon';
 import {NzInputDirective, NzInputGroupComponent} from 'ng-zorro-antd/input';
 import {NzMenuDirective, NzMenuItemComponent} from 'ng-zorro-antd/menu';
@@ -16,16 +13,12 @@ import {NzSpaceComponent} from 'ng-zorro-antd/space';
 import {Router, RouterLink} from '@angular/router';
 import {RequestService} from '../../../../projects/smart/src/lib/request.service';
 import {NzMessageService} from 'ng-zorro-antd/message';
-import {NzModalRef, NzModalService} from 'ng-zorro-antd/modal';
-import {SearchFormComponent} from '../../components/search-form/search-form.component';
-import {BatchBtnComponent} from '../../modals/batch-btn/batch-btn.component';
+import {NzModalService} from 'ng-zorro-antd/modal';
 
 @Component({
   selector: 'app-plugin',
   standalone: true,
   imports: [
-    BatchBtnComponent,
-    SearchFormComponent,
     NgForOf,
     NzButtonComponent,
     NzCardComponent,

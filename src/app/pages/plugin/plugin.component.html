@@ -1,15 +1,3 @@
-<div class="top">
-  <app-search-form
-    placeholder="请输入名称"
-    (onSearch)="search($event)"
-  ></app-search-form>
-  <app-batch-btn
-    [showExportBtn]="false"
-    [showImportBtn]="false"
-    [showDelBtn]="false"
-    (add)="handleEdit()"
-  ></app-batch-btn>
-</div>
 <div class="content">
   <nz-row [nzGutter]="[4,4]">
     <nz-col *ngFor="let p of plugins; index as i"

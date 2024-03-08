@@ -87,7 +87,7 @@ export class ProjectUserComponent {
       query.filter['project_id'] = this.project_id;
 
     this.loading = true;
-    this.rs.get(`project/${this.project_id}/user`).subscribe((res) => {
+    this.rs.get(`project/${this.project_id}/user/list`).subscribe((res) => {
       this.datum = res.data;
       //this.total = res.data.length
     }).add(() => this.loading = false);

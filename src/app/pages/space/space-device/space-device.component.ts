@@ -95,7 +95,7 @@ export class SpaceDeviceComponent {
       query.filter['project_id'] = this.project_id;
 
     this.loading = true;
-    this.rs.get(`space/${this.space_id}/device`).subscribe((res) => {
+    this.rs.get(`space/${this.space_id}/device/list`).subscribe((res) => {
       this.datum = res.data;
       //this.total = res.data.length
     }).add(() => this.loading = false);

@@ -37,6 +37,7 @@ import {SettingBackupComponent} from "../pages/setting/setting-backup/setting-ba
 import {SettingAttachComponent} from "../pages/setting/setting-attach/setting-attach.component";
 import {ProjectUserComponent} from "../pages/project/project-user/project-user.component";
 import {SpaceDeviceComponent} from "../pages/space/space-device/space-device.component";
+import {ProductVersionComponent} from "../pages/product/product-version/product-version.component";
 
 const routes: Routes = [
   {path: "", pathMatch: "full", redirectTo: "dash"},
@@ -49,6 +50,7 @@ const routes: Routes = [
   {path: 'product/:id/edit/property', component: ProductEditPropertyComponent, title: "编辑产品属性"},
   {path: 'product/:id/edit/event', component: ProductEditEventComponent, title: "编辑产品事件"},
   {path: 'product/:id/edit/action', component: ProductEditActionComponent, title: "编辑产品动作"},
+  {path: 'product/:id/version', component: ProductVersionComponent, title: "产品版本"},
 
   {path: 'device', component: DevicesComponent, title: "设备列表"},
   {path: 'device/create', component: DeviceEditComponent, title: "创建设备"},

@@ -80,6 +80,7 @@ export class SmartTableComponent implements OnInit {
 
   keyword = '';
 
+
   @Input() buttons?: SmartTableButton[];
   @Input() columns: SmartTableColumn[] = []
   @Input() operators?: SmartTableOperator[]
@@ -87,6 +88,8 @@ export class SmartTableComponent implements OnInit {
   @Input() datum: any[] = [];
   @Input() total: number = 0;
   @Input() loading = false;
+
+  @Input() showSearch: boolean = true
 
   @Output() query = new EventEmitter<ParamSearch>
 

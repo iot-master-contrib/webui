@@ -1,0 +1,10 @@
+<im-smart-table
+  [showSearch]="false"
+  [buttons]="ref ? [] : buttons"
+  [columns]="columns"
+  [operators]="ref ? operatorsSelect : operators"
+  [datum]="datum"
+  [total]="total"
+  [loading]="loading"
+  (query)="search($event)"
+></im-smart-table>

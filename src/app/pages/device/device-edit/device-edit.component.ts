@@ -62,7 +62,7 @@ export class DeviceEditComponent implements OnInit, AfterViewInit {
           nzTitle: "选择", nzContent: ProductsComponent,
         }).afterClose.subscribe(res => {
           if (res) {
-            this.form.patchValues({product_id: res.id})
+            this.form.patchValues({product_id: res.id, product_version: res.version})
             this.fields[4].tips = res.name
           }
         })
@@ -73,6 +73,7 @@ export class DeviceEditComponent implements OnInit, AfterViewInit {
         })
       }
     },
+    {key: "product_version", label: "产品版本", type: "text", disabled: true},
     {
       key: "project_id", label: "项目", type: "choose",
       choose: () => {
@@ -118,7 +119,7 @@ export class DeviceEditComponent implements OnInit, AfterViewInit {
       this.data.project_id = this.project_id
       this.form.patchValues({project_id: this.project_id})
       this.form.group.get('project_id')?.disable()
-      this.fields[5].disabled = true
+      this.fields[6].disabled = true
     }
   }
 
@@ -131,7 +132,7 @@ export class DeviceEditComponent implements OnInit, AfterViewInit {
       if (res.data.product_id)
         this.fields[4].change?.(res.data.product_id)
       if (res.data.project_id)
-        this.fields[5].change?.(res.data.project_id)
+        this.fields[6].change?.(res.data.project_id)
     });
   }
 
