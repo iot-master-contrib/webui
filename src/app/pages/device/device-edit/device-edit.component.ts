@@ -11,6 +11,7 @@ import {GatewaysComponent} from "../../gateway/gateways/gateways.component";
 import {NzModalService} from "ng-zorro-antd/modal";
 import {ProjectsComponent} from "../../project/projects/projects.component";
 import {ProductsComponent} from "../../product/products/products.component";
+import {ProductVersionComponent} from "../../product/product-version/product-version.component";
 
 @Component({
   selector: 'app-device-edit',
@@ -41,7 +42,7 @@ export class DeviceEditComponent implements OnInit, AfterViewInit {
       key: "gateway_id", label: "网关", type: "choose",
       choose: () => {
         this.ms.create({
-          nzTitle: "选择", nzContent: GatewaysComponent, nzData: {project_id: this.project_id},
+          nzTitle: "选择网关", nzContent: GatewaysComponent, nzData: {project_id: this.project_id},
         }).afterClose.subscribe(res => {
           if (res) {
             this.form.patchValues({gateway_id: res.id})
@@ -59,9 +60,10 @@ export class DeviceEditComponent implements OnInit, AfterViewInit {
       key: "product_id", label: "产品", type: "choose",
       choose: () => {
         this.ms.create({
-          nzTitle: "选择", nzContent: ProductsComponent,
+          nzTitle: "选择产品", nzContent: ProductsComponent,
         }).afterClose.subscribe(res => {
           if (res) {
+            console.log('选择产品', res)
             this.form.patchValues({product_id: res.id, product_version: res.version})
             this.fields[4].tips = res.name
           }
@@ -73,12 +75,28 @@ export class DeviceEditComponent implements OnInit, AfterViewInit {
         })
       }
     },
-    {key: "product_version", label: "产品版本", type: "text", disabled: true},
+    {
+      key: "product_version", label: "版本", type: "choose",
+      choose: () => {
+        let product_id = this.form.Value().product_id
+        if (!product_id) {
+          this.msg.error("请选择产品")
+          return
+        }
+        this.ms.create({
+          nzTitle: "选择版本", nzContent: ProductVersionComponent, nzData: {product_id},
+        }).afterClose.subscribe(res => {
+          if (res) {
+            this.form.patchValues({product_version: res.name})
+          }
+        })
+      },
+    },
     {
       key: "project_id", label: "项目", type: "choose",
       choose: () => {
         this.ms.create({
-          nzTitle: "选择", nzContent: ProjectsComponent,
+          nzTitle: "选择项目", nzContent: ProjectsComponent,
         }).afterClose.subscribe(res => {
           if (res) {
             this.form.patchValues({project_id: res.id})

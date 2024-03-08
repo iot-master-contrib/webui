@@ -11,6 +11,8 @@ import {
   SmartTableComponent,
   SmartTableOperator,
 } from '../../../../../projects/smart/src/lib/smart-table/smart-table.component';
+import {GatewaysComponent} from "../../gateway/gateways/gateways.component";
+import {ProductVersionComponent} from "../product-version/product-version.component";
 
 @Component({
   selector: 'app-products',
@@ -56,10 +58,25 @@ export class ProductsComponent {
   ];
 
   operatorsSelect: SmartTableOperator[] = [
-    {text: '选择', action: (data) => this.ref.close(data)},
+    {
+      text: '选择', action: (data) => {
+        this.ref.close(data)
+        // this.ms.create({
+        //   nzTitle: "选择版本",
+        //   nzContent: ProductVersionComponent,
+        //   nzData: {product_id: data.id},
+        // }).afterClose.subscribe(res => {
+        //   if (res) {
+        //     this.ref.close(Object.assign({}, data,{version: res.name}))
+        //   }
+        // })
+      }
+    },
   ];
 
-  constructor(private rs: RequestService, @Optional() protected ref: NzModalRef) {
+  constructor(private rs: RequestService,
+              private ms: NzModalService,
+              @Optional() protected ref: NzModalRef) {
   }
 
 
