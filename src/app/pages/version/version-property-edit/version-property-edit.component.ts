@@ -69,13 +69,13 @@ export class VersionPropertyEditComponent implements OnInit {
 
   items: SmartTableEditItem[] = [{
     label: '变量',
-    name: 'name'
+    key: 'name'
   }, {
     label: '显示名称',
-    name: 'label'
+    key: 'label'
   }, {
     label: '类型',
-    name: 'type',
+    key: 'type',
     type: 'select',
     default: 'int',
     options: [{
@@ -104,10 +104,10 @@ export class VersionPropertyEditComponent implements OnInit {
     ]
   }, {
     label: '单位',
-    name: 'unit'
+    key: 'unit'
   }, {
     label: '模式',
-    name: 'mode',
+    key: 'mode',
     type: 'select',
     default: 'r',
     options: [{

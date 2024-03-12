@@ -37,16 +37,16 @@ export class ProjectUserComponent {
   ];
 
   columns: SmartTableColumn[] = [
-    {key: 'user_id', sortable: true, text: 'ID', keyword: true},
-    {key: 'user', sortable: true, text: '名称', keyword: true},
-    {key: 'disabled', sortable: true, text: '状态'},
-    {key: 'created', sortable: true, text: '创建时间', date: true},
+    {key: 'user_id', sortable: true, label: 'ID', keyword: true},
+    {key: 'user', sortable: true, label: '名称', keyword: true},
+    {key: 'disabled', sortable: true, label: '状态'},
+    {key: 'created', sortable: true, label: '创建时间', date: true},
   ];
 
   columnsSelect: SmartTableColumn[] = [
-    {key: 'user_id', sortable: true, text: 'ID', keyword: true},
-    {key: 'user', sortable: true, text: '名称', keyword: true},
-    {key: 'disabled', sortable: true, text: '状态'},
+    {key: 'user_id', sortable: true, label: 'ID', keyword: true},
+    {key: 'user', sortable: true, label: '名称', keyword: true},
+    {key: 'disabled', sortable: true, label: '状态'},
   ];
 
   operators: SmartTableOperator[] = [

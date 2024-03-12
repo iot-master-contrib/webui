@@ -22,9 +22,9 @@ import {NzInputDirective} from "ng-zorro-antd/input";
 
 
 export interface SmartTableEditItem {
-  name: string
-  label: string
+  key: string
   type?: string
+  label: string
   placeholder?: string
   default?: any
   options?: NzSelectOptionInterface[]
@@ -82,7 +82,7 @@ export class SmartTableEditComponent implements OnInit, ControlValueAccessor {
     const row: any = {};
     data.forEach(item => {
       //if (item.hasOwnProperty("default"))
-      row[item.name] = item.default
+      row[item.key] = item.default
       //TODO 需要补充缺失的控件
 
     })

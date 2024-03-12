@@ -49,48 +49,48 @@ export class DevicesComponent implements OnInit {
 
   columns: SmartTableColumn[] = [
     {
-      key: 'id', sortable: true, text: 'ID', keyword: true,
+      key: 'id', sortable: true, label: 'ID', keyword: true,
       link: (data) => `/admin/device/${data.id}`,
     },
-    {key: 'name', sortable: true, text: '名称', keyword: true},
+    {key: 'name', sortable: true, label: '名称', keyword: true},
     {
-      key: 'gateway', sortable: true, text: '网关', keyword: true,
+      key: 'gateway', sortable: true, label: '网关', keyword: true,
       link: (data) => `/admin/gateway/${data.gateway_id}`,
     },
     {
-      key: 'product', sortable: true, text: '产品', keyword: true,
+      key: 'product', sortable: true, label: '产品', keyword: true,
       link: (data) => `/admin/product/${data.product_id}`,
     },
-    {key: 'product_version', sortable: true, text: '版本'},
+    {key: 'product_version', sortable: true, label: '版本'},
     {
-      key: 'project', sortable: true, text: '项目', keyword: true,
+      key: 'project', sortable: true, label: '项目', keyword: true,
       link: (data) => `/admin/project/${data.project_id}`,
     },
-    {key: 'online', sortable: true, text: '上线时间', date: true},
+    {key: 'online', sortable: true, label: '上线时间', date: true},
   ];
 
   columnsProject: SmartTableColumn[] = [
     {
-      key: 'id', sortable: true, text: 'ID', keyword: true,
+      key: 'id', sortable: true, label: 'ID', keyword: true,
       link: (data) => `/project/${this.project_id}/device/${data.id}`,
     },
-    {key: 'name', sortable: true, text: '名称', keyword: true},
+    {key: 'name', sortable: true, label: '名称', keyword: true},
     {
-      key: 'gateway', sortable: true, text: '网关', keyword: true,
+      key: 'gateway', sortable: true, label: '网关', keyword: true,
       link: (data) => `/project/${this.project_id}/gateway/${data.gateway_id}`,
     },
     {
-      key: 'product', sortable: true, text: '产品', keyword: true,
+      key: 'product', sortable: true, label: '产品', keyword: true,
       link: (data) => `/project/${this.project_id}/product/${data.product_id}`,
     },
-    {key: 'product_version', sortable: true, text: '版本'},
-    {key: 'online', sortable: true, text: '上线时间', date: true},
+    {key: 'product_version', sortable: true, label: '版本'},
+    {key: 'online', sortable: true, label: '上线时间', date: true},
   ];
 
 
   columnsSelect: SmartTableColumn[] = [
-    {key: 'id', text: 'ID', keyword: true},
-    {key: 'name', text: '名称', keyword: true},
+    {key: 'id', label: 'ID', keyword: true},
+    {key: 'name', label: '名称', keyword: true},
   ];
 
   operators: SmartTableOperator[] = [

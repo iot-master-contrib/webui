@@ -36,8 +36,8 @@ export class ProductVersionComponent {
   ];
 
   columns: SmartTableColumn[] = [
-    {key: 'name', text: '名称', link: (data) => `/admin/product/${data.product_id}/version/${data.name}`,},
-    {key: 'created', text: '创建时间', date: true},
+    {key: 'name', label: '名称', link: (data) => `/admin/product/${data.product_id}/version/${data.name}`,},
+    {key: 'created', label: '创建时间', date: true},
   ];
 
   operators: SmartTableOperator[] = [

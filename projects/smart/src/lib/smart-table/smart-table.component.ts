@@ -6,13 +6,13 @@ import {NzInputDirective, NzInputGroupComponent} from "ng-zorro-antd/input";
 import {Router, RouterLink} from "@angular/router";
 import {NzPaginationComponent} from "ng-zorro-antd/pagination";
 import {NzTableFilterList, NzTableModule, NzTableQueryParams} from "ng-zorro-antd/table";
-import {CommonModule, DatePipe, NgForOf} from "@angular/common";
+import {CommonModule} from "@angular/common";
 import {NzPopconfirmDirective} from "ng-zorro-antd/popconfirm";
 import {FormsModule} from '@angular/forms';
 
 export interface SmartTableColumn {
   key: string
-  text: string
+  label: string
   keyword?: boolean
   sortable?: boolean
   filter?: NzTableFilterList
@@ -67,8 +67,6 @@ export interface ParamSearch {
     NzPaginationComponent,
     NzSpaceItemDirective,
     NzTableModule,
-    NgForOf,
-    DatePipe,
     NzPopconfirmDirective,
   ],
   templateUrl: './smart-table.component.html',

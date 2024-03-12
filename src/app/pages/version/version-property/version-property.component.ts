@@ -20,19 +20,19 @@ export class VersionPropertyComponent {
   @Input() version!: any;
 
   items: SmartTableColumn[] = [{
-    text: '变量',
+    label: '变量',
     key: 'name'
   }, {
-    text: '显示名称',
+    label: '显示名称',
     key: 'label'
   }, {
-    text: '类型',
+    label: '类型',
     key: 'type',
   }, {
-    text: '单位',
+    label: '单位',
     key: 'unit'
   }, {
-    text: '模式',
+    label: '模式',
     key: 'mode',
   }]
 

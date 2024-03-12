@@ -27,14 +27,14 @@ export class ProjectsComponent {
   ];
 
   columns: SmartTableColumn[] = [
-    {key: "id", sortable: true, text: "ID", keyword: true, link: (data) => `/admin/project/${data.id}`},
-    {key: "name", sortable: true, text: "名称", keyword: true},
-    {key: "created", sortable: true, text: "创建时间", date: true},
+    {key: "id", sortable: true, label: "ID", keyword: true, link: (data) => `/admin/project/${data.id}`},
+    {key: "name", sortable: true, label: "名称", keyword: true},
+    {key: "created", sortable: true, label: "创建时间", date: true},
   ];
 
   columnsSelect: SmartTableColumn[] = [
-    {key: "id", text: "ID", keyword: true},
-    {key: "name", text: "名称", keyword: true},
+    {key: "id", label: "ID", keyword: true},
+    {key: "name", label: "名称", keyword: true},
   ];
 
   operators: SmartTableOperator[] = [

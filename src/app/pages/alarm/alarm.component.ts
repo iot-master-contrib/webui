@@ -93,15 +93,15 @@ export class AlarmComponent implements OnInit {
     {
       key: 'project_id',
       sortable: true,
-      text: '项目',
+      label: '项目',
       keyword: true,
     },
-    {key: 'device_id', sortable: true, text: '设备', keyword: true},
-    {key: 'level', sortable: true, text: '等级', keyword: true},
-    {key: 'title', sortable: true, text: '标题', keyword: true},
-    {key: 'message', sortable: true, text: '内容', keyword: true},
+    {key: 'device_id', sortable: true, label: '设备', keyword: true},
+    {key: 'level', sortable: true, label: '等级', keyword: true},
+    {key: 'title', sortable: true, label: '标题', keyword: true},
+    {key: 'message', sortable: true, label: '内容', keyword: true},
 
-    {key: 'created', sortable: true, text: '创建时间', date: true},
+    {key: 'created', sortable: true, label: '创建时间', date: true},
   ];
 
 

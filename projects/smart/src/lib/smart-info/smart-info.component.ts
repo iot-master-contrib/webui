@@ -7,8 +7,8 @@ import {NzTagComponent} from "ng-zorro-antd/tag";
 
 
 export interface SmartInfoItem {
-  type?: string
   key: string
+  type?: string
   label: string
   span?: number
   options?: { [p:string]: any }

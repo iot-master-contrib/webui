@@ -17,8 +17,8 @@ import {NzSelectOptionInterface} from "ng-zorro-antd/select/select.types";
 
 
 export interface SmartFormItem {
-  type: string
   key: string
+  type: string
   label: string
   default?: any
   placeholder?: string

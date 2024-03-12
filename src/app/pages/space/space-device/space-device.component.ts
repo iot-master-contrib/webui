@@ -39,16 +39,16 @@ export class SpaceDeviceComponent {
 
   columns: SmartTableColumn[] = [
     {
-      key: 'device_id', sortable: true, text: 'ID', keyword: true,
+      key: 'device_id', sortable: true, label: 'ID', keyword: true,
       link: (data) => `/admin/device/${data.device_id}`,
     },
-    {key: 'device', sortable: true, text: '名称', keyword: true},
-    {key: 'created', sortable: true, text: '创建时间', date: true},
+    {key: 'device', sortable: true, label: '名称', keyword: true},
+    {key: 'created', sortable: true, label: '创建时间', date: true},
   ];
 
   columnsSelect: SmartTableColumn[] = [
-    {key: 'device_id', sortable: true, text: 'ID', keyword: true},
-    {key: 'device', sortable: true, text: '名称', keyword: true},
+    {key: 'device_id', sortable: true, label: 'ID', keyword: true},
+    {key: 'device', sortable: true, label: '名称', keyword: true},
   ];
 
   operators: SmartTableOperator[] = [
