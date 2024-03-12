@@ -115,6 +115,7 @@ export class VersionPropertyEditComponent implements OnInit {
 
   id: any = ''
   properties: any = []
+
   @Input() product_id!: any;
   @Input() version!: any;
 
@@ -128,10 +129,9 @@ export class VersionPropertyEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id');
-    this.rs.get(`product/${this.id}/attach/read/property.json`).subscribe(res => {
-
+    this.rs.get(`product/${this.product_id}/version/${this.version}/config/property`).subscribe(res => {
       //console.log("test", res)
-      this.properties = res
+      this.properties = res.data
       this.buildFromGroup()
     })
   }
@@ -144,9 +144,9 @@ export class VersionPropertyEditComponent implements OnInit {
 
   onSubmit() {
     let value = this.formGroup.value
-    this.rs.post(`product/${this.id}/attach/write/property.json`, value.properties).subscribe(res => {
+    this.rs.post(`product/${this.product_id}/version/${this.version}/config/property`, value.properties).subscribe(res => {
       this.ms.success("提示", "保存成功")
-      this.router.navigateByUrl("/admin/product/" + this.id + "/edit")
+      //this.router.navigateByUrl("/admin/product/" + this.id + "/edit")
     })
   }
 

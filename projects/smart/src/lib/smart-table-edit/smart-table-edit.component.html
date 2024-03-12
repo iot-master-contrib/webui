@@ -1,8 +1,12 @@
-<button type="button" nz-button nzType="primary" (click)="propertyAdd()">
-  <i type="button" nz-icon nzType="plus"></i>
+
+<button type="button" nz-button (click)="propertyAdd()">
+  <i nz-icon nzType="plus"></i>
   添加
 </button>
-<nz-table nzTemplateMode [formGroup]="group">
+
+<ng-content></ng-content>
+
+<nz-table nzTemplateMode [formGroup]="group" nzSize="small">
   <thead>
   <tr>
     <th *ngFor="let item of _items">{{ item.label }}</th>

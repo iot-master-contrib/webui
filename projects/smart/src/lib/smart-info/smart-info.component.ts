@@ -3,6 +3,7 @@ import {CommonModule} from "@angular/common";
 import {NzDescriptionsModule} from "ng-zorro-antd/descriptions";
 import {NzProgressComponent} from "ng-zorro-antd/progress";
 import {RouterLink} from "@angular/router";
+import {NzTagComponent} from "ng-zorro-antd/tag";
 
 
 export interface SmartInfoItem {
@@ -22,6 +23,7 @@ export interface SmartInfoItem {
     NzDescriptionsModule,
     NzProgressComponent,
     RouterLink,
+    NzTagComponent,
   ],
   templateUrl: './smart-info.component.html',
   styleUrl: './smart-info.component.scss'
