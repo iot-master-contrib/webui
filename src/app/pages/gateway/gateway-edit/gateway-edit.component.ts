@@ -24,8 +24,9 @@ import {ProjectsComponent} from "../../project/projects/projects.component";
   styleUrl: './gateway-edit.component.scss'
 })
 export class GatewayEditComponent implements OnInit, AfterViewInit {
-  id: any = '';
+  base = '/admin'
   project_id: any = '';
+  id: any = '';
 
   @ViewChild('form') form!: SmartFormComponent
 
@@ -68,6 +69,10 @@ export class GatewayEditComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
+    if (this.route.parent?.snapshot.paramMap.has('project')) {
+      this.project_id = this.route.parent.snapshot.paramMap.get('project');
+      this.base = `/project/${this.project_id}`
+    }
     if (this.route.snapshot.paramMap.has('id')) {
       this.id = this.route.snapshot.paramMap.get('id');
       this.load()
@@ -75,8 +80,7 @@ export class GatewayEditComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    if (this.route.parent?.snapshot.paramMap.has('project')) {
-      this.project_id = this.route.parent?.snapshot.paramMap.get('project');
+    if (this.project_id) {
       this.form.patchValues({project_id: this.project_id})
       this.form.group.get('project_id')?.disable()
       this.fields[3].disabled = true
@@ -100,10 +104,7 @@ export class GatewayEditComponent implements OnInit, AfterViewInit {
 
     let url = `gateway/${this.id || 'create'}`
     this.rs.post(url, this.form.Value()).subscribe((res) => {
-      if (this.project_id)
-        this.router.navigateByUrl('/project/' + this.project_id + '/gateway/' + res.data.id);
-      else
-        this.router.navigateByUrl('/admin/gateway/' + res.data.id);
+      this.router.navigateByUrl(`${this.base}/gateway/` + res.data.id);
       this.msg.success('保存成功');
     });
   }

@@ -23,9 +23,10 @@ import {ProjectsComponent} from "../../project/projects/projects.component";
   templateUrl: './space-edit.component.html',
   styleUrl: './space-edit.component.scss',
 })
-export class SpaceEditComponent implements OnInit {
-  id: any = '';
+export class SpaceEditComponent implements OnInit, AfterViewInit {
+  base = '/admin'
   project_id: any = '';
+  id: any = '';
 
   @ViewChild('form') form!: SmartFormComponent
 
@@ -65,6 +66,10 @@ export class SpaceEditComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if (this.route.parent?.snapshot.paramMap.has('project')) {
+      this.project_id = this.route.parent.snapshot.paramMap.get('project');
+      this.base = `/project/${this.project_id}`
+    }
     if (this.route.snapshot.paramMap.has('id')) {
       this.id = this.route.snapshot.paramMap.get('id');
       this.load()
@@ -72,8 +77,7 @@ export class SpaceEditComponent implements OnInit {
   }
 
   ngAfterViewInit(): void {
-    if (this.route.parent?.snapshot.paramMap.has('project')) {
-      this.project_id = this.route.parent?.snapshot.paramMap.get('project');
+    if (this.project_id) {
       this.form.patchValues({project_id: this.project_id})
       this.form.group.get('project_id')?.disable()
       this.fields[2].disabled = true
@@ -97,10 +101,7 @@ export class SpaceEditComponent implements OnInit {
 
     let url = `space/${this.id || 'create'}`
     this.rs.post(url, this.form.Value()).subscribe((res) => {
-      if (this.project_id)
-        this.router.navigateByUrl('/project/' + this.project_id + '/space/' + res.data.id);
-      else
-        this.router.navigateByUrl('/admin/space/' + res.data.id);
+      this.router.navigateByUrl(`${this.base}/space/` + res.data.id);
       this.msg.success('保存成功');
     });
   }

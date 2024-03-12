@@ -30,6 +30,8 @@ import {DevicesComponent} from "../../device/devices/devices.component";
   styleUrl: './gateway-detail.component.scss'
 })
 export class GatewayDetailComponent implements OnInit {
+  base = '/admin'
+  project_id!: any;
   id!: any;
 
   data: any = {};
@@ -58,6 +60,10 @@ export class GatewayDetailComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if (this.route.parent?.snapshot.paramMap.has('project')) {
+      this.project_id = this.route.parent.snapshot.paramMap.get('project');
+      this.base = `/project/${this.project_id}`
+    }
     if (this.route.snapshot.paramMap.has('id')) {
       this.id = this.route.snapshot.paramMap.get('id');
       this.load();
@@ -74,7 +80,7 @@ export class GatewayDetailComponent implements OnInit {
   delete() {
     this.rs.get(`gateway/${this.id}/delete`, {}).subscribe((res) => {
       this.msg.success('删除成功');
-      this.router.navigateByUrl('admin/gateway');
+      this.router.navigateByUrl(`${this.base}/gateway`);
     });
 
   }

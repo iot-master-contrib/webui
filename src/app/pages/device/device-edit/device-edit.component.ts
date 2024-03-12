@@ -27,8 +27,9 @@ import {ProductVersionComponent} from "../../product/product-version/product-ver
   styleUrl: './device-edit.component.scss',
 })
 export class DeviceEditComponent implements OnInit, AfterViewInit {
-  id: any = '';
+  base = '/admin'
   project_id: any = '';
+  id: any = '';
 
   data: any = {}
 
@@ -100,13 +101,13 @@ export class DeviceEditComponent implements OnInit, AfterViewInit {
         }).afterClose.subscribe(res => {
           if (res) {
             this.form.patchValues({project_id: res.id})
-            this.fields[5].tips = res.name
+            this.fields[6].tips = res.name
           }
         })
       },
       change: id => {
         this.rs.get('project/' + id, {field: 'name'}).subscribe(res => {
-          this.fields[5].tips = res.data?.name || ''
+          this.fields[6].tips = res.data?.name || ''
         })
       }
     },
@@ -125,6 +126,10 @@ export class DeviceEditComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
+    if (this.route.parent?.snapshot.paramMap.has('project')) {
+      this.project_id = this.route.parent.snapshot.paramMap.get('project');
+      this.base = `/project/${this.project_id}`
+    }
     if (this.route.snapshot.paramMap.has('id')) {
       this.id = this.route.snapshot.paramMap.get('id');
       this.load()
@@ -132,8 +137,7 @@ export class DeviceEditComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    if (this.route.parent?.snapshot.paramMap.has('project')) {
-      this.project_id = this.route.parent?.snapshot.paramMap.get('project');
+    if (this.project_id) {
       this.data.project_id = this.project_id
       this.form.patchValues({project_id: this.project_id})
       this.form.group.get('project_id')?.disable()
@@ -162,10 +166,7 @@ export class DeviceEditComponent implements OnInit, AfterViewInit {
 
     let url = `device/${this.id || 'create'}`
     this.rs.post(url, this.form.Value()).subscribe((res) => {
-      if (this.project_id)
-        this.router.navigateByUrl('/project/' + this.project_id + '/device/' + res.data.id);
-      else
-        this.router.navigateByUrl('/admin/device/' + res.data.id);
+      this.router.navigateByUrl(`${this.base}/device/` + res.data.id);
       this.msg.success('保存成功');
     });
   }

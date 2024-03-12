@@ -57,7 +57,7 @@ export class SpacesComponent implements OnInit {
   columnsProject: SmartTableColumn[] = [
     {
       key: 'id', sortable: true, label: 'ID', keyword: true,
-      link: (data) => `/admin/space/${data.id}`,
+      link: (data) => `/project/${this.project_id}/space/${data.id}`,
     },
     {key: 'name', sortable: true, label: '名称', keyword: true},
     {key: 'created', sortable: true, label: '创建时间', date: true},

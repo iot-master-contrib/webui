@@ -90,6 +90,10 @@ export class ProjectComponent implements OnInit {
   }
 
   ngOnInit() {
+    // this.route.data.subscribe(({project})=>{
+    //   this.id = project
+    //   this.loadProject()
+    // })
     this.id = this.route.snapshot.paramMap.get("project")
     this.loadProject()
   }

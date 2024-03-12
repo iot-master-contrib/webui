@@ -18,6 +18,7 @@ import {ActivatedRoute} from "@angular/router";
   styleUrl: './product-version.component.scss'
 })
 export class ProductVersionComponent {
+  @Input() project_id: any = ''
   @Input() product_id: any = ''
 
   datum: any[] = [];
@@ -35,8 +36,18 @@ export class ProductVersionComponent {
     },
   ];
 
+  columnsSelect: SmartTableColumn[] = [
+    {key: 'name', label: '名称'},
+    {key: 'created', label: '创建时间', date: true},
+  ];
+
   columns: SmartTableColumn[] = [
     {key: 'name', label: '名称', link: (data) => `/admin/product/${data.product_id}/version/${data.name}`,},
+    {key: 'created', label: '创建时间', date: true},
+  ];
+
+  columnsProject: SmartTableColumn[] = [
+    {key: 'name', label: '名称', link: (data) => `/project/${this.project_id}/product/${data.product_id}/version/${data.name}`,},
     {key: 'created', label: '创建时间', date: true},
   ];
 
@@ -69,6 +80,10 @@ export class ProductVersionComponent {
   }
 
   ngOnInit(): void {
+    if (this.route.parent?.snapshot.paramMap.has('project')) {
+      this.project_id = this.route.parent?.snapshot.paramMap.get('project');
+      //console.log("project_id", this.project_id)
+    }
     if (this.route.snapshot.paramMap.has('id')) {
       this.product_id = this.route.snapshot.paramMap.get('id');
     }

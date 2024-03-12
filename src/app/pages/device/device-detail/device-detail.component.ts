@@ -36,6 +36,9 @@ import {SmartTableColumn} from "../../../../../projects/smart/src/lib/smart-tabl
   styleUrl: './device-detail.component.scss',
 })
 export class DeviceDetailComponent implements OnInit {
+  base = '/admin'
+  project_id!: any;
+
   id!: any;
   data: any = {};
 
@@ -44,16 +47,16 @@ export class DeviceDetailComponent implements OnInit {
     {key: 'name', label: '名称'},
     {
       key: 'gateway', label: '网关', type: 'link',
-      link: () => `/admin/gateway/${this.data.gateway_id}`,
+      link: () => `${this.base}/gateway/${this.data.gateway_id}`,
     },
     {
       key: 'product', label: '产品', type: 'link',
-      link: () => `/admin/product/${this.data.product_id}`,
+      link: () => `${this.base}/product/${this.data.product_id}`,
     },
     {key: 'product_version', label: '版本'},
     {
       key: 'project', label: '项目', type: 'link',
-      link: () => `/admin/project/${this.data.project_id}`,
+      link: () => `${this.base}/project/${this.data.project_id}`,
     },
     //{key: 'online',  label: '上线时间', type: 'date'},
     {key: 'created', label: '创建时间', type: 'date'},
@@ -77,8 +80,9 @@ export class DeviceDetailComponent implements OnInit {
   loading = false;
 
   ngOnInit(): void {
-    if (this.route.snapshot.paramMap.has('project')) {
-      //this.id = this.route.snapshot.paramMap.get('project');
+    if (this.route.parent?.snapshot.paramMap.has('project')) {
+      this.project_id = this.route.parent.snapshot.paramMap.get('project');
+      this.base = `/project/${this.project_id}`
     }
     if (this.route.snapshot.paramMap.has('id')) {
       this.id = this.route.snapshot.paramMap.get('id');
@@ -123,7 +127,7 @@ export class DeviceDetailComponent implements OnInit {
   delete() {
     this.rs.get(`device/${this.id}/delete`, {}).subscribe((res) => {
       this.msg.success('删除成功');
-      this.router.navigateByUrl('admin/device');
+      this.router.navigateByUrl(`${this.base}/device`);
     });
   }
 }

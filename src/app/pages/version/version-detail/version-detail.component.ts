@@ -37,6 +37,9 @@ import {VersionActionComponent} from "../version-action/version-action.component
   styleUrl: './version-detail.component.scss'
 })
 export class VersionDetailComponent implements OnInit {
+  base = '/admin'
+  project_id!: any;
+
   id!: any;
   version!: any;
 
@@ -63,6 +66,10 @@ export class VersionDetailComponent implements OnInit {
   plugins: any[] = [];
 
   ngOnInit(): void {
+    if (this.route.parent?.snapshot.paramMap.has('project')) {
+      this.project_id = this.route.parent.snapshot.paramMap.get('project');
+      this.base = `/project/${this.project_id}`
+    }
     if (this.route.snapshot.paramMap.has('id')) {
       this.id = this.route.snapshot.paramMap.get('id');
       this.load()

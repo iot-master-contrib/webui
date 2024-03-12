@@ -2,7 +2,7 @@ import {
   ActivatedRoute,
   ActivatedRouteSnapshot,
   CanActivateFn,
-  CanMatchFn,
+  CanMatchFn, ResolveFn,
   Router,
   RouterStateSnapshot
 } from '@angular/router';
@@ -10,6 +10,11 @@ import {inject} from "@angular/core";
 import {UserService} from "./user.service";
 import {Subject} from "rxjs";
 import {RequestService} from "../../projects/smart/src/lib/request.service";
+
+export const ProjectGuard: ResolveFn<any> = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot)=>{
+
+
+}
 
 export const projectGuard: CanMatchFn = () => {
   const us = inject(UserService);

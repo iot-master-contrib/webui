@@ -6,7 +6,7 @@
     </button>
 
     <!--搜索框-->
-    <ng-container *ngIf="showSearch">
+    <ng-container *ngIf="showSearch()">
       <div *nzSpaceItem class="search">
         <form (submit)="search()">
           <nz-input-group nzSearch [nzAddOnAfter]="suffixButton">

@@ -88,11 +88,21 @@ export class SmartTableComponent implements OnInit {
   @Input() total: number = 0;
   @Input() loading = false;
 
-  @Input() showSearch: boolean = true
+  //@Input() showSearch: boolean = true
 
   @Output() query = new EventEmitter<ParamSearch>
 
   body: ParamSearch = {filter: {}}
+
+  showSearch() {
+    //console.log('showSearch')
+    for (let i in this.columns) {
+      if (this.columns[i].keyword)
+        return true
+    }
+    return false
+    //return this.columns.filter(c => c.keyword).length > 0
+  }
 
   constructor(private router: Router,) {
   }

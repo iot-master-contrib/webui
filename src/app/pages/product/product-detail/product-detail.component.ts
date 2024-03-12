@@ -37,6 +37,9 @@ import {ProductVersionComponent} from "../product-version/product-version.compon
   styleUrl: './product-detail.component.scss'
 })
 export class ProductDetailComponent implements OnInit {
+  base = '/admin'
+  project_id!: any;
+
   id!: any;
 
   value = '';
@@ -62,6 +65,10 @@ export class ProductDetailComponent implements OnInit {
   plugins: any[] = [];
 
   ngOnInit(): void {
+    if (this.route.parent?.snapshot.paramMap.has('project')) {
+      this.project_id = this.route.parent?.snapshot.paramMap.get('project');
+      this.base = `/project/${this.project_id}`
+    }
     if (this.route.snapshot.paramMap.has('id')) {
       this.id = this.route.snapshot.paramMap.get('id');
       this.load()

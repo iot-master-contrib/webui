@@ -6,7 +6,7 @@ import {authGuard} from "./auth.guard";
 import {ProjectComponent} from "./project/project.component";
 import {SelectComponent} from "./select/select.component";
 import {adminGuard} from "./admin.guard";
-import {projectGuard} from "./project.guard";
+import {projectResolver} from "./project.resolver";
 
 export const routes: Routes = [
   {path: "", pathMatch: "full", redirectTo: "admin"},
@@ -26,6 +26,7 @@ export const routes: Routes = [
     path: "project/:project",
     canActivate: [authGuard],
     component: ProjectComponent,
+    resolve: {project: projectResolver},
     loadChildren: () => import('./project/project.module').then(m => m.ProjectModule),
   },
   {path: "**", component: UnknownComponent},

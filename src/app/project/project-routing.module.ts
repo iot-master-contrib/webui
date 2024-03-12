@@ -38,6 +38,7 @@ const routes: Routes = [
   // {path: 'space', loadChildren: () => import('../pages/space/space.module').then(m => m.SpaceModule)},
   // {path: 'user', loadChildren: () => import('../pages/users/user.module').then(m => m.UserModule)},
 
+  {path: 'product/:id', component: ProductDetailComponent, title: "产品版本详情"},
   {path: 'product/:id/version/:version', component: VersionDetailComponent, title: "产品版本详情"},
 
   {path: 'device', component: DevicesComponent, title: "设备列表"},

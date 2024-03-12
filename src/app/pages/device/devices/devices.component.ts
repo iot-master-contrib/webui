@@ -27,6 +27,7 @@ import {
   styleUrl: './devices.component.scss',
 })
 export class DevicesComponent implements OnInit {
+
   //从Modal中传参过来
   //readonly data: any = inject(NZ_MODAL_DATA, {optional:true});
   @Input() project_id: any = '';
@@ -145,9 +146,9 @@ export class DevicesComponent implements OnInit {
 
     if (this.gateway_id)
       query.filter['gateway_id'] = this.gateway_id;
-    else if (this.product_id)
+    if (this.product_id)
       query.filter['product_id'] = this.product_id;
-    else if (this.project_id)
+    if (this.project_id)
       query.filter['project_id'] = this.project_id;
 
     this.loading = true;

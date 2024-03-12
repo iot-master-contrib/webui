@@ -39,6 +39,9 @@ import {SpaceDeviceComponent} from "../space-device/space-device.component";
   styleUrl: './space-detail.component.scss'
 })
 export class SpaceDetailComponent implements OnInit {
+  base = '/admin'
+  project_id!: any;
+
   id!: any;
 
   value = '';
@@ -63,6 +66,10 @@ export class SpaceDetailComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if (this.route.parent?.snapshot.paramMap.has('project')) {
+      this.project_id = this.route.parent.snapshot.paramMap.get('project');
+      this.base = `/project/${this.project_id}`
+    }
     if (this.route.snapshot.paramMap.has('id')) {
       this.id = this.route.snapshot.paramMap.get('id');
       //this.query.filter = {project_id: this.id};
@@ -79,7 +86,7 @@ export class SpaceDetailComponent implements OnInit {
   delete() {
     this.rs.get(`space/${this.id}/delete`, {}).subscribe((res: any) => {
       this.msg.success('删除成功');
-      this.router.navigateByUrl('admin');
+      this.router.navigateByUrl(`${this.base}/space`);
     });
   }
 }
