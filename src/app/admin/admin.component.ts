@@ -72,7 +72,7 @@ export class AdminComponent {
       items: [
         {name: '所有网关', link: 'gateway'},
         {name: '创建网关', link: 'gateway/create'},
-        {name: '批量创建', link: 'gateway/batch'},
+        {name: '批量创建', link: 'gateway/batch', disabled: true},
       ]
     },
     {

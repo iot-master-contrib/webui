@@ -36,14 +36,13 @@ export class ProductVersionComponent {
   ];
 
   columns: SmartTableColumn[] = [
-    {key: 'name', text: '名称'},
+    {key: 'name', text: '名称', link: (data) => `/admin/product/${data.product_id}/version/${data.name}`,},
     {key: 'created', text: '创建时间', date: true},
   ];
 
   operators: SmartTableOperator[] = [
     {
       icon: 'edit', title: '编辑', action: data => {
-
         let ver = prompt("请输入版本号", data.name)
         if (ver) {
           this.rs.post(`product/${this.product_id}/version/${data.name}`, {name: ver}).subscribe(res => this.refresh())

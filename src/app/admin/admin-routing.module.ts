@@ -7,9 +7,9 @@ import {DashComponent} from "../pages/dash/dash.component";
 import {ProductsComponent} from "../pages/product/products/products.component";
 import {ProductEditComponent} from "../pages/product/product-edit/product-edit.component";
 import {ProductDetailComponent} from "../pages/product/product-detail/product-detail.component";
-import {ProductEditPropertyComponent} from "../pages/product/product-edit-property/product-edit-property.component";
-import {ProductEditEventComponent} from "../pages/product/product-edit-event/product-edit-event.component";
-import {ProductEditActionComponent} from "../pages/product/product-edit-action/product-edit-action.component";
+import {VersionPropertyEditComponent} from "../pages/version/version-property-edit/version-property-edit.component";
+import {VersionEventEditComponent} from "../pages/version/version-event-edit/version-event-edit.component";
+import {VersionActionEditComponent} from "../pages/version/version-action-edit/version-action-edit.component";
 import {DevicesComponent} from "../pages/device/devices/devices.component";
 import {DeviceEditComponent} from "../pages/device/device-edit/device-edit.component";
 import {DeviceDetailComponent} from "../pages/device/device-detail/device-detail.component";
@@ -38,6 +38,8 @@ import {SettingAttachComponent} from "../pages/setting/setting-attach/setting-at
 import {ProjectUserComponent} from "../pages/project/project-user/project-user.component";
 import {SpaceDeviceComponent} from "../pages/space/space-device/space-device.component";
 import {ProductVersionComponent} from "../pages/product/product-version/product-version.component";
+import {VersionDetailComponent} from "../pages/version/version-detail/version-detail.component";
+import {VersionEditComponent} from "../pages/version/version-edit/version-edit.component";
 
 const routes: Routes = [
   {path: "", pathMatch: "full", redirectTo: "dash"},
@@ -47,10 +49,9 @@ const routes: Routes = [
   {path: 'product/create', component: ProductEditComponent, title: "创建产品"},
   {path: 'product/:id', component: ProductDetailComponent, title: "产品详情"},
   {path: 'product/:id/edit', component: ProductEditComponent, title: "编辑产品"},
-  {path: 'product/:id/edit/property', component: ProductEditPropertyComponent, title: "编辑产品属性"},
-  {path: 'product/:id/edit/event', component: ProductEditEventComponent, title: "编辑产品事件"},
-  {path: 'product/:id/edit/action', component: ProductEditActionComponent, title: "编辑产品动作"},
   {path: 'product/:id/version', component: ProductVersionComponent, title: "产品版本"},
+  {path: 'product/:id/version/:version', component: VersionDetailComponent, title: "产品版本详情"},
+  {path: 'product/:id/version/:version/edit', component: VersionEditComponent, title: "产品版本编辑"},
 
   {path: 'device', component: DevicesComponent, title: "设备列表"},
   {path: 'device/create', component: DeviceEditComponent, title: "创建设备"},

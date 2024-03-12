@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {NzButtonComponent} from "ng-zorro-antd/button";
 import {NzColDirective, NzRowDirective} from "ng-zorro-antd/grid";
@@ -22,7 +22,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {NzNotificationService} from "ng-zorro-antd/notification";
 
 @Component({
-  selector: 'app-product-edit-property',
+  selector: 'app-version-property-edit',
   standalone: true,
   imports: [
     FormsModule,
@@ -52,10 +52,10 @@ import {NzNotificationService} from "ng-zorro-antd/notification";
     CdkDragHandle,
     SmartTableEditComponent
   ],
-  templateUrl: './product-edit-property.component.html',
-  styleUrl: './product-edit-property.component.scss'
+  templateUrl: './version-property-edit.component.html',
+  styleUrl: './version-property-edit.component.scss'
 })
-export class ProductEditPropertyComponent implements OnInit {
+export class VersionPropertyEditComponent implements OnInit {
   data: any = {
     name: "新产品",
   }
@@ -115,6 +115,8 @@ export class ProductEditPropertyComponent implements OnInit {
 
   id: any = ''
   properties: any = []
+  @Input() product_id!: any;
+  @Input() version!: any;
 
   constructor(private fb: FormBuilder,
               private rs: RequestService,

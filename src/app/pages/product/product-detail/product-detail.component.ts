@@ -31,7 +31,6 @@ import {ProductVersionComponent} from "../product-version/product-version.compon
     NzTabsModule,
     DevicesComponent,
     WebViewComponent,
-    WebViewComponent,
     ProductVersionComponent,
   ],
   templateUrl: './product-detail.component.html',
