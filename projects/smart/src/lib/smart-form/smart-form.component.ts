@@ -163,7 +163,8 @@ export class SmartFormComponent {
     // if (!this.Validate()) {
     //   return undefined;
     // }
-    return this.group.value
+    return this.group.getRawValue()
+    //return this.group.value
   }
 
   constructor(private fb: FormBuilder, private viewContainerRef: ViewContainerRef) {
