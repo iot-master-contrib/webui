@@ -34,11 +34,11 @@ export class SpacesComponent implements OnInit {
 
 
   buttons: SmartTableButton[] = [
-    {icon: 'plus', text: '创建', link: () => `/admin/space/create`},
+    {icon: 'plus', label: '创建', link: () => `/admin/space/create`},
   ];
 
   buttonsProject: SmartTableButton[] = [
-    {icon: 'plus', text: '创建', link: () => `/project/${this.project_id}/space/create`},
+    {icon: 'plus', label: '创建', link: () => `/project/${this.project_id}/space/create`},
   ];
 
   columns: SmartTableColumn[] = [
@@ -88,7 +88,7 @@ export class SpacesComponent implements OnInit {
   ];
 
   operatorsSelect: SmartTableOperator[] = [
-    {text: '选择', action: (data) => this.ref.close(data)},
+    {label: '选择', action: (data) => this.ref.close(data)},
   ];
 
   constructor(private route: ActivatedRoute,

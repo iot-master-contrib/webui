@@ -33,7 +33,7 @@ export class ProjectUserComponent {
 
 
   buttons: SmartTableButton[] = [
-    {icon: 'link', text: '绑定用户', action: () => this.bind()}, //应该只有平台管理员可以操作吧
+    {icon: 'link', label: '绑定用户', action: () => this.bind()}, //应该只有平台管理员可以操作吧
   ];
 
   columns: SmartTableColumn[] = [
@@ -50,11 +50,11 @@ export class ProjectUserComponent {
   ];
 
   operators: SmartTableOperator[] = [
-    {icon: 'disconnect', text: '解绑', confirm: '确认解绑？', action: (data) => this.unbind(data.user_id)},
+    {icon: 'disconnect', label: '解绑', confirm: '确认解绑？', action: (data) => this.unbind(data.user_id)},
   ];
 
   operatorsSelect: SmartTableOperator[] = [
-    {text: '选择', action: (data) => this.ref.close(data)},
+    {label: '选择', action: (data) => this.ref.close(data)},
   ];
 
   constructor(private route: ActivatedRoute,

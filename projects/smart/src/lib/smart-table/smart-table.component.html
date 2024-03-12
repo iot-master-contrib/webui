@@ -30,10 +30,11 @@
       <button *nzSpaceItem nz-button
               nzType="primary"
               nzShape="round"
+              [title]="b.title || ''"
               [routerLink]="b.link?.()"
               (click)="b.action?.()">
         <span *ngIf="b.icon" nz-icon [nzType]="b.icon"></span>
-        {{ b.text }}
+        {{ b.label }}
       </button>
     </ng-container>
   </nz-space>
@@ -94,7 +95,7 @@
              [target]="o.external ? '_blank' : ''"
              [routerLink]="o.link?.(data)">
             <i *ngIf="o.icon" nz-icon [nzType]="o.icon"></i>
-            {{ o.text }}
+            {{ o.label }}
           </a>
 
           <!--链接-->
@@ -102,7 +103,7 @@
              [title]="o.title||''"
              [routerLink]="o.link?.(data)">
             <i *ngIf="o.icon" nz-icon [nzType]="o.icon"></i>
-            {{ o.text }}
+            {{ o.label }}
           </a>
 
           <!--确认调用，比如删除-->
@@ -112,7 +113,7 @@
              [nzPopconfirmTitle]="o.confirm"
              (nzOnConfirm)="o.action?.(data)">
             <i *ngIf="o.icon" nz-icon [nzType]="o.icon"></i>
-            {{ o.text }}
+            {{ o.label }}
           </a>
 
           <!--调用-->
@@ -120,7 +121,7 @@
              [title]="o.title||''"
              (click)="o.action?.(data)">
             <i *ngIf="o.icon" nz-icon [nzType]="o.icon"></i>
-            {{ o.text }}
+            {{ o.label }}
           </a>
 
         </span>

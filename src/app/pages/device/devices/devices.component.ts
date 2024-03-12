@@ -40,11 +40,11 @@ export class DevicesComponent implements OnInit {
 
 
   buttons: SmartTableButton[] = [
-    {icon: 'plus', text: '创建', link: () => `/admin/device/create`},
+    {icon: 'plus', label: '创建', link: () => `/admin/device/create`},
   ];
 
   buttonsProject: SmartTableButton[] = [
-    {icon: 'plus', text: '创建', link: () => `/project/${this.project_id}/device/create`},
+    {icon: 'plus', label: '创建', link: () => `/project/${this.project_id}/device/create`},
   ];
 
   columns: SmartTableColumn[] = [
@@ -113,7 +113,7 @@ export class DevicesComponent implements OnInit {
   ];
 
   operatorsSelect: SmartTableOperator[] = [
-    {text: '选择', action: (data) => this.ref.close(data)},
+    {label: '选择', action: (data) => this.ref.close(data)},
   ];
 
 

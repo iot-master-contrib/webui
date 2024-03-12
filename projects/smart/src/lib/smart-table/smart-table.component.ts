@@ -21,20 +21,21 @@ export interface SmartTableColumn {
 }
 
 export interface SmartTableOperator {
+  icon?: string
+  label?: string
+  title?: string
   link?: (data: any) => string
   action?: (data: any) => void
-  icon?: string
-  title?: string
-  text?: string
   confirm?: string
   external?: boolean
 }
 
 export interface SmartTableButton {
+  icon?: string
+  label: string
+  title?: string
   link?: () => string
   action?: () => void
-  text: string
-  icon?: string
 }
 
 

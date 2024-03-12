@@ -26,7 +26,7 @@ export class ProductVersionComponent {
 
   buttons: SmartTableButton[] = [
     {
-      icon: 'plus', text: '创建', action: () => {
+      icon: 'plus', label: '创建', action: () => {
         let ver = prompt("请输入版本号")
         if (ver) {
           this.rs.post(`product/${this.product_id}/version/create`, {name: ver}).subscribe(res => this.refresh())
@@ -57,7 +57,7 @@ export class ProductVersionComponent {
   ];
 
   operatorsSelect: SmartTableOperator[] = [
-    {text: '选择', action: (data) => this.ref.close(data)},
+    {label: '选择', action: (data) => this.ref.close(data)},
   ];
 
   constructor(private route: ActivatedRoute,

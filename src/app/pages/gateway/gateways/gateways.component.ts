@@ -33,11 +33,11 @@ export class GatewaysComponent implements OnInit {
 
 
   buttons: SmartTableButton[] = [
-    {icon: 'plus', text: '创建', link: () => `/admin/gateway/create`},
+    {icon: 'plus', label: '创建', link: () => `/admin/gateway/create`},
   ];
 
   buttonsProject: SmartTableButton[] = [
-    {icon: 'plus', text: '创建', link: () => `/project/${this.project_id}/gateway/create`},
+    {icon: 'plus', label: '创建', link: () => `/project/${this.project_id}/gateway/create`},
   ];
 
   columns: SmartTableColumn[] = [
@@ -83,7 +83,7 @@ export class GatewaysComponent implements OnInit {
   ];
 
   operatorsSelect: SmartTableOperator[] = [
-    {text: '选择', action: (data) => this.ref.close(data)},
+    {label: '选择', action: (data) => this.ref.close(data)},
   ];
 
   constructor(private route: ActivatedRoute,

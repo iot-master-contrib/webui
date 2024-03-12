@@ -23,7 +23,7 @@ export class ProjectsComponent {
   loading = false;
 
   buttons: SmartTableButton[] = [
-    {icon: "plus", text: "创建", link: () => `/admin/project/create`}
+    {icon: "plus", label: "创建", link: () => `/admin/project/create`}
   ];
 
   columns: SmartTableColumn[] = [
@@ -48,7 +48,7 @@ export class ProjectsComponent {
   ];
 
   operatorsSelect: SmartTableOperator[] = [
-    {text: "选择", action: data => this.ref.close(data)},
+    {label: "选择", action: data => this.ref.close(data)},
   ];
 
   constructor(private rs: RequestService, @Optional() protected ref: NzModalRef) {

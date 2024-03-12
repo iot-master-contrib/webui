@@ -34,7 +34,7 @@ export class SpaceDeviceComponent {
 
 
   buttons: SmartTableButton[] = [
-    {icon: 'link', text: '绑定设备', action: () => this.bind()}, //应该只有平台管理员可以操作吧
+    {icon: 'link', label: '绑定设备', action: () => this.bind()}, //应该只有平台管理员可以操作吧
   ];
 
   columns: SmartTableColumn[] = [
@@ -52,11 +52,11 @@ export class SpaceDeviceComponent {
   ];
 
   operators: SmartTableOperator[] = [
-    {icon: 'disconnect', text: '解绑', confirm: '确认解绑？', action: (data) => this.unbind(data.device_id)},
+    {icon: 'disconnect', label: '解绑', confirm: '确认解绑？', action: (data) => this.unbind(data.device_id)},
   ];
 
   operatorsSelect: SmartTableOperator[] = [
-    {text: '选择', action: (data) => this.ref.close(data)},
+    {label: '选择', action: (data) => this.ref.close(data)},
   ];
 
   constructor(private route: ActivatedRoute,

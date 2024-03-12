@@ -30,7 +30,7 @@ export class ProductsComponent {
   loading = false;
 
   buttons: SmartTableButton[] = [
-    {icon: 'plus', text: '创建', link: () => `/admin/product/create`},
+    {icon: 'plus', label: '创建', link: () => `/admin/product/create`},
   ];
 
   columns: SmartTableColumn[] = [
@@ -59,7 +59,7 @@ export class ProductsComponent {
 
   operatorsSelect: SmartTableOperator[] = [
     {
-      text: '选择', action: (data) => {
+      label: '选择', action: (data) => {
         this.ref.close(data)
         // this.ms.create({
         //   nzTitle: "选择版本",
