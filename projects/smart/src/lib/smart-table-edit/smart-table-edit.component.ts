@@ -13,12 +13,13 @@ import {CdkDrag, CdkDragDrop, CdkDragHandle, CdkDropList, moveItemInArray} from 
 import {NzSelectComponent, NzSelectOptionInterface} from "ng-zorro-antd/select";
 import {NzButtonComponent} from "ng-zorro-antd/button";
 import {NzIconDirective} from "ng-zorro-antd/icon";
-import {NzTableComponent, NzTableModule} from "ng-zorro-antd/table";
-import {NgForOf, NgSwitch, NgSwitchCase, NgSwitchDefault} from "@angular/common";
+import {NzTableModule} from "ng-zorro-antd/table";
+import {CommonModule} from "@angular/common";
 import {NzInputNumberComponent} from "ng-zorro-antd/input-number";
 import {NzSwitchComponent} from "ng-zorro-antd/switch";
 import {NzSpaceComponent, NzSpaceItemDirective} from "ng-zorro-antd/space";
 import {NzInputDirective} from "ng-zorro-antd/input";
+import {NzColorPickerModule} from "ng-zorro-antd/color-picker";
 
 
 export interface SmartTableEditItem {
@@ -37,24 +38,22 @@ export interface SmartTableEditItem {
   styleUrls: ['./smart-table-edit.component.scss'],
   standalone: true,
   imports: [
+    CommonModule,
     NzButtonComponent,
     NzIconDirective,
     NzTableModule,
-    NgForOf,
-    NgSwitch,
     CdkDropList,
     FormsModule,
     ReactiveFormsModule,
     NzSelectComponent,
     NzInputNumberComponent,
-    NgSwitchDefault,
-    NgSwitchCase,
     NzSpaceComponent,
     NzSpaceItemDirective,
     CdkDragHandle,
     CdkDrag,
     NzSwitchComponent,
-    NzInputDirective
+    NzInputDirective,
+    NzColorPickerModule
   ],
   providers: [
     {
@@ -69,7 +68,7 @@ export class SmartTableEditComponent implements OnInit, ControlValueAccessor {
   formArray!: FormArray;
 
   row: any = {};
-  _items: any = [];
+  _columns: any = [];
 
   onChanged: any = () => {
   }
@@ -77,7 +76,7 @@ export class SmartTableEditComponent implements OnInit, ControlValueAccessor {
   }
 
   @Input()
-  set items(data: SmartTableEditItem[]) {
+  set columns(data: SmartTableEditItem[]) {
     //TODO 创建默认group
     const row: any = {};
     data.forEach(item => {
@@ -87,7 +86,7 @@ export class SmartTableEditComponent implements OnInit, ControlValueAccessor {
 
     })
     this.row = row;
-    this._items = data;
+    this._columns = data;
   };
 
   constructor(

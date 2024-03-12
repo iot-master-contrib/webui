@@ -1,4 +1,3 @@
-
 <button type="button" nz-button (click)="propertyAdd()">
   <i nz-icon nzType="plus"></i>
   添加
@@ -9,41 +8,37 @@
 <nz-table nzTemplateMode [formGroup]="group" nzSize="small">
   <thead>
   <tr>
-    <th *ngFor="let item of _items">{{ item.label }}</th>
+    <th *ngFor="let c of _columns">{{ c.label }}</th>
     <th>操作</th>
   </tr>
   </thead>
   <tbody cdkDropList (cdkDropListDropped)="drop($event)" formArrayName="array">
   <tr *ngFor="let trData of formArray.controls; let i=index;" [formGroupName]="i" cdkDrag>
-    <td *ngFor="let item of _items">
-      <ng-container [ngSwitch]="item.type">
-        <nz-input-number *ngSwitchCase="'number'"
-                         [formControlName]="item.name"
-                         [nzPlaceHolder]="item.placeholder"
-                         (nzBlur)="change()">
-        </nz-input-number>
-        <nz-select *ngSwitchCase="'select'"
-                   [formControlName]="item.name"
-                   (ngModelChange)="change()"
-                   [nzPlaceHolder]="item.placeholder"
-                   [nzOptions]="item.options">
-        </nz-select>
-        <nz-switch *ngSwitchCase="'switch'"
-                   [formControlName]="item.name"></nz-switch>
-        <input *ngSwitchDefault nz-input
-               [placeholder]="item.placeholder || ''"
-               [formControlName]="item.name"
+    <td *ngFor="let c of _columns">
+      <ng-container [ngSwitch]="c.type">
+
+        <nz-input-number *ngSwitchCase="'number'" [formControlName]="c.key" [nzPlaceHolder]="c.placeholder"
+                         (nzBlur)="change()"></nz-input-number>
+
+        <nz-select *ngSwitchCase="'select'" [formControlName]="c.key" (change)="change()"
+                   [nzPlaceHolder]="c.placeholder" [nzOptions]="c.options"></nz-select>
+
+        <nz-switch *ngSwitchCase="'switch'" [formControlName]="c.key" (change)="change()"></nz-switch>
+
+        <nz-color-picker nzShowText *ngSwitchCase="'color'"
+                         [formControlName]="c.key"
+                         (change)="change()"></nz-color-picker>
+
+        <input *ngSwitchDefault nz-input [placeholder]="c.placeholder || ''" [formControlName]="c.key"
                (blur)="change()"/>
+
       </ng-container>
     </td>
-    <td class="td-oper">
+    <td class="operators">
       <nz-space>
-        <span *nzSpaceItem nz-icon nzType="drag" nzTheme="outline" title="移动当前行" style="cursor:move;"
-              cdkDragHandle></span>
-        <span *nzSpaceItem nz-icon nzType="copy" nzTheme="outline" title="复制当前行" style="cursor:pointer;"
-              (click)="handleCopyProperTy(i)"></span>
-        <span *nzSpaceItem nz-icon nzType="delete" nzTheme="outline" title="删除" style="cursor:pointer;"
-              (click)="propertyDel(i)"></span>
+        <a *nzSpaceItem title="排序" style="cursor:move;" cdkDragHandle><i nz-icon nzType="drag"></i></a>
+        <a *nzSpaceItem title="复制" (click)="handleCopyProperTy(i)"><i nz-icon nzType="copy"></i></a>
+        <a *nzSpaceItem title="删除" (click)="propertyDel(i)"><i nz-icon nzType="delete"></i></a>
       </nz-space>
     </td>
   </tr>

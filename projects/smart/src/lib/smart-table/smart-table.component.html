@@ -73,7 +73,7 @@
 
     <td *ngFor="let item of columns">
       <ng-container *ngIf="item.date; else temp">
-        {{ data[item.key] | date }}
+        {{ data[item.key] | date: 'yyyy-MM-dd HH:mm:ss' }}
       </ng-container>
       <ng-template #temp>
         <a *ngIf="item.link; else elseTemplate" [routerLink]="item.link(data)">

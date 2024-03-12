@@ -37,8 +37,6 @@ import {SmartTableColumn} from "../../../../../projects/smart/src/lib/smart-tabl
 })
 export class DeviceDetailComponent implements OnInit {
   id!: any;
-
-
   data: any = {};
 
   fields: SmartInfoItem[] = [
@@ -52,8 +50,7 @@ export class DeviceDetailComponent implements OnInit {
       key: 'product', label: '产品', type: 'link',
       link: () => `/admin/product/${this.data.product_id}`,
     },
-    {
-      key: 'product_version', label: '版本'},
+    {key: 'product_version', label: '版本'},
     {
       key: 'project', label: '项目', type: 'link',
       link: () => `/admin/project/${this.data.project_id}`,
@@ -97,7 +94,7 @@ export class DeviceDetailComponent implements OnInit {
     //   this.loadProperties();
     // });
     this.loading = true
-    this.rs.post('device/search', {filter:{id:this.id}}).subscribe((res) => {
+    this.rs.post('device/search', {filter: {id: this.id}}).subscribe((res) => {
       this.data = res.data[0];
       this.loadProduct();
       this.loadProperties();
