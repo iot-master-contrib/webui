@@ -15,7 +15,7 @@
           <nz-progress [nzPercent]="value[f.key]"></nz-progress>
         </ng-container>
         <ng-container *ngSwitchCase="'tags'">
-          <nz-tag *ngFor="let t of value[f.key]">{{t}}</nz-tag>
+          <nz-tag *ngFor="let t of value[f.key]">{{ t }}</nz-tag>
         </ng-container>
         <ng-container *ngSwitchCase="'link'">
           <a [routerLink]="f.link?.()">{{ value[f.key] }}</a>

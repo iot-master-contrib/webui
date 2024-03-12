@@ -70,7 +70,7 @@ export class ProductDetailComponent implements OnInit {
   }
 
   load() {
-    this.rs.get(`product/${this.id}`, {}).subscribe(      (res) => {
+    this.rs.get(`product/${this.id}`, {}).subscribe((res) => {
         this.data = res.data
       }
     );
@@ -84,10 +84,10 @@ export class ProductDetailComponent implements OnInit {
 
 
   delete() {
-    this.rs.get(`product/${this.id}/delete`, {}).subscribe(      (res) => {
-        this.msg.success('删除成功');
-        this.router.navigateByUrl('admin/product');
-      }    );
+    this.rs.get(`product/${this.id}/delete`, {}).subscribe((res) => {
+      this.msg.success('删除成功');
+      this.router.navigateByUrl('admin/product');
+    });
     this.load();
   }
 }

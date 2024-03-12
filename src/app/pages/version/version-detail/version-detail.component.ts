@@ -36,7 +36,7 @@ import {VersionActionComponent} from "../version-action/version-action.component
   templateUrl: './version-detail.component.html',
   styleUrl: './version-detail.component.scss'
 })
-export class VersionDetailComponent implements OnInit{
+export class VersionDetailComponent implements OnInit {
   id!: any;
   version!: any;
 

@@ -19,7 +19,7 @@ export class RequestService {
               private http: HttpClient,
               private route: Router,
               @Optional() @Inject(API_BASE) base?: string,
-              ) {
+  ) {
     if (base)
       this.base = base
   }

@@ -42,7 +42,8 @@
         <ng-container *ngFor="let menu of menus">
           <li nz-submenu [nzIcon]="menu.icon || 'appstore-add'" [nzTitle]="menu.name" [nzOpen]="menu.open">
             <ul>
-              <li nz-menu-item *ngFor="let item of menu.items" [nzDisabled]="item.disabled" nzMatchRouter nzMatchRouterExact>
+              <li nz-menu-item *ngFor="let item of menu.items" [nzDisabled]="item.disabled" nzMatchRouter
+                  nzMatchRouterExact>
                 <a *ngIf="item.standalone" [href]="item.url" target="_blank">{{ item.name }}</a>
                 <a *ngIf="!item.standalone" [routerLink]="item.link || 'web'"
                    [queryParams]="item.url && {url: item.url}">{{ item.name }}</a>

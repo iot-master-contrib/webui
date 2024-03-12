@@ -78,15 +78,15 @@ export class ProjectDetailComponent implements OnInit {
   }
 
   load() {
-    this.rs.get(`project/${this.id}`).subscribe(      (res: any) => {
-        this.data = res.data;
-      }    );
+    this.rs.get(`project/${this.id}`).subscribe((res: any) => {
+      this.data = res.data;
+    });
   }
 
   delete() {
     this.rs.get(`project/${this.id}/delete`, {}).subscribe((res: any) => {
-        this.msg.success('删除成功');
-        this.router.navigateByUrl('admin');
-      });
+      this.msg.success('删除成功');
+      this.router.navigateByUrl('admin');
+    });
   }
 }

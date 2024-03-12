@@ -43,8 +43,8 @@ export class GatewayDetailComponent implements OnInit {
       key: 'project', label: '项目', type: 'link',
       link: () => `/admin/project/${this.data.project_id}`,
     },
-    {key: 'username',  label: '用户名'},
-    {key: 'password',  label: '密码'},
+    {key: 'username', label: '用户名'},
+    {key: 'password', label: '密码'},
     {key: 'created', label: '创建时间', type: 'date'},
     {key: 'description', label: '说明', span: 2},
   ];
@@ -66,16 +66,16 @@ export class GatewayDetailComponent implements OnInit {
 
   load() {
     this.loading = true
-    this.rs.post('gateway/search', {filter:{id:this.id}}).subscribe((res) => {
+    this.rs.post('gateway/search', {filter: {id: this.id}}).subscribe((res) => {
       this.data = res.data[0];
     }).add(() => this.loading = false);
   }
 
   delete() {
     this.rs.get(`gateway/${this.id}/delete`, {}).subscribe((res) => {
-        this.msg.success('删除成功');
-        this.router.navigateByUrl('admin/gateway');
-      }    );
+      this.msg.success('删除成功');
+      this.router.navigateByUrl('admin/gateway');
+    });
 
   }
 }

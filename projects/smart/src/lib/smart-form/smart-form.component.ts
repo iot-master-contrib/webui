@@ -35,13 +35,13 @@ export interface SmartFormItem {
   options?: NzSelectOptionInterface[]
 
 
-  change?: (value: any)=>void //监测变化
+  change?: (value: any) => void //监测变化
 
   time?: boolean //日期控件 显示时间
 
   upload?: string //文件上传
 
-  choose?: ()=>void //选择操作
+  choose?: () => void //选择操作
   //data?: any; //控件参数
 
   pattern?: string | RegExp
