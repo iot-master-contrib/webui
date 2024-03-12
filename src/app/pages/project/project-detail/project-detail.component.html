@@ -31,10 +31,16 @@
 
 </nz-card>
 <ng-template #extra>
-  <nz-space>
-    <a nz-button *nzSpaceItem [routerLink]="'/project/'+id" target="_blank">打开</a>
-    <button *nzSpaceItem nz-button routerLink="edit">编辑</button>
-    <button *nzSpaceItem nz-button nz-popconfirm nzPopconfirmTitle="确认删除" (nzOnConfirm)="delete()">删除</button>
-  </nz-space>
+  @if (project_id) {
+    <nz-space>
+      <button *nzSpaceItem nz-button [routerLink]="'/project/'+id+'/edit'">编辑</button>
+    </nz-space>
+  } @else {
+    <nz-space>
+      <a nz-button *nzSpaceItem [routerLink]="'/project/'+id" target="_blank">打开</a>
+      <button *nzSpaceItem nz-button routerLink="edit">编辑</button>
+      <button *nzSpaceItem nz-button nz-popconfirm nzPopconfirmTitle="确认删除" (nzOnConfirm)="delete()">删除</button>
+    </nz-space>
+  }
 </ng-template>
 

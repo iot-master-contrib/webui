@@ -43,6 +43,7 @@ import {ProjectUserComponent} from "../project-user/project-user.component";
   styleUrl: './project-detail.component.scss',
 })
 export class ProjectDetailComponent implements OnInit {
+  project_id!: any;
   id!: any;
 
   value = '';
@@ -67,14 +68,12 @@ export class ProjectDetailComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.route.parent?.snapshot.paramMap.has('project')) {
-      this.id = this.route.parent?.snapshot.paramMap.get('project');
-      this.load();
-      return;
+      this.project_id = this.id = this.route.parent?.snapshot.paramMap.get('project');
     }
     if (this.route.snapshot.paramMap.has('id')) {
       this.id = this.route.snapshot.paramMap.get('id');
-      this.load();
     }
+    this.load();
   }
 
   load() {

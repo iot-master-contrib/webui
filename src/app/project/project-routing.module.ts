@@ -31,6 +31,7 @@ const routes: Routes = [
 
   {path: 'dash', component: ProjectDashComponent, title: "项目控制台"},
   {path: 'detail', component: ProjectDetailComponent, title: "项目详情"},
+  {path: 'edit', component: ProjectEditComponent, title: "项目编辑"},
 
   // {path: 'device', loadChildren: () => import('../pages/device/device.module').then(m => m.DeviceModule)},
   // {path: 'gateway', loadChildren: () => import('../pages/gateway/gateway.module').then(m => m.GatewayModule)},

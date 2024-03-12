@@ -43,7 +43,7 @@ export class GatewayDetailComponent implements OnInit {
     {key: 'name', label: '名称'},
     {
       key: 'project', label: '项目', type: 'link',
-      link: () => `/admin/project/${this.data.project_id}`,
+      link: () => `${this.base}/project/${this.data.project_id}`,
     },
     {key: 'username', label: '用户名'},
     {key: 'password', label: '密码'},
