@@ -36,7 +36,7 @@ import {VersionActionComponent} from "../version-action/version-action.component
   templateUrl: './version-detail.component.html',
   styleUrl: './version-detail.component.scss'
 })
-export class VersionDetailComponent {
+export class VersionDetailComponent implements OnInit{
   id!: any;
   version!: any;
 
@@ -63,8 +63,8 @@ export class VersionDetailComponent {
   plugins: any[] = [];
 
   ngOnInit(): void {
-    if (this.route.parent?.snapshot.paramMap.has('id')) {
-      this.id = this.route.parent.snapshot.paramMap.get('id');
+    if (this.route.snapshot.paramMap.has('id')) {
+      this.id = this.route.snapshot.paramMap.get('id');
       this.load()
       this.loadPlugins()
     }

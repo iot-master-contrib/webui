@@ -35,7 +35,7 @@ import {VersionActionEditComponent} from "../version-action-edit/version-action-
   templateUrl: './version-edit.component.html',
   styleUrl: './version-edit.component.scss'
 })
-export class VersionEditComponent {
+export class VersionEditComponent implements OnInit{
   id!: any;
   version!: any;
 
@@ -62,8 +62,8 @@ export class VersionEditComponent {
   plugins: any[] = [];
 
   ngOnInit(): void {
-    if (this.route.parent?.snapshot.paramMap.has('id')) {
-      this.id = this.route.parent.snapshot.paramMap.get('id');
+    if (this.route.snapshot.paramMap.has('id')) {
+      this.id = this.route.snapshot.paramMap.get('id');
       this.load()
       this.loadPlugins()
     }
