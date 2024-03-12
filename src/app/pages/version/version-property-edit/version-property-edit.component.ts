@@ -16,7 +16,10 @@ import {NzUploadComponent} from "ng-zorro-antd/upload";
 import {NzTableModule} from "ng-zorro-antd/table";
 import {CdkDrag, CdkDragHandle, CdkDropList} from "@angular/cdk/drag-drop";
 import {NgForOf} from "@angular/common";
-import {SmartTableEditComponent, SmartTableEditItem} from "../../../../../projects/smart/src/lib/smart-table-edit/smart-table-edit.component";
+import {
+  SmartTableEditComponent,
+  SmartTableEditItem
+} from "../../../../../projects/smart/src/lib/smart-table-edit/smart-table-edit.component";
 import {RequestService} from "../../../../../projects/smart/src/lib/request.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {NzNotificationService} from "ng-zorro-antd/notification";
@@ -56,10 +59,13 @@ import {NzNotificationService} from "ng-zorro-antd/notification";
   styleUrl: './version-property-edit.component.scss'
 })
 export class VersionPropertyEditComponent implements OnInit {
-  data: any = {
-    name: "新产品",
-  }
-  formGroup!: FormGroup;
+
+  properties: any = []
+
+  @Input() product_id!: any;
+  @Input() version!: any;
+
+  group!: FormGroup;
 
   items: SmartTableEditItem[] = [{
     label: '变量',
@@ -113,37 +119,26 @@ export class VersionPropertyEditComponent implements OnInit {
     }]
   }]
 
-  id: any = ''
-  properties: any = []
-
-  @Input() product_id!: any;
-  @Input() version!: any;
-
-  constructor(private fb: FormBuilder,
-              private rs: RequestService,
-              private ms: NzNotificationService,
-              private router: Router,
-              private route: ActivatedRoute) {
-    this.buildFromGroup()
+  constructor(private fb: FormBuilder, private rs: RequestService, private ms: NzNotificationService) {
+    this.build()
   }
 
   ngOnInit(): void {
-    this.id = this.route.snapshot.paramMap.get('id');
     this.rs.get(`product/${this.product_id}/version/${this.version}/config/property`).subscribe(res => {
       //console.log("test", res)
       this.properties = res.data
-      this.buildFromGroup()
+      this.build()
     })
   }
 
-  buildFromGroup() {
-    this.formGroup = this.fb.group({
+  build() {
+    this.group = this.fb.group({
       properties: [this.properties || [], []]
     })
   }
 
   onSubmit() {
-    let value = this.formGroup.value
+    let value = this.group.value
     this.rs.post(`product/${this.product_id}/version/${this.version}/config/property`, value.properties).subscribe(res => {
       this.ms.success("提示", "保存成功")
       //this.router.navigateByUrl("/admin/product/" + this.id + "/edit")
