@@ -11,7 +11,7 @@ export interface SmartInfoItem {
   type?: string
   label: string
   span?: number
-  options?: { [p: string]: any }
+  options?: { [p: string | number]: any }
   link?: () => string
 }
 
