@@ -85,7 +85,7 @@ export class ProjectDetailComponent implements OnInit {
   delete() {
     this.rs.get(`project/${this.id}/delete`, {}).subscribe((res: any) => {
       this.msg.success('删除成功');
-      this.router.navigateByUrl('admin');
+      this.router.navigateByUrl('/project');
     });
   }
 }

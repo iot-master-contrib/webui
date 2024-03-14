@@ -117,7 +117,7 @@ export class AdminComponent {
     this.rs.get('plugin/menus/admin').subscribe((res: any) => {
       //this.menus = res.data
       //this.menus = this.menus.concat(res.data)
-      res.data.forEach((m: any) => {
+      res.data?.forEach((m: any) => {
         m.items.forEach((i: any) => i.standalone = true)
         //先查找同名，找到就合并
         let has = false

@@ -53,7 +53,9 @@ export class ProjectEditComponent implements OnInit {
     if (this.route.snapshot.paramMap.has('id')) {
       this.id = this.route.snapshot.paramMap.get('id');
     }
-    this.load()
+    if (this.id) {
+      this.load()
+    }
   }
 
   load() {
