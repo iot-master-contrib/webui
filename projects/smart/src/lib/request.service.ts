@@ -27,8 +27,12 @@ export class RequestService {
   request(method: string, uri: string, options: any): Observable<any> {
     // 携带Cookie，保持session会话
     options.withCredentials = true;
-    let sendUrl = this.base + uri;
-    return this.http.request<any>(method, sendUrl, options).pipe(
+
+    //默认添加基础路径
+    if (uri.substring(0, 1) != '/')
+      uri = this.base + uri
+
+    return this.http.request<any>(method, uri, options).pipe(
       // 捕捉异常，数据转换
       catchError(err => {
         if (err.status === 404) {
