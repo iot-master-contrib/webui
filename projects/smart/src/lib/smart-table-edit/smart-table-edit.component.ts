@@ -20,6 +20,7 @@ import {NzSwitchComponent} from "ng-zorro-antd/switch";
 import {NzSpaceComponent, NzSpaceItemDirective} from "ng-zorro-antd/space";
 import {NzInputDirective} from "ng-zorro-antd/input";
 import {NzColorPickerModule} from "ng-zorro-antd/color-picker";
+import {NzCardComponent} from "ng-zorro-antd/card";
 
 
 export interface SmartTableEditItem {
@@ -53,7 +54,8 @@ export interface SmartTableEditItem {
     CdkDrag,
     NzSwitchComponent,
     NzInputDirective,
-    NzColorPickerModule
+    NzColorPickerModule,
+    NzCardComponent
   ],
   providers: [
     {
@@ -69,6 +71,9 @@ export class SmartTableEditComponent implements OnInit, ControlValueAccessor {
 
   row: any = {};
   _columns: any = [];
+
+  @Input() title = ""
+  @Input() showAdd = true
 
   onChanged: any = () => {
   }
@@ -126,15 +131,15 @@ export class SmartTableEditComponent implements OnInit, ControlValueAccessor {
     this.onChanged(data);
   }
 
-  handleCopyProperTy(index: number) {
+  copy(index: number) {
     const old = this.formArray.controls[index].value;
     this.formArray.insert(index, this.fb.group(old));
     this.msg.success("复制成功");
     this.change();
   }
 
-  propertyDel(i: number) {
-    this.formArray.removeAt(i);
+  del(index: number) {
+    this.formArray.removeAt(index);
     this.change();
   }
 
@@ -143,7 +148,8 @@ export class SmartTableEditComponent implements OnInit, ControlValueAccessor {
     this.change();
   }
 
-  propertyAdd() {
-    this.formArray.insert(0, this.fb.group(this.row));
+  public Add() {
+    //this.formArray.insert(0, this.fb.group(this.row));
+    this.formArray.push(this.fb.group(this.row))
   }
 }

@@ -88,7 +88,7 @@ export class VersionPropertyEditComponent implements OnInit {
       label: '布尔型',
       value: 'bool'
     }, {
-      label: '文本',
+      label: '字符串',
       value: 'text'
     },
       //   {
