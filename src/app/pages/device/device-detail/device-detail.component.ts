@@ -13,25 +13,27 @@ import {NzCardComponent} from "ng-zorro-antd/card";
 import {SmartInfoComponent, SmartInfoItem} from "../../../../../projects/smart/src/lib/smart-info/smart-info.component";
 import {NzTabsModule} from "ng-zorro-antd/tabs";
 import {SmartTableColumn} from "../../../../../projects/smart/src/lib/smart-table/smart-table.component";
+import {DevicePropertyComponent} from "../device-property/device-property.component";
 
 @Component({
   selector: 'app-device-detail',
   standalone: true,
-  imports: [
-    CommonModule,
-    SmartInfoComponent,
-    NzDividerComponent,
-    NzRowDirective,
-    NzColDirective,
-    NzStatisticComponent,
-    NzCardComponent,
-    NzSpaceComponent,
-    NzSpaceItemDirective,
-    NzButtonComponent,
-    RouterLink,
-    NzPopconfirmDirective,
-    NzTabsModule,
-  ],
+    imports: [
+        CommonModule,
+        SmartInfoComponent,
+        NzDividerComponent,
+        NzRowDirective,
+        NzColDirective,
+        NzStatisticComponent,
+        NzCardComponent,
+        NzSpaceComponent,
+        NzSpaceItemDirective,
+        NzButtonComponent,
+        RouterLink,
+        NzPopconfirmDirective,
+        NzTabsModule,
+        DevicePropertyComponent,
+    ],
   templateUrl: './device-detail.component.html',
   styleUrl: './device-detail.component.scss',
 })
@@ -71,10 +73,6 @@ export class DeviceDetailComponent implements OnInit {
   ) {
   }
 
-  product: any = {};
-
-  properties: any = [];
-
   values: any = {};
 
   loading = false;
@@ -87,41 +85,14 @@ export class DeviceDetailComponent implements OnInit {
     if (this.route.snapshot.paramMap.has('id')) {
       this.id = this.route.snapshot.paramMap.get('id');
       this.load();
-      this.loadValues();
     }
   }
 
   load() {
-    // this.rs.get(`device/${this.id}`, {}).subscribe((res) => {
-    //   this.data = res.data;
-    //   this.loadProduct();
-    //   this.loadProperties();
-    // });
     this.loading = true
     this.rs.post('device/search', {filter: {id: this.id}}).subscribe((res) => {
       this.data = res.data[0];
-      this.loadProduct();
-      this.loadProperties();
     }).add(() => this.loading = false);
-  }
-
-  loadValues() {
-    this.rs.get('device/' + this.id + '/values').subscribe((res) => {
-      this.values = res.data;
-    });
-  }
-
-  loadProduct() {
-    this.rs.get('product/' + this.data.product_id).subscribe((res) => {
-      this.product = res.data;
-    });
-  }
-
-  loadProperties() {
-    this.rs.get('product/' + this.data.product_id + '/attach/read/property.json').subscribe((res) => {
-      console.log('property', res);
-      this.properties = res;
-    });
   }
 
   delete() {
