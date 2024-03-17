@@ -38,7 +38,7 @@ export class DevicePropertyComponent {
     base = '/admin'
     project_id!: any;
 
-    validateForm!: FormGroup;
+    group!: FormGroup;
 
     data: any = {};
 
@@ -48,6 +48,7 @@ export class DevicePropertyComponent {
     values: any = {};
 
     actives: any = {}
+    names: any = {}
 
     loading = false;
 
@@ -64,17 +65,13 @@ export class DevicePropertyComponent {
         },
         title: {left: 'center', text: '历史曲线',},
         toolbox: {feature: {saveAsImage: {}},},
-        xAxis: {type: 'time', boundaryGap: false, data: []},
+        xAxis: {type: 'time', boundaryGap: false},
         yAxis: {type: 'value'},
         dataZoom: [
             {type: 'inside', start: 0, end: 100,},
             {start: 0, end: 100,},
         ],
-        series: [
-            {
-                name: 'Fake Data', type: 'line', smooth: true, symbol: 'none', data: [1, 2, 3] //data,
-            },
-        ],
+        series: [],
     };
 
     constructor(
@@ -95,7 +92,7 @@ export class DevicePropertyComponent {
         this.load();
         this.loadValues();
 
-        this.validateForm = this.fb.group({
+        this.group = this.fb.group({
             strEnd: [[dayjs().add(-7, "days").toDate(), dayjs().toDate(),],],
             window: [1],
             winTp: ['h'],
@@ -119,6 +116,7 @@ export class DevicePropertyComponent {
     loadProperties() {
         this.rs.get(`product/${this.data.product_id}/version/${this.data.product_version}/config/property`).subscribe(res => {
             this.properties = res.data
+            this.properties.forEach((p:any)=>{this.names[p.name] = p.label || p.name})
         })
     }
 
@@ -130,14 +128,15 @@ export class DevicePropertyComponent {
             //图表渲染
             // this.chart.setOption(this.option);
             this.option.series.push({
-                name: name, //TODO 使用名称
+                name: this.names[name], //使用名称
                 type: 'line',
                 smooth: true,
                 symbol: 'none',
                 //areaStyle: {},
                 data: res.data?.map((p: any) => [p.time, p.value]),
             })
-           // this.option.xAxis.data = res.data?.map((p: any) => dayjs(p.time).format())
+            // this.option.xAxis.data = res.data?.map((p: any) => dayjs(p.time).format())
+            this.chart.clear()
             this.chart.setOption(this.option)
             console.log(this.option)
         })
@@ -145,14 +144,16 @@ export class DevicePropertyComponent {
 
 
     search() {
-        if (this.validateForm.valid) {
-            let value = this.validateForm.value;
+        if (this.group.valid) {
+            let value = this.group.value;
             let query = {
                 start: dayjs(value.strEnd[0]).toISOString(),
                 end: dayjs(value.strEnd[1]).toISOString(),
                 window: value.window ? value.window + value.winTp : '1h',
                 fn: 'last',
             };
+
+            console.log('actives', this.actives)
 
             this.option.series = []
             Object.keys(this.actives).forEach((k: string) => {
@@ -161,7 +162,7 @@ export class DevicePropertyComponent {
             })
             //this.loadHistory("a", query)
         } else {
-            Object.values(this.validateForm.controls).forEach((control) => {
+            Object.values(this.group.controls).forEach((control) => {
                 if (control.invalid) {
                     control.markAsDirty();
                     control.updateValueAndValidity({onlySelf: true});

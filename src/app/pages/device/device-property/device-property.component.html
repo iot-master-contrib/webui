@@ -9,14 +9,14 @@
 
 <div class="history">
 
-    <form nz-form [formGroup]="validateForm">
+    <form nz-form [formGroup]="group">
         <div nz-row>
             <div nz-col [nzSpan]="8">
                 <nz-form-item>
                     <nz-form-label [nzSm]="6" [nzXs]="24">窗口时间</nz-form-label>
                     <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="">
                         <ng-template #addOnAfterTemplate>
-                            <nz-select formControlName="winTp" (change)="search()" style="width: 60px">
+                            <nz-select formControlName="winTp" (nzOpenChange)="search()" (change)="search()" style="width: 60px">
                                 <nz-option nzValue="s" nzLabel="秒"></nz-option>
                                 <nz-option nzValue="m" nzLabel="分"></nz-option>
                                 <nz-option nzValue="h" nzLabel="时"></nz-option>
