@@ -11,7 +11,7 @@ import dayjs from "dayjs";
 import {NzFormModule} from "ng-zorro-antd/form";
 import {NzOptionComponent, NzSelectComponent} from "ng-zorro-antd/select";
 import {NzInputNumberComponent, NzInputNumberGroupComponent} from "ng-zorro-antd/input-number";
-import {NzDatePickerComponent} from "ng-zorro-antd/date-picker";
+import {NzDatePickerModule} from "ng-zorro-antd/date-picker";
 
 @Component({
     selector: 'app-device-property',
@@ -29,7 +29,7 @@ import {NzDatePickerComponent} from "ng-zorro-antd/date-picker";
         NzOptionComponent,
         NzInputNumberGroupComponent,
         NzInputNumberComponent,
-        NzDatePickerComponent,
+        NzDatePickerModule,
     ],
     templateUrl: './device-property.component.html',
     styleUrl: './device-property.component.scss'
