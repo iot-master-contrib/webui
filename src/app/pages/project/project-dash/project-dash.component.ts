@@ -7,33 +7,33 @@ import {NzMessageService} from "ng-zorro-antd/message";
 import {RequestService} from "../../../../../projects/smart/src/lib/request.service";
 
 @Component({
-  selector: 'app-project-dash',
-  standalone: true,
-  imports: [
-    CountComponent,
-    NzCardComponent,
-    NzColDirective,
-    NzRowDirective
-  ],
-  templateUrl: './project-dash.component.html',
-  styleUrl: './project-dash.component.scss'
+    selector: 'app-project-dash',
+    standalone: true,
+    imports: [
+        CountComponent,
+        NzCardComponent,
+        NzColDirective,
+        NzRowDirective
+    ],
+    templateUrl: './project-dash.component.html',
+    styleUrl: './project-dash.component.scss'
 })
 export class ProjectDashComponent {
 
-  project: any = ''
+    project: any = ''
 
-  constructor(
-    private router: Router,
-    private msg: NzMessageService,
-    private rs: RequestService,
-    private route: ActivatedRoute
-  ) {
-  }
-
-  ngOnInit(): void {
-    if (this.route.parent?.snapshot.paramMap.has('project')) {
-      this.project = this.route.parent?.snapshot.paramMap.get('project');
-      return;
+    constructor(
+        private router: Router,
+        private msg: NzMessageService,
+        private rs: RequestService,
+        private route: ActivatedRoute
+    ) {
     }
-  }
+
+    ngOnInit(): void {
+        if (this.route.parent?.snapshot.paramMap.has('project')) {
+            this.project = this.route.parent?.snapshot.paramMap.get('project');
+            return;
+        }
+    }
 }

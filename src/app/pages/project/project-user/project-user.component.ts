@@ -5,115 +5,115 @@ import {CommonModule} from '@angular/common';
 import {RequestService} from "../../../../../projects/smart/src/lib/request.service";
 import {UsersComponent} from "../../users/users/users.component";
 import {
-  ParamSearch,
-  SmartTableButton,
-  SmartTableColumn,
-  SmartTableComponent,
-  SmartTableOperator
+    ParamSearch,
+    SmartTableButton,
+    SmartTableColumn,
+    SmartTableComponent,
+    SmartTableOperator
 } from "../../../../../projects/smart/src/lib/smart-table/smart-table.component";
 import {NzNotificationService} from "ng-zorro-antd/notification";
 
 @Component({
-  selector: 'app-project-user',
-  standalone: true,
-  imports: [
-    CommonModule,
-    SmartTableComponent,
-  ],
-  templateUrl: './project-user.component.html',
-  styleUrl: './project-user.component.scss',
+    selector: 'app-project-user',
+    standalone: true,
+    imports: [
+        CommonModule,
+        SmartTableComponent,
+    ],
+    templateUrl: './project-user.component.html',
+    styleUrl: './project-user.component.scss',
 })
 export class ProjectUserComponent {
-  @Input() project_id: any = '';
+    @Input() project_id: any = '';
 
 
-  datum: any[] = [];
-  total = 0;
-  loading = false;
+    datum: any[] = [];
+    total = 0;
+    loading = false;
 
 
-  buttons: SmartTableButton[] = [
-    {icon: 'link', label: '绑定用户', action: () => this.bind()}, //应该只有平台管理员可以操作吧
-  ];
+    buttons: SmartTableButton[] = [
+        {icon: 'link', label: '绑定用户', action: () => this.bind()}, //应该只有平台管理员可以操作吧
+    ];
 
-  columns: SmartTableColumn[] = [
-    {key: 'user_id', sortable: true, label: 'ID', keyword: true},
-    {key: 'user', sortable: true, label: '名称', keyword: true},
-    {key: 'disabled', sortable: true, label: '状态'},
-    {key: 'created', sortable: true, label: '创建时间', date: true},
-  ];
+    columns: SmartTableColumn[] = [
+        {key: 'user_id', sortable: true, label: 'ID', keyword: true},
+        {key: 'user', sortable: true, label: '名称', keyword: true},
+        {key: 'disabled', sortable: true, label: '状态'},
+        {key: 'created', sortable: true, label: '创建时间', date: true},
+    ];
 
-  columnsSelect: SmartTableColumn[] = [
-    {key: 'user_id', sortable: true, label: 'ID', keyword: true},
-    {key: 'user', sortable: true, label: '名称', keyword: true},
-    {key: 'disabled', sortable: true, label: '状态'},
-  ];
+    columnsSelect: SmartTableColumn[] = [
+        {key: 'user_id', sortable: true, label: 'ID', keyword: true},
+        {key: 'user', sortable: true, label: '名称', keyword: true},
+        {key: 'disabled', sortable: true, label: '状态'},
+    ];
 
-  operators: SmartTableOperator[] = [
-    {icon: 'disconnect', label: '解绑', confirm: '确认解绑？', action: (data) => this.unbind(data.user_id)},
-  ];
+    operators: SmartTableOperator[] = [
+        {icon: 'disconnect', label: '解绑', confirm: '确认解绑？', action: (data) => this.unbind(data.user_id)},
+    ];
 
-  operatorsSelect: SmartTableOperator[] = [
-    {label: '选择', action: (data) => this.ref.close(data)},
-  ];
+    operatorsSelect: SmartTableOperator[] = [
+        {label: '选择', action: (data) => this.ref.close(data)},
+    ];
 
-  constructor(private route: ActivatedRoute,
-              private rs: RequestService,
-              private msg: NzNotificationService,
-              private ms: NzModalService,
-              @Optional() protected ref: NzModalRef,
-              @Optional() @Inject(NZ_MODAL_DATA) protected data: any
-  ) {
-    this.project_id = data?.project_id;
-  }
-
-  ngOnInit(): void {
-    if (this.route.parent?.snapshot.paramMap.has('project')) {
-      this.project_id = this.route.parent?.snapshot.paramMap.get('project');
+    constructor(private route: ActivatedRoute,
+                private rs: RequestService,
+                private msg: NzNotificationService,
+                private ms: NzModalService,
+                @Optional() protected ref: NzModalRef,
+                @Optional() @Inject(NZ_MODAL_DATA) protected data: any
+    ) {
+        this.project_id = data?.project_id;
     }
-  }
 
-  query!: ParamSearch
+    ngOnInit(): void {
+        if (this.route.parent?.snapshot.paramMap.has('project')) {
+            this.project_id = this.route.parent?.snapshot.paramMap.get('project');
+        }
+    }
 
-  refresh() {
-    this.search(this.query)
-  }
+    query!: ParamSearch
 
-  search(query: ParamSearch) {
-    //console.log('onQuery', query)
-    this.query = query
+    refresh() {
+        this.search(this.query)
+    }
 
-    if (this.project_id)
-      query.filter['project_id'] = this.project_id;
+    search(query: ParamSearch) {
+        //console.log('onQuery', query)
+        this.query = query
 
-    this.loading = true;
-    this.rs.get(`project/${this.project_id}/user/list`).subscribe((res) => {
-      this.datum = res.data;
-      //this.total = res.data.length
-    }).add(() => this.loading = false);
-    // this.rs.post('user/search', query).subscribe((res) => {
-    //   this.datum = res.data;
-    //   this.total = res.total;
-    // }).add(() => this.loading = false);
-  }
+        if (this.project_id)
+            query.filter['project_id'] = this.project_id;
 
-  bind() {
-    this.ms.create({
-      nzTitle: '绑定用户',
-      nzContent: UsersComponent,
-    }).afterClose.subscribe(res => {
-      if (!res) return
-      this.rs.get(`project/${this.project_id}/user/${res.id}/bind`, {}).subscribe((res) => {
-        this.msg.success('提示', '绑定成功');
-        this.refresh();
-      });
-    })
-  }
+        this.loading = true;
+        this.rs.get(`project/${this.project_id}/user/list`).subscribe((res) => {
+            this.datum = res.data;
+            //this.total = res.data.length
+        }).add(() => this.loading = false);
+        // this.rs.post('user/search', query).subscribe((res) => {
+        //   this.datum = res.data;
+        //   this.total = res.total;
+        // }).add(() => this.loading = false);
+    }
 
-  unbind(i: any) {
-    this.rs.get(`project/${this.project_id}/user/${i}/unbind`, {}).subscribe((res) => {
-      this.msg.success('提示', '解绑成功');
-      this.refresh();
-    });
-  }
+    bind() {
+        this.ms.create({
+            nzTitle: '绑定用户',
+            nzContent: UsersComponent,
+        }).afterClose.subscribe(res => {
+            if (!res) return
+            this.rs.get(`project/${this.project_id}/user/${res.id}/bind`, {}).subscribe((res) => {
+                this.msg.success('提示', '绑定成功');
+                this.refresh();
+            });
+        })
+    }
+
+    unbind(i: any) {
+        this.rs.get(`project/${this.project_id}/user/${i}/unbind`, {}).subscribe((res) => {
+            this.msg.success('提示', '解绑成功');
+            this.refresh();
+        });
+    }
 }

@@ -6,12 +6,12 @@ import {NzModalModule} from "ng-zorro-antd/modal";
 
 
 @NgModule({
-  declarations: [],
-  imports: [
-    CommonModule,
-    AdminRoutingModule,
-    NzModalModule,
-  ]
+    declarations: [],
+    imports: [
+        CommonModule,
+        AdminRoutingModule,
+        NzModalModule,
+    ]
 })
 export class AdminModule {
 }

@@ -1,43 +1,43 @@
 <div class="toolbar">
-  <nz-space>
-    <button *nzSpaceItem nz-button nzType="primary" (click)="refresh()">
-      <span nz-icon nzType="reload" [nzSpin]="loading"></span>
-      刷新
-    </button>
+    <nz-space>
+        <button *nzSpaceItem nz-button nzType="primary" (click)="refresh()">
+            <span nz-icon nzType="reload" [nzSpin]="loading"></span>
+            刷新
+        </button>
 
-    <!--搜索框-->
-    <ng-container *ngIf="showSearch()">
-      <div *nzSpaceItem class="search">
-        <form (submit)="search()">
-          <nz-input-group nzSearch [nzAddOnAfter]="suffixButton">
-            <input type="text" [(ngModel)]="keyword" [ngModelOptions]="{standalone:true}" nz-input
-                   placeholder="请输入关键字"/>
-          </nz-input-group>
-          <ng-template #suffixButton>
-            <button nz-button nzType="primary" nzSearch (click)="search()">搜索</button>
-          </ng-template>
-        </form>
-      </div>
-    </ng-container>
-  </nz-space>
+        <!--搜索框-->
+        <ng-container *ngIf="showSearch()">
+            <div *nzSpaceItem class="search">
+                <form (submit)="search()">
+                    <nz-input-group nzSearch [nzAddOnAfter]="suffixButton">
+                        <input type="text" [(ngModel)]="keyword" [ngModelOptions]="{standalone:true}" nz-input
+                               placeholder="请输入关键字"/>
+                    </nz-input-group>
+                    <ng-template #suffixButton>
+                        <button nz-button nzType="primary" nzSearch (click)="search()">搜索</button>
+                    </ng-template>
+                </form>
+            </div>
+        </ng-container>
+    </nz-space>
 
-  <div class="fill"></div>
+    <div class="fill"></div>
 
-  <!--按钮区-->
+    <!--按钮区-->
 
-  <nz-space>
-    <ng-container *ngFor="let b of buttons">
-      <button *nzSpaceItem nz-button
-              nzType="primary"
-              nzShape="round"
-              [title]="b.title || ''"
-              [routerLink]="b.link?.()"
-              (click)="b.action?.()">
-        <span *ngIf="b.icon" nz-icon [nzType]="b.icon"></span>
-        {{ b.label }}
-      </button>
-    </ng-container>
-  </nz-space>
+    <nz-space>
+        <ng-container *ngFor="let b of buttons">
+            <button *nzSpaceItem nz-button
+                    nzType="primary"
+                    nzShape="round"
+                    [title]="b.title || ''"
+                    [routerLink]="b.link?.()"
+                    (click)="b.action?.()">
+                <span *ngIf="b.icon" nz-icon [nzType]="b.icon"></span>
+                {{ b.label }}
+            </button>
+        </ng-container>
+    </nz-space>
 
 </div>
 
@@ -55,38 +55,38 @@
           [nzShowQuickJumper]="true"
           [nzShowSizeChanger]="true"
           (nzQueryParams)="onQuery($event)">
-  <thead>
-  <tr>
-    <th *ngFor="let item of columns"
-        [nzColumnKey]="item.key"
-        [nzShowSort]="item.sortable"
-        [nzSortFn]="true"
-        [nzShowFilter]="!!item.filter"
-        [nzFilterFn]="true"
-        [nzFilters]="item.filter || []">
-      {{ item.label }}
-    </th>
-    <th *ngIf="operators && operators.length">操作</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let data of table.data">
+    <thead>
+    <tr>
+        <th *ngFor="let item of columns"
+            [nzColumnKey]="item.key"
+            [nzShowSort]="item.sortable"
+            [nzSortFn]="true"
+            [nzShowFilter]="!!item.filter"
+            [nzFilterFn]="true"
+            [nzFilters]="item.filter || []">
+            {{ item.label }}
+        </th>
+        <th *ngIf="operators && operators.length">操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let data of table.data">
 
-    <td *ngFor="let item of columns">
-      <ng-container *ngIf="item.date; else temp">
-        {{ data[item.key] | date: 'yyyy-MM-dd HH:mm:ss' }}
-      </ng-container>
-      <ng-template #temp>
-        <a *ngIf="item.link; else elseTemplate" [routerLink]="item.link(data)">
-          {{ data[item.key] }}
-        </a>
-        <ng-template #elseTemplate>
-          {{ data[item.key] }}
-        </ng-template>
-      </ng-template>
-    </td>
+        <td *ngFor="let item of columns">
+            <ng-container *ngIf="item.date; else temp">
+                {{ data[item.key] | date: 'yyyy-MM-dd HH:mm:ss' }}
+            </ng-container>
+            <ng-template #temp>
+                <a *ngIf="item.link; else elseTemplate" [routerLink]="item.link(data)">
+                    {{ data[item.key] }}
+                </a>
+                <ng-template #elseTemplate>
+                    {{ data[item.key] }}
+                </ng-template>
+            </ng-template>
+        </td>
 
-    <td *ngIf="operators && operators.length">
+        <td *ngIf="operators && operators.length">
         <span class="operator" *ngFor="let o of operators">
 
           <!--外部链接-->
@@ -95,39 +95,39 @@
              [target]="o.external ? '_blank' : ''"
              [routerLink]="o.link?.(data)">
             <i *ngIf="o.icon" nz-icon [nzType]="o.icon"></i>
-            {{ o.label }}
+              {{ o.label }}
           </a>
 
-          <!--链接-->
+            <!--链接-->
           <a *ngIf="o.link && !o.external"
              [title]="o.title||''"
              [routerLink]="o.link?.(data)">
             <i *ngIf="o.icon" nz-icon [nzType]="o.icon"></i>
-            {{ o.label }}
+              {{ o.label }}
           </a>
 
-          <!--确认调用，比如删除-->
+            <!--确认调用，比如删除-->
           <a *ngIf="o.action && o.confirm"
              [title]="o.title||''"
              nz-popconfirm
              [nzPopconfirmTitle]="o.confirm"
              (nzOnConfirm)="o.action?.(data)">
             <i *ngIf="o.icon" nz-icon [nzType]="o.icon"></i>
-            {{ o.label }}
+              {{ o.label }}
           </a>
 
-          <!--调用-->
+            <!--调用-->
           <a *ngIf="o.action && !o.confirm"
              [title]="o.title||''"
              (click)="o.action?.(data)">
             <i *ngIf="o.icon" nz-icon [nzType]="o.icon"></i>
-            {{ o.label }}
+              {{ o.label }}
           </a>
 
         </span>
-    </td>
-  </tr>
-  </tbody>
+        </td>
+    </tr>
+    </tbody>
 </nz-table>
 
 <ng-template #totalTemplate let-total>总计 {{ total }} 条</ng-template>

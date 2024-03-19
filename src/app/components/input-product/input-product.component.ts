@@ -7,78 +7,78 @@ import {ProductsComponent} from "../../pages/product/products/products.component
 import {RequestService} from "../../../../projects/smart/src/lib/request.service";
 
 @Component({
-  selector: 'app-input-product',
-  standalone: true,
-  imports: [
-    NzInputDirective,
-    NzButtonComponent
-  ],
-  templateUrl: './input-product.component.html',
-  styleUrl: './input-product.component.scss',
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => InputProductComponent),
-      multi: true
-    }
-  ]
+    selector: 'app-input-product',
+    standalone: true,
+    imports: [
+        NzInputDirective,
+        NzButtonComponent
+    ],
+    templateUrl: './input-product.component.html',
+    styleUrl: './input-product.component.scss',
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => InputProductComponent),
+            multi: true
+        }
+    ]
 })
 export class InputProductComponent implements OnInit, ControlValueAccessor {
-  id = ""
-  product: any = {}
+    id = ""
+    product: any = {}
 
-  private onChange!: any;
+    private onChange!: any;
 
-  @Input() placeholder = ''
+    @Input() placeholder = ''
 
-  constructor(private ms: NzModalService, private rs: RequestService) {
-  }
+    constructor(private ms: NzModalService, private rs: RequestService) {
+    }
 
-  ngOnInit(): void {
-  }
+    ngOnInit(): void {
+    }
 
-  registerOnChange(fn: any): void {
-    this.onChange = fn;
-  }
+    registerOnChange(fn: any): void {
+        this.onChange = fn;
+    }
 
-  registerOnTouched(fn: any): void {
-  }
+    registerOnTouched(fn: any): void {
+    }
 
-  writeValue(obj: any): void {
-    if (this.id !== obj) {
-      this.id = obj
-      if (this.id)
+    writeValue(obj: any): void {
+        if (this.id !== obj) {
+            this.id = obj
+            if (this.id)
+                this.load()
+        }
+    }
+
+    load() {
+        console.log('load product', this.id)
+        this.rs.get('product/' + this.id).subscribe(res => {
+            if (res.data) {
+                this.product = res.data;
+            }
+        })
+    }
+
+    select() {
+        this.ms.create({
+            nzTitle: "选择",
+            nzContent: ProductsComponent
+        }).afterClose.subscribe(res => {
+            console.log(res)
+            if (res) {
+                this.product = res
+                this.id = res.id
+                this.onChange(this.id)
+            }
+        })
+    }
+
+    change(value: string) {
+        console.log('on change', value)
+        this.id = value
+        this.onChange(value)
         this.load()
     }
-  }
-
-  load() {
-    console.log('load product', this.id)
-    this.rs.get('product/' + this.id).subscribe(res => {
-      if (res.data) {
-        this.product = res.data;
-      }
-    })
-  }
-
-  select() {
-    this.ms.create({
-      nzTitle: "选择",
-      nzContent: ProductsComponent
-    }).afterClose.subscribe(res => {
-      console.log(res)
-      if (res) {
-        this.product = res
-        this.id = res.id
-        this.onChange(this.id)
-      }
-    })
-  }
-
-  change(value: string) {
-    console.log('on change', value)
-    this.id = value
-    this.onChange(value)
-    this.load()
-  }
 }

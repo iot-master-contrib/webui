@@ -27,48 +27,48 @@ import {SpaceDeviceComponent} from "../pages/space/space-device/space-device.com
 import {VersionDetailComponent} from "../pages/version/version-detail/version-detail.component";
 
 const routes: Routes = [
-  {path: "", pathMatch: "full", redirectTo: "dash"},
+    {path: "", pathMatch: "full", redirectTo: "dash"},
 
-  {path: 'dash', component: ProjectDashComponent, title: "项目控制台"},
-  {path: 'detail', component: ProjectDetailComponent, title: "项目详情"},
-  {path: 'edit', component: ProjectEditComponent, title: "项目编辑"},
+    {path: 'dash', component: ProjectDashComponent, title: "项目控制台"},
+    {path: 'detail', component: ProjectDetailComponent, title: "项目详情"},
+    {path: 'edit', component: ProjectEditComponent, title: "项目编辑"},
 
-  // {path: 'device', loadChildren: () => import('../pages/device/device.module').then(m => m.DeviceModule)},
-  // {path: 'gateway', loadChildren: () => import('../pages/gateway/gateway.module').then(m => m.GatewayModule)},
-  // {path: 'project', loadChildren: () => import('../pages/project/project.module').then(m => m.ProjectModule)},
-  // {path: 'space', loadChildren: () => import('../pages/space/space.module').then(m => m.SpaceModule)},
-  // {path: 'user', loadChildren: () => import('../pages/users/user.module').then(m => m.UserModule)},
+    // {path: 'device', loadChildren: () => import('../pages/device/device.module').then(m => m.DeviceModule)},
+    // {path: 'gateway', loadChildren: () => import('../pages/gateway/gateway.module').then(m => m.GatewayModule)},
+    // {path: 'project', loadChildren: () => import('../pages/project/project.module').then(m => m.ProjectModule)},
+    // {path: 'space', loadChildren: () => import('../pages/space/space.module').then(m => m.SpaceModule)},
+    // {path: 'user', loadChildren: () => import('../pages/users/user.module').then(m => m.UserModule)},
 
-  {path: 'product/:id', component: ProductDetailComponent, title: "产品版本详情"},
-  {path: 'product/:id/version/:version', component: VersionDetailComponent, title: "产品版本详情"},
+    {path: 'product/:id', component: ProductDetailComponent, title: "产品版本详情"},
+    {path: 'product/:id/version/:version', component: VersionDetailComponent, title: "产品版本详情"},
 
-  {path: 'device', component: DevicesComponent, title: "设备列表"},
-  {path: 'device/create', component: DeviceEditComponent, title: "创建设备"},
-  {path: 'device/:id', component: DeviceDetailComponent, title: "设备详情"},
-  {path: 'device/:id/edit', component: DeviceEditComponent, title: "编辑设备"},
+    {path: 'device', component: DevicesComponent, title: "设备列表"},
+    {path: 'device/create', component: DeviceEditComponent, title: "创建设备"},
+    {path: 'device/:id', component: DeviceDetailComponent, title: "设备详情"},
+    {path: 'device/:id/edit', component: DeviceEditComponent, title: "编辑设备"},
 
-  {path: 'gateway', component: GatewaysComponent, title: "网关列表"},
-  {path: 'gateway/create', component: GatewayEditComponent, title: "创建网关"},
-  {path: 'gateway/:id', component: GatewayDetailComponent, title: "网关详情"},
-  {path: 'gateway/:id/edit', component: GatewayEditComponent, title: "编辑网关"},
+    {path: 'gateway', component: GatewaysComponent, title: "网关列表"},
+    {path: 'gateway/create', component: GatewayEditComponent, title: "创建网关"},
+    {path: 'gateway/:id', component: GatewayDetailComponent, title: "网关详情"},
+    {path: 'gateway/:id/edit', component: GatewayEditComponent, title: "编辑网关"},
 
-  {path: 'space', component: SpacesComponent, title: "空间列表"},
-  {path: 'space/create', component: SpaceEditComponent, title: "创建空间"},
-  {path: 'space/:id', component: SpaceDetailComponent, title: "空间详情"},
-  {path: 'space/:id/edit', component: SpaceEditComponent, title: "空间编辑"},
-  {path: 'space/:id/device', component: SpaceDeviceComponent, title: "绑定设备"},
+    {path: 'space', component: SpacesComponent, title: "空间列表"},
+    {path: 'space/create', component: SpaceEditComponent, title: "创建空间"},
+    {path: 'space/:id', component: SpaceDetailComponent, title: "空间详情"},
+    {path: 'space/:id/edit', component: SpaceEditComponent, title: "空间编辑"},
+    {path: 'space/:id/device', component: SpaceDeviceComponent, title: "绑定设备"},
 
-  {path: 'user', component: ProjectUserComponent, title: "用户列表"},
+    {path: 'user', component: ProjectUserComponent, title: "用户列表"},
 
 
-  {path: "web", component: WebViewComponent, title: "-"},
-  {path: "alarm", component: AlarmComponent, title: "告警日志"},
-  {path: "**", component: UnknownComponent},
+    {path: "web", component: WebViewComponent, title: "-"},
+    {path: "alarm", component: AlarmComponent, title: "告警日志"},
+    {path: "**", component: UnknownComponent},
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+    imports: [RouterModule.forChild(routes)],
+    exports: [RouterModule]
 })
 export class ProjectRoutingModule {
 }

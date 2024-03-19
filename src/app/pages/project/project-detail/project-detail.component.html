@@ -1,46 +1,47 @@
 <nz-card nzTitle="项目详情" [nzExtra]="extra">
-  <im-smart-info [fields]="fields" [value]="data"></im-smart-info>
+    <im-smart-info [fields]="fields" [value]="data"></im-smart-info>
 
-  <nz-tabset>
-    <nz-tab nzTitle="项目空间">
-      <ng-template nz-tab>
-        <app-spaces [project_id]="id"></app-spaces>
-      </ng-template>
-    </nz-tab>
-    <nz-tab nzTitle="项目设备">
-      <ng-template nz-tab>
-        <app-devices [project_id]="id"></app-devices>
-      </ng-template>
-    </nz-tab>
-    <nz-tab nzTitle="项目网关">
-      <ng-template nz-tab>
-        <app-gateways [project_id]="id"></app-gateways>
-      </ng-template>
-    </nz-tab>
-    <nz-tab nzTitle="项目用户">
-      <ng-template nz-tab>
-        <app-project-user [project_id]="id"></app-project-user>
-      </ng-template>
-    </nz-tab>
-    <nz-tab nzTitle="报警日志">
-      <ng-template nz-tab>
+    <nz-tabset>
+        <nz-tab nzTitle="项目空间">
+            <ng-template nz-tab>
+                <app-spaces [project_id]="id"></app-spaces>
+            </ng-template>
+        </nz-tab>
+        <nz-tab nzTitle="项目设备">
+            <ng-template nz-tab>
+                <app-devices [project_id]="id"></app-devices>
+            </ng-template>
+        </nz-tab>
+        <nz-tab nzTitle="项目网关">
+            <ng-template nz-tab>
+                <app-gateways [project_id]="id"></app-gateways>
+            </ng-template>
+        </nz-tab>
+        <nz-tab nzTitle="项目用户">
+            <ng-template nz-tab>
+                <app-project-user [project_id]="id"></app-project-user>
+            </ng-template>
+        </nz-tab>
+        <nz-tab nzTitle="报警日志">
+            <ng-template nz-tab>
 
-      </ng-template>
-    </nz-tab>
-  </nz-tabset>
+            </ng-template>
+        </nz-tab>
+    </nz-tabset>
 
 </nz-card>
 <ng-template #extra>
-  @if (project_id) {
-    <nz-space>
-      <button *nzSpaceItem nz-button [routerLink]="'/project/'+id+'/edit'">编辑</button>
-    </nz-space>
-  } @else {
-    <nz-space>
-      <a nz-button *nzSpaceItem [routerLink]="'/project/'+id" target="_blank">打开</a>
-      <button *nzSpaceItem nz-button routerLink="edit">编辑</button>
-      <button *nzSpaceItem nz-button nz-popconfirm nzPopconfirmTitle="确认删除" (nzOnConfirm)="delete()">删除</button>
-    </nz-space>
-  }
+    @if (project_id) {
+        <nz-space>
+            <button *nzSpaceItem nz-button [routerLink]="'/project/'+id+'/edit'">编辑</button>
+        </nz-space>
+    } @else {
+        <nz-space>
+            <a nz-button *nzSpaceItem [routerLink]="'/project/'+id" target="_blank">打开</a>
+            <button *nzSpaceItem nz-button routerLink="edit">编辑</button>
+            <button *nzSpaceItem nz-button nz-popconfirm nzPopconfirmTitle="确认删除" (nzOnConfirm)="delete()">删除
+            </button>
+        </nz-space>
+    }
 </ng-template>
 

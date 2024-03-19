@@ -3,10 +3,10 @@ import {CommonModule} from '@angular/common';
 
 
 @NgModule({
-  declarations: [],
-  imports: [
-    CommonModule
-  ]
+    declarations: [],
+    imports: [
+        CommonModule
+    ]
 })
 export class WidgetsModule {
 }

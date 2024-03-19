@@ -16,8 +16,8 @@ import {SmartTableColumn} from "../../../../../projects/smart/src/lib/smart-tabl
 import {DevicePropertyComponent} from "../device-property/device-property.component";
 
 @Component({
-  selector: 'app-device-detail',
-  standalone: true,
+    selector: 'app-device-detail',
+    standalone: true,
     imports: [
         CommonModule,
         SmartInfoComponent,
@@ -34,71 +34,71 @@ import {DevicePropertyComponent} from "../device-property/device-property.compon
         NzTabsModule,
         DevicePropertyComponent,
     ],
-  templateUrl: './device-detail.component.html',
-  styleUrl: './device-detail.component.scss',
+    templateUrl: './device-detail.component.html',
+    styleUrl: './device-detail.component.scss',
 })
 export class DeviceDetailComponent implements OnInit {
-  base = '/admin'
-  project_id!: any;
+    base = '/admin'
+    project_id!: any;
 
-  id!: any;
-  data: any = {};
+    id!: any;
+    data: any = {};
 
-  fields: SmartInfoItem[] = [
-    {key: 'id', label: 'ID'},
-    {key: 'name', label: '名称'},
-    {
-      key: 'gateway', label: '网关', type: 'link',
-      link: () => `${this.base}/gateway/${this.data.gateway_id}`,
-    },
-    {
-      key: 'product', label: '产品', type: 'link',
-      link: () => `${this.base}/product/${this.data.product_id}`,
-    },
-    {key: 'product_version', label: '版本'},
-    {
-      key: 'project', label: '项目', type: 'link',
-      link: () => `${this.base}/project/${this.data.project_id}`,
-    },
-    //{key: 'online',  label: '上线时间', type: 'date'},
-    {key: 'created', label: '创建时间', type: 'date'},
-    {key: 'description', label: '说明', span: 2},
-  ];
+    fields: SmartInfoItem[] = [
+        {key: 'id', label: 'ID'},
+        {key: 'name', label: '名称'},
+        {
+            key: 'gateway', label: '网关', type: 'link',
+            link: () => `${this.base}/gateway/${this.data.gateway_id}`,
+        },
+        {
+            key: 'product', label: '产品', type: 'link',
+            link: () => `${this.base}/product/${this.data.product_id}`,
+        },
+        {key: 'product_version', label: '版本'},
+        {
+            key: 'project', label: '项目', type: 'link',
+            link: () => `${this.base}/project/${this.data.project_id}`,
+        },
+        //{key: 'online',  label: '上线时间', type: 'date'},
+        {key: 'created', label: '创建时间', type: 'date'},
+        {key: 'description', label: '说明', span: 2},
+    ];
 
-  constructor(
-    private router: Router,
-    private msg: NzMessageService,
-    private rs: RequestService,
-    private route: ActivatedRoute
-  ) {
-  }
-
-  values: any = {};
-
-  loading = false;
-
-  ngOnInit(): void {
-    if (this.route.parent?.snapshot.paramMap.has('project')) {
-      this.project_id = this.route.parent.snapshot.paramMap.get('project');
-      this.base = `/project/${this.project_id}`
+    constructor(
+        private router: Router,
+        private msg: NzMessageService,
+        private rs: RequestService,
+        private route: ActivatedRoute
+    ) {
     }
-    if (this.route.snapshot.paramMap.has('id')) {
-      this.id = this.route.snapshot.paramMap.get('id');
-      this.load();
+
+    values: any = {};
+
+    loading = false;
+
+    ngOnInit(): void {
+        if (this.route.parent?.snapshot.paramMap.has('project')) {
+            this.project_id = this.route.parent.snapshot.paramMap.get('project');
+            this.base = `/project/${this.project_id}`
+        }
+        if (this.route.snapshot.paramMap.has('id')) {
+            this.id = this.route.snapshot.paramMap.get('id');
+            this.load();
+        }
     }
-  }
 
-  load() {
-    this.loading = true
-    this.rs.post('device/search', {filter: {id: this.id}}).subscribe((res) => {
-      this.data = res.data[0];
-    }).add(() => this.loading = false);
-  }
+    load() {
+        this.loading = true
+        this.rs.post('device/search', {filter: {id: this.id}}).subscribe((res) => {
+            this.data = res.data[0];
+        }).add(() => this.loading = false);
+    }
 
-  delete() {
-    this.rs.get(`device/${this.id}/delete`, {}).subscribe((res) => {
-      this.msg.success('删除成功');
-      this.router.navigateByUrl(`${this.base}/device`);
-    });
-  }
+    delete() {
+        this.rs.get(`device/${this.id}/delete`, {}).subscribe((res) => {
+            this.msg.success('删除成功');
+            this.router.navigateByUrl(`${this.base}/device`);
+        });
+    }
 }

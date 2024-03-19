@@ -16,14 +16,16 @@
                     <nz-form-label [nzSm]="6" [nzXs]="24">窗口时间</nz-form-label>
                     <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="">
                         <ng-template #addOnAfterTemplate>
-                            <nz-select formControlName="winTp" (nzOpenChange)="search()" (change)="search()" style="width: 60px">
+                            <nz-select formControlName="winTp" (nzOpenChange)="search()" (change)="search()"
+                                       style="width: 60px">
                                 <nz-option nzValue="s" nzLabel="秒"></nz-option>
                                 <nz-option nzValue="m" nzLabel="分"></nz-option>
                                 <nz-option nzValue="h" nzLabel="时"></nz-option>
                             </nz-select>
                         </ng-template>
                         <nz-input-number-group [nzAddOnAfter]="addOnAfterTemplate" style="width: 100%">
-                            <nz-input-number [nzStep]="1" (change)="search()" formControlName="window"></nz-input-number>
+                            <nz-input-number [nzStep]="1" (change)="search()"
+                                             formControlName="window"></nz-input-number>
                         </nz-input-number-group>
                     </nz-form-control>
                 </nz-form-item>
@@ -33,7 +35,8 @@
                 <nz-form-item>
                     <nz-form-label [nzSm]="3" [nzXs]="24">起止时间</nz-form-label>
                     <nz-form-control [nzSm]="18" [nzXs]="24" nzErrorTip="" style="width: 100%">
-                        <nz-range-picker nzMode="date" [nzShowTime]="true" (change)="search()" formControlName="strEnd"></nz-range-picker>
+                        <nz-range-picker nzMode="date" [nzShowTime]="true" (change)="search()"
+                                         formControlName="strEnd"></nz-range-picker>
                     </nz-form-control>
                 </nz-form-item>
             </div>

@@ -18,74 +18,74 @@ import {GatewaysComponent} from "../../gateway/gateways/gateways.component";
 import {ProjectUserComponent} from "../project-user/project-user.component";
 
 @Component({
-  selector: 'app-project-detail',
-  standalone: true,
-  imports: [
-    CommonModule,
-    SmartInfoComponent,
-    NzDividerComponent,
-    NzRowDirective,
-    NzColDirective,
-    NzStatisticComponent,
-    NzCardComponent,
-    NzSpaceComponent,
-    NzButtonComponent,
-    NzSpaceItemDirective,
-    RouterLink,
-    NzPopconfirmDirective,
-    NzTabsModule,
-    SpacesComponent,
-    DevicesComponent,
-    GatewaysComponent,
-    ProjectUserComponent
-  ],
-  templateUrl: './project-detail.component.html',
-  styleUrl: './project-detail.component.scss',
+    selector: 'app-project-detail',
+    standalone: true,
+    imports: [
+        CommonModule,
+        SmartInfoComponent,
+        NzDividerComponent,
+        NzRowDirective,
+        NzColDirective,
+        NzStatisticComponent,
+        NzCardComponent,
+        NzSpaceComponent,
+        NzButtonComponent,
+        NzSpaceItemDirective,
+        RouterLink,
+        NzPopconfirmDirective,
+        NzTabsModule,
+        SpacesComponent,
+        DevicesComponent,
+        GatewaysComponent,
+        ProjectUserComponent
+    ],
+    templateUrl: './project-detail.component.html',
+    styleUrl: './project-detail.component.scss',
 })
 export class ProjectDetailComponent implements OnInit {
-  project_id!: any;
-  id!: any;
+    project_id!: any;
+    id!: any;
 
-  value = '';
+    value = '';
 
-  data: any = {};
+    data: any = {};
 
-  fields: SmartInfoItem[] = [
-    {label: 'ID', key: 'id'},
-    {label: '名称', key: 'name'},
-    {label: '版本', key: 'version'},
-    {label: '创建时间', key: 'created', type: 'date'},
-    {label: '说明', key: 'description', span: 2},
-  ];
+    fields: SmartInfoItem[] = [
+        {label: 'ID', key: 'id'},
+        {label: '名称', key: 'name'},
+        {label: '版本', key: 'version'},
+        {label: '创建时间', key: 'created', type: 'date'},
+        {label: '说明', key: 'description', span: 2},
+    ];
 
-  constructor(
-    private router: Router,
-    private msg: NzMessageService,
-    private rs: RequestService,
-    private route: ActivatedRoute
-  ) {
-  }
-
-  ngOnInit(): void {
-    if (this.route.parent?.snapshot.paramMap.has('project')) {
-      this.project_id = this.id = this.route.parent?.snapshot.paramMap.get('project');
+    constructor(
+        private router: Router,
+        private msg: NzMessageService,
+        private rs: RequestService,
+        private route: ActivatedRoute
+    ) {
     }
-    if (this.route.snapshot.paramMap.has('id')) {
-      this.id = this.route.snapshot.paramMap.get('id');
+
+    ngOnInit(): void {
+        if (this.route.parent?.snapshot.paramMap.has('project')) {
+            this.project_id = this.id = this.route.parent?.snapshot.paramMap.get('project');
+        }
+        if (this.route.snapshot.paramMap.has('id')) {
+            this.id = this.route.snapshot.paramMap.get('id');
+        }
+        this.load();
     }
-    this.load();
-  }
 
-  load() {
-    this.rs.get(`project/${this.id}`).subscribe((res: any) => {
-      this.data = res.data;
-    });
-  }
+    load() {
+        this.rs.get(`project/${this.id}`).subscribe((res: any) => {
+            this.data = res.data;
+        });
+    }
 
-  delete() {
-    this.rs.get(`project/${this.id}/delete`, {}).subscribe((res: any) => {
-      this.msg.success('删除成功');
-      this.router.navigateByUrl('/project');
-    });
-  }
+    delete() {
+        this.rs.get(`project/${this.id}/delete`, {}).subscribe((res: any) => {
+            this.msg.success('删除成功');
+            this.router.navigateByUrl('/project');
+        });
+    }
 }

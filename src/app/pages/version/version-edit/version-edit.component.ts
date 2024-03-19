@@ -15,74 +15,74 @@ import {VersionEventEditComponent} from "../version-event-edit/version-event-edi
 import {VersionActionEditComponent} from "../version-action-edit/version-action-edit.component";
 
 @Component({
-  selector: 'app-version-edit',
-  standalone: true,
-  imports: [
-    CommonModule,
-    SmartInfoComponent,
-    NzCardComponent,
-    NzSpaceComponent,
-    NzButtonComponent,
-    NzSpaceItemDirective,
-    RouterLink,
-    NzPopconfirmDirective,
-    NzTabsModule,
-    WebViewComponent,
-    VersionPropertyEditComponent,
-    VersionEventEditComponent,
-    VersionActionEditComponent,
-  ],
-  templateUrl: './version-edit.component.html',
-  styleUrl: './version-edit.component.scss'
+    selector: 'app-version-edit',
+    standalone: true,
+    imports: [
+        CommonModule,
+        SmartInfoComponent,
+        NzCardComponent,
+        NzSpaceComponent,
+        NzButtonComponent,
+        NzSpaceItemDirective,
+        RouterLink,
+        NzPopconfirmDirective,
+        NzTabsModule,
+        WebViewComponent,
+        VersionPropertyEditComponent,
+        VersionEventEditComponent,
+        VersionActionEditComponent,
+    ],
+    templateUrl: './version-edit.component.html',
+    styleUrl: './version-edit.component.scss'
 })
 export class VersionEditComponent implements OnInit {
-  id!: any;
-  version!: any;
+    id!: any;
+    version!: any;
 
-  value = '';
+    value = '';
 
-  data: any = {};
+    data: any = {};
 
-  fields: SmartInfoItem[] = [
-    {label: 'ID', key: 'id'},
-    {label: '名称', key: 'name'},
-    {label: '关键字', key: 'keywords', type: 'tags'},
-    {label: '创建时间', key: 'created', type: 'date'},
-    {label: '说明', key: 'description', span: 2},
-  ];
+    fields: SmartInfoItem[] = [
+        {label: 'ID', key: 'id'},
+        {label: '名称', key: 'name'},
+        {label: '关键字', key: 'keywords', type: 'tags'},
+        {label: '创建时间', key: 'created', type: 'date'},
+        {label: '说明', key: 'description', span: 2},
+    ];
 
-  constructor(
-    private router: Router,
-    private msg: NzMessageService,
-    private rs: RequestService,
-    private route: ActivatedRoute
-  ) {
-  }
-
-  plugins: any[] = [];
-
-  ngOnInit(): void {
-    if (this.route.snapshot.paramMap.has('id')) {
-      this.id = this.route.snapshot.paramMap.get('id');
-      this.load()
-      this.loadPlugins()
+    constructor(
+        private router: Router,
+        private msg: NzMessageService,
+        private rs: RequestService,
+        private route: ActivatedRoute
+    ) {
     }
-    if (this.route.snapshot.paramMap.has('version')) {
-      this.version = this.route.snapshot.paramMap.get('version');
+
+    plugins: any[] = [];
+
+    ngOnInit(): void {
+        if (this.route.snapshot.paramMap.has('id')) {
+            this.id = this.route.snapshot.paramMap.get('id');
+            this.load()
+            this.loadPlugins()
+        }
+        if (this.route.snapshot.paramMap.has('version')) {
+            this.version = this.route.snapshot.paramMap.get('version');
+        }
     }
-  }
 
-  load() {
-    this.rs.get(`product/${this.id}`, {}).subscribe((res) => {
-        this.data = res.data
-      }
-    );
-  }
+    load() {
+        this.rs.get(`product/${this.id}`, {}).subscribe((res) => {
+                this.data = res.data
+            }
+        );
+    }
 
-  loadPlugins() {
-    this.rs.get("plugin/pages/product").subscribe(res => {
-      this.plugins = res.data
-    })
-  }
+    loadPlugins() {
+        this.rs.get("plugin/pages/product").subscribe(res => {
+            this.plugins = res.data
+        })
+    }
 
 }

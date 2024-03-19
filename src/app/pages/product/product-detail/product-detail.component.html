@@ -1,28 +1,28 @@
 <nz-card nzTitle="产品详情" [nzExtra]="extra">
-  <im-smart-info [fields]="fields" [value]="data"></im-smart-info>
+    <im-smart-info [fields]="fields" [value]="data"></im-smart-info>
 
-  <nz-tabset>
-    <nz-tab nzTitle="产品版本">
-      <ng-template nz-tab>
-        <app-product-version [product_id]="id"></app-product-version>
-      </ng-template>
-    </nz-tab>
-    <nz-tab nzTitle="产品设备">
-      <ng-template nz-tab>
-        <app-devices [product_id]="id" [project_id]="project_id"></app-devices>
-      </ng-template>
-    </nz-tab>
-    <nz-tab [nzTitle]="p.name" *ngFor="let p of plugins">
-      <ng-template nz-tab>
-        <app-web-view [url]="p.url + '?product=' + this.id"></app-web-view>
-      </ng-template>
-    </nz-tab>
-  </nz-tabset>
+    <nz-tabset>
+        <nz-tab nzTitle="产品版本">
+            <ng-template nz-tab>
+                <app-product-version [product_id]="id"></app-product-version>
+            </ng-template>
+        </nz-tab>
+        <nz-tab nzTitle="产品设备">
+            <ng-template nz-tab>
+                <app-devices [product_id]="id" [project_id]="project_id"></app-devices>
+            </ng-template>
+        </nz-tab>
+        <nz-tab [nzTitle]="p.name" *ngFor="let p of plugins">
+            <ng-template nz-tab>
+                <app-web-view [url]="p.url + '?product=' + this.id"></app-web-view>
+            </ng-template>
+        </nz-tab>
+    </nz-tabset>
 
 </nz-card>
 <ng-template #extra>
-  <nz-space *ngIf="!project_id">
-    <button *nzSpaceItem nz-button routerLink="edit">编辑</button>
-    <button *nzSpaceItem nz-button nz-popconfirm nzPopconfirmTitle="确认删除" (nzOnConfirm)="delete()">删除</button>
-  </nz-space>
+    <nz-space *ngIf="!project_id">
+        <button *nzSpaceItem nz-button routerLink="edit">编辑</button>
+        <button *nzSpaceItem nz-button nz-popconfirm nzPopconfirmTitle="确认删除" (nzOnConfirm)="delete()">删除</button>
+    </nz-space>
 </ng-template>

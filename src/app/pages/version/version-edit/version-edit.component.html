@@ -1,27 +1,27 @@
 <nz-card nzTitle="产品版本编辑">
-  <im-smart-info [fields]="fields" [value]="data"></im-smart-info>
+    <im-smart-info [fields]="fields" [value]="data"></im-smart-info>
 
-  <nz-tabset>
-    <nz-tab nzTitle="产品属性">
-      <ng-template nz-tab>
-        <app-version-property-edit [product_id]="id" [version]="version"></app-version-property-edit>
-      </ng-template>
-    </nz-tab>
-    <nz-tab nzTitle="产品事件" nzDisabled>
-      <ng-template nz-tab>
-        <app-version-event-edit [product_id]="id" [version]="version"></app-version-event-edit>
-      </ng-template>
-    </nz-tab>
-    <nz-tab nzTitle="产品动作" nzDisabled>
-      <ng-template nz-tab>
-        <app-version-action-edit [product_id]="id" [version]="version"></app-version-action-edit>
-      </ng-template>
-    </nz-tab>
-    <nz-tab [nzTitle]="p.name" *ngFor="let p of plugins">
-      <ng-template nz-tab>
-        <app-web-view [url]="p.url + '?product=' + this.id"></app-web-view>
-      </ng-template>
-    </nz-tab>
-  </nz-tabset>
+    <nz-tabset>
+        <nz-tab nzTitle="产品属性">
+            <ng-template nz-tab>
+                <app-version-property-edit [product_id]="id" [version]="version"></app-version-property-edit>
+            </ng-template>
+        </nz-tab>
+        <nz-tab nzTitle="产品事件" nzDisabled>
+            <ng-template nz-tab>
+                <app-version-event-edit [product_id]="id" [version]="version"></app-version-event-edit>
+            </ng-template>
+        </nz-tab>
+        <nz-tab nzTitle="产品动作" nzDisabled>
+            <ng-template nz-tab>
+                <app-version-action-edit [product_id]="id" [version]="version"></app-version-action-edit>
+            </ng-template>
+        </nz-tab>
+        <nz-tab [nzTitle]="p.name" *ngFor="let p of plugins">
+            <ng-template nz-tab>
+                <app-web-view [url]="p.url + '?product=' + this.id"></app-web-view>
+            </ng-template>
+        </nz-tab>
+    </nz-tabset>
 
 </nz-card>

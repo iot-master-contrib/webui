@@ -17,84 +17,84 @@ import {WebViewComponent} from "../../../components/web-view/web-view.component"
 import {ProductVersionComponent} from "../product-version/product-version.component";
 
 @Component({
-  selector: 'app-product-detail',
-  standalone: true,
-  imports: [
-    CommonModule,
-    SmartInfoComponent,
-    NzCardComponent,
-    NzSpaceComponent,
-    NzButtonComponent,
-    NzSpaceItemDirective,
-    RouterLink,
-    NzPopconfirmDirective,
-    NzTabsModule,
-    DevicesComponent,
-    WebViewComponent,
-    ProductVersionComponent,
-  ],
-  templateUrl: './product-detail.component.html',
-  styleUrl: './product-detail.component.scss'
+    selector: 'app-product-detail',
+    standalone: true,
+    imports: [
+        CommonModule,
+        SmartInfoComponent,
+        NzCardComponent,
+        NzSpaceComponent,
+        NzButtonComponent,
+        NzSpaceItemDirective,
+        RouterLink,
+        NzPopconfirmDirective,
+        NzTabsModule,
+        DevicesComponent,
+        WebViewComponent,
+        ProductVersionComponent,
+    ],
+    templateUrl: './product-detail.component.html',
+    styleUrl: './product-detail.component.scss'
 })
 export class ProductDetailComponent implements OnInit {
-  base = '/admin'
-  project_id!: any;
+    base = '/admin'
+    project_id!: any;
 
-  id!: any;
+    id!: any;
 
-  value = '';
+    value = '';
 
-  data: any = {};
+    data: any = {};
 
-  fields: SmartInfoItem[] = [
-    {label: 'ID', key: 'id'},
-    {label: '名称', key: 'name'},
-    {label: '关键字', key: 'keywords', type: 'tags'},
-    {label: '创建时间', key: 'created', type: 'date'},
-    {label: '说明', key: 'description', span: 2},
-  ];
+    fields: SmartInfoItem[] = [
+        {label: 'ID', key: 'id'},
+        {label: '名称', key: 'name'},
+        {label: '关键字', key: 'keywords', type: 'tags'},
+        {label: '创建时间', key: 'created', type: 'date'},
+        {label: '说明', key: 'description', span: 2},
+    ];
 
-  constructor(
-    private router: Router,
-    private msg: NzMessageService,
-    private rs: RequestService,
-    private route: ActivatedRoute
-  ) {
-  }
-
-  plugins: any[] = [];
-
-  ngOnInit(): void {
-    if (this.route.parent?.snapshot.paramMap.has('project')) {
-      this.project_id = this.route.parent?.snapshot.paramMap.get('project');
-      this.base = `/project/${this.project_id}`
+    constructor(
+        private router: Router,
+        private msg: NzMessageService,
+        private rs: RequestService,
+        private route: ActivatedRoute
+    ) {
     }
-    if (this.route.snapshot.paramMap.has('id')) {
-      this.id = this.route.snapshot.paramMap.get('id');
-      this.load()
-      this.loadPlugins()
+
+    plugins: any[] = [];
+
+    ngOnInit(): void {
+        if (this.route.parent?.snapshot.paramMap.has('project')) {
+            this.project_id = this.route.parent?.snapshot.paramMap.get('project');
+            this.base = `/project/${this.project_id}`
+        }
+        if (this.route.snapshot.paramMap.has('id')) {
+            this.id = this.route.snapshot.paramMap.get('id');
+            this.load()
+            this.loadPlugins()
+        }
     }
-  }
 
-  load() {
-    this.rs.get(`product/${this.id}`, {}).subscribe((res) => {
-        this.data = res.data
-      }
-    );
-  }
+    load() {
+        this.rs.get(`product/${this.id}`, {}).subscribe((res) => {
+                this.data = res.data
+            }
+        );
+    }
 
-  loadPlugins() {
-    this.rs.get("plugin/pages/product").subscribe(res => {
-      this.plugins = res.data
-    })
-  }
+    loadPlugins() {
+        this.rs.get("plugin/pages/product").subscribe(res => {
+            this.plugins = res.data
+        })
+    }
 
 
-  delete() {
-    this.rs.get(`product/${this.id}/delete`, {}).subscribe((res) => {
-      this.msg.success('删除成功');
-      this.router.navigateByUrl('admin/product');
-    });
-    this.load();
-  }
+    delete() {
+        this.rs.get(`product/${this.id}/delete`, {}).subscribe((res) => {
+            this.msg.success('删除成功');
+            this.router.navigateByUrl('admin/product');
+        });
+        this.load();
+    }
 }

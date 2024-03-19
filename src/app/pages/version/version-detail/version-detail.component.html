@@ -1,33 +1,33 @@
 <nz-card nzTitle="产品版本详情" [nzExtra]="extra">
-  <im-smart-info [fields]="fields" [value]="data"></im-smart-info>
+    <im-smart-info [fields]="fields" [value]="data"></im-smart-info>
 
-  <nz-tabset>
-    <nz-tab nzTitle="产品属性">
-      <ng-template nz-tab>
-        <app-version-property [product_id]="id" [version]="version"></app-version-property>
-      </ng-template>
-    </nz-tab>
-    <nz-tab nzTitle="产品事件" nzDisabled>
-      <ng-template nz-tab>
-        <app-version-event [product_id]="id" [version]="version"></app-version-event>
-      </ng-template>
-    </nz-tab>
-    <nz-tab nzTitle="产品动作" nzDisabled>
-      <ng-template nz-tab>
-        <app-version-action [product_id]="id" [version]="version"></app-version-action>
-      </ng-template>
-    </nz-tab>
-    <nz-tab [nzTitle]="p.name" *ngFor="let p of plugins">
-      <ng-template nz-tab>
-        <app-web-view [url]="p.url + '?product=' + this.id"></app-web-view>
-      </ng-template>
-    </nz-tab>
-  </nz-tabset>
+    <nz-tabset>
+        <nz-tab nzTitle="产品属性">
+            <ng-template nz-tab>
+                <app-version-property [product_id]="id" [version]="version"></app-version-property>
+            </ng-template>
+        </nz-tab>
+        <nz-tab nzTitle="产品事件" nzDisabled>
+            <ng-template nz-tab>
+                <app-version-event [product_id]="id" [version]="version"></app-version-event>
+            </ng-template>
+        </nz-tab>
+        <nz-tab nzTitle="产品动作" nzDisabled>
+            <ng-template nz-tab>
+                <app-version-action [product_id]="id" [version]="version"></app-version-action>
+            </ng-template>
+        </nz-tab>
+        <nz-tab [nzTitle]="p.name" *ngFor="let p of plugins">
+            <ng-template nz-tab>
+                <app-web-view [url]="p.url + '?product=' + this.id"></app-web-view>
+            </ng-template>
+        </nz-tab>
+    </nz-tabset>
 
 </nz-card>
 <ng-template #extra>
-  <nz-space *ngIf="!project_id">
-    <button *nzSpaceItem nz-button routerLink="edit">编辑</button>
-    <button *nzSpaceItem nz-button nz-popconfirm nzPopconfirmTitle="确认删除" (nzOnConfirm)="delete()">删除</button>
-  </nz-space>
+    <nz-space *ngIf="!project_id">
+        <button *nzSpaceItem nz-button routerLink="edit">编辑</button>
+        <button *nzSpaceItem nz-button nz-popconfirm nzPopconfirmTitle="确认删除" (nzOnConfirm)="delete()">删除</button>
+    </nz-space>
 </ng-template>

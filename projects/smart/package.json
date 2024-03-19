@@ -1,18 +1,18 @@
 {
-  "name": "iot-master-smart",
-  "version": "0.0.14",
-  "peerDependencies": {
-    "@angular/common": "^17.0.0",
-    "@angular/core": "^17.0.0",
-    "@angular/forms": "^17.0.0",
-    "@angular/router": "^17.0.0",
-    "ng-antd-color-picker": "^1.1.0",
-    "ng-zorro-antd": "^17.1.0",
-    "rxjs": "~7.8.0",
-    "zone.js": "~0.14.2"
-  },
-  "dependencies": {
-    "tslib": "^2.3.0"
-  },
-  "sideEffects": false
+    "name": "iot-master-smart",
+    "version": "0.0.14",
+    "peerDependencies": {
+        "@angular/common": "^17.0.0",
+        "@angular/core": "^17.0.0",
+        "@angular/forms": "^17.0.0",
+        "@angular/router": "^17.0.0",
+        "ng-antd-color-picker": "^1.1.0",
+        "ng-zorro-antd": "^17.1.0",
+        "rxjs": "~7.8.0",
+        "zone.js": "~0.14.2"
+    },
+    "dependencies": {
+        "tslib": "^2.3.0"
+    },
+    "sideEffects": false
 }

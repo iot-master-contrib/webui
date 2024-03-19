@@ -1,5 +1,5 @@
-import { ResolveFn } from '@angular/router';
+import {ResolveFn} from '@angular/router';
 
 export const projectResolver: ResolveFn<any> = (route, state) => {
-  return route.paramMap.get('project');
+    return route.paramMap.get('project');
 };

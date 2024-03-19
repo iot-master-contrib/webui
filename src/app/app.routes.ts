@@ -9,25 +9,25 @@ import {adminGuard} from "./admin.guard";
 import {projectResolver} from "./project.resolver";
 
 export const routes: Routes = [
-  {path: "", pathMatch: "full", redirectTo: "admin"},
-  {path: "login", component: LoginComponent},
-  {
-    path: "select",
-    canActivate: [authGuard],
-    component: SelectComponent,
-  },
-  {
-    path: "admin",
-    canActivate: [authGuard, adminGuard],
-    component: AdminComponent,
-    loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)
-  },
-  {
-    path: "project/:project",
-    canActivate: [authGuard],
-    component: ProjectComponent,
-    resolve: {project: projectResolver},
-    loadChildren: () => import('./project/project.module').then(m => m.ProjectModule),
-  },
-  {path: "**", component: UnknownComponent},
+    {path: "", pathMatch: "full", redirectTo: "admin"},
+    {path: "login", component: LoginComponent},
+    {
+        path: "select",
+        canActivate: [authGuard],
+        component: SelectComponent,
+    },
+    {
+        path: "admin",
+        canActivate: [authGuard, adminGuard],
+        component: AdminComponent,
+        loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)
+    },
+    {
+        path: "project/:project",
+        canActivate: [authGuard],
+        component: ProjectComponent,
+        resolve: {project: projectResolver},
+        loadChildren: () => import('./project/project.module').then(m => m.ProjectModule),
+    },
+    {path: "**", component: UnknownComponent},
 ];

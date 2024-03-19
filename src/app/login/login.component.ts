@@ -14,69 +14,69 @@ import {NzButtonComponent} from "ng-zorro-antd/button";
 import {NzCardComponent} from "ng-zorro-antd/card";
 
 @Component({
-  selector: 'app-login',
-  standalone: true,
-  imports: [
-    NzFormDirective,
-    NzFormItemComponent,
-    NzInputGroupComponent,
-    NzFormControlComponent,
-    NzRowDirective,
-    NzColDirective,
-    NzCheckboxComponent,
-    NzButtonComponent,
-    FormsModule,
-    ReactiveFormsModule,
-    NzInputDirective,
-    NzCardComponent
-  ],
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.scss'
+    selector: 'app-login',
+    standalone: true,
+    imports: [
+        NzFormDirective,
+        NzFormItemComponent,
+        NzInputGroupComponent,
+        NzFormControlComponent,
+        NzRowDirective,
+        NzColDirective,
+        NzCheckboxComponent,
+        NzButtonComponent,
+        FormsModule,
+        ReactiveFormsModule,
+        NzInputDirective,
+        NzCardComponent
+    ],
+    templateUrl: './login.component.html',
+    styleUrl: './login.component.scss'
 })
 export class LoginComponent implements OnInit {
-  validateForm!: FormGroup;
+    validateForm!: FormGroup;
 
-  constructor(private fb: FormBuilder,
-              private rs: RequestService,
-              private us: UserService,
-              private router: Router,
-              protected os: OemService
-  ) {
-  }
-
-
-  submitForm(): void {
-    console.log('submit form');
-    for (const i in this.validateForm.controls) {
-      this.validateForm.controls[i].markAsDirty();
-      this.validateForm.controls[i].updateValueAndValidity();
-    }
-    if (!this.validateForm.valid) {
-      return;
+    constructor(private fb: FormBuilder,
+                private rs: RequestService,
+                private us: UserService,
+                private router: Router,
+                protected os: OemService
+    ) {
     }
 
-    const password = Md5.hashStr(this.validateForm.value.password);
 
-    this.rs.post('login', {username: this.validateForm.value.username, password}).subscribe(res => {
-      console.log('res:', res);
-      //localStorage.setItem('token', res.data.token);
+    submitForm(): void {
+        console.log('submit form');
+        for (const i in this.validateForm.controls) {
+            this.validateForm.controls[i].markAsDirty();
+            this.validateForm.controls[i].updateValueAndValidity();
+        }
+        if (!this.validateForm.valid) {
+            return;
+        }
 
-      //更新用户
-      this.us.setUser(res.data);
+        const password = Md5.hashStr(this.validateForm.value.password);
 
-      if (res.data.admin) {
-        this.router.navigateByUrl('/admin')
-      } else {
-        this.router.navigateByUrl('/select')
-      }
-    });
-  }
+        this.rs.post('login', {username: this.validateForm.value.username, password}).subscribe(res => {
+            console.log('res:', res);
+            //localStorage.setItem('token', res.data.token);
 
-  ngOnInit(): void {
-    this.validateForm = this.fb.group({
-      username: [null, [Validators.required]],
-      password: [null, [Validators.required]],
-      remember: [false]
-    });
-  }
+            //更新用户
+            this.us.setUser(res.data);
+
+            if (res.data.admin) {
+                this.router.navigateByUrl('/admin')
+            } else {
+                this.router.navigateByUrl('/select')
+            }
+        });
+    }
+
+    ngOnInit(): void {
+        this.validateForm = this.fb.group({
+            username: [null, [Validators.required]],
+            password: [null, [Validators.required]],
+            remember: [false]
+        });
+    }
 }

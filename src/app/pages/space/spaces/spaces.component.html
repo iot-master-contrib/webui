@@ -1,9 +1,9 @@
 <im-smart-table
-  [buttons]="ref ? [] : (this.project_id ? buttonsProject: buttons)"
-  [columns]="ref ? columnsSelect : (this.project_id ? columnsProject : columns)"
-  [operators]="ref ? operatorsSelect : (this.project_id ? operatorsProject: operators)"
-  [datum]="datum"
-  [total]="total"
-  [loading]="loading"
-  (query)="search($event)"
+    [buttons]="ref ? [] : (this.project_id ? buttonsProject: buttons)"
+    [columns]="ref ? columnsSelect : (this.project_id ? columnsProject : columns)"
+    [operators]="ref ? operatorsSelect : (this.project_id ? operatorsProject: operators)"
+    [datum]="datum"
+    [total]="total"
+    [loading]="loading"
+    (query)="search($event)"
 ></im-smart-table>

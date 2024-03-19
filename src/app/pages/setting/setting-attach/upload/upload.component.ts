@@ -9,48 +9,48 @@ import {RequestService} from '../../../../../../projects/smart/src/lib/request.s
 
 // , FileUploadModule
 @Component({
-  selector: 'app-upload',
-  imports: [FormsModule, NzUploadModule, NzInputModule],
-  standalone: true,
-  templateUrl: './upload.component.html',
-  styleUrls: ['./upload.component.scss'],
+    selector: 'app-upload',
+    imports: [FormsModule, NzUploadModule, NzInputModule],
+    standalone: true,
+    templateUrl: './upload.component.html',
+    styleUrls: ['./upload.component.scss'],
 })
 
 export class UploadComponent {
-  group!: FormGroup;
-  name!: '';
+    group!: FormGroup;
+    name!: '';
 
-  isSuccess: boolean = false
+    isSuccess: boolean = false
 
-  @Input() set inputValue(value: any) {
-    this.name = value || '';
-  }
-
-  @Output() load = new EventEmitter<number>();
-
-  constructor(
-    private msg: NzMessageService
-  ) {
-
-    this.isSuccess = false;
-
-  }
-
-  handleUpload(info: any): void {
-    if (info.type === 'error') {
-      this.msg.error(`上传失败`);
-      return;
+    @Input() set inputValue(value: any) {
+        this.name = value || '';
     }
-    if (info.file && info.file.response) {
-      const res = info.file.response;
-      if (!res.error) {
-        this.msg.success(`上传成功!`);
-        // this.onLoad.emit();
-      } else {
-        this.msg.error(`${res.error}`);
-      }
+
+    @Output() load = new EventEmitter<number>();
+
+    constructor(
+        private msg: NzMessageService
+    ) {
+
+        this.isSuccess = false;
+
     }
-  }
+
+    handleUpload(info: any): void {
+        if (info.type === 'error') {
+            this.msg.error(`上传失败`);
+            return;
+        }
+        if (info.file && info.file.response) {
+            const res = info.file.response;
+            if (!res.error) {
+                this.msg.success(`上传成功!`);
+                // this.onLoad.emit();
+            } else {
+                this.msg.error(`${res.error}`);
+            }
+        }
+    }
 
 
 }
