@@ -112,6 +112,19 @@
                         </ng-template>
                     </ng-container>
 
+                    <!--选择(整数型)-->
+                    <ng-container *ngSwitchCase="'choose-number'">
+                        <nz-input-group nzSearch [nzAddOnAfter]="suffixButton">
+                            <input nz-input [formControlName]="f.key" type="number"
+                                   [placeholder]="f.placeholder || ''"
+                                   #box (change)="f.change?.(box.value)"/>
+                        </nz-input-group>
+                        <ng-template #suffixButton>
+                            <button nz-button nzType="primary" (click)="f.choose?.()" [disabled]="!!f.disabled">选择
+                            </button>
+                        </ng-template>
+                    </ng-container>
+
                     <!--默认 用文本-->
                     <span *ngSwitchDefault>不支持的控件类型：{{ f.type }}</span>
 
