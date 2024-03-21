@@ -14,6 +14,8 @@ import {NzUploadChangeParam, NzUploadComponent} from "ng-zorro-antd/upload";
 import {NzButtonComponent} from "ng-zorro-antd/button";
 import {NzIconDirective} from "ng-zorro-antd/icon";
 import {NzSelectOptionInterface} from "ng-zorro-antd/select/select.types";
+import {NzTreeNode, NzTreeNodeOptions} from "ng-zorro-antd/tree";
+import {NzTreeSelectComponent} from "ng-zorro-antd/tree-select";
 
 
 export interface SmartFormItem {
@@ -34,6 +36,7 @@ export interface SmartFormItem {
 
     options?: NzSelectOptionInterface[]
 
+    tree?: NzTreeNodeOptions[]
 
     change?: (value: any) => void //监测变化
 
@@ -75,6 +78,7 @@ function getValue(val: any, def: any): any {
         NzButtonComponent,
         NzIconDirective,
         NzColorPickerModule,
+        NzTreeSelectComponent,
     ],
     templateUrl: './smart-form.component.html',
     styleUrl: './smart-form.component.scss'
@@ -171,8 +175,10 @@ export class SmartFormComponent {
     }
 
 
-    handleUpload($event: NzUploadChangeParam) {
-
+    handleUpload(key: string, $event: NzUploadChangeParam) {
+        if ($event.type == 'success') {
+            this.group.patchValue({[key]: $event.file.response.data[0]})
+        }
     }
 
 

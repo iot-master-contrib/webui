@@ -55,6 +55,14 @@
                                [nzPlaceHolder]="f.placeholder || '输入 逗号，分号，空格 分隔'"
                                (change)="f.change?.($event)"></nz-select>
 
+                    <!--树选择-->
+                    <nz-tree-select *ngSwitchCase="'tree'" nzShowSearch nzCheckable
+                                    [nzNodes]="f.tree || empty"
+                                    (nzTreeCheckBoxChange)="f.change?.($event)"
+                                    [formControlName]="f.key"
+                                    [nzPlaceHolder]="f.placeholder || ''"
+                                    (change)="f.change?.($event)"></nz-tree-select>
+
                     <!--颜色-->
                     <nz-color-picker nzShowText *ngSwitchCase="'color'"
                                      [formControlName]="f.key"
@@ -90,14 +98,20 @@
                                     (change)="f.change?.($event)"></nz-time-picker>
 
                     <!--文件-->
-                    <nz-upload *ngSwitchCase="'file'"
-                               [nzAction]="f.upload"
-                               (nzChange)="handleUpload($event)">
-                        <button nz-button>
-                            <span nz-icon nzType="upload"></span>
-                            上传文件
-                        </button>
-                    </nz-upload>
+                    <ng-container *ngSwitchCase="'file'">
+                        <nz-input-group nzSearch [nzAddOnAfter]="suffixButton">
+                            <input nz-input [formControlName]="f.key"
+                                   [placeholder]="f.placeholder || ''"
+                                   #box (change)="f.change?.(box.value)"/>
+                        </nz-input-group>
+                        <ng-template #suffixButton>
+                            <nz-upload [nzAction]="f.upload" [nzShowUploadList]="false" [nzDisabled]="!!f.disabled"
+                                       (nzChange)="handleUpload(f.key, $event)">
+                                <button nz-button nzType="primary" [disabled]="!!f.disabled">上传</button>
+                            </nz-upload>
+                        </ng-template>
+
+                    </ng-container>
 
                     <!--选择-->
                     <ng-container *ngSwitchCase="'choose'">
