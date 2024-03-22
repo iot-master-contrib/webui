@@ -14,8 +14,9 @@ import {NzUploadChangeParam, NzUploadComponent} from "ng-zorro-antd/upload";
 import {NzButtonComponent} from "ng-zorro-antd/button";
 import {NzIconDirective} from "ng-zorro-antd/icon";
 import {NzSelectOptionInterface} from "ng-zorro-antd/select/select.types";
-import {NzTreeNode, NzTreeNodeOptions} from "ng-zorro-antd/tree";
+import {NzTreeNodeOptions} from "ng-zorro-antd/tree";
 import {NzTreeSelectComponent} from "ng-zorro-antd/tree-select";
+import {NzRadioButtonDirective, NzRadioComponent, NzRadioGroupComponent} from "ng-zorro-antd/radio";
 
 
 export interface SmartFormItem {
@@ -79,6 +80,9 @@ function getValue(val: any, def: any): any {
         NzIconDirective,
         NzColorPickerModule,
         NzTreeSelectComponent,
+        NzRadioGroupComponent,
+        NzRadioButtonDirective,
+        NzRadioComponent,
     ],
     templateUrl: './smart-form.component.html',
     styleUrl: './smart-form.component.scss'
@@ -181,8 +185,17 @@ export class SmartFormComponent {
         }
     }
 
+    handleUploadImages(key: string, $event: NzUploadChangeParam) {
+        let paths: any = []
+        $event.fileList.forEach(file => {
+            if (file.response?.data?.[0])
+                paths.push(file.response.data[0])
+        })
+        this.group.patchValue({[key]: paths})
+    }
 
     onSubmit() {
 
     }
+
 }

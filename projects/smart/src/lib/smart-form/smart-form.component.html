@@ -40,6 +40,17 @@
                                      [nzPlaceHolder]="f.placeholder || ''"
                                      (change)="f.change?.($event)"></nz-input-number>
 
+
+                    <!--滑块-->
+                    <nz-slider *ngSwitchCase="'slider'"
+                               [formControlName]="f.key"
+                               [nzMax]="f.max" [nzMin]="f.min" [nzStep]="f.step"></nz-slider>
+
+                    <!--单选-->
+                    <nz-radio-group *ngSwitchCase="'radio'" [formControlName]="f.key" nzButtonStyle="solid">
+                        <label nz-radio-button *ngFor="let o of f.options" [nzValue]="o.value">{{ o.label }}</label>
+                    </nz-radio-group>
+
                     <!--选项-->
                     <nz-select *ngSwitchCase="'select'"
                                [nzOptions]="f.options || empty"
@@ -110,7 +121,21 @@
                                 <button nz-button nzType="primary" [disabled]="!!f.disabled">上传</button>
                             </nz-upload>
                         </ng-template>
+                    </ng-container>
 
+
+                    <!--标签-->
+                    <ng-container *ngSwitchCase="'images'">
+                        <nz-select nzMode="tags"
+                                   [nzTokenSeparators]="[',','，', ' ', ';']"
+                                   [nzOptions]="f.options || empty"
+                                   [formControlName]="f.key"
+                                   [nzPlaceHolder]="f.placeholder || '输入 逗号，分号，空格 分隔'"
+                                   (change)="f.change?.($event)"></nz-select>
+                        <nz-upload [nzAction]="f.upload" nzMultiple [nzDisabled]="!!f.disabled"
+                                   (nzChange)="handleUploadImages(f.key, $event)">
+                            <button nz-button nzType="primary" [disabled]="!!f.disabled">上传</button>
+                        </nz-upload>
                     </ng-container>
 
                     <!--选择-->
