@@ -6,9 +6,9 @@ import (
 	"net/http"
 )
 
-//go:embed www/browser
+//go:embed www
 var wwwFiles embed.FS
 
 func init() {
-	web.Static.Put("", http.FS(wwwFiles), "www/browser", "index.html")
+	web.Static.Put("", http.FS(wwwFiles), "www", "index.html")
 }
