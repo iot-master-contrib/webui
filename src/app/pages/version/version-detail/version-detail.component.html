@@ -24,6 +24,8 @@
         </nz-tab>
     </nz-tabset>
 
+    <app-plugin-pages target="product-version" [object]="data" [params]="{product: this.id, version: this.version}"/>
+
 </nz-card>
 <ng-template #extra>
     <nz-space *ngIf="!project_id">

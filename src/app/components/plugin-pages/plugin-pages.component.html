@@ -1,0 +1,8 @@
+<nz-tabset>
+    <nz-tab [nzTitle]="p.name" *ngFor="let p of plugins">
+        <ng-template nz-tab>
+            <app-web-view [url]="p.url + '?' + this._params"></app-web-view>
+        </ng-template>
+    </nz-tab>
+    <ng-content></ng-content>
+</nz-tabset>

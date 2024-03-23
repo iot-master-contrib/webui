@@ -1,5 +1,7 @@
 <nz-card [nzTitle]="'空间'+ (this.id ? '编辑' : '创建') " [nzExtra]="extraTemplate">
     <im-smart-form #form [fields]="fields" [value]="values"></im-smart-form>
+
+    <app-plugin-pages *ngIf="id" target="space-edit" [object]="values" [params]="{space: this.id}"/>
 </nz-card>
 
 <ng-template #extraTemplate>

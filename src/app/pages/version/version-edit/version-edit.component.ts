@@ -65,7 +65,6 @@ export class VersionEditComponent implements OnInit {
         if (this.route.snapshot.paramMap.has('id')) {
             this.id = this.route.snapshot.paramMap.get('id');
             this.load()
-            this.loadPlugins()
         }
         if (this.route.snapshot.paramMap.has('version')) {
             this.version = this.route.snapshot.paramMap.get('version');
@@ -78,11 +77,4 @@ export class VersionEditComponent implements OnInit {
             }
         );
     }
-
-    loadPlugins() {
-        this.rs.get("plugin/pages/product").subscribe(res => {
-            this.plugins = res.data
-        })
-    }
-
 }

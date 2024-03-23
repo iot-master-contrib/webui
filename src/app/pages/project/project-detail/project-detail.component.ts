@@ -16,6 +16,7 @@ import {SpacesComponent} from "../../space/spaces/spaces.component";
 import {DevicesComponent} from "../../device/devices/devices.component";
 import {GatewaysComponent} from "../../gateway/gateways/gateways.component";
 import {ProjectUserComponent} from "../project-user/project-user.component";
+import {PluginPagesComponent} from "../../../components/plugin-pages/plugin-pages.component";
 
 @Component({
     selector: 'app-project-detail',
@@ -37,7 +38,8 @@ import {ProjectUserComponent} from "../project-user/project-user.component";
         SpacesComponent,
         DevicesComponent,
         GatewaysComponent,
-        ProjectUserComponent
+        ProjectUserComponent,
+        PluginPagesComponent
     ],
     templateUrl: './project-detail.component.html',
     styleUrl: './project-detail.component.scss',

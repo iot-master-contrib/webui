@@ -7,6 +7,7 @@ import {CommonModule} from '@angular/common';
 import {Router} from '@angular/router';
 import {NzCardComponent} from "ng-zorro-antd/card";
 import {SmartFormComponent, SmartFormItem} from "../../../../../projects/smart/src/lib/smart-form/smart-form.component";
+import {PluginPagesComponent} from "../../../components/plugin-pages/plugin-pages.component";
 
 @Component({
     selector: 'app-project-edit',
@@ -17,6 +18,7 @@ import {SmartFormComponent, SmartFormItem} from "../../../../../projects/smart/s
         RouterLink,
         NzCardComponent,
         SmartFormComponent,
+        PluginPagesComponent,
     ],
     templateUrl: './project-edit.component.html',
     styleUrl: './project-edit.component.scss',

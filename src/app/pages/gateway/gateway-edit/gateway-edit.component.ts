@@ -9,6 +9,7 @@ import {NzCardComponent} from "ng-zorro-antd/card";
 import {SmartFormComponent, SmartFormItem} from "../../../../../projects/smart/src/lib/smart-form/smart-form.component";
 import {NzModalService} from "ng-zorro-antd/modal";
 import {ProjectsComponent} from "../../project/projects/projects.component";
+import {PluginPagesComponent} from "../../../components/plugin-pages/plugin-pages.component";
 
 @Component({
     selector: 'app-gateway-edit',
@@ -19,6 +20,7 @@ import {ProjectsComponent} from "../../project/projects/projects.component";
         RouterLink,
         NzCardComponent,
         SmartFormComponent,
+        PluginPagesComponent,
     ],
     templateUrl: './gateway-edit.component.html',
     styleUrl: './gateway-edit.component.scss'

@@ -15,6 +15,8 @@ import {NzTabsModule} from "ng-zorro-antd/tabs";
 import {DevicesComponent} from "../../device/devices/devices.component";
 import {WebViewComponent} from "../../../components/web-view/web-view.component";
 import {ProductVersionComponent} from "../product-version/product-version.component";
+import {PluginPagesComponent} from "../../../components/plugin-pages/plugin-pages.component";
+import {NzCollapseComponent} from "ng-zorro-antd/collapse";
 
 @Component({
     selector: 'app-product-detail',
@@ -32,6 +34,8 @@ import {ProductVersionComponent} from "../product-version/product-version.compon
         DevicesComponent,
         WebViewComponent,
         ProductVersionComponent,
+        PluginPagesComponent,
+        NzCollapseComponent,
     ],
     templateUrl: './product-detail.component.html',
     styleUrl: './product-detail.component.scss'
@@ -72,7 +76,6 @@ export class ProductDetailComponent implements OnInit {
         if (this.route.snapshot.paramMap.has('id')) {
             this.id = this.route.snapshot.paramMap.get('id');
             this.load()
-            this.loadPlugins()
         }
     }
 
@@ -82,13 +85,6 @@ export class ProductDetailComponent implements OnInit {
             }
         );
     }
-
-    loadPlugins() {
-        this.rs.get("plugin/pages/product").subscribe(res => {
-            this.plugins = res.data
-        })
-    }
-
 
     delete() {
         this.rs.get(`product/${this.id}/delete`, {}).subscribe((res) => {

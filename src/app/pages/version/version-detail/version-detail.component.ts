@@ -14,6 +14,7 @@ import {WebViewComponent} from "../../../components/web-view/web-view.component"
 import {VersionPropertyComponent} from "../version-property/version-property.component";
 import {VersionEventComponent} from "../version-event/version-event.component";
 import {VersionActionComponent} from "../version-action/version-action.component";
+import {PluginPagesComponent} from "../../../components/plugin-pages/plugin-pages.component";
 
 @Component({
     selector: 'app-version-detail',
@@ -32,6 +33,7 @@ import {VersionActionComponent} from "../version-action/version-action.component
         VersionPropertyComponent,
         VersionEventComponent,
         VersionActionComponent,
+        PluginPagesComponent,
     ],
     templateUrl: './version-detail.component.html',
     styleUrl: './version-detail.component.scss'
@@ -73,7 +75,6 @@ export class VersionDetailComponent implements OnInit {
         if (this.route.snapshot.paramMap.has('id')) {
             this.id = this.route.snapshot.paramMap.get('id');
             this.load()
-            this.loadPlugins()
         }
         if (this.route.snapshot.paramMap.has('version')) {
             this.version = this.route.snapshot.paramMap.get('version');
@@ -86,13 +87,6 @@ export class VersionDetailComponent implements OnInit {
             }
         );
     }
-
-    loadPlugins() {
-        this.rs.get("plugin/pages/product").subscribe(res => {
-            this.plugins = res.data
-        })
-    }
-
 
     delete() {
         this.rs.get(`product/${this.id}/version/${this.version}/delete`, {}).subscribe((res) => {
