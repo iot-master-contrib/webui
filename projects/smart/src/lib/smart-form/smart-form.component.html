@@ -46,10 +46,10 @@
                                [formControlName]="f.key"
                                [nzMax]="f.max" [nzMin]="f.min" [nzStep]="f.step"></nz-slider>
 
-                    <!--单选-->
+                    <!--单选 有import Bug，先不支持
                     <nz-radio-group *ngSwitchCase="'radio'" [formControlName]="f.key" nzButtonStyle="solid">
                         <label nz-radio-button *ngFor="let o of f.options" [nzValue]="o.value">{{ o.label }}</label>
-                    </nz-radio-group>
+                    </nz-radio-group>-->
 
                     <!--选项-->
                     <nz-select *ngSwitchCase="'select'"
