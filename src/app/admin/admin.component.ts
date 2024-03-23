@@ -118,7 +118,7 @@ export class AdminComponent {
             //this.menus = res.data
             //this.menus = this.menus.concat(res.data)
             res.data?.forEach((m: any) => {
-                m.items.forEach((i: any) => i.standalone = true)
+                //m.items.forEach((i: any) => i.standalone = true)
                 //先查找同名，找到就合并
                 let has = false
                 this.menus.forEach((m2: any) => {
