@@ -83,6 +83,15 @@ export class AdminComponent {
             ]
         },
         {
+            name: '连接管理', icon: 'link',
+            items: [
+                {name: 'TCP服务器', link: 'server'},
+                {name: 'TCP连接', link: 'link'},
+                {name: 'TCP客户端', link: 'client'},
+                {name: '串口连接', link: 'serial'},
+            ]
+        },
+        {
             name: '用户管理', icon: 'user',
             items: [
                 {name: '所有用户', link: 'user'},

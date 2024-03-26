@@ -7,9 +7,6 @@ import {DashComponent} from "../pages/dash/dash.component";
 import {ProductsComponent} from "../pages/product/products/products.component";
 import {ProductEditComponent} from "../pages/product/product-edit/product-edit.component";
 import {ProductDetailComponent} from "../pages/product/product-detail/product-detail.component";
-import {VersionPropertyEditComponent} from "../pages/version/version-property-edit/version-property-edit.component";
-import {VersionEventEditComponent} from "../pages/version/version-event-edit/version-event-edit.component";
-import {VersionActionEditComponent} from "../pages/version/version-action-edit/version-action-edit.component";
 import {DevicesComponent} from "../pages/device/devices/devices.component";
 import {DeviceEditComponent} from "../pages/device/device-edit/device-edit.component";
 import {DeviceDetailComponent} from "../pages/device/device-detail/device-detail.component";
@@ -40,6 +37,18 @@ import {SpaceDeviceComponent} from "../pages/space/space-device/space-device.com
 import {ProductVersionComponent} from "../pages/product/product-version/product-version.component";
 import {VersionDetailComponent} from "../pages/version/version-detail/version-detail.component";
 import {VersionEditComponent} from "../pages/version/version-edit/version-edit.component";
+import {ServerComponent} from "../pages/server/server/server.component";
+import {ServerEditComponent} from "../pages/server/server-edit/server-edit.component";
+import {ServerDetailComponent} from "../pages/server/server-detail/server-detail.component";
+import {LinkComponent} from "../pages/link/link/link.component";
+import {LinkEditComponent} from "../pages/link/link-edit/link-edit.component";
+import {LinkDetailComponent} from "../pages/link/link-detail/link-detail.component";
+import {SerialComponent} from "../pages/serial/serial/serial.component";
+import {SerialEditComponent} from "../pages/serial/serial-edit/serial-edit.component";
+import {SerialDetailComponent} from "../pages/serial/serial-detail/serial-detail.component";
+import {ClientComponent} from "../pages/client/client/client.component";
+import {ClientEditComponent} from "../pages/client/client-edit/client-edit.component";
+import {ClientDetailComponent} from "../pages/client/client-detail/client-detail.component";
 
 const routes: Routes = [
     {path: "", pathMatch: "full", redirectTo: "dash"},
@@ -79,6 +88,27 @@ const routes: Routes = [
     {path: 'plugin/create', component: PluginEditComponent, title: "创建插件"},
     {path: 'plugin/:id', component: PluginDetailComponent, title: "插件详情"},
     {path: 'plugin/:id/edit', component: PluginEditComponent, title: "编辑插件"},
+
+
+    {path: 'server', component: ServerComponent},
+    {path: 'server/create', component: ServerEditComponent},
+    {path: 'server/:id', component: ServerDetailComponent},
+    {path: 'server/:id/edit', component: ServerEditComponent},
+
+    {path: 'link', component: LinkComponent},
+    {path: 'link/create', component: LinkEditComponent},
+    {path: 'link/:id', component: LinkDetailComponent},
+    {path: 'link/:id/edit', component: LinkEditComponent},
+
+    {path: 'serial', component: SerialComponent},
+    {path: 'serial/create', component: SerialEditComponent},
+    {path: 'serial/:id', component: SerialDetailComponent},
+    {path: 'serial/:id/edit', component: SerialEditComponent},
+
+    {path: 'client', component: ClientComponent},
+    {path: 'client/create', component: ClientEditComponent},
+    {path: 'client/:id', component: ClientDetailComponent},
+    {path: 'client/:id/edit', component: ClientEditComponent},
 
     {path: 'user', component: UsersComponent, title: "用户列表"},
     {path: 'user/create', component: UserEditComponent, title: "创建用户"},

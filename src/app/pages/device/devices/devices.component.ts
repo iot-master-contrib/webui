@@ -25,6 +25,7 @@ export class DevicesComponent implements OnInit {
     @Input() project_id: any = '';
     @Input() gateway_id: any = '';
     @Input() product_id: any = '';
+    @Input() tunnel_id: any = '';
 
 
     datum: any[] = [];
@@ -142,6 +143,8 @@ export class DevicesComponent implements OnInit {
             query.filter['product_id'] = this.product_id;
         if (this.project_id)
             query.filter['project_id'] = this.project_id;
+        if (this.tunnel_id)
+            query.filter['tunnel_id'] = this.tunnel_id;
 
         this.loading = true;
         this.rs.post('device/search', query).subscribe((res) => {
