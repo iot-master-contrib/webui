@@ -7,6 +7,7 @@ import {Router} from '@angular/router';
 import {NzCardComponent} from "ng-zorro-antd/card";
 import {SmartFormComponent, SmartFormItem} from "../../../../../projects/smart/src/lib/smart-form/smart-form.component";
 import {RequestService} from "../../../../../projects/smart/src/lib/request.service";
+import {NzSelectOptionInterface} from "ng-zorro-antd/select/select.types";
 
 @Component({
     selector: 'app-serial-edit',
@@ -26,10 +27,12 @@ export class SerialEditComponent implements OnInit {
 
     @ViewChild('form') form!: SmartFormComponent
 
+    ports: NzSelectOptionInterface[] = []
+
     fields: SmartFormItem[] = [
         {key: "id", label: "ID", type: "text", min: 2, max: 30, placeholder: "选填"},
-        {key: "name", label: "名称", type: "text", required: true, default: '新客户端'},
-        {key: "port", label: "端口", type: "text"},
+        {key: "name", label: "名称", type: "text", required: true, default: '新串口'},
+        {key: "port", label: "端口", type: "select", options: this.ports},
         {key: "poller_period", label: "采集周期", type: "number", min: 0},
         {key: "poller_interval", label: "采集间隔", type: "number", min: 0},
         {
@@ -40,7 +43,7 @@ export class SerialEditComponent implements OnInit {
         },
         {key: "retry_timeout", label: "重连超时", type: "number", min: 0},
         {key: "retry_maximum", label: "重连最大次数", type: "number", min: 0},
-        {key: "baud_rate", label: "波特率", type: "text"},
+        {key: "baud_rate", label: "波特率", type: "number"},
         {
             key: "parity_mode", label: "奇偶校验", type: "select", options: [
                 {label: '无校验 NONE', value: 0},
@@ -83,11 +86,22 @@ export class SerialEditComponent implements OnInit {
             this.id = this.route.snapshot.paramMap.get('id');
             this.load()
         }
+        this.loadPorts()
     }
 
     load() {
         this.rs.get(`serial/` + this.id).subscribe((res) => {
             this.values = res.data
+        });
+    }
+
+    loadPorts() {
+        this.rs.get(`serial/ports`).subscribe((res) => {
+            // res.data.forEach((p: any) => {
+            //     this.ports.push({value: p, label: p})
+            //     //this.ports.push({value: p.name, label: p.label})
+            // })
+            this.fields[2].options = res.data.map((p:string)=>{return {value: p, label: p}})
         });
     }
 
