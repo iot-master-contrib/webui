@@ -5,7 +5,7 @@ import {CommonModule} from "@angular/common";
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {NzFormModule} from "ng-zorro-antd/form";
 import {NzUploadChangeParam} from "ng-zorro-antd/upload";
-import {NzTbodyComponent, NzTrDirective} from "ng-zorro-antd/table";
+import {NzTableModule, NzTbodyComponent, NzTrDirective} from "ng-zorro-antd/table";
 import {CdkDrag} from "@angular/cdk/drag-drop";
 import {NzInputDirective} from "ng-zorro-antd/input";
 
@@ -98,7 +98,7 @@ export class SmartItem {
         FormsModule,
         ReactiveFormsModule,
         NzFormModule,
-        NzTbodyComponent,
+        NzTableModule,
         CdkDrag,
         NzTrDirective,
         NzInputDirective,

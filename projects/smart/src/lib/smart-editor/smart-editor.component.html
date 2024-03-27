@@ -19,96 +19,53 @@
             </ng-container>
         }
         @case ('table') {
-            @for (c of control.controls; let i=$index;  track c) {
-                @for (f of field.children; let j=$index;  track f) {
+            <!--表格-->
+            <nz-table nzSize="small" nzTemplateMode>
+                <!--表头-->
+                <tr>
+                    @for (f of field.children;let j=$index;track f) {
+                        <th>{{ f.label }}</th>
+                    }
+                </tr>
 
-                    <ng-container
-                        *ngTemplateOutlet="groupTpl; context: { fields: field.children, group:c.get(f.key) }">
-                    </ng-container>
+                <!--内容-->
+                @for (c of control.controls;let i=$index;track c) {
+                    <!--行-->
+                    <tr>
+                        @for (f of field.children;let j=$index;track f) {
+                            <td>
+                                <ng-container
+                                    *ngTemplateOutlet="groupTpl; context: { fields: field.children, group:c.get(f.key) }">
+                                </ng-container>
+                            </td>
+                        }
+                    </tr>
                 }
-            }
+            </nz-table>
         }
     }
 </ng-template>
 
 <!-- 表单组模板 -->
 <ng-template #groupTpl let-fields let-group>
-    @for (field of fields; track field) {
-        <ng-container *ngTemplateOutlet="controlTpl; context: { field: field, group:group.get(field.key)}">
-        </ng-container>
-    }
-</ng-template>
-
-
-<ng-template #item let-field let-control>
-
-    @switch (field.type) {
-        @case ('text') {
-            <input nz-input [formControl]="control">
-        }
-        @case ('table') {
-            @for (a of field.children; track a) {
-                <ng-container *ngTemplateOutlet="items; context: { fields: field.children, group:control.get() }">
+    @for (field of fields;track field) {
+        <nz-form-item>
+            <nz-form-label [nzSm]="6" [nzXs]="24"
+                           [nzRequired]="field.required"
+                           [nzFor]="field.key">{{ field.label }}
+            </nz-form-label>
+            <nz-form-control [nzSm]="14" [nzXs]="24" [nzErrorTip]="errorTip">
+                <ng-container *ngTemplateOutlet="controlTpl; context: { field: field, group:group.get(field.key)}">
                 </ng-container>
-            }
-
-        }
-    }
-
-
-    @if (field.array) {
-        <ng-container formArrayName="field.key">
-
-            <tr *ngFor="let trData of formArray.controls; let i=index;" [formGroupName]="i" cdkDrag>
-
-            </tr>
-            @for (arr of for.controls) {
-
-
-            }
-            <ng-container>
-
-
-            </ng-container>
-        </ng-container>
-    }
-
-
-    @if (field.children && field.children.length) {
-
-    }
-
-</ng-template>
-
-<ng-template #items let-fields let-group>
-    @for (field of fields; track field) {
-        @switch (field.type) {
-            @case ('') {
-
-            }
-            @case ('table') {
-                <ng-container [formArrayName]="field.key">
-                    @for (field of field.children; ) {
-                        <ng-container [formGroupName]="field">
-
-                        </ng-container>
-                        <ng-container *ngTemplateOutlet="items; context: { $implicit: field.children }">
-
-                        </ng-container>
-                    }
-                </ng-container>
-            }
-        }
+            </nz-form-control>
+        </nz-form-item>
     }
 </ng-template>
 
-<form [formGroup]="group" (ngSubmit)="onSubmit()">
 
-    <ng-container *ngTemplateOutlet="items; context: { $implicit: fields }">
-
+<form (ngSubmit)="onSubmit()">
+    <ng-container *ngTemplateOutlet="groupTpl; context: { fields: fields, group: group }">
     </ng-container>
-
-
 </form>
 
 
