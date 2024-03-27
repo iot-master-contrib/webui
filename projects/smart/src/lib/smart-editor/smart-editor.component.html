@@ -172,18 +172,40 @@
         }
         @case ('table') {
             <!--表格-->
-            <nz-table nzSize="small" nzTemplateMode>
+            <nz-table nzSize="small" nzTemplateMode nzBordered>
                 <!--表头-->
+                <thead>
                 <tr>
                     <th *ngFor="let f of field.children;let j=index">{{ f.label }}</th>
+                    <th>
+                        <a title="添加" (click)="add(control, field.children)">
+                            <i nz-icon nzType="plus"></i>添加
+                        </a>
+                    </th>
                 </tr>
+                </thead>
                 <!--内容-->
-                <tr *ngFor="let c of control.controls; let i=index">
+                <tbody cdkDropList (cdkDropListDropped)="drop(control, $event)">
+                <tr *ngFor="let c of control.controls; let i=index" cdkDrag>
                     <td *ngFor="let f of field.children; let j=index">
                         <ng-container *ngTemplateOutlet="controlTpl; context: { field: f, control:c.get(f.key) }">
                         </ng-container>
                     </td>
+                    <td class="operators">
+                        <nz-space>
+                            <a *nzSpaceItem title="排序" style="cursor:move;" cdkDragHandle>
+                                <i nz-icon nzType="drag"></i>
+                            </a>
+                            <a *nzSpaceItem title="复制" (click)="copy(control, i)">
+                                <i nz-icon nzType="copy"></i>
+                            </a>
+                            <a *nzSpaceItem title="删除" (click)="remove(control, i)">
+                                <i nz-icon nzType="delete"></i>
+                            </a>
+                        </nz-space>
+                    </td>
                 </tr>
+                </tbody>
             </nz-table>
         }
         @default {

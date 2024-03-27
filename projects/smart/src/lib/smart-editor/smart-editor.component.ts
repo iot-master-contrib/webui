@@ -13,8 +13,8 @@ import {
 } from "@angular/forms";
 import {NzFormModule} from "ng-zorro-antd/form";
 import {NzUploadChangeParam, NzUploadComponent} from "ng-zorro-antd/upload";
-import {NzTableModule, NzTbodyComponent, NzTrDirective} from "ng-zorro-antd/table";
-import {CdkDrag} from "@angular/cdk/drag-drop";
+import {NzTableModule} from "ng-zorro-antd/table";
+import {CdkDrag, CdkDragDrop, CdkDragHandle, CdkDropList, moveItemInArray} from "@angular/cdk/drag-drop";
 import {NzInputDirective, NzInputGroupComponent, NzTextareaCountComponent} from "ng-zorro-antd/input";
 import {NzButtonComponent} from "ng-zorro-antd/button";
 import {NzColorPickerModule} from "ng-zorro-antd/color-picker";
@@ -25,6 +25,8 @@ import {NzSliderComponent} from "ng-zorro-antd/slider";
 import {NzSwitchComponent} from "ng-zorro-antd/switch";
 import {NzTimePickerComponent} from "ng-zorro-antd/time-picker";
 import {NzTreeSelectComponent} from "ng-zorro-antd/tree-select";
+import {NzIconDirective} from "ng-zorro-antd/icon";
+import {NzSpaceModule} from "ng-zorro-antd/space";
 
 export interface SmartItem {
     key: string
@@ -118,7 +120,6 @@ function getDefault(si: SmartItem): any {
         NzFormModule,
         NzTableModule,
         CdkDrag,
-        NzTrDirective,
         NzInputDirective,
         NzButtonComponent,
         NzColorPickerModule,
@@ -132,6 +133,10 @@ function getDefault(si: SmartItem): any {
         NzTimePickerComponent,
         NzTreeSelectComponent,
         NzUploadComponent,
+        CdkDragHandle,
+        NzIconDirective,
+        NzSpaceModule,
+        CdkDropList,
 
     ],
     templateUrl: './smart-editor.component.html',
@@ -225,23 +230,6 @@ export class SmartEditorComponent implements OnInit, ControlValueAccessor {
         setTimeout(() => this.group.patchValue(value))
     }
 
-    public Validate(): boolean {
-        //检查
-        for (const i in this.group.controls) {
-            this.group.controls[i].markAsDirty();
-            this.group.controls[i].updateValueAndValidity();
-        }
-        return this.group.valid
-    }
-
-    public Value(): any {
-        // if (!this.Validate()) {
-        //   return undefined;
-        // }
-        return this.group.getRawValue()
-        //return this.group.value
-    }
-
     constructor(private fb: FormBuilder) {
     }
 
@@ -298,7 +286,34 @@ export class SmartEditorComponent implements OnInit, ControlValueAccessor {
         control.setValue(paths)
     }
 
+
+    change() {
+        this.onChanged(this.group.value);
+    }
+
+
     onSubmit() {
 
+    }
+
+    drop(control: FormArray, event: CdkDragDrop<any, any>) {
+        moveItemInArray(control.controls, event.previousIndex, event.currentIndex);
+        this.change();
+    }
+
+    copy(control: FormArray, i: number) {
+        let group = control.at(i)
+        let values = group.value
+        control.insert(i, this.fb.group(values))
+        this.change()
+    }
+
+    remove(control: FormArray, i: number) {
+        control.removeAt(i);
+        this.change();
+    }
+
+    add(control: FormArray, fields: SmartItem[]) {
+        control.push(this.buildGroup(fields, {}))
     }
 }
