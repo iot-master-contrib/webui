@@ -7,8 +7,56 @@
     <ng-container *ngIf="control.hasError('maxlength')">太长了</ng-container>
 </ng-template>
 
-<ng-template #item let-field>
-    @if (field.array){
+
+<!-- 表单模板 -->
+<ng-template #controlTpl let-field let-control>
+    @switch (field.type) {
+        @case ('text') {
+            <input nz-input [formControl]="control">
+        }
+        @case ('object') {
+            <ng-container *ngTemplateOutlet="groupTpl; context: { fields: field.children, group:control }">
+            </ng-container>
+        }
+        @case ('table') {
+            @for (c of control.controls; let i=$index;  track c) {
+                @for (f of field.children; let j=$index;  track f) {
+
+                    <ng-container
+                        *ngTemplateOutlet="groupTpl; context: { fields: field.children, group:c.get(f.key) }">
+                    </ng-container>
+                }
+            }
+        }
+    }
+</ng-template>
+
+<!-- 表单组模板 -->
+<ng-template #groupTpl let-fields let-group>
+    @for (field of fields; track field) {
+        <ng-container *ngTemplateOutlet="controlTpl; context: { field: field, group:group.get(field.key)}">
+        </ng-container>
+    }
+</ng-template>
+
+
+<ng-template #item let-field let-control>
+
+    @switch (field.type) {
+        @case ('text') {
+            <input nz-input [formControl]="control">
+        }
+        @case ('table') {
+            @for (a of field.children; track a) {
+                <ng-container *ngTemplateOutlet="items; context: { fields: field.children, group:control.get() }">
+                </ng-container>
+            }
+
+        }
+    }
+
+
+    @if (field.array) {
         <ng-container formArrayName="field.key">
 
             <tr *ngFor="let trData of formArray.controls; let i=index;" [formGroupName]="i" cdkDrag>
@@ -26,14 +74,13 @@
     }
 
 
-
     @if (field.children && field.children.length) {
 
     }
 
 </ng-template>
 
-<ng-template #items let-fields>
+<ng-template #items let-fields let-group>
     @for (field of fields; track field) {
         @switch (field.type) {
             @case ('') {
@@ -41,7 +88,7 @@
             }
             @case ('table') {
                 <ng-container [formArrayName]="field.key">
-                    @for (field of field.children;) {
+                    @for (field of field.children; ) {
                         <ng-container [formGroupName]="field">
 
                         </ng-container>

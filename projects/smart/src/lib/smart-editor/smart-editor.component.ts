@@ -7,6 +7,7 @@ import {NzFormModule} from "ng-zorro-antd/form";
 import {NzUploadChangeParam} from "ng-zorro-antd/upload";
 import {NzTbodyComponent, NzTrDirective} from "ng-zorro-antd/table";
 import {CdkDrag} from "@angular/cdk/drag-drop";
+import {NzInputDirective} from "ng-zorro-antd/input";
 
 export class SmartItem {
     key!: string
@@ -100,6 +101,7 @@ export class SmartItem {
         NzTbodyComponent,
         CdkDrag,
         NzTrDirective,
+        NzInputDirective,
 
 
     ],
