@@ -1,0 +1,67 @@
+<ng-template #errorTip let-control>
+    <ng-container *ngIf="control.hasError('required')">必填项</ng-container>
+    <ng-container *ngIf="control.hasError('pattern')">格式不对</ng-container>
+    <ng-container *ngIf="control.hasError('min')">太小了</ng-container>
+    <ng-container *ngIf="control.hasError('max')">太大了</ng-container>
+    <ng-container *ngIf="control.hasError('minlength')">太短了</ng-container>
+    <ng-container *ngIf="control.hasError('maxlength')">太长了</ng-container>
+</ng-template>
+
+<ng-template #item let-field>
+    @if (field.array){
+        <ng-container formArrayName="field.key">
+
+            <tr *ngFor="let trData of formArray.controls; let i=index;" [formGroupName]="i" cdkDrag>
+
+            </tr>
+            @for (arr of for.controls) {
+
+
+            }
+            <ng-container>
+
+
+            </ng-container>
+        </ng-container>
+    }
+
+
+
+    @if (field.children && field.children.length) {
+
+    }
+
+</ng-template>
+
+<ng-template #items let-fields>
+    @for (field of fields; track field) {
+        @switch (field.type) {
+            @case ('') {
+
+            }
+            @case ('table') {
+                <ng-container [formArrayName]="field.key">
+                    @for (field of field.children;) {
+                        <ng-container [formGroupName]="field">
+
+                        </ng-container>
+                        <ng-container *ngTemplateOutlet="items; context: { $implicit: field.children }">
+
+                        </ng-container>
+                    }
+                </ng-container>
+            }
+        }
+    }
+</ng-template>
+
+<form [formGroup]="group" (ngSubmit)="onSubmit()">
+
+    <ng-container *ngTemplateOutlet="items; context: { $implicit: fields }">
+
+    </ng-container>
+
+
+</form>
+
+
