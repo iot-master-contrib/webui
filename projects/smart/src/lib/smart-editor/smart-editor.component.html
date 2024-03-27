@@ -208,6 +208,10 @@
                 </tbody>
             </nz-table>
         }
+        @case ('template') {
+            <ng-container *ngTemplateOutlet="field.template; context: { field: field, control:control }">
+            </ng-container>
+        }
         @default {
             <!--默认 用文本-->
             <span>不支持的控件类型：{{ field.type }}</span>

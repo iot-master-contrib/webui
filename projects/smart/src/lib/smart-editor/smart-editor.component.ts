@@ -1,10 +1,12 @@
-import {Component, forwardRef, Input, OnInit, ViewContainerRef} from '@angular/core';
+import {Component, forwardRef, Input, OnInit, TemplateRef} from '@angular/core';
 import {NzSelectOptionInterface} from "ng-zorro-antd/select/select.types";
 import {NzTreeNodeOptions} from "ng-zorro-antd/tree";
 import {CommonModule} from "@angular/common";
 import {
-    ControlValueAccessor, FormArray,
-    FormBuilder, FormControl,
+    ControlValueAccessor,
+    FormArray,
+    FormBuilder,
+    FormControl,
     FormGroup,
     FormsModule,
     NG_VALUE_ACCESSOR,
@@ -63,7 +65,7 @@ export interface SmartItem {
     pattern?: string | RegExp
     validators?: any[];
 
-
+    template?: TemplateRef<any>
 }
 
 function getDefault(si: SmartItem): any {
@@ -237,7 +239,7 @@ export class SmartEditorComponent implements OnInit, ControlValueAccessor {
         //console.log("write", this._fields, obj)
         if (obj) {
             this.group = this.buildGroup(this._fields, obj)
-            this.group.valueChanges.subscribe(res=>{
+            this.group.valueChanges.subscribe(res => {
                 this.onChanged(this.group.value)
             })
         }
