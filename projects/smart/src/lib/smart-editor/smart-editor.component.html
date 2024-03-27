@@ -9,12 +9,164 @@
 
 
 <!-- 表单模板 -->
-<ng-template #controlTpl let-field let-control>
+<ng-template #controlTpl let-field="field" let-control="control">
     @switch (field.type) {
         @case ('text') {
-            <input nz-input [formControl]="control">
+            <!--文本-->
+            <input nz-input
+                   [formControl]="control"
+                   [minlength]="field.min || 0" [maxlength]="field.max || 200"
+                   [placeholder]="field.placeholder || ''"
+                   #box (change)="field.change?.(box.value)"/>
+
+        }
+        @case ('password') {
+            <!--密码-->
+            <input nz-input type="password"
+                   [formControl]="control"
+                   [minlength]="field.min || 0" [maxlength]="field.max || 200"
+                   [placeholder]="field.placeholder || ''"
+                   #box (change)="field.change?.(box.value)"/>
+        }
+        @case ('number') {
+            <!--数值-->
+            <nz-input-number
+                [formControl]="control"
+                [nzMax]="field.max || 100" [nzMin]="field.min || 0" [nzStep]="field.step || 1"
+                [nzPlaceHolder]="field.placeholder || ''"
+                (change)="field.change?.($event)"></nz-input-number>
+        }
+        @case ('slider') {
+            <!--滑块-->
+            <nz-slider
+                [formControl]="control"
+                [nzMax]="field.max" [nzMin]="field.min" [nzStep]="field.step"></nz-slider>
+        }
+        @case ('radio') {
+            <!--单选 有import Bug，先不支持
+            <nz-radio-group [formControl]="control" nzButtonStyle="solid">
+                <label nz-radio-button *ngFor="let o of field.options" [nzValue]="o.value">{{ o.label }}</label>
+            </nz-radio-group>-->
+        }
+        @case ('select') {
+            <!--选项-->
+            <nz-select
+                [nzOptions]="field.options || empty"
+                [formControl]="control"
+                [nzPlaceHolder]="field.placeholder || ''"
+                (change)="field.change?.($event)"></nz-select>
+        }
+        @case ('tags') {
+            <!--标签-->
+            <nz-select nzMode="tags"
+                       [nzTokenSeparators]="[',','，', ' ', ';']"
+                       [nzOptions]="field.options || empty"
+                       [formControl]="control"
+                       [nzPlaceHolder]="field.placeholder || '输入 逗号，分号，空格 分隔'"
+                       (change)="field.change?.($event)"></nz-select>
+        }
+        @case ('tree') {
+            <!--树选择-->
+            <nz-tree-select nzShowSearch nzCheckable
+                            [nzNodes]="field.tree || empty"
+                            (nzTreeCheckBoxChange)="field.change?.($event)"
+                            [formControl]="control"
+                            [nzPlaceHolder]="field.placeholder || ''"
+                            (change)="field.change?.($event)"></nz-tree-select>
+        }
+        @case ('color') {
+            <!--颜色-->
+            <nz-color-picker nzShowText
+                             [formControl]="control"
+                             (change)="field.change?.($event)"></nz-color-picker>
+        }
+        @case ('switch') {
+            <!--开关-->
+            <nz-switch
+                [formControl]="control" (change)="field.change?.($event)"></nz-switch>
+        }
+        @case ('textarea') {
+            <!--多行文本-->
+            <nz-textarea-count [nzMaxCharacterCount]="field.max || 200">
+                        <textarea rows="4" nz-input [formControl]="control" #box
+                                  (change)="field.change?.(box.value)"></textarea>
+            </nz-textarea-count>
+        }
+        @case ('slider') {
+            <!--进度条-->
+            <nz-slider
+                [formControl]="control"
+                [nzMax]="field.max" [nzMin]="field.min" [nzStep]="field.step"
+                (change)="field.change?.($event)"></nz-slider>
+        }
+        @case ('date') {
+            <!--日期-->
+            <nz-date-picker
+                [formControl]="control"
+                [nzShowTime]="!!field.time"
+                [nzPlaceHolder]="field.placeholder || ''"
+                (change)="field.change?.($event)"></nz-date-picker>
+        }
+        @case ('time') {
+            <!--时间-->
+            <nz-time-picker
+                [formControl]="control"
+                [nzPlaceHolder]="field.placeholder || ''"
+                (change)="field.change?.($event)"></nz-time-picker>
+        }
+        @case ('file') {
+            <!--文件-->
+            <nz-input-group nzSearch [nzAddOnAfter]="suffixButton">
+                <input nz-input [formControl]="control"
+                       [placeholder]="field.placeholder || ''"
+                       #box (change)="field.change?.(box.value)"/>
+            </nz-input-group>
+            <ng-template #suffixButton>
+                <nz-upload [nzAction]="field.upload" [nzShowUploadList]="false" [nzDisabled]="!!field.disabled"
+                           (nzChange)="handleUpload(control, $event)">
+                    <button nz-button nzType="primary" [disabled]="!!field.disabled">上传</button>
+                </nz-upload>
+            </ng-template>
+        }
+        @case ('images') {
+            <!--标签-->
+            <nz-select nzMode="tags"
+                       [nzTokenSeparators]="[',','，', ' ', ';']"
+                       [nzOptions]="field.options || empty"
+                       [formControl]="control"
+                       [nzPlaceHolder]="field.placeholder || '输入 逗号，分号，空格 分隔'"
+                       (change)="field.change?.($event)"></nz-select>
+            <nz-upload [nzAction]="field.upload" nzMultiple [nzDisabled]="!!field.disabled"
+                       (nzChange)="handleUploadImages(control, $event)">
+                <button nz-button nzType="primary" [disabled]="!!field.disabled">上传</button>
+            </nz-upload>
+        }
+        @case ('choose') {
+            <!--选择-->
+            <nz-input-group nzSearch [nzAddOnAfter]="suffixButton">
+                <input nz-input [formControl]="control"
+                       [placeholder]="field.placeholder || ''"
+                       #box (change)="field.change?.(box.value)"/>
+            </nz-input-group>
+            <ng-template #suffixButton>
+                <button nz-button nzType="primary" (click)="field.choose?.()" [disabled]="!!field.disabled">选择
+                </button>
+            </ng-template>
+        }
+        @case ('choose-number') {
+            <!--选择(整数型)-->
+            <nz-input-group nzSearch [nzAddOnAfter]="suffixButton">
+                <input nz-input [formControl]="control" type="number"
+                       [placeholder]="field.placeholder || ''"
+                       #box (change)="field.change?.(box.value)"/>
+            </nz-input-group>
+            <ng-template #suffixButton>
+                <button nz-button nzType="primary" (click)="field.choose?.()" [disabled]="!!field.disabled">选择
+                </button>
+            </ng-template>
         }
         @case ('object') {
+            <!--对象-->
             <ng-container *ngTemplateOutlet="groupTpl; context: { fields: field.children, group:control }">
             </ng-container>
         }
@@ -23,31 +175,26 @@
             <nz-table nzSize="small" nzTemplateMode>
                 <!--表头-->
                 <tr>
-                    @for (f of field.children;let j=$index;track f) {
-                        <th>{{ f.label }}</th>
-                    }
+                    <th *ngFor="let f of field.children;let j=index">{{ f.label }}</th>
                 </tr>
-
                 <!--内容-->
-                @for (c of control.controls;let i=$index;track c) {
-                    <!--行-->
-                    <tr>
-                        @for (f of field.children;let j=$index;track f) {
-                            <td>
-                                <ng-container
-                                    *ngTemplateOutlet="groupTpl; context: { fields: field.children, group:c.get(f.key) }">
-                                </ng-container>
-                            </td>
-                        }
-                    </tr>
-                }
+                <tr *ngFor="let c of control.controls; let i=index">
+                    <td *ngFor="let f of field.children; let j=index">
+                        <ng-container *ngTemplateOutlet="controlTpl; context: { field: f, control:c.get(f.key) }">
+                        </ng-container>
+                    </td>
+                </tr>
             </nz-table>
+        }
+        @default {
+            <!--默认 用文本-->
+            <span>不支持的控件类型：{{ field.type }}</span>
         }
     }
 </ng-template>
 
 <!-- 表单组模板 -->
-<ng-template #groupTpl let-fields let-group>
+<ng-template #groupTpl let-fields="fields" let-group="group">
     @for (field of fields;track field) {
         <nz-form-item>
             <nz-form-label [nzSm]="6" [nzXs]="24"
@@ -55,17 +202,18 @@
                            [nzFor]="field.key">{{ field.label }}
             </nz-form-label>
             <nz-form-control [nzSm]="14" [nzXs]="24" [nzErrorTip]="errorTip">
-                <ng-container *ngTemplateOutlet="controlTpl; context: { field: field, group:group.get(field.key)}">
+                <ng-container *ngTemplateOutlet="controlTpl; context: { field: field, control:group.get(field.key)}">
                 </ng-container>
             </nz-form-control>
         </nz-form-item>
     }
 </ng-template>
 
-
-<form (ngSubmit)="onSubmit()">
+<!-- 入口 -->
+<form>
     <ng-container *ngTemplateOutlet="groupTpl; context: { fields: fields, group: group }">
     </ng-container>
 </form>
+
 
 

@@ -2,6 +2,7 @@
  * Public API Surface of smart
  */
 
+export * from './lib/smart-editor/smart-editor.component';
 export * from './lib/smart-form/smart-form.component';
 export * from './lib/smart-info/smart-info.component';
 export * from './lib/smart-table/smart-table.component';
