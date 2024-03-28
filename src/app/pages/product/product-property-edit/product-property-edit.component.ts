@@ -25,7 +25,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {NzNotificationService} from "ng-zorro-antd/notification";
 
 @Component({
-    selector: 'app-version-property-edit',
+    selector: 'app-product-property-edit',
     standalone: true,
     imports: [
         FormsModule,
@@ -55,10 +55,10 @@ import {NzNotificationService} from "ng-zorro-antd/notification";
         CdkDragHandle,
         SmartTableEditComponent
     ],
-    templateUrl: './version-property-edit.component.html',
-    styleUrl: './version-property-edit.component.scss'
+    templateUrl: './product-property-edit.component.html',
+    styleUrl: './product-property-edit.component.scss'
 })
-export class VersionPropertyEditComponent implements OnInit {
+export class ProductPropertyEditComponent implements OnInit {
 
     properties: any = []
 

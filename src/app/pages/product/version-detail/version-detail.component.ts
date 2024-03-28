@@ -11,9 +11,11 @@ import {SmartInfoComponent, SmartInfoItem} from "../../../../../projects/smart/s
 import {NzTabsModule} from "ng-zorro-antd/tabs";
 import {DevicesComponent} from "../../device/devices/devices.component";
 import {WebViewComponent} from "../../../components/web-view/web-view.component";
-import {VersionPropertyComponent} from "../version-property/version-property.component";
-import {VersionEventComponent} from "../version-event/version-event.component";
-import {VersionActionComponent} from "../version-action/version-action.component";
+import {ProductPropertyComponent} from "../product-property/product-property.component";
+import {ProductEventComponent} from "../product-event/product-event.component";
+import {ProductActionComponent} from "../../product/product-action/product-action.component";
+import {ProductMapperComponent} from "../product-mapper/product-mapper.component";
+import {ProductPollerComponent} from "../product-poller/product-poller.component";
 
 @Component({
     selector: 'app-version-detail',
@@ -29,9 +31,11 @@ import {VersionActionComponent} from "../version-action/version-action.component
         NzPopconfirmDirective,
         NzTabsModule,
         WebViewComponent,
-        VersionPropertyComponent,
-        VersionEventComponent,
-        VersionActionComponent,
+        ProductPropertyComponent,
+        ProductEventComponent,
+        ProductActionComponent,
+        ProductMapperComponent,
+        ProductPollerComponent,
     ],
     templateUrl: './version-detail.component.html',
     styleUrl: './version-detail.component.scss'

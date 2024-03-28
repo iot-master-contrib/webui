@@ -10,9 +10,11 @@ import {NzCardComponent} from "ng-zorro-antd/card";
 import {SmartInfoComponent, SmartInfoItem} from "../../../../../projects/smart/src/lib/smart-info/smart-info.component";
 import {NzTabsModule} from "ng-zorro-antd/tabs";
 import {WebViewComponent} from "../../../components/web-view/web-view.component";
-import {VersionPropertyEditComponent} from "../version-property-edit/version-property-edit.component";
-import {VersionEventEditComponent} from "../version-event-edit/version-event-edit.component";
-import {VersionActionEditComponent} from "../version-action-edit/version-action-edit.component";
+import {ProductPropertyEditComponent} from "../product-property-edit/product-property-edit.component";
+import {ProductEventEditComponent} from "../product-event-edit/product-event-edit.component";
+import {ProductActionEditComponent} from "../product-action-edit/product-action-edit.component";
+import {ProductMapperEditComponent} from "../product-mapper-edit/product-mapper-edit.component";
+import {ProductPollerEditComponent} from "../product-poller-edit/product-poller-edit.component";
 
 @Component({
     selector: 'app-version-edit',
@@ -28,9 +30,11 @@ import {VersionActionEditComponent} from "../version-action-edit/version-action-
         NzPopconfirmDirective,
         NzTabsModule,
         WebViewComponent,
-        VersionPropertyEditComponent,
-        VersionEventEditComponent,
-        VersionActionEditComponent,
+        ProductPropertyEditComponent,
+        ProductEventEditComponent,
+        ProductActionEditComponent,
+        ProductMapperEditComponent,
+        ProductPollerEditComponent,
     ],
     templateUrl: './version-edit.component.html',
     styleUrl: './version-edit.component.scss'

@@ -3,19 +3,10 @@ import {RouterModule, Routes} from '@angular/router';
 import {WebViewComponent} from "../components/web-view/web-view.component";
 import {AlarmComponent} from "../pages/alarm/alarm.component";
 import {UnknownComponent} from "../../../projects/smart/src/lib/unknown/unknown.component";
-import {ProductsComponent} from "../pages/product/products/products.component";
-import {ProductEditComponent} from "../pages/product/product-edit/product-edit.component";
 import {ProductDetailComponent} from "../pages/product/product-detail/product-detail.component";
-import {VersionPropertyEditComponent} from "../pages/version/version-property-edit/version-property-edit.component";
-import {VersionEventEditComponent} from "../pages/version/version-event-edit/version-event-edit.component";
-import {VersionActionEditComponent} from "../pages/version/version-action-edit/version-action-edit.component";
 import {DevicesComponent} from "../pages/device/devices/devices.component";
 import {DeviceEditComponent} from "../pages/device/device-edit/device-edit.component";
 import {DeviceDetailComponent} from "../pages/device/device-detail/device-detail.component";
-import {GatewaysComponent} from "../pages/gateway/gateways/gateways.component";
-import {GatewayEditComponent} from "../pages/gateway/gateway-edit/gateway-edit.component";
-import {GatewayDetailComponent} from "../pages/gateway/gateway-detail/gateway-detail.component";
-import {ProjectsComponent} from "../pages/project/projects/projects.component";
 import {ProjectEditComponent} from "../pages/project/project-edit/project-edit.component";
 import {ProjectDetailComponent} from "../pages/project/project-detail/project-detail.component";
 import {SpacesComponent} from "../pages/space/spaces/spaces.component";
@@ -24,7 +15,7 @@ import {SpaceDetailComponent} from "../pages/space/space-detail/space-detail.com
 import {ProjectDashComponent} from "../pages/project/project-dash/project-dash.component";
 import {ProjectUserComponent} from "../pages/project/project-user/project-user.component";
 import {SpaceDeviceComponent} from "../pages/space/space-device/space-device.component";
-import {VersionDetailComponent} from "../pages/version/version-detail/version-detail.component";
+import {VersionDetailComponent} from "../pages/product/version-detail/version-detail.component";
 
 const routes: Routes = [
     {path: "", pathMatch: "full", redirectTo: "dash"},

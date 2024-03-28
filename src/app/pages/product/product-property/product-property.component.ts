@@ -6,15 +6,15 @@ import {
 import {RequestService} from "../../../../../projects/smart/src/lib/request.service";
 
 @Component({
-    selector: 'app-version-property',
+    selector: 'app-product-property',
     standalone: true,
     imports: [
         SmartTableComponent
     ],
-    templateUrl: './version-property.component.html',
-    styleUrl: './version-property.component.scss'
+    templateUrl: './product-property.component.html',
+    styleUrl: './product-property.component.scss'
 })
-export class VersionPropertyComponent {
+export class ProductPropertyComponent {
 
     @Input() product_id!: any;
     @Input() version!: any;

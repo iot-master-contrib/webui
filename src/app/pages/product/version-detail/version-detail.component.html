@@ -1,0 +1,38 @@
+<nz-card nzTitle="产品版本详情" [nzExtra]="extra">
+    <im-smart-info [fields]="fields" [value]="data"></im-smart-info>
+
+    <nz-tabset>
+        <nz-tab nzTitle="产品属性">
+            <ng-template nz-tab>
+                <app-product-property [product_id]="id" [version]="version"></app-product-property>
+            </ng-template>
+        </nz-tab>
+        <nz-tab nzTitle="产品事件">
+            <ng-template nz-tab>
+                <app-product-event [product_id]="id" [version]="version"></app-product-event>
+            </ng-template>
+        </nz-tab>
+        <nz-tab nzTitle="产品动作">
+            <ng-template nz-tab>
+                <app-product-action [product_id]="id" [version]="version"></app-product-action>
+            </ng-template>
+        </nz-tab>
+        <nz-tab nzTitle="数据映射">
+            <ng-template nz-tab>
+                <app-product-mapper [product_id]="id" [version]="version"></app-product-mapper>
+            </ng-template>
+        </nz-tab>
+        <nz-tab nzTitle="数据轮询">
+            <ng-template nz-tab>
+                <app-product-poller [product_id]="id" [version]="version"></app-product-poller>
+            </ng-template>
+        </nz-tab>
+    </nz-tabset>
+
+</nz-card>
+<ng-template #extra>
+    <nz-space *ngIf="!project_id">
+        <button *nzSpaceItem nz-button routerLink="edit">编辑</button>
+        <button *nzSpaceItem nz-button nz-popconfirm nzPopconfirmTitle="确认删除" (nzOnConfirm)="delete()">删除</button>
+    </nz-space>
+</ng-template>

@@ -1,0 +1,32 @@
+<nz-card nzTitle="产品版本编辑">
+    <im-smart-info [fields]="fields" [value]="data"></im-smart-info>
+
+    <nz-tabset>
+        <nz-tab nzTitle="产品属性">
+            <ng-template nz-tab>
+                <app-product-property-edit [product_id]="id" [version]="version"></app-product-property-edit>
+            </ng-template>
+        </nz-tab>
+        <nz-tab nzTitle="产品事件">
+            <ng-template nz-tab>
+                <app-product-event-edit [product_id]="id" [version]="version"></app-product-event-edit>
+            </ng-template>
+        </nz-tab>
+        <nz-tab nzTitle="产品动作">
+            <ng-template nz-tab>
+                <app-product-action-edit [product_id]="id" [version]="version"></app-product-action-edit>
+            </ng-template>
+        </nz-tab>
+        <nz-tab nzTitle="数据映射">
+            <ng-template nz-tab>
+                <app-product-mapper-edit [product_id]="id" [version]="version"></app-product-mapper-edit>
+            </ng-template>
+        </nz-tab>
+        <nz-tab nzTitle="数据轮询">
+            <ng-template nz-tab>
+                <app-product-poller-edit [product_id]="id" [version]="version"></app-product-poller-edit>
+            </ng-template>
+        </nz-tab>
+    </nz-tabset>
+
+</nz-card>

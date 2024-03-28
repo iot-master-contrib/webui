@@ -25,7 +25,6 @@ import {ProjectsComponent} from "../../project/projects/projects.component";
 })
 export class GatewayEditComponent implements OnInit, AfterViewInit {
     base = '/admin'
-    project_id: any = '';
     id: any = '';
 
     @ViewChild('form') form!: SmartFormComponent
@@ -34,24 +33,6 @@ export class GatewayEditComponent implements OnInit, AfterViewInit {
         {key: "id", label: "ID", type: "text", min: 2, max: 30, placeholder: "选填"},
         {key: "name", label: "名称", type: "text", required: true, default: '新网关'},
         {key: "keywords", label: "关键字", type: "tags", default: []},
-        {
-            key: "project_id", label: "项目", type: "choose",
-            choose: () => {
-                this.ms.create({
-                    nzTitle: "选择", nzContent: ProjectsComponent,
-                }).afterClose.subscribe(res => {
-                    if (res) {
-                        this.form.patchValues({project_id: res.id})
-                        this.fields[3].tips = res.name
-                    }
-                })
-            },
-            change: id => {
-                this.rs.get('project/' + id, {field: 'name'}).subscribe(res => {
-                    this.fields[3].tips = res.data?.name || ''
-                })
-            }
-        },
         {key: "description", label: "说明", type: "textarea"},
         {key: "username", label: "MQTT用户名", type: "text"},
         {key: "password", label: "MQTT密码", type: "text"},
@@ -69,10 +50,6 @@ export class GatewayEditComponent implements OnInit, AfterViewInit {
     }
 
     ngOnInit(): void {
-        if (this.route.parent?.snapshot.paramMap.has('project')) {
-            this.project_id = this.route.parent.snapshot.paramMap.get('project');
-            this.base = `/project/${this.project_id}`
-        }
         if (this.route.snapshot.paramMap.has('id')) {
             this.id = this.route.snapshot.paramMap.get('id');
             this.load()
@@ -80,11 +57,6 @@ export class GatewayEditComponent implements OnInit, AfterViewInit {
     }
 
     ngAfterViewInit(): void {
-        if (this.project_id) {
-            this.form.patchValues({project_id: this.project_id})
-            this.form.group.get('project_id')?.disable()
-            this.fields[3].disabled = true
-        }
     }
 
 

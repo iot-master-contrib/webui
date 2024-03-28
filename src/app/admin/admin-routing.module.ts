@@ -32,8 +32,8 @@ import {SettingAttachComponent} from "../pages/setting/setting-attach/setting-at
 import {ProjectUserComponent} from "../pages/project/project-user/project-user.component";
 import {SpaceDeviceComponent} from "../pages/space/space-device/space-device.component";
 import {ProductVersionComponent} from "../pages/product/product-version/product-version.component";
-import {VersionDetailComponent} from "../pages/version/version-detail/version-detail.component";
-import {VersionEditComponent} from "../pages/version/version-edit/version-edit.component";
+import {VersionDetailComponent} from "../pages/product/version-detail/version-detail.component";
+import {VersionEditComponent} from "../pages/product/version-edit/version-edit.component";
 import {ServerComponent} from "../pages/server/server/server.component";
 import {ServerEditComponent} from "../pages/server/server-edit/server-edit.component";
 import {ServerDetailComponent} from "../pages/server/server-detail/server-detail.component";
