@@ -6,7 +6,7 @@ import {NzMessageService} from 'ng-zorro-antd/message';
 import {CommonModule} from '@angular/common';
 import {Router} from '@angular/router';
 import {NzCardComponent} from "ng-zorro-antd/card";
-import {SmartFormComponent, SmartFormItem} from "../../../../../projects/smart/src/lib/smart-form/smart-form.component";
+import {SmartEditorComponent, SmartField} from "../../../../../projects/smart/src/lib/smart-editor/smart-editor.component";
 
 @Component({
     selector: 'app-product-edit',
@@ -16,7 +16,7 @@ import {SmartFormComponent, SmartFormItem} from "../../../../../projects/smart/s
         NzButtonComponent,
         RouterLink,
         NzCardComponent,
-        SmartFormComponent,
+        SmartEditorComponent,
     ],
     templateUrl: './product-edit.component.html',
     styleUrl: './product-edit.component.scss',
@@ -24,9 +24,9 @@ import {SmartFormComponent, SmartFormItem} from "../../../../../projects/smart/s
 export class ProductEditComponent implements OnInit {
     id: any = '';
 
-    @ViewChild('form') form!: SmartFormComponent
+    @ViewChild('form') form!: SmartEditorComponent
 
-    fields: SmartFormItem[] = [
+    fields: SmartField[] = [
         {key: "id", label: "ID", type: "text", min: 2, max: 30, placeholder: "选填"},
         {key: "name", label: "名称", type: "text", required: true, default: '新产品'},
         {key: "keywords", label: "关键字", type: "tags", default: []},
@@ -61,13 +61,13 @@ export class ProductEditComponent implements OnInit {
     }
 
     onSubmit() {
-        if (!this.form.Validate()) {
+        if (!this.form.valid) {
             this.msg.error('请检查数据')
             return
         }
 
         let url = `product/${this.id || 'create'}`
-        this.rs.post(url, this.form.Value()).subscribe((res) => {
+        this.rs.post(url, this.form.value).subscribe((res) => {
             this.router.navigateByUrl('/admin/product/' + res.data.id);
             this.msg.success('保存成功');
         });

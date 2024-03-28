@@ -5,7 +5,7 @@ import {RequestService} from '../../../../../projects/smart/src/lib/request.serv
 import {NzMessageService} from 'ng-zorro-antd/message';
 import {CommonModule} from '@angular/common';
 import {NzCardComponent} from "ng-zorro-antd/card";
-import {SmartFormComponent, SmartFormItem} from "../../../../../projects/smart/src/lib/smart-form/smart-form.component";
+import {SmartEditorComponent, SmartField} from "../../../../../projects/smart/src/lib/smart-editor/smart-editor.component";
 
 @Component({
     selector: 'app-setting-broker',
@@ -15,16 +15,16 @@ import {SmartFormComponent, SmartFormItem} from "../../../../../projects/smart/s
         NzButtonComponent,
         RouterLink,
         NzCardComponent,
-        SmartFormComponent,
+        SmartEditorComponent,
     ],
     templateUrl: './setting-broker.component.html',
     styleUrl: './setting-broker.component.scss'
 })
 export class SettingBrokerComponent implements OnInit {
 
-    @ViewChild('form') form!: SmartFormComponent
+    @ViewChild('form') form!: SmartEditorComponent
 
-    fields: SmartFormItem[] = [
+    fields: SmartField[] = [
         {key: "enable", label: "启用", type: "switch", default: true},
         {key: "port", label: "端口", type: "number", default: 1843},
     ]
@@ -41,13 +41,13 @@ export class SettingBrokerComponent implements OnInit {
     }
 
     onSubmit() {
-        if (!this.form.Validate()) {
+        if (!this.form.valid) {
             this.msg.error('请检查数据')
             return
         }
 
         let url = `setting/broker`
-        this.rs.post(url, this.form.Value()).subscribe((res) => {
+        this.rs.post(url, this.form.value).subscribe((res) => {
             this.msg.success('保存成功');
         });
     }

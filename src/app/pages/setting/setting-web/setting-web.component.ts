@@ -5,7 +5,7 @@ import {RequestService} from '../../../../../projects/smart/src/lib/request.serv
 import {NzMessageService} from 'ng-zorro-antd/message';
 import {CommonModule} from '@angular/common';
 import {NzCardComponent} from "ng-zorro-antd/card";
-import {SmartFormComponent, SmartFormItem} from "../../../../../projects/smart/src/lib/smart-form/smart-form.component";
+import {SmartEditorComponent, SmartField} from "../../../../../projects/smart/src/lib/smart-editor/smart-editor.component";
 
 @Component({
     selector: 'app-setting-web',
@@ -15,16 +15,16 @@ import {SmartFormComponent, SmartFormItem} from "../../../../../projects/smart/s
         NzButtonComponent,
         RouterLink,
         NzCardComponent,
-        SmartFormComponent,
+        SmartEditorComponent,
     ],
     templateUrl: './setting-web.component.html',
     styleUrl: './setting-web.component.scss',
 })
 export class SettingWebComponent implements OnInit {
 
-    @ViewChild('form') form!: SmartFormComponent
+    @ViewChild('form') form!: SmartEditorComponent
 
-    fields: SmartFormItem[] = [
+    fields: SmartField[] = [
         {key: "port", label: "端口", type: "number", required: true, default: 8080, min: 1, max: 65535},
         {key: "debug", label: "调试模式", type: "switch"},
         {key: "cors", label: "跨域请求", type: "switch"},
@@ -56,13 +56,13 @@ export class SettingWebComponent implements OnInit {
     }
 
     onSubmit() {
-        if (!this.form.Validate()) {
+        if (!this.form.valid) {
             this.msg.error('请检查数据')
             return
         }
 
         let url = `setting/web`
-        this.rs.post(url, this.form.Value()).subscribe((res) => {
+        this.rs.post(url, this.form.value).subscribe((res) => {
             this.msg.success('保存成功');
         });
     }

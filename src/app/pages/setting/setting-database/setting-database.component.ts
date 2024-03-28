@@ -5,7 +5,7 @@ import {RequestService} from '../../../../../projects/smart/src/lib/request.serv
 import {NzMessageService} from 'ng-zorro-antd/message';
 import {CommonModule} from '@angular/common';
 import {NzCardComponent} from "ng-zorro-antd/card";
-import {SmartFormComponent, SmartFormItem} from "../../../../../projects/smart/src/lib/smart-form/smart-form.component";
+import {SmartEditorComponent, SmartField} from "../../../../../projects/smart/src/lib/smart-editor/smart-editor.component";
 import {NzTableComponent, NzTableModule} from "ng-zorro-antd/table";
 
 @Component({
@@ -16,7 +16,7 @@ import {NzTableComponent, NzTableModule} from "ng-zorro-antd/table";
         NzButtonComponent,
         RouterLink,
         NzCardComponent,
-        SmartFormComponent,
+        SmartEditorComponent,
         NzTableComponent,
         NzTableModule,
     ],
@@ -37,9 +37,9 @@ export class SettingDatabaseComponent {
         {label: 'Oracle', type: 'godror', url: 'user="root" password="123456" connectString="127.0.0.1:1521/master"'},
     ]
 
-    @ViewChild('form') form!: SmartFormComponent
+    @ViewChild('form') form!: SmartEditorComponent
 
-    fields: SmartFormItem[] = [
+    fields: SmartField[] = [
         {
             key: "type", label: "数据库类型", type: "select",
             options: [
@@ -66,19 +66,19 @@ export class SettingDatabaseComponent {
     }
 
     onSubmit() {
-        if (!this.form.Validate()) {
+        if (!this.form.valid) {
             this.msg.error('请检查数据')
             return
         }
 
         let url = `setting/database`
-        this.rs.post(url, this.form.Value()).subscribe((res) => {
+        this.rs.post(url, this.form.value).subscribe((res) => {
             this.msg.success('保存成功');
         });
     }
 
     writeExample(url: string) {
-        this.form.patchValues({url})
+        this.form.patchValue({url})
     }
 
 

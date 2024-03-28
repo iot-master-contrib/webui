@@ -6,7 +6,7 @@ import {NzMessageService} from 'ng-zorro-antd/message';
 import {CommonModule} from '@angular/common';
 import {Router} from '@angular/router';
 import {NzCardComponent} from "ng-zorro-antd/card";
-import {SmartFormComponent, SmartFormItem} from "../../../../../projects/smart/src/lib/smart-form/smart-form.component";
+import {SmartEditorComponent, SmartField} from "../../../../../projects/smart/src/lib/smart-editor/smart-editor.component";
 import {NzModalService} from "ng-zorro-antd/modal";
 import {ProjectsComponent} from "../../project/projects/projects.component";
 
@@ -18,7 +18,7 @@ import {ProjectsComponent} from "../../project/projects/projects.component";
         NzButtonComponent,
         RouterLink,
         NzCardComponent,
-        SmartFormComponent,
+        SmartEditorComponent,
     ],
     templateUrl: './gateway-edit.component.html',
     styleUrl: './gateway-edit.component.scss'
@@ -27,9 +27,9 @@ export class GatewayEditComponent implements OnInit, AfterViewInit {
     base = '/admin'
     id: any = '';
 
-    @ViewChild('form') form!: SmartFormComponent
+    @ViewChild('form') form!: SmartEditorComponent
 
-    fields: SmartFormItem[] = [
+    fields: SmartField[] = [
         {key: "id", label: "ID", type: "text", min: 2, max: 30, placeholder: "选填"},
         {key: "name", label: "名称", type: "text", required: true, default: '新网关'},
         {key: "keywords", label: "关键字", type: "tags", default: []},
@@ -69,13 +69,13 @@ export class GatewayEditComponent implements OnInit, AfterViewInit {
     }
 
     onSubmit() {
-        if (!this.form.Validate()) {
+        if (!this.form.valid) {
             this.msg.error('请检查数据')
             return
         }
 
         let url = `gateway/${this.id || 'create'}`
-        this.rs.post(url, this.form.Value()).subscribe((res) => {
+        this.rs.post(url, this.form.value).subscribe((res) => {
             this.router.navigateByUrl(`${this.base}/gateway/` + res.data.id);
             this.msg.success('保存成功');
         });

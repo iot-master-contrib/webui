@@ -5,7 +5,11 @@ import {NzMessageService} from 'ng-zorro-antd/message';
 import {CommonModule} from '@angular/common';
 import {Router} from '@angular/router';
 import {NzCardComponent} from "ng-zorro-antd/card";
-import {SmartFormComponent, SmartFormItem} from "../../../../../projects/smart/src/lib/smart-form/smart-form.component";
+import {
+    SmartEditorComponent,
+    SmartField,
+    SmartSelectOption
+} from "../../../../../projects/smart/src/lib/smart-editor/smart-editor.component";
 import {RequestService} from "../../../../../projects/smart/src/lib/request.service";
 import {NzSelectOptionInterface} from "ng-zorro-antd/select/select.types";
 
@@ -17,7 +21,7 @@ import {NzSelectOptionInterface} from "ng-zorro-antd/select/select.types";
         NzButtonComponent,
         RouterLink,
         NzCardComponent,
-        SmartFormComponent,
+        SmartEditorComponent,
     ],
     templateUrl: './serial-edit.component.html',
     styleUrls: ['./serial-edit.component.scss'],
@@ -25,11 +29,11 @@ import {NzSelectOptionInterface} from "ng-zorro-antd/select/select.types";
 export class SerialEditComponent implements OnInit {
     id: any = '';
 
-    @ViewChild('form') form!: SmartFormComponent
+    @ViewChild('form') form!: SmartEditorComponent
 
-    ports: NzSelectOptionInterface[] = []
+    ports: SmartSelectOption[] = []
 
-    fields: SmartFormItem[] = [
+    fields: SmartField[] = [
         {key: "id", label: "ID", type: "text", min: 2, max: 30, placeholder: "选填"},
         {key: "name", label: "名称", type: "text", required: true, default: '新串口'},
         {key: "port", label: "端口", type: "select", options: this.ports},
@@ -106,13 +110,13 @@ export class SerialEditComponent implements OnInit {
     }
 
     onSubmit() {
-        if (!this.form.Validate()) {
+        if (!this.form.valid) {
             this.msg.error('请检查数据')
             return
         }
 
         let url = `serial/${this.id || 'create'}`
-        this.rs.post(url, this.form.Value()).subscribe((res) => {
+        this.rs.post(url, this.form.value).subscribe((res) => {
             this.router.navigateByUrl('/admin/serial/' + res.data.id);
             this.msg.success('保存成功');
         });

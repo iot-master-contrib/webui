@@ -5,7 +5,7 @@ import {RequestService} from '../../../../../projects/smart/src/lib/request.serv
 import {NzMessageService} from 'ng-zorro-antd/message';
 import {CommonModule} from '@angular/common';
 import {NzCardComponent} from "ng-zorro-antd/card";
-import {SmartFormComponent, SmartFormItem} from "../../../../../projects/smart/src/lib/smart-form/smart-form.component";
+import {SmartEditorComponent, SmartField} from "../../../../../projects/smart/src/lib/smart-editor/smart-editor.component";
 
 @Component({
     selector: 'app-setting-log',
@@ -15,16 +15,16 @@ import {SmartFormComponent, SmartFormItem} from "../../../../../projects/smart/s
         NzButtonComponent,
         RouterLink,
         NzCardComponent,
-        SmartFormComponent,
+        SmartEditorComponent,
     ],
     templateUrl: './setting-log.component.html',
     styleUrl: './setting-log.component.scss'
 })
 export class SettingLogComponent implements OnInit {
 
-    @ViewChild('form') form!: SmartFormComponent
+    @ViewChild('form') form!: SmartEditorComponent
 
-    fields: SmartFormItem[] = [
+    fields: SmartField[] = [
         {key: "caller", label: "显示函数调用", type: "switch"},
         {key: "text", label: "使用文本格式", type: "switch"},
         {
@@ -65,13 +65,13 @@ export class SettingLogComponent implements OnInit {
     }
 
     onSubmit() {
-        if (!this.form.Validate()) {
+        if (!this.form.valid) {
             this.msg.error('请检查数据')
             return
         }
 
         let url = `setting/log`
-        this.rs.post(url, this.form.Value()).subscribe((res) => {
+        this.rs.post(url, this.form.value).subscribe((res) => {
             this.msg.success('保存成功');
         });
     }

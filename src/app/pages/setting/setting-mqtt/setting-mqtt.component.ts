@@ -5,7 +5,7 @@ import {RequestService} from '../../../../../projects/smart/src/lib/request.serv
 import {NzMessageService} from 'ng-zorro-antd/message';
 import {CommonModule} from '@angular/common';
 import {NzCardComponent} from "ng-zorro-antd/card";
-import {SmartFormComponent, SmartFormItem} from "../../../../../projects/smart/src/lib/smart-form/smart-form.component";
+import {SmartEditorComponent, SmartField} from "../../../../../projects/smart/src/lib/smart-editor/smart-editor.component";
 
 @Component({
     selector: 'app-setting-mqtt',
@@ -15,16 +15,16 @@ import {SmartFormComponent, SmartFormItem} from "../../../../../projects/smart/s
         NzButtonComponent,
         RouterLink,
         NzCardComponent,
-        SmartFormComponent,
+        SmartEditorComponent,
     ],
     templateUrl: './setting-mqtt.component.html',
     styleUrl: './setting-mqtt.component.scss'
 })
 export class SettingMqttComponent implements OnInit {
 
-    @ViewChild('form') form!: SmartFormComponent
+    @ViewChild('form') form!: SmartEditorComponent
 
-    fields: SmartFormItem[] = [
+    fields: SmartField[] = [
         {key: "url", label: "地址", type: "text", required: true, default: ''},
         {key: "username", label: "用户名", type: "text"},
         {key: "password", label: "密码", type: "text"},
@@ -43,13 +43,13 @@ export class SettingMqttComponent implements OnInit {
     }
 
     onSubmit() {
-        if (!this.form.Validate()) {
+        if (!this.form.valid) {
             this.msg.error('请检查数据')
             return
         }
 
         let url = `setting/mqtt`
-        this.rs.post(url, this.form.Value()).subscribe((res) => {
+        this.rs.post(url, this.form.value).subscribe((res) => {
             this.msg.success('保存成功');
         });
     }
