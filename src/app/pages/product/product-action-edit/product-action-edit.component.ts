@@ -45,7 +45,7 @@ export class ProductActionEditComponent {
     values: any = {}
     fields: SmartField[] = [
         {
-            label: '', key: 'actions', type: 'table',
+            label: '', key: 'actions', type: 'list',
             children: [
                 {label: '动作', key: 'name', type: 'text'},
                 {label: '名称', key: 'label', type: 'text'},

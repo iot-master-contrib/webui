@@ -120,6 +120,8 @@ function getDefault(field: SmartField): any {
             return []
         case 'object':
             return {}
+        case 'list':
+            return []
         case 'table':
             return []
     }
@@ -199,6 +201,12 @@ export class SmartEditorComponent implements OnInit {
         fields.forEach(f => {
             if (f.type == 'object' && f.children) {
                 fs[f.key] = this.build(f.children, values[f.key])
+                return
+            }
+            if (f.type == 'list' && f.children) {
+                fs[f.key] = this.fb.array(values[f.key]?.map((v: any) => {
+                    return this.build(f.children || [], v)
+                }) || [])
                 return
             }
             if (f.type == 'table' && f.children) {

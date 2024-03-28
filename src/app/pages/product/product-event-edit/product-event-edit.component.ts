@@ -45,7 +45,7 @@ export class ProductEventEditComponent {
     values: any = {}
     fields: SmartField[] = [
         {
-            label: '', key: 'events', type: 'table',
+            label: '', key: 'events', type: 'list',
             children: [
                 {label: '等级', key: 'level', type: 'number'},
                 {label: '事件', key: 'name', type: 'text'},
