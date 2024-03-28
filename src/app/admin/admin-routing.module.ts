@@ -19,9 +19,6 @@ import {ProjectDetailComponent} from "../pages/project/project-detail/project-de
 import {SpacesComponent} from "../pages/space/spaces/spaces.component";
 import {SpaceEditComponent} from "../pages/space/space-edit/space-edit.component";
 import {SpaceDetailComponent} from "../pages/space/space-detail/space-detail.component";
-import {PluginComponent} from "../pages/plugin/plugin.component";
-import {PluginEditComponent} from "../pages/plugin/plugin-edit/plugin-edit.component";
-import {PluginDetailComponent} from "../pages/plugin/plugin-detail/plugin-detail.component";
 import {UsersComponent} from "../pages/users/users/users.component";
 import {UserEditComponent} from "../pages/users/user-edit/user-edit.component";
 import {UserDetailComponent} from "../pages/users/user-detail/user-detail.component";
