@@ -15,7 +15,6 @@ import {NzTabsModule} from "ng-zorro-antd/tabs";
 import {DevicesComponent} from "../../device/devices/devices.component";
 import {WebViewComponent} from "../../../components/web-view/web-view.component";
 import {ProductVersionComponent} from "../product-version/product-version.component";
-import {PluginPagesComponent} from "../../../components/plugin-pages/plugin-pages.component";
 import {NzCollapseComponent} from "ng-zorro-antd/collapse";
 
 @Component({
@@ -34,7 +33,6 @@ import {NzCollapseComponent} from "ng-zorro-antd/collapse";
         DevicesComponent,
         WebViewComponent,
         ProductVersionComponent,
-        PluginPagesComponent,
         NzCollapseComponent,
     ],
     templateUrl: './product-detail.component.html',
@@ -65,8 +63,6 @@ export class ProductDetailComponent implements OnInit {
         private route: ActivatedRoute
     ) {
     }
-
-    plugins: any[] = [];
 
     ngOnInit(): void {
         if (this.route.parent?.snapshot.paramMap.has('project')) {

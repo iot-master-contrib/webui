@@ -30,3 +30,9 @@
         </nz-card>
     </nz-col>
 </nz-row>
+
+<ng-template #test let-control="control" let-field="field">
+    <app-input-product [formControl]="control"></app-input-product>
+</ng-template>
+
+<im-smart-editor [fields]="fields" [values]="values" #editor></im-smart-editor>

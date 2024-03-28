@@ -14,7 +14,6 @@ import {WebViewComponent} from "../../../components/web-view/web-view.component"
 import {VersionPropertyComponent} from "../version-property/version-property.component";
 import {VersionEventComponent} from "../version-event/version-event.component";
 import {VersionActionComponent} from "../version-action/version-action.component";
-import {PluginPagesComponent} from "../../../components/plugin-pages/plugin-pages.component";
 
 @Component({
     selector: 'app-version-detail',
@@ -33,7 +32,6 @@ import {PluginPagesComponent} from "../../../components/plugin-pages/plugin-page
         VersionPropertyComponent,
         VersionEventComponent,
         VersionActionComponent,
-        PluginPagesComponent,
     ],
     templateUrl: './version-detail.component.html',
     styleUrl: './version-detail.component.scss'
@@ -64,8 +62,6 @@ export class VersionDetailComponent implements OnInit {
         private route: ActivatedRoute
     ) {
     }
-
-    plugins: any[] = [];
 
     ngOnInit(): void {
         if (this.route.parent?.snapshot.paramMap.has('project')) {

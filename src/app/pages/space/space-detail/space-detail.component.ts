@@ -14,7 +14,6 @@ import {SmartInfoComponent, SmartInfoItem} from "../../../../../projects/smart/s
 import {NzTabsModule} from "ng-zorro-antd/tabs";
 import {DevicesComponent} from "../../device/devices/devices.component";
 import {SpaceDeviceComponent} from "../space-device/space-device.component";
-import {PluginPagesComponent} from "../../../components/plugin-pages/plugin-pages.component";
 
 @Component({
     selector: 'app-space-detail',
@@ -35,7 +34,6 @@ import {PluginPagesComponent} from "../../../components/plugin-pages/plugin-page
         NzTabsModule,
         DevicesComponent,
         SpaceDeviceComponent,
-        PluginPagesComponent,
     ],
     templateUrl: './space-detail.component.html',
     styleUrl: './space-detail.component.scss'

@@ -12,9 +12,7 @@ import {NzStatisticComponent} from "ng-zorro-antd/statistic";
 import {NzCardComponent} from "ng-zorro-antd/card";
 import {SmartInfoComponent, SmartInfoItem} from "../../../../../projects/smart/src/lib/smart-info/smart-info.component";
 import {NzTabsModule} from "ng-zorro-antd/tabs";
-import {SmartTableColumn} from "../../../../../projects/smart/src/lib/smart-table/smart-table.component";
 import {DevicePropertyComponent} from "../device-property/device-property.component";
-import {PluginPagesComponent} from "../../../components/plugin-pages/plugin-pages.component";
 
 @Component({
     selector: 'app-device-detail',
@@ -34,7 +32,6 @@ import {PluginPagesComponent} from "../../../components/plugin-pages/plugin-page
         NzPopconfirmDirective,
         NzTabsModule,
         DevicePropertyComponent,
-        PluginPagesComponent,
     ],
     templateUrl: './device-detail.component.html',
     styleUrl: './device-detail.component.scss',

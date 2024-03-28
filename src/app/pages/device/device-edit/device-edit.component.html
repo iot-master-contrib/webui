@@ -1,7 +1,5 @@
 <nz-card [nzTitle]="'设备'+ (this.id ? '编辑' : '创建') " [nzExtra]="extraTemplate">
     <im-smart-form #form [fields]="fields" [value]="values"></im-smart-form>
-
-    <app-plugin-pages *ngIf="id" target="device-edit" [object]="values" [params]="{device: this.id}"/>
 </nz-card>
 
 <ng-template #extraTemplate>

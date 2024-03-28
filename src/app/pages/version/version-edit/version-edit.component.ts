@@ -59,8 +59,6 @@ export class VersionEditComponent implements OnInit {
     ) {
     }
 
-    plugins: any[] = [];
-
     ngOnInit(): void {
         if (this.route.snapshot.paramMap.has('id')) {
             this.id = this.route.snapshot.paramMap.get('id');

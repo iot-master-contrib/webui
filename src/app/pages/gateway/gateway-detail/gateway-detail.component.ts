@@ -10,7 +10,6 @@ import {NzCardComponent} from "ng-zorro-antd/card";
 import {SmartInfoComponent, SmartInfoItem} from "../../../../../projects/smart/src/lib/smart-info/smart-info.component";
 import {NzTabsModule} from "ng-zorro-antd/tabs";
 import {DevicesComponent} from "../../device/devices/devices.component";
-import {PluginPagesComponent} from "../../../components/plugin-pages/plugin-pages.component";
 
 @Component({
     selector: 'app-gateway-detail',
@@ -26,7 +25,6 @@ import {PluginPagesComponent} from "../../../components/plugin-pages/plugin-page
         NzPopconfirmDirective,
         NzTabsModule,
         DevicesComponent,
-        PluginPagesComponent,
     ],
     templateUrl: './gateway-detail.component.html',
     styleUrl: './gateway-detail.component.scss'

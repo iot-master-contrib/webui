@@ -11,6 +11,7 @@ import {UserService} from "../user.service";
 import {PasswordComponent} from "../modals/password/password.component";
 import {RequestService} from '../../../projects/smart/src/lib/request.service';
 import {CommonModule} from '@angular/common';
+import {NzBreadCrumbComponent} from "ng-zorro-antd/breadcrumb";
 
 @Component({
     selector: 'app-project',
@@ -29,7 +30,7 @@ import {CommonModule} from '@angular/common';
         NzMenuDividerDirective,
         NzMenuItemComponent,
         RouterLink,
-        NzSubMenuComponent, NzSiderComponent,
+        NzSubMenuComponent, NzSiderComponent, NzBreadCrumbComponent,
     ],
     templateUrl: './project.component.html',
     styleUrl: './project.component.scss'
@@ -58,14 +59,6 @@ export class ProjectComponent implements OnInit {
             items: [
                 {name: '所有设备', link: 'device'},
                 {name: '创建设备', link: 'device/create'},
-            ]
-        },
-        {
-            name: '网关管理', icon: 'link',
-            items: [
-                {name: '所有网关', link: 'gateway'},
-                {name: '创建网关', link: 'gateway/create'},
-                //{name: '批量创建', link: 'gateway/batch'},
             ]
         },
         {

@@ -12,7 +12,6 @@ import {NzModalService} from "ng-zorro-antd/modal";
 import {ProjectsComponent} from "../../project/projects/projects.component";
 import {ProductsComponent} from "../../product/products/products.component";
 import {ProductVersionComponent} from "../../product/product-version/product-version.component";
-import {PluginPagesComponent} from "../../../components/plugin-pages/plugin-pages.component";
 
 @Component({
     selector: 'app-device-edit',
@@ -23,7 +22,6 @@ import {PluginPagesComponent} from "../../../components/plugin-pages/plugin-page
         RouterLink,
         NzCardComponent,
         SmartFormComponent,
-        PluginPagesComponent,
     ],
     templateUrl: './device-edit.component.html',
     styleUrl: './device-edit.component.scss',
