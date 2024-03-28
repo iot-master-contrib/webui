@@ -12,6 +12,7 @@ import {PasswordComponent} from "../modals/password/password.component";
 import {RequestService} from '../../../projects/smart/src/lib/request.service';
 import {CommonModule} from '@angular/common';
 import {NzButtonComponent} from "ng-zorro-antd/button";
+import {NzBreadCrumbComponent} from "ng-zorro-antd/breadcrumb";
 
 @Component({
     selector: 'app-admin',
@@ -30,7 +31,7 @@ import {NzButtonComponent} from "ng-zorro-antd/button";
         NzMenuDividerDirective,
         NzMenuItemComponent,
         RouterLink,
-        NzSubMenuComponent, NzSiderComponent, NzButtonComponent,
+        NzSubMenuComponent, NzSiderComponent, NzButtonComponent, NzBreadCrumbComponent,
     ],
     templateUrl: './admin.component.html',
     styleUrl: './admin.component.scss'

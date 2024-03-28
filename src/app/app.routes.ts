@@ -20,7 +20,8 @@ export const routes: Routes = [
         path: "admin",
         canActivate: [authGuard, adminGuard],
         component: AdminComponent,
-        loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)
+        loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule),
+        data:{breadcrumb:"管理后台"}
     },
     {
         path: "project/:project",
