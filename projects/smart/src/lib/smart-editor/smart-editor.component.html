@@ -13,34 +13,36 @@
     @switch (field.type) {
         @case ('text') {
             <!--文本-->
-            <input nz-input
-                   [formControl]="control"
-                   [minlength]="field.min || 0" [maxlength]="field.max || 200"
+            <input nz-input [formControl]="control"
+                   [minlength]="field.min || 0"
+                   [maxlength]="field.max || 255"
                    [placeholder]="field.placeholder || ''"
                    #box (change)="field.change?.(box.value)"/>
 
         }
         @case ('password') {
             <!--密码-->
-            <input nz-input type="password"
-                   [formControl]="control"
-                   [minlength]="field.min || 0" [maxlength]="field.max || 200"
+            <input nz-input type="password" [formControl]="control"
+                   [minlength]="field.min || 0"
+                   [maxlength]="field.max || 255"
                    [placeholder]="field.placeholder || ''"
                    #box (change)="field.change?.(box.value)"/>
         }
         @case ('number') {
             <!--数值-->
-            <nz-input-number
-                [formControl]="control"
-                [nzMax]="field.max || 100" [nzMin]="field.min || 0" [nzStep]="field.step || 1"
-                [nzPlaceHolder]="field.placeholder || ''"
-                (change)="field.change?.($event)"></nz-input-number>
+            <nz-input-number [formControl]="control"
+                             [nzMin]="field.min===undefined ? -Infinity : field.min"
+                             [nzMax]="field.max===undefined ? Infinity : field.max"
+                             [nzStep]="field.step || 1"
+                             [nzPlaceHolder]="field.placeholder || ''"
+                             (change)="field.change?.($event)"></nz-input-number>
         }
         @case ('slider') {
             <!--滑块-->
-            <nz-slider
-                [formControl]="control"
-                [nzMax]="field.max" [nzMin]="field.min" [nzStep]="field.step"></nz-slider>
+            <nz-slider [formControl]="control"
+                       [nzMin]="field.min || 0"
+                       [nzMax]="field.max || 100"
+                       [nzStep]="field.step"></nz-slider>
         }
         @case ('radio') {
             <!--单选 有import Bug，先不支持
@@ -50,69 +52,61 @@
         }
         @case ('select') {
             <!--选项-->
-            <nz-select
-                [nzOptions]="field.options || empty"
-                [formControl]="control"
-                [nzPlaceHolder]="field.placeholder || ''"
-                (change)="field.change?.($event)"></nz-select>
+            <nz-select [formControl]="control"
+                       [nzOptions]="field.options || empty"
+                       [nzPlaceHolder]="field.placeholder || ''"
+                       (change)="field.change?.($event)"></nz-select>
         }
         @case ('tags') {
             <!--标签-->
-            <nz-select nzMode="tags"
+            <nz-select nzMode="tags" [formControl]="control"
                        [nzTokenSeparators]="[',','，', ' ', ';']"
                        [nzOptions]="field.options || empty"
-                       [formControl]="control"
                        [nzPlaceHolder]="field.placeholder || '输入 逗号，分号，空格 分隔'"
                        (change)="field.change?.($event)"></nz-select>
         }
         @case ('tree') {
             <!--树选择-->
-            <nz-tree-select nzShowSearch nzCheckable
+            <nz-tree-select nzShowSearch nzCheckable [formControl]="control"
                             [nzNodes]="field.tree || empty"
                             (nzTreeCheckBoxChange)="field.change?.($event)"
-                            [formControl]="control"
                             [nzPlaceHolder]="field.placeholder || ''"
                             (change)="field.change?.($event)"></nz-tree-select>
         }
         @case ('color') {
             <!--颜色-->
-            <nz-color-picker nzShowText
-                             [formControl]="control"
+            <nz-color-picker nzShowText [formControl]="control"
                              (change)="field.change?.($event)"></nz-color-picker>
         }
         @case ('switch') {
             <!--开关-->
-            <nz-switch
-                [formControl]="control" (change)="field.change?.($event)"></nz-switch>
+            <nz-switch [formControl]="control" (change)="field.change?.($event)"></nz-switch>
         }
         @case ('textarea') {
             <!--多行文本-->
-            <nz-textarea-count [nzMaxCharacterCount]="field.max || 200">
+            <nz-textarea-count [nzMaxCharacterCount]="field.max || 255">
                         <textarea rows="4" nz-input [formControl]="control" #box
                                   (change)="field.change?.(box.value)"></textarea>
             </nz-textarea-count>
         }
         @case ('slider') {
             <!--进度条-->
-            <nz-slider
-                [formControl]="control"
-                [nzMax]="field.max" [nzMin]="field.min" [nzStep]="field.step"
-                (change)="field.change?.($event)"></nz-slider>
+            <nz-slider [formControl]="control"
+                       [nzMax]="field.max" [nzMin]="field.min" [nzStep]="field.step"
+                       (change)="field.change?.($event)"></nz-slider>
         }
         @case ('date') {
             <!--日期-->
-            <nz-date-picker
-                [formControl]="control"
-                [nzShowTime]="!!field.time"
-                [nzPlaceHolder]="field.placeholder || ''"
-                (change)="field.change?.($event)"></nz-date-picker>
+            <nz-date-picker [formControl]="control"
+                            [nzShowTime]="!!field.time"
+                            [nzPlaceHolder]="field.placeholder || ''"
+                            (change)="field.change?.($event)"></nz-date-picker>
         }
         @case ('time') {
             <!--时间-->
-            <nz-time-picker
-                [formControl]="control"
-                [nzPlaceHolder]="field.placeholder || ''"
-                (change)="field.change?.($event)"></nz-time-picker>
+            <nz-time-picker [formControl]="control"
+                            [nzPlaceHolder]="field.placeholder || ''"
+                            (change)="field.change?.($event)"></nz-time-picker>
         }
         @case ('file') {
             <!--文件-->
@@ -130,10 +124,9 @@
         }
         @case ('images') {
             <!--标签-->
-            <nz-select nzMode="tags"
+            <nz-select nzMode="tags" [formControl]="control"
                        [nzTokenSeparators]="[',','，', ' ', ';']"
                        [nzOptions]="field.options || empty"
-                       [formControl]="control"
                        [nzPlaceHolder]="field.placeholder || '输入 逗号，分号，空格 分隔'"
                        (change)="field.change?.($event)"></nz-select>
             <nz-upload [nzAction]="field.upload" nzMultiple [nzDisabled]="!!field.disabled"
@@ -199,9 +192,8 @@
 <ng-template #groupTpl let-fields="fields" let-group="group">
     @for (field of fields;track field) {
         <nz-form-item>
-            <nz-form-label [nzSm]="6" [nzXs]="24"
-                           [nzRequired]="field.required"
-                           [nzFor]="field.key">{{ field.label }}
+            <nz-form-label [nzSm]="6" [nzXs]="24" [nzRequired]="field.required" [nzFor]="field.key">
+                {{ field.label }}
             </nz-form-label>
             <nz-form-control [nzSm]="14" [nzXs]="24" [nzErrorTip]="errorTip">
                 <ng-container *ngTemplateOutlet="controlTpl; context: { field: field, control:group.get(field.key)}">

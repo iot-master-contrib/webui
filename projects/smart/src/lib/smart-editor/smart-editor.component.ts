@@ -30,7 +30,7 @@ import {NzTreeSelectComponent} from "ng-zorro-antd/tree-select";
 import {NzIconDirective} from "ng-zorro-antd/icon";
 import {NzSpaceModule} from "ng-zorro-antd/space";
 
-export interface SmartItem {
+export interface SmartField {
     key: string
     type: string
     label: string
@@ -42,7 +42,7 @@ export interface SmartItem {
     hidden?: boolean //隐藏
 
     array?: boolean //数组
-    children?: SmartItem[]
+    children?: SmartField[]
 
     required?: boolean
     max?: number
@@ -65,10 +65,10 @@ export interface SmartItem {
     template?: TemplateRef<any>
 }
 
-function getDefault(si: SmartItem): any {
-    if (si.array)
+function getDefault(field: SmartField): any {
+    if (field.array)
         return []
-    switch (si.type) {
+    switch (field.type) {
         case 'text':
             return ''
         case 'password':
@@ -78,7 +78,7 @@ function getDefault(si: SmartItem): any {
         case 'slider':
             return 0
         case 'select':
-            return si.options?.[0]?.value
+            return field.options?.[0]?.value
         case 'tags':
             return []
         case 'color':
@@ -143,13 +143,13 @@ function getDefault(si: SmartItem): any {
 export class SmartEditorComponent implements OnInit {
     group!: FormGroup
 
-    _fields: SmartItem[] = []
+    _fields: SmartField[] = []
     _values: any = {}
 
     empty: any = []
 
 
-    @Input() set fields(fs: SmartItem[]) {
+    @Input() set fields(fs: SmartField[]) {
         console.log("[SmartEditor] set fields", fs)
         if (fs && fs.length) {
             this._fields = fs
@@ -174,7 +174,7 @@ export class SmartEditorComponent implements OnInit {
         return this._values
     }
 
-    build(fields: SmartItem[], values: any): FormGroup {
+    build(fields: SmartField[], values: any): FormGroup {
         console.log("[SmartEditor] build", fields, values)
         values = values || {}
 
@@ -293,7 +293,7 @@ export class SmartEditorComponent implements OnInit {
         moveItemInArray(control.controls, event.previousIndex, event.currentIndex);
     }
 
-    copy(fields: SmartItem[], control: FormArray, i: number) {
+    copy(fields: SmartField[], control: FormArray, i: number) {
         let o = control.at(i)
         let n = this.build(fields, o.value)
         control.insert(i, n)
@@ -303,7 +303,9 @@ export class SmartEditorComponent implements OnInit {
         control.removeAt(i);
     }
 
-    add(control: FormArray, fields: SmartItem[]) {
+    add(control: FormArray, fields: SmartField[]) {
         control.push(this.build(fields, {}))
     }
+
+    protected readonly Infinity = Infinity;
 }
