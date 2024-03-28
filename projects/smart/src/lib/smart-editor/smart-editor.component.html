@@ -141,30 +141,6 @@
                 <button nz-button nzType="primary" [disabled]="!!field.disabled">上传</button>
             </nz-upload>
         }
-        @case ('choose') {
-            <!--选择-->
-            <nz-input-group nzSearch [nzAddOnAfter]="suffixButton">
-                <input nz-input [formControl]="control"
-                       [placeholder]="field.placeholder || ''"
-                       #box (change)="field.change?.(box.value)"/>
-            </nz-input-group>
-            <ng-template #suffixButton>
-                <button nz-button nzType="primary" (click)="field.choose?.()" [disabled]="!!field.disabled">选择
-                </button>
-            </ng-template>
-        }
-        @case ('choose-number') {
-            <!--选择(整数型)-->
-            <nz-input-group nzSearch [nzAddOnAfter]="suffixButton">
-                <input nz-input [formControl]="control" type="number"
-                       [placeholder]="field.placeholder || ''"
-                       #box (change)="field.change?.(box.value)"/>
-            </nz-input-group>
-            <ng-template #suffixButton>
-                <button nz-button nzType="primary" (click)="field.choose?.()" [disabled]="!!field.disabled">选择
-                </button>
-            </ng-template>
-        }
         @case ('object') {
             <!--对象-->
             <ng-container *ngTemplateOutlet="groupTpl; context: { fields: field.children, group:control }">
@@ -196,7 +172,7 @@
                             <a *nzSpaceItem title="排序" style="cursor:move;" cdkDragHandle>
                                 <i nz-icon nzType="drag"></i>
                             </a>
-                            <a *nzSpaceItem title="复制" (click)="copy(control, i)">
+                            <a *nzSpaceItem title="复制" (click)="copy(field.children, control, i)">
                                 <i nz-icon nzType="copy"></i>
                             </a>
                             <a *nzSpaceItem title="删除" (click)="remove(control, i)">
@@ -236,10 +212,8 @@
 </ng-template>
 
 <!-- 入口 -->
-<form>
-    <ng-container *ngTemplateOutlet="groupTpl; context: { fields: fields, group: group }">
-    </ng-container>
-</form>
+<ng-container *ngTemplateOutlet="groupTpl; context: { fields: _fields, group: group }">
+</ng-container>
 
 
 

@@ -59,9 +59,6 @@ export interface SmartItem {
 
     upload?: string //文件上传
 
-    choose?: () => void //选择操作
-    //data?: any; //控件参数
-
     pattern?: string | RegExp
     validators?: any[];
 
@@ -139,49 +136,57 @@ function getDefault(si: SmartItem): any {
         NzIconDirective,
         NzSpaceModule,
         CdkDropList,
-
     ],
     templateUrl: './smart-editor.component.html',
     styleUrl: './smart-editor.component.scss',
-    providers: [
-        {
-            provide: NG_VALUE_ACCESSOR,
-            useExisting: forwardRef(() => SmartEditorComponent),
-            multi: true
-        }
-    ]
 })
-export class SmartEditorComponent implements OnInit, ControlValueAccessor {
+export class SmartEditorComponent implements OnInit {
     group!: FormGroup
 
     _fields: SmartItem[] = []
-    //_values: any = {}
+    _values: any = {}
 
     empty: any = []
 
 
     @Input() set fields(fs: SmartItem[]) {
-        this._fields = fs
-        //this.group = this.buildGroup(this._fields, this._values)
-        console.log("set fields", fs)
+        console.log("[SmartEditor] set fields", fs)
+        if (fs && fs.length) {
+            this._fields = fs
+            this.group = this.build(this._fields, this._values)
+        }
     }
 
     get fields() {
         return this._fields
     }
 
-    buildGroup(fields: SmartItem[], values: any): FormGroup {
+
+    @Input() set values(values: any) {
+        console.log("[SmartEditor] set values", values)
+        this._values = values
+        if (this._fields && this._fields.length) {
+            this.group = this.build(this._fields, this._values)
+        }
+    }
+
+    get values() {
+        return this._values
+    }
+
+    build(fields: SmartItem[], values: any): FormGroup {
+        console.log("[SmartEditor] build", fields, values)
         values = values || {}
 
         let fs: any = {}
         fields.forEach(f => {
             if (f.type == 'object' && f.children) {
-                fs[f.key] = this.buildGroup(f.children, values[f.key])
+                fs[f.key] = this.build(f.children, values[f.key])
                 return
             }
             if (f.type == 'table' && f.children) {
                 fs[f.key] = this.fb.array(values[f.key]?.map((v: any) => {
-                    return this.buildGroup(f.children || [], v)
+                    return this.build(f.children || [], v)
                 }) || [])
                 return
             }
@@ -227,47 +232,42 @@ export class SmartEditorComponent implements OnInit, ControlValueAccessor {
         return this.fb.group(fs)
     }
 
+    //设置数据
+    setValue(value: any) {
+        console.log("[SmartEditor] setValue", value)
+        //this.group.setValue(value)
+        this._values = value
+        if (this._fields && this._fields.length)
+            this.group = this.build(this._fields, value)
+    }
 
-    PatchValue(value: any) {
-        setTimeout(() => this.group.patchValue(value))
+    //补充数据
+    patchValue(value: any) {
+        console.log("[SmartEditor] patchValue", value)
+        //setTimeout(() => this.group.patchValue(value))
+        //TODO 数组类型 需要创建control
+        this.group.patchValue(value)
+    }
+
+    get valid() {
+        return this.group.valid
+    }
+
+    get value() {
+        return this.group.value
+    }
+
+    getRawValue() {
+        //this.group.updateValueAndValidity()
+        return this.group.getRawValue()
     }
 
     constructor(private fb: FormBuilder) {
     }
 
-    writeValue(obj: any): void {
-        //console.log("write", this._fields, obj)
-        if (obj) {
-            this.group = this.buildGroup(this._fields, obj)
-            this.group.valueChanges.subscribe(res => {
-                this.onChanged(this.group.value)
-            })
-        }
-    }
-
-    onChanged: any = () => {
-    }
-    onTouched: any = () => {
-    }
-
-    registerOnChange(fn: any): void {
-        this.onChanged = fn;
-    }
-
-    registerOnTouched(fn: any): void {
-        this.onTouched = fn;
-    }
-
-    setDisabledState?(isDisabled: boolean): void {
-        //throw new Error('Method not implemented.');
-    }
-
     ngOnInit(): void {
-        //throw new Error('Method not implemented.');
-        this.group = this.buildGroup(this._fields, {})
-        this.group.valueChanges.subscribe(res => {
-            this.onChanged(this.group.value)
-        })
+        if (this._fields && this._fields.length)
+            this.group = this.build(this._fields, this._values)
     }
 
 
@@ -289,33 +289,21 @@ export class SmartEditorComponent implements OnInit, ControlValueAccessor {
     }
 
 
-    change() {
-        this.onChanged(this.group.value);
-    }
-
-
-    onSubmit() {
-
-    }
-
     drop(control: FormArray, event: CdkDragDrop<any, any>) {
         moveItemInArray(control.controls, event.previousIndex, event.currentIndex);
-        this.change();
     }
 
-    copy(control: FormArray, i: number) {
-        let group = control.at(i)
-        let values = group.value
-        control.insert(i, this.fb.group(values))
-        this.change()
+    copy(fields: SmartItem[], control: FormArray, i: number) {
+        let o = control.at(i)
+        let n = this.build(fields, o.value)
+        control.insert(i, n)
     }
 
     remove(control: FormArray, i: number) {
         control.removeAt(i);
-        this.change();
     }
 
     add(control: FormArray, fields: SmartItem[]) {
-        control.push(this.buildGroup(fields, {}))
+        control.push(this.build(fields, {}))
     }
 }

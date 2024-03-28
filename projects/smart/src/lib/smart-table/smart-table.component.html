@@ -34,7 +34,7 @@
                     nzType="primary"
                     nzShape="round"
                     [title]="b.title || ''"
-                    [routerLink]="b.link?.()"
+                    [routerLink]="b.link?.() || ''"
                     (click)="b.action?.()">
                 <span *ngIf="b.icon" nz-icon [nzType]="b.icon"></span>
                 {{ b.label }}
@@ -96,7 +96,7 @@
           <a *ngIf="o.link && o.external"
              [title]="o.title||''"
              [target]="o.external ? '_blank' : ''"
-             [routerLink]="o.link?.(data)">
+             [routerLink]="o.link(data)">
             <i *ngIf="o.icon" nz-icon [nzType]="o.icon"></i>
               {{ o.label }}
           </a>
@@ -104,7 +104,7 @@
             <!--链接-->
           <a *ngIf="o.link && !o.external"
              [title]="o.title||''"
-             [routerLink]="o.link?.(data)">
+             [routerLink]="o.link(data)">
             <i *ngIf="o.icon" nz-icon [nzType]="o.icon"></i>
               {{ o.label }}
           </a>
@@ -114,7 +114,7 @@
              [title]="o.title||''"
              nz-popconfirm
              [nzPopconfirmTitle]="o.confirm"
-             (nzOnConfirm)="o.action?.(data)">
+             (nzOnConfirm)="o.action(data)">
             <i *ngIf="o.icon" nz-icon [nzType]="o.icon"></i>
               {{ o.label }}
           </a>
@@ -122,7 +122,7 @@
             <!--调用-->
           <a *ngIf="o.action && !o.confirm"
              [title]="o.title||''"
-             (click)="o.action?.(data)">
+             (click)="o.action(data)">
             <i *ngIf="o.icon" nz-icon [nzType]="o.icon"></i>
               {{ o.label }}
           </a>
