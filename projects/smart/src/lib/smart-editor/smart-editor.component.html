@@ -69,6 +69,7 @@
             <!--树选择-->
             <nz-tree-select nzShowSearch nzCheckable [formControl]="control"
                             [nzNodes]="field.tree || empty"
+                            [nzMultiple]="field.multiple"
                             (nzTreeCheckBoxChange)="field.change?.($event)"
                             [nzPlaceHolder]="field.placeholder || ''"
                             (change)="field.change?.($event)"></nz-tree-select>
@@ -95,10 +96,15 @@
                        [nzMax]="field.max" [nzMin]="field.min" [nzStep]="field.step"
                        (change)="field.change?.($event)"></nz-slider>
         }
+        @case ('datetime') {
+            <!--日期和时间-->
+            <nz-date-picker nzShowTime [formControl]="control"
+                            [nzPlaceHolder]="field.placeholder || ''"
+                            (change)="field.change?.($event)"></nz-date-picker>
+        }
         @case ('date') {
             <!--日期-->
             <nz-date-picker [formControl]="control"
-                            [nzShowTime]="!!field.time"
                             [nzPlaceHolder]="field.placeholder || ''"
                             (change)="field.change?.($event)"></nz-date-picker>
         }

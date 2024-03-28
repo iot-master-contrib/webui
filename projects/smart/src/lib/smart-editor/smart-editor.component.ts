@@ -29,6 +29,29 @@ import {NzTimePickerComponent} from "ng-zorro-antd/time-picker";
 import {NzTreeSelectComponent} from "ng-zorro-antd/tree-select";
 import {NzIconDirective} from "ng-zorro-antd/icon";
 import {NzSpaceModule} from "ng-zorro-antd/space";
+import {NzSafeAny} from "ng-zorro-antd/core/types";
+
+
+export interface SmartSelectOption {
+    label: string
+    value: any
+    title?: string
+    disabled?: boolean
+    hide?: boolean
+    key?: string | number
+}
+
+export interface SmartTreeOption {
+    title: string;
+    key: string;
+    isLeaf?: boolean;
+    selectable?: boolean;
+    disabled?: boolean;
+    expanded?: boolean;
+    children?: SmartTreeOption[];
+
+    [key: string]: any;
+}
 
 export interface SmartField {
     key: string
@@ -39,19 +62,20 @@ export interface SmartField {
     tips?: string
 
     disabled?: boolean
-    hidden?: boolean //隐藏
+    hidden?: boolean //隐藏？？？
 
     array?: boolean //数组
     children?: SmartField[]
 
-    required?: boolean
+    required?: boolean //必须
     max?: number
     min?: number
     step?: number
 
-    options?: NzSelectOptionInterface[]
+    multiple?: boolean //多选
 
-    tree?: NzTreeNodeOptions[]
+    options?: SmartSelectOption[] //select参数
+    tree?: SmartTreeOption[] //树形选择
 
     change?: (value: any) => void //监测变化
 
@@ -90,17 +114,15 @@ function getDefault(field: SmartField): any {
         case 'date':
             return new Date()
         case 'time':
-            return ''
+            return new Date()
+        case 'datetime':
+            return new Date()
         case 'file':
             return ''
         case 'image':
             return ''
         case 'images':
             return []
-        case 'choose':
-            return ''
-        case 'choose-number':
-            return 0
         case 'object':
             return {}
         case 'table':
