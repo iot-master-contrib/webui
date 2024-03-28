@@ -1,5 +1,7 @@
-<form nz-form [formGroup]="group">
-    <im-smart-table-edit title="属性" [columns]="items" formControlName="properties">
-        <button nz-button nzType="primary" (click)="onSubmit()">保存</button>
-    </im-smart-table-edit>
-</form>
+<nz-card nzTitle="'属性编辑" [nzExtra]="extraTemplate">
+    <im-smart-editor [fields]="fields" [values]="values" #editor></im-smart-editor>
+</nz-card>
+
+<ng-template #extraTemplate>
+    <button nz-button nzType="primary" (click)="onSubmit()">保存</button>
+</ng-template>

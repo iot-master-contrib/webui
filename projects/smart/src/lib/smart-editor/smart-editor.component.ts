@@ -1,15 +1,11 @@
-import {Component, forwardRef, Input, OnInit, TemplateRef} from '@angular/core';
-import {NzSelectOptionInterface} from "ng-zorro-antd/select/select.types";
-import {NzTreeNodeOptions} from "ng-zorro-antd/tree";
+import {Component, Input, OnInit, TemplateRef} from '@angular/core';
 import {CommonModule} from "@angular/common";
 import {
-    ControlValueAccessor,
     FormArray,
     FormBuilder,
     FormControl,
     FormGroup,
     FormsModule,
-    NG_VALUE_ACCESSOR,
     ReactiveFormsModule,
     Validators
 } from "@angular/forms";
@@ -29,7 +25,6 @@ import {NzTimePickerComponent} from "ng-zorro-antd/time-picker";
 import {NzTreeSelectComponent} from "ng-zorro-antd/tree-select";
 import {NzIconDirective} from "ng-zorro-antd/icon";
 import {NzSpaceModule} from "ng-zorro-antd/space";
-import {NzSafeAny} from "ng-zorro-antd/core/types";
 
 
 export interface SmartSelectOption {

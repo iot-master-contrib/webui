@@ -198,10 +198,10 @@
 <ng-template #groupTpl let-fields="fields" let-group="group">
     @for (field of fields;track field) {
         <nz-form-item>
-            <nz-form-label [nzSm]="6" [nzXs]="24" [nzRequired]="field.required" [nzFor]="field.key">
+            <nz-form-label *ngIf="field.label" [nzSm]="4" [nzXs]="24" [nzRequired]="field.required" [nzFor]="field.key">
                 {{ field.label }}
             </nz-form-label>
-            <nz-form-control [nzSm]="14" [nzXs]="24" [nzErrorTip]="errorTip">
+            <nz-form-control [nzSm]="20" [nzXs]="24" [nzErrorTip]="errorTip">
                 <ng-container *ngTemplateOutlet="controlTpl; context: { field: field, control:group.get(field.key)}">
                 </ng-container>
             </nz-form-control>

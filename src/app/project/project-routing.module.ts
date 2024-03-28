@@ -3,7 +3,6 @@ import {RouterModule, Routes} from '@angular/router';
 import {WebViewComponent} from "../components/web-view/web-view.component";
 import {AlarmComponent} from "../pages/alarm/alarm.component";
 import {UnknownComponent} from "../../../projects/smart/src/lib/unknown/unknown.component";
-import {ProductDetailComponent} from "../pages/product/product-detail/product-detail.component";
 import {DevicesComponent} from "../pages/device/devices/devices.component";
 import {DeviceEditComponent} from "../pages/device/device-edit/device-edit.component";
 import {DeviceDetailComponent} from "../pages/device/device-detail/device-detail.component";
@@ -15,7 +14,6 @@ import {SpaceDetailComponent} from "../pages/space/space-detail/space-detail.com
 import {ProjectDashComponent} from "../pages/project/project-dash/project-dash.component";
 import {ProjectUserComponent} from "../pages/project/project-user/project-user.component";
 import {SpaceDeviceComponent} from "../pages/space/space-device/space-device.component";
-import {VersionDetailComponent} from "../pages/product/version-detail/version-detail.component";
 
 const routes: Routes = [
     {path: "", pathMatch: "full", redirectTo: "dash"},
@@ -23,9 +21,6 @@ const routes: Routes = [
     {path: 'dash', component: ProjectDashComponent, title: "控制台", data:{breadcrumb:"控制台"}},
     {path: 'detail', component: ProjectDetailComponent, title: "项目详情", data:{breadcrumb:"项目详情"}},
     {path: 'edit', component: ProjectEditComponent, title: "项目编辑", data:{breadcrumb:"项目编辑"}},
-
-    {path: 'product/:id', component: ProductDetailComponent, title: "产品详情", data:{breadcrumb:"产品详情"}},
-    {path: 'product/:id/version/:version', component: VersionDetailComponent, title: "产品版本详情", data:{breadcrumb:"产品版本详情"}},
 
     {path: 'device', component: DevicesComponent, title:"设备列表", data:{breadcrumb:"设备列表"}},
     {path: 'device/create', component: DeviceEditComponent, title:"创建设备", data:{breadcrumb:"创建设备"}},
