@@ -47,7 +47,7 @@ export class SerialEditComponent implements OnInit {
         },
         {key: "retry_timeout", label: "重连超时", type: "number", min: 0},
         {key: "retry_maximum", label: "重连最大次数", type: "number", min: 0},
-        {key: "baud_rate", label: "波特率", type: "number"},
+        {key: "baud_rate", label: "波特率", type: "number", default: 9600},
         {
             key: "parity_mode", label: "奇偶校验", type: "select", options: [
                 {label: '无校验 NONE', value: 0},
@@ -70,7 +70,7 @@ export class SerialEditComponent implements OnInit {
                 {label: '6', value: 6},
                 {label: '7', value: 7},
                 {label: '8', value: 8},
-            ]
+            ], default: 8
         },
         {key: "description", label: "说明", type: "textarea"},
     ]
