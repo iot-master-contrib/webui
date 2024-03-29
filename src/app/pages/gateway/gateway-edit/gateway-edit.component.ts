@@ -63,8 +63,6 @@ export class GatewayEditComponent implements OnInit, AfterViewInit {
     load() {
         this.rs.get(`gateway/${this.id}`).subscribe(res => {
             this.values = res.data
-            if (res.data.project_id)
-                this.fields[3].change?.(res.data.project_id)
         });
     }
 

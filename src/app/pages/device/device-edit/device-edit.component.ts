@@ -122,12 +122,14 @@ export class DeviceEditComponent implements OnInit, AfterViewInit {
     load() {
         this.rs.get(`device/${this.id}`).subscribe(res => {
             this.values = res.data
-            if (res.data.gateway_id)
-                this.fields[3].change?.(res.data.gateway_id)
-            if (res.data.product_id)
-                this.fields[4].change?.(res.data.product_id)
-            if (res.data.project_id)
-                this.fields[6].change?.(res.data.project_id)
+
+            this.rs.get(`product/${this.values.product_id}`).subscribe(res => {
+                let product = res.data
+                this.rs.get(`protocol/${product.protocol}/station`).subscribe(res => {
+                    if (res.data)
+                        this.fields.push(...res.data)
+                })
+            });
         });
     }
 
