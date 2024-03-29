@@ -2,7 +2,9 @@
     <nz-col *ngFor="let p of properties" [nzXs]="12" [nzSm]="8" [nzMd]="6" [nzLg]="4" [nzXl]="3" [nzXXl]="2">
         <div class="variable" [ngClass]="{active:actives[p.name]}">
             <nz-statistic [nzTitle]="p.label" [nzValue]="values[p.name] || '-'" [nzSuffix]="p.unit"
-                          (click)="actives[p.name]=!actives[p.name]; search()"></nz-statistic>
+                          (click)="actives[p.name]=!actives[p.name]; search()">
+            </nz-statistic>
+            <nz-switch nzSize="small" [ngModel]="values[p.name]" (ngModelChange)="valueSwitch(p.name, $event)" *ngIf="p.type=='bool' && p.mode=='rw'"></nz-switch>
         </div>
     </nz-col>
 </nz-row>

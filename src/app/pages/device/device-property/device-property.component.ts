@@ -6,12 +6,13 @@ import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 import {NzMessageService} from "ng-zorro-antd/message";
 import {RequestService} from "../../../../../projects/smart/src/lib/request.service";
 import {NgxEchartsDirective} from "ngx-echarts";
-import {FormBuilder, FormGroup, ReactiveFormsModule} from "@angular/forms";
+import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule} from "@angular/forms";
 import dayjs from "dayjs";
 import {NzFormModule} from "ng-zorro-antd/form";
 import {NzOptionComponent, NzSelectComponent} from "ng-zorro-antd/select";
 import {NzInputNumberComponent, NzInputNumberGroupComponent} from "ng-zorro-antd/input-number";
 import {NzDatePickerModule} from "ng-zorro-antd/date-picker";
+import {NzSwitchComponent} from "ng-zorro-antd/switch";
 
 @Component({
     selector: 'app-device-property',
@@ -30,6 +31,8 @@ import {NzDatePickerModule} from "ng-zorro-antd/date-picker";
         NzInputNumberGroupComponent,
         NzInputNumberComponent,
         NzDatePickerModule,
+        NzSwitchComponent,
+        FormsModule,
     ],
     templateUrl: './device-property.component.html',
     styleUrl: './device-property.component.scss'
@@ -81,7 +84,7 @@ export class DevicePropertyComponent {
         private rs: RequestService,
         private route: ActivatedRoute
     ) {
-        this.load();
+        //this.load();
     }
 
     chartInit(ec: any) {
@@ -171,5 +174,12 @@ export class DevicePropertyComponent {
                 }
             });
         }
+    }
+
+    valueSwitch(name: string, $event: any) {
+        //console.log(name, $event)
+        this.rs.post('device/' + this.id + '/values', {[name]: $event}).subscribe((res) => {
+            this.msg.success("操作成功")
+        });
     }
 }
