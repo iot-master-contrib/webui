@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {NzButtonComponent} from 'ng-zorro-antd/button';
 import {ActivatedRoute, RouterLink} from '@angular/router';
 import {NzMessageService} from 'ng-zorro-antd/message';
@@ -7,28 +7,35 @@ import {Router} from '@angular/router';
 import {NzCardComponent} from "ng-zorro-antd/card";
 import {SmartEditorComponent, SmartField} from "../../../../../projects/smart/src/lib/smart-editor/smart-editor.component";
 import {RequestService} from "../../../../../projects/smart/src/lib/request.service";
+import {InputServerComponent} from "../../../components/input-server/input-server.component";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 @Component({
     selector: 'app-link-edit',
     standalone: true,
     imports: [
         CommonModule,
+        FormsModule,
+        ReactiveFormsModule,
         NzButtonComponent,
         RouterLink,
         NzCardComponent,
         SmartEditorComponent,
+        InputServerComponent,
     ],
     templateUrl: './link-edit.component.html',
     styleUrls: ['./link-edit.component.scss'],
 })
-export class LinkEditComponent implements OnInit {
+export class LinkEditComponent implements OnInit, AfterViewInit {
     id: any = '';
 
     @ViewChild('form') form!: SmartEditorComponent
+    @ViewChild("chooseServer") chooseServer!: TemplateRef<any>
 
     fields: SmartField[] = [
         {key: "id", label: "ID", type: "text", min: 2, max: 30, placeholder: "选填"},
         {key: "name", label: "名称", type: "text", required: true},
+        {key: "server_id", label:"服务器", type: "template"},
         {key: "poller_period", label: "采集周期", type: "number", min: 0},
         {key: "poller_interval", label: "采集间隔", type: "number", min: 0},
         {
@@ -48,6 +55,12 @@ export class LinkEditComponent implements OnInit {
                 private rs: RequestService,
                 private route: ActivatedRoute
     ) {
+    }
+
+    ngAfterViewInit(): void {
+        setTimeout(()=>{
+            this.fields[2].template = this.chooseServer
+        })
     }
 
     ngOnInit(): void {

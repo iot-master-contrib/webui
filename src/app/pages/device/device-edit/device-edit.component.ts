@@ -20,6 +20,7 @@ import {InputGatewayComponent} from "../../../components/input-gateway/input-gat
 import {InputProjectComponent} from "../../../components/input-project/input-project.component";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {InputVersionComponent} from "../../../components/input-version/input-version.component";
+import {InputTunnelComponent} from "../../../components/input-tunnel/input-tunnel.component";
 
 @Component({
     selector: 'app-device-edit',
@@ -36,6 +37,7 @@ import {InputVersionComponent} from "../../../components/input-version/input-ver
         InputGatewayComponent,
         InputProjectComponent,
         InputVersionComponent,
+        InputTunnelComponent,
     ],
     templateUrl: './device-edit.component.html',
     styleUrl: './device-edit.component.scss',
@@ -43,6 +45,7 @@ import {InputVersionComponent} from "../../../components/input-version/input-ver
 export class DeviceEditComponent implements OnInit, AfterViewInit {
     base = '/admin'
     project_id: any = '';
+    tunnel_id: any = '';
     id: any = '';
 
     data: any = {}
@@ -52,6 +55,7 @@ export class DeviceEditComponent implements OnInit, AfterViewInit {
     @ViewChild("chooseProduct") chooseProduct!: TemplateRef<any>
     @ViewChild("chooseVersion") chooseVersion!: TemplateRef<any>
     @ViewChild("chooseProject") chooseProject!: TemplateRef<any>
+    @ViewChild("chooseTunnel") chooseTunnel!: TemplateRef<any>
 
     fields: SmartField[] = [
         {key: "id", label: "ID", type: "text", min: 2, max: 30, placeholder: "选填"},
@@ -61,6 +65,7 @@ export class DeviceEditComponent implements OnInit, AfterViewInit {
         {key: "product_id", label: "产品", type: "template",},
         {key: "product_version", label: "版本", type: "template",},
         {key: "project_id", label: "项目", type: "template",},
+        {key: "tunnel_id", label: "通道", type: "template",},
         {key: "description", label: "说明", type: "textarea"},
     ]
 
@@ -83,6 +88,9 @@ export class DeviceEditComponent implements OnInit, AfterViewInit {
             this.id = this.route.snapshot.paramMap.get('id');
             this.load()
         }
+        if (this.route.snapshot.paramMap.has('tunnel_id')) {
+            this.tunnel_id = this.route.snapshot.paramMap.get('tunnel_id');
+        }
     }
 
     ngAfterViewInit(): void {
@@ -91,12 +99,18 @@ export class DeviceEditComponent implements OnInit, AfterViewInit {
             this.fields[4].template = this.chooseProduct
             this.fields[5].template = this.chooseVersion
             this.fields[6].template = this.chooseProject
+            this.fields[7].template = this.chooseTunnel
 
             setTimeout(() => {
                 if (this.project_id) {
                     this.data.project_id = this.project_id
                     this.form.patchValue({project_id: this.project_id})
                     this.form.group.get('project_id')?.disable()
+                }
+                if (this.tunnel_id) {
+                    this.data.tunnel_id = this.tunnel_id
+                    this.form.patchValue({tunnel_id: this.tunnel_id})
+                    this.form.group.get('tunnel_id')?.disable()
                 }
             }, 10)
         }, 10)

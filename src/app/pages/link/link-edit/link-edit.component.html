@@ -5,3 +5,8 @@
 <ng-template #extraTemplate>
     <button nz-button nzType="primary" (click)="onSubmit()">保存</button>
 </ng-template>
+
+<ng-template #chooseServer let-control="control" let-field="field">
+    <app-input-server [formControl]="control"></app-input-server>
+</ng-template>
+

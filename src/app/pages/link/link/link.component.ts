@@ -1,11 +1,11 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, Optional} from '@angular/core';
+import {RequestService} from '../../../../../projects/smart/src/lib/request.service';
+import {NzModalRef} from 'ng-zorro-antd/modal';
 import {CommonModule} from '@angular/common';
 import {
-    ParamSearch,
-    SmartTableButton, SmartTableColumn,
+    ParamSearch, SmartTableButton, SmartTableColumn,
     SmartTableComponent, SmartTableOperator
 } from "../../../../../projects/smart/src/lib/smart-table/smart-table.component";
-import {RequestService} from "../../../../../projects/smart/src/lib/request.service";
 
 @Component({
     selector: 'app-link',
@@ -36,8 +36,15 @@ export class LinkComponent {
         {key: "created", sortable: true, label: "创建时间", date: true},
     ];
 
+    columnsSelect: SmartTableColumn[] = [
+        {key: "id", label: "ID", keyword: true},
+        {key: "server", label: "服务器", keyword: true},
+        {key: "name", label: "名称", keyword: true},
+        {key: "remote", label: "远程地址", keyword: true},
+    ];
+
     operators: SmartTableOperator[] = [
-        {icon: 'edit', title: '编辑', link: data => `/link/${data.id}/edit`},
+        {icon: 'edit', title: '编辑', link: data => `/admin/link/${data.id}/edit`},
         {
             icon: 'delete', title: '删除', confirm: "确认删除？", action: data => {
                 this.rs.get(`link/${data.id}/delete`).subscribe(res => this.refresh())
@@ -45,7 +52,11 @@ export class LinkComponent {
         },
     ];
 
-    constructor(private rs: RequestService) {
+    operatorsSelect: SmartTableOperator[] = [
+        {label: "选择", action: data => this.ref.close(data)},
+    ];
+
+    constructor(private rs: RequestService, @Optional() protected ref: NzModalRef) {
     }
 
 

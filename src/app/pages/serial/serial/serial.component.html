@@ -1,7 +1,7 @@
 <im-smart-table
-    [buttons]="buttons"
-    [columns]="columns"
-    [operators]="operators"
+    [buttons]="ref ? [] : buttons"
+    [columns]="ref ? columnsSelect : columns"
+    [operators]="ref ? operatorsSelect : operators"
     [datum]="datum"
     [total]="total"
     [loading]="loading"
