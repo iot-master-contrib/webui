@@ -66,6 +66,7 @@ export class DeviceEditComponent implements OnInit, AfterViewInit {
         {key: "product_version", label: "版本", type: "template",},
         {key: "project_id", label: "项目", type: "template",},
         {key: "tunnel_id", label: "通道", type: "template",},
+        {key: "station", label: "从站", type: "object"},
         {key: "description", label: "说明", type: "textarea"},
     ]
 
@@ -122,15 +123,23 @@ export class DeviceEditComponent implements OnInit, AfterViewInit {
     load() {
         this.rs.get(`device/${this.id}`).subscribe(res => {
             this.values = res.data
+            setTimeout(()=>this.loadProtocolStation())
+        });
+    }
 
-            this.rs.get(`product/${this.values.product_id}`).subscribe(res => {
+    loadProtocolStation(){
+        let product_id = this.form.value.product_id
+        if (product_id) {
+            this.rs.get(`product/${product_id}`).subscribe(res => {
                 let product = res.data
                 this.rs.get(`protocol/${product.protocol}/station`).subscribe(res => {
-                    if (res.data)
-                        this.fields.push(...res.data)
+                    if (res.data) {
+                        this.fields[8].children = res.data
+                        this.form.ngOnInit()
+                    }
                 })
             });
-        });
+        }
     }
 
     onSubmit() {
