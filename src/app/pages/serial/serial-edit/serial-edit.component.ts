@@ -11,7 +11,6 @@ import {
     SmartSelectOption
 } from "../../../../../projects/smart/src/lib/smart-editor/smart-editor.component";
 import {RequestService} from "../../../../../projects/smart/src/lib/request.service";
-import {NzSelectOptionInterface} from "ng-zorro-antd/select/select.types";
 
 @Component({
     selector: 'app-serial-edit',
@@ -38,11 +37,6 @@ export class SerialEditComponent implements OnInit {
         {key: "id", label: "ID", type: "text", min: 2, max: 30, placeholder: "选填"},
         {key: "name", label: "名称", type: "text", required: true, default: '新串口'},
         {key: "port_name", label: "端口", type: "select", options: this.ports},
-        {
-            key: "protocol_name", label: "通讯协议", type: "select", options: this.protocols,
-            change: () => this.loadProtocolOptions()
-        },
-        {key: "protocol_options", label: "通讯协议参数", type: "object"},
         {
             key: "baud_rate", label: "波特率", type: "select", default: 9600, options: [
                 {label: '150', value: 150},
@@ -84,6 +78,11 @@ export class SerialEditComponent implements OnInit {
                 {label: '8', value: 8},
             ], default: 8
         },
+        {
+            key: "protocol_name", label: "通讯协议", type: "select", options: this.protocols,
+            change: (p: any) => this.loadProtocolOptions(p)
+        },
+        {key: "protocol_options", label: "通讯协议参数", type: "object"},
         {key: "description", label: "说明", type: "textarea"},
     ]
 
@@ -109,7 +108,7 @@ export class SerialEditComponent implements OnInit {
     load() {
         this.rs.get(`serial/` + this.id).subscribe((res) => {
             this.values = res.data
-            this.loadProtocolOptions()
+            this.loadProtocolOptions(this.values.protocol_name)
         });
     }
 
@@ -123,21 +122,17 @@ export class SerialEditComponent implements OnInit {
 
     loadProtocols() {
         this.rs.get(`protocol/list`).subscribe((res) => {
-            //protocols
-            this.fields[3].options = res.data.map((p: any) => {
+            this.fields[7].options = res.data.map((p: any) => {
                 return {value: p.name, label: p.label}
             })
-            //console.log(this.fields[3].options)
         });
     }
 
-    loadProtocolOptions() {
-        let protocol = this.values.protocol_name || this.form.value.protocol_name
-        //this.values = this.form.value //备份数据
+    loadProtocolOptions(protocol: string) {
         if (protocol)
             this.rs.get(`protocol/${protocol}/option`).subscribe((res) => {
-                this.fields[4].children = res.data
-                this.form.ngOnInit()
+                this.fields[8].children = res.data
+                this.form.group.setControl("protocol_options", this.form.build(res.data, this.form.value.protocol_options))
             });
     }
 

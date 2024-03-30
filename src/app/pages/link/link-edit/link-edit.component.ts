@@ -5,7 +5,11 @@ import {NzMessageService} from 'ng-zorro-antd/message';
 import {CommonModule} from '@angular/common';
 import {Router} from '@angular/router';
 import {NzCardComponent} from "ng-zorro-antd/card";
-import {SmartEditorComponent, SmartField} from "../../../../../projects/smart/src/lib/smart-editor/smart-editor.component";
+import {
+    SmartEditorComponent,
+    SmartField,
+    SmartSelectOption
+} from "../../../../../projects/smart/src/lib/smart-editor/smart-editor.component";
 import {RequestService} from "../../../../../projects/smart/src/lib/request.service";
 import {InputServerComponent} from "../../../components/input-server/input-server.component";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
@@ -32,16 +36,18 @@ export class LinkEditComponent implements OnInit, AfterViewInit {
     @ViewChild('form') form!: SmartEditorComponent
     @ViewChild("chooseServer") chooseServer!: TemplateRef<any>
 
+    protocols: SmartSelectOption[] = []
+
     fields: SmartField[] = [
         {key: "id", label: "ID", type: "text", min: 2, max: 30, placeholder: "选填"},
         {key: "name", label: "名称", type: "text", required: true},
         {key: "server_id", label:"服务器", type: "template"},
+
         {
-            key: "protocol_name", label: "通讯协议", type: "select", options: [
-                {label: 'Modbus RTU', value: 'modbus-rtu'},
-                {label: 'Modbus TCP', value: 'modbus-tcp'},
-            ]
+            key: "protocol_name", label: "通讯协议", type: "select", options: this.protocols,
+            change: (p: any) => this.loadProtocolOptions(p)
         },
+        {key: "protocol_options", label: "通讯协议参数", type: "object"},
         {key: "description", label: "说明", type: "textarea"},
     ]
 
@@ -66,12 +72,31 @@ export class LinkEditComponent implements OnInit, AfterViewInit {
             this.id = this.route.snapshot.paramMap.get('id');
             this.load()
         }
+        this.loadProtocols()
     }
 
     load() {
         this.rs.get(`link/` + this.id).subscribe((res) => {
             this.values = res.data
+            this.loadProtocolOptions(this.values.protocol_name)
         });
+    }
+
+
+    loadProtocols() {
+        this.rs.get(`protocol/list`).subscribe((res) => {
+            this.fields[3].options = res.data.map((p: any) => {
+                return {value: p.name, label: p.label}
+            })
+        });
+    }
+
+    loadProtocolOptions(protocol: string) {
+        if (protocol)
+            this.rs.get(`protocol/${protocol}/option`).subscribe((res) => {
+                this.fields[4].children = res.data
+                this.form.group.setControl("protocol_options", this.form.build(res.data, this.form.value.protocol_options))
+            });
     }
 
     onSubmit() {
