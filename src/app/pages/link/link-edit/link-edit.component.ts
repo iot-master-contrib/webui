@@ -36,8 +36,6 @@ export class LinkEditComponent implements OnInit, AfterViewInit {
         {key: "id", label: "ID", type: "text", min: 2, max: 30, placeholder: "选填"},
         {key: "name", label: "名称", type: "text", required: true},
         {key: "server_id", label:"服务器", type: "template"},
-        {key: "poller_period", label: "采集周期", type: "number", min: 0},
-        {key: "poller_interval", label: "采集间隔", type: "number", min: 0},
         {
             key: "protocol_name", label: "通讯协议", type: "select", options: [
                 {label: 'Modbus RTU', value: 'modbus-rtu'},

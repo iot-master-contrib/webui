@@ -30,14 +30,14 @@ export class SerialComponent {
     columns: SmartTableColumn[] = [
         {key: "id", sortable: true, label: "ID", keyword: true, link: (data) => `/admin/serial/${data.id}`},
         {key: "name", sortable: true, label: "名称", keyword: true},
-        {key: "port", sortable: true, label: "端口", keyword: true},
+        {key: "port_name", sortable: true, label: "端口", keyword: true},
         {key: "created", sortable: true, label: "创建时间", date: true},
     ];
 
     columnsSelect: SmartTableColumn[] = [
         {key: "id", label: "ID", keyword: true},
         {key: "name", label: "名称", keyword: true},
-        {key: "port", label: "端口", keyword: true},
+        {key: "port_name", label: "端口", keyword: true},
     ];
 
     operators: SmartTableOperator[] = [

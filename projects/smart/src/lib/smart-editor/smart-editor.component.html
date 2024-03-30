@@ -16,8 +16,7 @@
             <input nz-input [formControl]="control"
                    [minlength]="field.min || 0"
                    [maxlength]="field.max || 255"
-                   [placeholder]="field.placeholder || ''"
-                   #box (change)="field.change?.(box.value)"/>
+                   [placeholder]="field.placeholder || ''"/>
 
         }
         @case ('password') {
@@ -25,8 +24,7 @@
             <input nz-input type="password" [formControl]="control"
                    [minlength]="field.min || 0"
                    [maxlength]="field.max || 255"
-                   [placeholder]="field.placeholder || ''"
-                   #box (change)="field.change?.(box.value)"/>
+                   [placeholder]="field.placeholder || ''"/>
         }
         @case ('number') {
             <!--数值-->
@@ -34,8 +32,7 @@
                              [nzMin]="field.min===undefined ? -Infinity : field.min"
                              [nzMax]="field.max===undefined ? Infinity : field.max"
                              [nzStep]="field.step || 1"
-                             [nzPlaceHolder]="field.placeholder || ''"
-                             (change)="field.change?.($event)"></nz-input-number>
+                             [nzPlaceHolder]="field.placeholder || ''"></nz-input-number>
         }
         @case ('slider') {
             <!--滑块-->
@@ -54,16 +51,14 @@
             <!--选项-->
             <nz-select [formControl]="control"
                        [nzOptions]="field.options || empty"
-                       [nzPlaceHolder]="field.placeholder || ''"
-                       (change)="field.change?.($event)"></nz-select>
+                       [nzPlaceHolder]="field.placeholder || ''"></nz-select>
         }
         @case ('tags') {
             <!--标签-->
             <nz-select nzMode="tags" [formControl]="control"
                        [nzTokenSeparators]="[',','，', ' ', ';']"
                        [nzOptions]="field.options || empty"
-                       [nzPlaceHolder]="field.placeholder || '输入 逗号，分号，空格 分隔'"
-                       (change)="field.change?.($event)"></nz-select>
+                       [nzPlaceHolder]="field.placeholder || '输入 逗号，分号，空格 分隔'"></nz-select>
         }
         @case ('tree') {
             <!--树选择-->
@@ -71,56 +66,45 @@
                             [nzNodes]="field.tree || empty"
                             [nzMultiple]="field.multiple"
                             (nzTreeCheckBoxChange)="field.change?.($event)"
-                            [nzPlaceHolder]="field.placeholder || ''"
-                            (change)="field.change?.($event)"></nz-tree-select>
+                            [nzPlaceHolder]="field.placeholder || ''"></nz-tree-select>
         }
         @case ('color') {
             <!--颜色-->
-            <nz-color-picker nzShowText [formControl]="control"
-                             (change)="field.change?.($event)"></nz-color-picker>
+            <nz-color-picker nzShowText [formControl]="control"></nz-color-picker>
         }
         @case ('switch') {
             <!--开关-->
-            <nz-switch [formControl]="control" (change)="field.change?.($event)"></nz-switch>
+            <nz-switch [formControl]="control"></nz-switch>
         }
         @case ('textarea') {
             <!--多行文本-->
             <nz-textarea-count [nzMaxCharacterCount]="field.max || 255">
-                        <textarea rows="4" nz-input [formControl]="control" #box
-                                  (change)="field.change?.(box.value)"></textarea>
+                <textarea rows="4" nz-input [formControl]="control"></textarea>
             </nz-textarea-count>
         }
         @case ('slider') {
             <!--进度条-->
             <nz-slider [formControl]="control"
-                       [nzMax]="field.max" [nzMin]="field.min" [nzStep]="field.step"
-                       (change)="field.change?.($event)"></nz-slider>
+                       [nzMax]="field.max" [nzMin]="field.min" [nzStep]="field.step"></nz-slider>
         }
         @case ('datetime') {
             <!--日期和时间-->
             <nz-date-picker nzShowTime [formControl]="control"
-                            [nzPlaceHolder]="field.placeholder || ''"
-                            (change)="field.change?.($event)"></nz-date-picker>
+                            [nzPlaceHolder]="field.placeholder || ''"></nz-date-picker>
         }
         @case ('date') {
             <!--日期-->
-            <nz-date-picker [formControl]="control"
-                            [nzPlaceHolder]="field.placeholder || ''"
-                            (change)="field.change?.($event)"></nz-date-picker>
+            <nz-date-picker [formControl]="control" [nzPlaceHolder]="field.placeholder || ''"></nz-date-picker>
         }
         @case ('time') {
             <!--时间-->
-            <nz-time-picker [formControl]="control"
-                            [nzPlaceHolder]="field.placeholder || ''"
-                            (change)="field.change?.($event)"></nz-time-picker>
+            <nz-time-picker [formControl]="control" [nzPlaceHolder]="field.placeholder || ''"></nz-time-picker>
         }
         @case ('file') {
             <!--文件-->
             <nz-input-group nzSearch [nzAddOnAfter]="suffixButton">
                 <input nz-input [formControl]="control"
-                       [placeholder]="field.placeholder || ''"
-                       #box (change)="field.change?.(box.value)"/>
-            </nz-input-group>
+                       [placeholder]="field.placeholder || ''"/></nz-input-group>
             <ng-template #suffixButton>
                 <nz-upload [nzAction]="field.upload" [nzShowUploadList]="false" [nzDisabled]="!!field.disabled"
                            (nzChange)="handleUpload(control, $event)">
@@ -134,7 +118,7 @@
                        [nzTokenSeparators]="[',','，', ' ', ';']"
                        [nzOptions]="field.options || empty"
                        [nzPlaceHolder]="field.placeholder || '输入 逗号，分号，空格 分隔'"
-                       (change)="field.change?.($event)"></nz-select>
+            ></nz-select>
             <nz-upload [nzAction]="field.upload" nzMultiple [nzDisabled]="!!field.disabled"
                        (nzChange)="handleUploadImages(control, $event)">
                 <button nz-button nzType="primary" [disabled]="!!field.disabled">上传</button>

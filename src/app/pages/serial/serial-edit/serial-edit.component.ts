@@ -32,22 +32,34 @@ export class SerialEditComponent implements OnInit {
     @ViewChild('form') form!: SmartEditorComponent
 
     ports: SmartSelectOption[] = []
+    protocols: SmartSelectOption[] = []
 
     fields: SmartField[] = [
         {key: "id", label: "ID", type: "text", min: 2, max: 30, placeholder: "选填"},
         {key: "name", label: "名称", type: "text", required: true, default: '新串口'},
-        {key: "port", label: "端口", type: "select", options: this.ports},
-        {key: "poller_period", label: "采集周期", type: "number", min: 0},
-        {key: "poller_interval", label: "采集间隔", type: "number", min: 0},
+        {key: "port_name", label: "端口", type: "select", options: this.ports},
         {
-            key: "protocol_name", label: "通讯协议", type: "select", options: [
-                {label: 'Modbus RTU', value: 'modbus-rtu'},
-                {label: 'Modbus TCP', value: 'modbus-tcp'},
+            key: "protocol_name", label: "通讯协议", type: "select", options: this.protocols,
+            change: () => this.loadProtocolOptions()
+        },
+        {key: "protocol_options", label: "通讯协议参数", type: "object"},
+        {
+            key: "baud_rate", label: "波特率", type: "select", default: 9600, options: [
+                {label: '150', value: 150},
+                {label: '200', value: 200},
+                {label: '300', value: 300},
+                {label: '600', value: 600},
+                {label: '1200', value: 1200},
+                {label: '1800', value: 1800},
+                {label: '2400', value: 2400},
+                {label: '4800', value: 4800},
+                {label: '9600', value: 9600},
+                {label: '19200', value: 19200},
+                {label: '38400', value: 38400},
+                {label: '57600', value: 57600},
+                {label: '115200', value: 115200},
             ]
         },
-        {key: "retry_timeout", label: "重连超时", type: "number", min: 0},
-        {key: "retry_maximum", label: "重连最大次数", type: "number", min: 0},
-        {key: "baud_rate", label: "波特率", type: "number", default: 9600},
         {
             key: "parity_mode", label: "奇偶校验", type: "select", options: [
                 {label: '无校验 NONE', value: 0},
@@ -91,22 +103,42 @@ export class SerialEditComponent implements OnInit {
             this.load()
         }
         this.loadPorts()
+        this.loadProtocols()
     }
 
     load() {
         this.rs.get(`serial/` + this.id).subscribe((res) => {
             this.values = res.data
+            this.loadProtocolOptions()
         });
     }
 
     loadPorts() {
         this.rs.get(`serial/ports`).subscribe((res) => {
-            // res.data.forEach((p: any) => {
-            //     this.ports.push({value: p, label: p})
-            //     //this.ports.push({value: p.name, label: p.label})
-            // })
-            this.fields[2].options = res.data.map((p:string)=>{return {value: p, label: p}})
+            this.fields[2].options = res.data.map((p: string) => {
+                return {value: p, label: p}
+            })
         });
+    }
+
+    loadProtocols() {
+        this.rs.get(`protocol/list`).subscribe((res) => {
+            //protocols
+            this.fields[3].options = res.data.map((p: any) => {
+                return {value: p.name, label: p.label}
+            })
+            //console.log(this.fields[3].options)
+        });
+    }
+
+    loadProtocolOptions() {
+        let protocol = this.values.protocol_name || this.form.value.protocol_name
+        //this.values = this.form.value //备份数据
+        if (protocol)
+            this.rs.get(`protocol/${protocol}/option`).subscribe((res) => {
+                this.fields[4].children = res.data
+                this.form.ngOnInit()
+            });
     }
 
     onSubmit() {

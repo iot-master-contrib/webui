@@ -198,21 +198,24 @@ export class SmartEditorComponent implements OnInit {
         values = values || {}
 
         let fs: any = {}
-        fields.forEach(f => {
+        fields?.forEach(f => {
             if (f.type == 'object' && f.children) {
                 fs[f.key] = this.build(f.children, values[f.key])
+                if (f.change) fs[f.key].valueChanges.subscribe((res: any) => f.change?.(res))
                 return
             }
             if (f.type == 'list' && f.children) {
                 fs[f.key] = this.fb.array(values[f.key]?.map((v: any) => {
                     return this.build(f.children || [], v)
                 }) || [])
+                if (f.change) fs[f.key].valueChanges.subscribe((res: any) => f.change?.(res))
                 return
             }
             if (f.type == 'table' && f.children) {
                 fs[f.key] = this.fb.array(values[f.key]?.map((v: any) => {
                     return this.build(f.children || [], v)
                 }) || [])
+                if (f.change) fs[f.key].valueChanges.subscribe((res: any) => f.change?.(res))
                 return
             }
 
@@ -252,7 +255,8 @@ export class SmartEditorComponent implements OnInit {
             else
                 value = getDefault(f)
 
-            fs[f.key] = [{value, disabled: !!f.disabled}, validators]
+            fs[f.key] = new FormControl(value, validators)
+            if (f.change) fs[f.key].valueChanges.subscribe((res: any) => f.change?.(res))
         })
         return this.fb.group(fs)
     }

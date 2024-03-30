@@ -44,11 +44,7 @@ export class ClientDetailComponent implements OnInit {
         {key: 'port', label: '端口'},
         {key: 'disabled', label: '禁用'},
         {key: 'created', label: '创建时间', type: 'date'},
-        {key: "poller_period", label: "采集周期"},
-        {key: "poller_interval", label: "采集间隔"},
         {key: "protocol_name", label: "通讯协议"},
-        {key: "retry_timeout", label: "重连超时"},
-        {key: "retry_maximum", label: "重连最大次数"},
         {key: 'description', label: '说明', span: 2},
     ];
 

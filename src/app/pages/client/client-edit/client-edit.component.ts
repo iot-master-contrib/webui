@@ -37,16 +37,12 @@ export class ClientEditComponent implements OnInit {
         },
         {key: "addr", label: "地址", type: "text"},
         {key: "port", label: "端口", type: "number", min: 1, max: 65535},
-        {key: "poller_period", label: "采集周期", type: "number", min: 0},
-        {key: "poller_interval", label: "采集间隔", type: "number", min: 0},
         {
             key: "protocol_name", label: "通讯协议", type: "select", options: [
                 {label: 'Modbus RTU', value: 'modbus-rtu'},
                 {label: 'Modbus TCP', value: 'modbus-tcp'},
             ]
         },
-        {key: "retry_timeout", label: "重连超时", type: "number", min: 0},
-        {key: "retry_maximum", label: "重连最大次数", type: "number", min: 0},
         {key: "description", label: "说明", type: "textarea"},
     ]
 
