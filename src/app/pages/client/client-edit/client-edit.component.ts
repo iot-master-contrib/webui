@@ -13,7 +13,7 @@ import {
 import {RequestService} from "../../../../../projects/smart/src/lib/request.service";
 
 @Component({
-    selector: 'app-client-edit',
+    selector: 'app-clients-edit',
     standalone: true,
     imports: [
         CommonModule,

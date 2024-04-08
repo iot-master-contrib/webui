@@ -1,17 +1,17 @@
 import { Component } from '@angular/core';
 import {NzTabsModule} from "ng-zorro-antd/tabs";
-import {LinkComponent} from "../../link/link/link.component";
-import {ClientComponent} from "../../client/client/client.component";
-import {SerialComponent} from "../../serial/serial/serial.component";
+import {LinksComponent} from "../../link/links/links.component";
+import {ClientsComponent} from "../../client/clients/clients.component";
+import {SerialsComponent} from "../../serial/serials/serials.component";
 
 @Component({
   selector: 'app-tunnels',
   standalone: true,
     imports: [
         NzTabsModule,
-        LinkComponent,
-        ClientComponent,
-        SerialComponent
+        LinksComponent,
+        ClientsComponent,
+        SerialsComponent
     ],
   templateUrl: './tunnels.component.html',
   styleUrl: './tunnels.component.scss'

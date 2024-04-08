@@ -65,7 +65,7 @@ export class ProjectComponent implements OnInit {
             name: '用户管理', icon: 'user',
             items: [
                 {name: '项目用户', link: 'user'},
-                //{name: '创建用户', link: 'user/create'},
+                //{name: '创建用户', links: 'user/create'},
             ]
         },
     ]

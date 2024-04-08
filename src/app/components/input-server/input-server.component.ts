@@ -4,7 +4,7 @@ import {NzInputDirective} from "ng-zorro-antd/input";
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
 import {NzModalService} from "ng-zorro-antd/modal";
 import {RequestService} from "../../../../projects/smart/src/lib/request.service";
-import {ServerComponent} from "../../pages/server/server/server.component";
+import {ServersComponent} from "../../pages/server/servers/servers.component";
 
 @Component({
   selector: 'app-input-server',
@@ -54,7 +54,7 @@ export class InputServerComponent implements OnInit, ControlValueAccessor {
     }
 
     load() {
-        console.log('load server', this.id)
+        console.log('load servers', this.id)
         this.rs.get('server/' + this.id).subscribe(res => {
             if (res.data) {
                 this.server = res.data;
@@ -65,7 +65,7 @@ export class InputServerComponent implements OnInit, ControlValueAccessor {
     select() {
         this.ms.create({
             nzTitle: "选择",
-            nzContent: ServerComponent,
+            nzContent: ServersComponent,
             nzData: this.data
         }).afterClose.subscribe(res => {
             console.log(res)

@@ -12,7 +12,7 @@ import {RequestService} from "../../../../../projects/smart/src/lib/request.serv
 import {DevicesComponent} from "../../device/devices/devices.component";
 
 @Component({
-    selector: 'app-client-detail',
+    selector: 'app-clients-detail',
     templateUrl: './client-detail.component.html',
     standalone: true,
     imports: [

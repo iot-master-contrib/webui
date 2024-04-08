@@ -1,4 +1,4 @@
-import {Routes} from '@angular/router';
+import {ActivatedRoute, Routes} from '@angular/router';
 import {LoginComponent} from "./login/login.component";
 import {AdminComponent} from "./admin/admin.component";
 import {UnknownComponent} from "../../projects/smart/src/lib/unknown/unknown.component";
@@ -33,3 +33,22 @@ export const routes: Routes = [
     },
     {path: "**", component: UnknownComponent},
 ];
+
+export function GetParentRouteUrl(route: ActivatedRoute): string {
+    let base = route.snapshot.parent?.url.map(u => u.path).join("/") || 'admin'
+    base = "/" + base
+    console.log("base ", base)
+    return base
+}
+
+export function GetParentRouteParam(route: ActivatedRoute, name: string) {
+    return route.snapshot.parent?.paramMap.get(name)
+}
+
+export function GetParentRouteParamFilter(route: ActivatedRoute, name: string, key: string) {
+    let filter: any = {}
+    if (route.snapshot.parent?.paramMap.has(name)) {
+        filter[key] = route.snapshot.parent?.paramMap.get(name)
+    }
+    return filter
+}

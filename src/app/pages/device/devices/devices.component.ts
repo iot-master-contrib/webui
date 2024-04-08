@@ -10,6 +10,8 @@ import {
     SmartTableComponent,
     SmartTableOperator,
 } from '../../../../../projects/smart/src/lib/smart-table/smart-table.component';
+import {GetParentRouteParam, GetParentRouteParamFilter, GetParentRouteUrl} from "../../../app.routes";
+import {filter} from "rxjs/operators";
 
 @Component({
     selector: 'app-devices',
@@ -19,6 +21,7 @@ import {
     styleUrl: './devices.component.scss',
 })
 export class DevicesComponent implements OnInit {
+    base = "/admin"
 
     //从Modal中传参过来
     //readonly data: any = inject(NZ_MODAL_DATA, {optional:true});
@@ -34,53 +37,30 @@ export class DevicesComponent implements OnInit {
 
 
     buttons: SmartTableButton[] = [
-        {icon: 'plus', label: '创建', link: () => `/admin/device/create`},
-    ];
-
-    buttonsProject: SmartTableButton[] = [
-        {icon: 'plus', label: '创建', link: () => `/project/${this.project_id}/device/create`},
+        {icon: 'plus', label: '创建', link: () => `${this.base}/device/create`},
     ];
 
     columns: SmartTableColumn[] = [
         {
             key: 'id', sortable: true, label: 'ID', keyword: true,
-            link: (data) => `/admin/device/${data.id}`,
+            link: (data) => `${this.base}/device/${data.id}`,
         },
         {key: 'name', sortable: true, label: '名称', keyword: true},
         {
             key: 'gateway', sortable: true, label: '网关', keyword: true,
-            link: (data) => `/admin/gateway/${data.gateway_id}`,
+            link: (data) => `${this.base}/gateway/${data.gateway_id}`,
         },
         {
             key: 'product', sortable: true, label: '产品', keyword: true,
-            link: (data) => `/admin/product/${data.product_id}`,
+            link: (data) => `${this.base}/product/${data.product_id}`,
         },
         {key: 'product_version', sortable: true, label: '版本'},
         {
             key: 'project', sortable: true, label: '项目', keyword: true,
-            link: (data) => `/admin/project/${data.project_id}`,
+            link: (data) => `${this.base}/project/${data.project_id}`,
         },
         {key: 'online', sortable: true, label: '上线时间', date: true},
     ];
-
-    columnsProject: SmartTableColumn[] = [
-        {
-            key: 'id', sortable: true, label: 'ID', keyword: true,
-            link: (data) => `/project/${this.project_id}/device/${data.id}`,
-        },
-        {key: 'name', sortable: true, label: '名称', keyword: true},
-        {
-            key: 'gateway', sortable: true, label: '网关', keyword: true,
-            link: (data) => `/project/${this.project_id}/gateway/${data.gateway_id}`,
-        },
-        {
-            key: 'product', sortable: true, label: '产品', keyword: true,
-            link: (data) => `/project/${this.project_id}/product/${data.product_id}`,
-        },
-        {key: 'product_version', sortable: true, label: '版本'},
-        {key: 'online', sortable: true, label: '上线时间', date: true},
-    ];
-
 
     columnsSelect: SmartTableColumn[] = [
         {key: 'id', label: 'ID', keyword: true},
@@ -88,19 +68,9 @@ export class DevicesComponent implements OnInit {
     ];
 
     operators: SmartTableOperator[] = [
-        {icon: 'edit', title: '编辑', link: (data) => `/admin/device/${data.id}/edit`,},
+        {icon: 'edit', title: '编辑', link: (data) => `${this.base}/device/${data.id}/edit`,},
         {
             icon: 'delete', title: '删除', confirm: '确认删除？', action: (data) => {
-                this.rs.get(`device/${data.id}/delete`).subscribe((res) => this.refresh())
-            },
-        },
-    ];
-
-    operatorsProject: SmartTableOperator[] = [
-        {icon: 'edit', title: '编辑', link: (data) => `/project/${this.project_id}/device/${data.id}/edit`,},
-        {
-            icon: 'delete', title: '删除', confirm: '确认删除？',
-            action: (data) => {
                 this.rs.get(`device/${data.id}/delete`).subscribe((res) => this.refresh())
             },
         },
@@ -121,10 +91,8 @@ export class DevicesComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        if (this.route.parent?.snapshot.paramMap.has('project')) {
-            this.project_id = this.route.parent?.snapshot.paramMap.get('project');
-            //this.base = '/project/' + this.project_id + '/';
-        }
+        this.base = GetParentRouteUrl(this.route)
+        this.project_id ||= GetParentRouteParam(this.route, "project")
     }
 
     query!: ParamSearch
@@ -134,17 +102,11 @@ export class DevicesComponent implements OnInit {
     }
 
     search(query: ParamSearch) {
-        //console.log('onQuery', query)
-        this.query = query
-
-        if (this.gateway_id)
-            query.filter['gateway_id'] = this.gateway_id;
-        if (this.product_id)
-            query.filter['product_id'] = this.product_id;
-        if (this.project_id)
-            query.filter['project_id'] = this.project_id;
-        if (this.tunnel_id)
-            query.filter['tunnel_id'] = this.tunnel_id;
+        //console.log('onQuery', query)        this.query = query
+        if (this.gateway_id) query.filter['gateway_id'] = this.gateway_id;
+        if (this.product_id) query.filter['product_id'] = this.product_id;
+        if (this.project_id) query.filter['project_id'] = this.project_id;
+        if (this.tunnel_id) query.filter['tunnel_id'] = this.tunnel_id;
 
         this.loading = true;
         this.rs.post('device/search', query).subscribe((res) => {

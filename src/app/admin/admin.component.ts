@@ -88,8 +88,8 @@ export class AdminComponent {
             items: [
                 {name: 'TCP服务器', link: 'server'},
                 {name: 'TCP连接', link: 'link'},
-                {name: 'TCP客户端', link: 'client'},
-                {name: '串口连接', link: 'serial'},
+                {name: 'TCP客户端', link: 'clients'},
+                {name: '串口连接', link: 'serials'},
             ]
         },
         {

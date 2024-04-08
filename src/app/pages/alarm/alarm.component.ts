@@ -1,128 +1,84 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {CommonModule, DatePipe, NgForOf} from "@angular/common";
-import {NzButtonComponent} from "ng-zorro-antd/button";
-import {NzIconDirective} from "ng-zorro-antd/icon";
-import {NzInputDirective, NzInputGroupComponent} from "ng-zorro-antd/input";
-import {NzPaginationComponent} from "ng-zorro-antd/pagination";
-import {NzPopconfirmDirective} from "ng-zorro-antd/popconfirm";
-import {NzSpaceComponent, NzSpaceItemDirective} from "ng-zorro-antd/space";
-import {
-    NzTableCellDirective,
-    NzTableComponent,
-    NzTbodyComponent,
-    NzTheadComponent,
-    NzThMeasureDirective, NzTrDirective
-} from "ng-zorro-antd/table";
-import {Router, RouterLink} from "@angular/router";
+import {ActivatedRoute} from "@angular/router";
 import {RequestService} from '../../../../projects/smart/src/lib/request.service';
-import {NzMessageService} from 'ng-zorro-antd/message';
 import {
     ParamSearch,
-    SmartTableButton,
     SmartTableColumn,
     SmartTableComponent,
     SmartTableOperator,
 } from '../../../../projects/smart/src/lib/smart-table/smart-table.component';
+import {GetParentRouteParam, GetParentRouteUrl} from "../../app.routes";
 
 @Component({
     selector: 'app-alarm',
     standalone: true,
     imports: [
-        DatePipe,
-        NgForOf,
-        NzButtonComponent,
-        NzIconDirective,
-        NzInputDirective,
-        NzInputGroupComponent,
-        NzPaginationComponent,
-        NzPopconfirmDirective,
-        NzSpaceComponent,
-        NzTableCellDirective,
-        NzTableComponent,
-        NzTbodyComponent,
-        NzThMeasureDirective,
-        NzTheadComponent,
-        NzTrDirective,
-        RouterLink,
-        NzSpaceItemDirective,
-        CommonModule,
         SmartTableComponent,
     ],
     templateUrl: './alarm.component.html',
     styleUrl: './alarm.component.scss'
 })
 export class AlarmComponent implements OnInit {
-    ngOnInit(): void {
-        this.load();
-    }
+    base = "/admin"
 
-    @Input() device_id? = '';
+    @Input() project_id!: any
+    @Input() device_id!: any
+
     total = 0;
-    pageIndex = 1;
-    pageSize = 10;
-    value = '';
-
-    constructor(
-        private route: Router,
-        private rs: RequestService,
-        private msg: NzMessageService
-    ) {
-    }
-
-
-    load(query?: any) {
-
-        this.device_id ? (query = {...query, filter: {device_id: this.device_id}}) : '';
-        this.loading = true;
-        this.rs
-            .get('alarm/list', query)
-            .subscribe((res) => {
-                this.datum = res.data;
-                this.total = res.total;
-            })
-            .add(() => {
-                this.loading = false;
-            });
-    }
-
     datum: any[] = [];
     loading = false;
 
 
     columns: SmartTableColumn[] = [
         {
-            key: 'project_id',
-            sortable: true,
-            label: '项目',
-            keyword: true,
+            key: 'project', sortable: true, label: '项目', keyword: true,
+            link: (data) => `${this.base}/project/${data.project_id}`,
         },
-        {key: 'device_id', sortable: true, label: '设备', keyword: true},
+        {
+            key: 'device', sortable: true, label: '项目', keyword: true,
+            link: (data) => `${this.base}/device/${data.device_id}`,
+        },
         {key: 'level', sortable: true, label: '等级', keyword: true},
         {key: 'title', sortable: true, label: '标题', keyword: true},
         {key: 'message', sortable: true, label: '内容', keyword: true},
-
         {key: 'created', sortable: true, label: '创建时间', date: true},
     ];
 
 
     operators: SmartTableOperator[] = [
         {
-            icon: 'delete',
-            title: '解绑',
-            confirm: '确认解绑？',
+            icon: 'delete', title: '删除', confirm: '确认删除？',
             action: (data) => {
-                this.rs.get(`alarm/${data.id}/delete`).subscribe((res) => {
-                    this.load({})
-                    //refresh
-                });
+                this.rs.get(`alarm/${data.id}/delete`).subscribe((res) => this.refresh());
             },
         },
     ];
 
 
-    onQuery(query: ParamSearch) {
-        console.log('onQuery', query);
-        this.load(query)
+    constructor(private route: ActivatedRoute, private rs: RequestService) {
+    }
+
+    ngOnInit(): void {
+        this.base = GetParentRouteUrl(this.route)
+        this.project_id ||= GetParentRouteParam(this.route, "project")
+    }
+
+
+    query!: ParamSearch
+
+    refresh() {
+        this.search(this.query)
+    }
+
+    search(query: ParamSearch) {
+        if (this.project_id) query.filter['project_id'] = this.project_id;
+        if (this.device_id) query.filter['tunnel_id'] = this.device_id;
+
+        this.loading = true;
+        this.rs.post('alarm/search', query).subscribe((res) => {
+            this.datum = res.data;
+            this.total = res.total;
+        }).add(() => this.loading = false);
     }
 
 }

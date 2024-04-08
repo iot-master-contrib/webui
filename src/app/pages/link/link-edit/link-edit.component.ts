@@ -15,7 +15,7 @@ import {InputServerComponent} from "../../../components/input-server/input-serve
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 @Component({
-    selector: 'app-link-edit',
+    selector: 'app-links-edit',
     standalone: true,
     imports: [
         CommonModule,

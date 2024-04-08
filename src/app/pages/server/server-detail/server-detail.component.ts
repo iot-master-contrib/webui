@@ -8,11 +8,11 @@ import {NzButtonComponent} from "ng-zorro-antd/button";
 import {NzPopconfirmDirective} from "ng-zorro-antd/popconfirm";
 import {NzMessageService} from "ng-zorro-antd/message";
 import {SmartInfoComponent, SmartInfoItem} from "../../../../../projects/smart/src/lib/smart-info/smart-info.component";
-import {LinkComponent} from "../../link/link/link.component";
+import {LinksComponent} from "../../link/links/links.component";
 import {RequestService} from "../../../../../projects/smart/src/lib/request.service";
 
 @Component({
-    selector: 'app-server-detail',
+    selector: 'app-servers-detail',
     templateUrl: './server-detail.component.html',
     standalone: true,
     imports: [
@@ -27,7 +27,7 @@ import {RequestService} from "../../../../../projects/smart/src/lib/request.serv
         NzButtonComponent,
         RouterLink,
         NzPopconfirmDirective,
-        LinkComponent
+        LinksComponent
     ],
     styleUrls: ['./server-detail.component.scss']
 })
