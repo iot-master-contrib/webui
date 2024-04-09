@@ -17,6 +17,8 @@ export interface SmartTableColumn {
     sortable?: boolean
     filter?: NzTableFilterList
     date?: boolean
+    ellipsis?: boolean
+    break?:boolean
     link?: (data: any) => string
 }
 

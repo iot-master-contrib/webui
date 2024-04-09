@@ -44,6 +44,7 @@ import {InputTunnelComponent} from "../../../components/input-tunnel/input-tunne
 })
 export class DeviceEditComponent implements OnInit, AfterViewInit {
     base = '/admin'
+
     project_id: any = '';
     tunnel_id: any = '';
     id: any = '';
@@ -62,7 +63,7 @@ export class DeviceEditComponent implements OnInit, AfterViewInit {
         {key: "name", label: "名称", type: "text", required: true, default: '新设备'},
         {key: "keywords", label: "关键字", type: "tags", default: []},
         {key: "gateway_id", label: "网关", type: "template",},
-        {key: "product_id", label: "产品", type: "template",},
+        {key: "product_id", label: "产品", type: "template", change: ()=>setTimeout(()=>this.loadProtocolStation(), 100)},
         {key: "product_version", label: "版本", type: "template",},
         {key: "project_id", label: "项目", type: "template",},
         {key: "tunnel_id", label: "通道", type: "template",},
@@ -128,6 +129,9 @@ export class DeviceEditComponent implements OnInit, AfterViewInit {
     }
 
     loadProtocolStation(){
+        console.log("loadProtocolStation", this.form.value)
+        this.values = this.form.value
+
         let product_id = this.form.value.product_id
         if (product_id) {
             this.rs.get(`product/${product_id}`).subscribe(res => {

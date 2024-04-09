@@ -75,18 +75,15 @@
     <tbody>
     <tr *ngFor="let data of table.data">
 
-        <td *ngFor="let item of columns">
-            <ng-container *ngIf="item.date; else temp">
+        <td *ngFor="let item of columns" [nzEllipsis]="item.ellipsis" [nzBreakWord]="item.break">
+            @if (item.date) {
                 {{ data[item.key] | date: 'yyyy-MM-dd HH:mm:ss' }}
-            </ng-container>
-            <ng-template #temp>
-                <a *ngIf="item.link; else elseTemplate" [routerLink]="item.link(data)">
-                    {{ data[item.key] }}
-                </a>
-                <ng-template #elseTemplate>
-                    {{ data[item.key] }}
-                </ng-template>
-            </ng-template>
+            } @else if (item.link) {
+                <a [routerLink]="item.link(data)">{{ data[item.key] }}</a>
+            } @else {
+                {{ data[item.key] }}
+
+            }
         </td>
 
         <td *ngIf="operators && operators.length">

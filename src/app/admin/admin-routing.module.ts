@@ -81,24 +81,24 @@ const routes: Routes = [
 
 
     {path: 'server', component: ServersComponent, title:"TCP服务器列表", data:{breadcrumb:"TCP服务器列表"}},
-    {path: 'servers/create', component: ServerEditComponent, title:"创建TCP服务器", data:{breadcrumb:"创建TCP服务器"}},
-    {path: 'servers/:id', component: ServerDetailComponent, title:"TCP服务器详情", data:{breadcrumb:"TCP服务器详情"}},
-    {path: 'servers/:id/edit', component: ServerEditComponent, title:"TCP服务器编辑", data:{breadcrumb:"TCP服务器编辑"}},
+    {path: 'server/create', component: ServerEditComponent, title:"创建TCP服务器", data:{breadcrumb:"创建TCP服务器"}},
+    {path: 'server/:id', component: ServerDetailComponent, title:"TCP服务器详情", data:{breadcrumb:"TCP服务器详情"}},
+    {path: 'server/:id/edit', component: ServerEditComponent, title:"TCP服务器编辑", data:{breadcrumb:"TCP服务器编辑"}},
 
     {path: 'link', component: LinksComponent, title:"TCP连接列表", data:{breadcrumb:"TCP连接列表"}},
-    {path: 'links/create', component: LinkEditComponent, title:"创建TCP连接", data:{breadcrumb:"创建TCP连接"}},
-    {path: 'links/:id', component: LinkDetailComponent, title:"TCP连接详情", data:{breadcrumb:"TCP连接详情"}},
-    {path: 'links/:id/edit', component: LinkEditComponent, title:"TCP连接编辑", data:{breadcrumb:"TCP连接编辑"}},
+    {path: 'link/create', component: LinkEditComponent, title:"创建TCP连接", data:{breadcrumb:"创建TCP连接"}},
+    {path: 'link/:id', component: LinkDetailComponent, title:"TCP连接详情", data:{breadcrumb:"TCP连接详情"}},
+    {path: 'link/:id/edit', component: LinkEditComponent, title:"TCP连接编辑", data:{breadcrumb:"TCP连接编辑"}},
 
-    {path: 'serials', component: SerialsComponent, title:"串口列表", data:{breadcrumb:"串口列表"}},
-    {path: 'serials/create', component: SerialEditComponent, title:"创建串口", data:{breadcrumb:"创建串口"}},
-    {path: 'serials/:id', component: SerialDetailComponent, title:"串口详情", data:{breadcrumb:"串口详情"}},
-    {path: 'serials/:id/edit', component: SerialEditComponent, title:"串口编辑", data:{breadcrumb:"串口编辑"}},
+    {path: 'serial', component: SerialsComponent, title:"串口列表", data:{breadcrumb:"串口列表"}},
+    {path: 'serial/create', component: SerialEditComponent, title:"创建串口", data:{breadcrumb:"创建串口"}},
+    {path: 'serial/:id', component: SerialDetailComponent, title:"串口详情", data:{breadcrumb:"串口详情"}},
+    {path: 'serial/:id/edit', component: SerialEditComponent, title:"串口编辑", data:{breadcrumb:"串口编辑"}},
 
-    {path: 'clients', component: ClientsComponent, title:"客户端列表", data:{breadcrumb:"客户端列表"}},
-    {path: 'clients/create', component: ClientEditComponent, title:"创建客户端", data:{breadcrumb:"创建客户端"}},
-    {path: 'clients/:id', component: ClientDetailComponent, title:"客户端详情", data:{breadcrumb:"客户端详情"}},
-    {path: 'clients/:id/edit', component: ClientEditComponent, title:"客户端编辑", data:{breadcrumb:"客户端编辑"}},
+    {path: 'client', component: ClientsComponent, title:"客户端列表", data:{breadcrumb:"客户端列表"}},
+    {path: 'client/create', component: ClientEditComponent, title:"创建客户端", data:{breadcrumb:"创建客户端"}},
+    {path: 'client/:id', component: ClientDetailComponent, title:"客户端详情", data:{breadcrumb:"客户端详情"}},
+    {path: 'client/:id/edit', component: ClientEditComponent, title:"客户端编辑", data:{breadcrumb:"客户端编辑"}},
 
     {path: 'user', component: UsersComponent, title:"用户列表", data:{breadcrumb:"用户列表"}},
     {path: 'user/create', component: UserEditComponent, title:"创建用户", data:{breadcrumb:"创建用户"}},
