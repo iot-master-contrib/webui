@@ -10,11 +10,6 @@ import {
     SmartEditorComponent,
     SmartField
 } from "../../../../../projects/smart/src/lib/smart-editor/smart-editor.component";
-import {GatewaysComponent} from "../../gateway/gateways/gateways.component";
-import {NzModalService} from "ng-zorro-antd/modal";
-import {ProjectsComponent} from "../../project/projects/projects.component";
-import {ProductsComponent} from "../../product/products/products.component";
-import {ProductVersionComponent} from "../../product/product-version/product-version.component";
 import {InputProductComponent} from "../../../components/input-product/input-product.component";
 import {InputGatewayComponent} from "../../../components/input-gateway/input-gateway.component";
 import {InputProjectComponent} from "../../../components/input-project/input-project.component";
@@ -52,7 +47,6 @@ export class DeviceEditComponent implements OnInit, AfterViewInit {
     data: any = {}
 
     @ViewChild('form') form!: SmartEditorComponent
-    @ViewChild("chooseGateway") chooseGateway!: TemplateRef<any>
     @ViewChild("chooseProduct") chooseProduct!: TemplateRef<any>
     @ViewChild("chooseVersion") chooseVersion!: TemplateRef<any>
     @ViewChild("chooseProject") chooseProject!: TemplateRef<any>
@@ -62,7 +56,6 @@ export class DeviceEditComponent implements OnInit, AfterViewInit {
         {key: "id", label: "ID", type: "text", min: 2, max: 30, placeholder: "选填"},
         {key: "name", label: "名称", type: "text", required: true, default: '新设备'},
         {key: "keywords", label: "关键字", type: "tags", default: []},
-        {key: "gateway_id", label: "网关", type: "template",},
         {key: "product_id", label: "产品", type: "template", change: ()=>setTimeout(()=>this.loadProtocolStation(), 100)},
         {key: "product_version", label: "版本", type: "template",},
         {key: "project_id", label: "项目", type: "template",},
@@ -97,11 +90,10 @@ export class DeviceEditComponent implements OnInit, AfterViewInit {
 
     ngAfterViewInit(): void {
         setTimeout(() => {
-            this.fields[3].template = this.chooseGateway
-            this.fields[4].template = this.chooseProduct
-            this.fields[5].template = this.chooseVersion
-            this.fields[6].template = this.chooseProject
-            this.fields[7].template = this.chooseTunnel
+            this.fields[3].template = this.chooseProduct
+            this.fields[4].template = this.chooseVersion
+            this.fields[5].template = this.chooseProject
+            this.fields[6].template = this.chooseTunnel
 
             setTimeout(() => {
                 if (this.project_id) {
@@ -138,7 +130,7 @@ export class DeviceEditComponent implements OnInit, AfterViewInit {
                 let product = res.data
                 this.rs.get(`protocol/${product.protocol}/station`).subscribe(res => {
                     if (res.data) {
-                        this.fields[8].children = res.data
+                        this.fields[7].children = res.data
                         this.form.ngOnInit()
                     }
                 })

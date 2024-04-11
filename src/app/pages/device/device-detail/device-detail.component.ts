@@ -48,10 +48,6 @@ export class DeviceDetailComponent implements OnInit {
         {key: 'id', label: 'ID'},
         {key: 'name', label: '名称'},
         {
-            key: 'gateway', label: '网关', type: 'link',
-            link: () => `${this.base}/gateway/${this.data.gateway_id}`,
-        },
-        {
             key: 'product', label: '产品', type: 'link',
             link: () => `${this.base}/product/${this.data.product_id}`,
         },

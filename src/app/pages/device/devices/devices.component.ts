@@ -26,7 +26,6 @@ export class DevicesComponent implements OnInit {
     //从Modal中传参过来
     //readonly data: any = inject(NZ_MODAL_DATA, {optional:true});
     @Input() project_id: any = '';
-    @Input() gateway_id: any = '';
     @Input() product_id: any = '';
     @Input() tunnel_id: any = '';
 
@@ -46,10 +45,6 @@ export class DevicesComponent implements OnInit {
             link: (data) => `${this.base}/device/${data.id}`,
         },
         {key: 'name', sortable: true, label: '名称', keyword: true},
-        {
-            key: 'gateway', sortable: true, label: '网关', keyword: true,
-            link: (data) => `${this.base}/gateway/${data.gateway_id}`,
-        },
         {
             key: 'product', sortable: true, label: '产品', keyword: true,
             link: (data) => `${this.base}/product/${data.product_id}`,
@@ -103,7 +98,6 @@ export class DevicesComponent implements OnInit {
 
     search(query: ParamSearch) {
         //console.log('onQuery', query)        this.query = query
-        if (this.gateway_id) query.filter['gateway_id'] = this.gateway_id;
         if (this.product_id) query.filter['product_id'] = this.product_id;
         if (this.project_id) query.filter['project_id'] = this.project_id;
         if (this.tunnel_id) query.filter['tunnel_id'] = this.tunnel_id;

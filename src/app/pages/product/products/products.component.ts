@@ -11,9 +11,6 @@ import {
     SmartTableComponent,
     SmartTableOperator,
 } from '../../../../../projects/smart/src/lib/smart-table/smart-table.component';
-import {GatewaysComponent} from "../../gateway/gateways/gateways.component";
-import {ProductVersionComponent} from "../product-version/product-version.component";
-
 @Component({
     selector: 'app-products',
     standalone: true,
