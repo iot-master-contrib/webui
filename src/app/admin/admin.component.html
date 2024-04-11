@@ -44,9 +44,20 @@
                         <ul>
                             <li nz-menu-item *ngFor="let item of menu.items" [nzDisabled]="item.disabled" nzMatchRouter
                                 nzMatchRouterExact>
-                                <a *ngIf="item.standalone" [href]="item.url" target="_blank">{{ item.name }}</a>
-                                <a *ngIf="!item.standalone" [routerLink]="item.link || 'web'"
-                                   [queryParams]="item.url && {url: item.url}">{{ item.name }}</a>
+                                @switch (item.type) {
+                                    @case ('route') {
+                                        <a [routerLink]="item.url">{{ item.name }}</a>
+                                    }
+                                    @case ('web') {
+                                        <a routerLink="web" [queryParams]="{url: item.url}">{{ item.name }}</a>
+                                    }
+                                    @case ('out') {
+                                        <a [href]="item.url" target="_blank">{{ item.name }}</a>
+                                    }
+                                    @default {
+                                        <a [routerLink]="item.url">{{ item.name }}</a>
+                                    }
+                                }
                             </li>
                         </ul>
                     </li>

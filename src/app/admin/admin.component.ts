@@ -44,70 +44,53 @@ export class AdminComponent {
         {
             name: '控制台', icon: 'dashboard', open: true,
             items: [
-                {name: '仪表盘', link: 'dash'}
+                {name: '仪表盘', url: 'dash'}
             ]
         },
         {
             name: '项目管理', icon: 'apartment',
             items: [
-                {name: '所有项目', link: 'project'},
-                {name: '创建项目', link: 'project/create'},
+                {name: '所有项目', url: 'project'},
+                {name: '创建项目', url: 'project/create'},
             ]
         },
         {
             name: '空间管理', icon: 'appstore',
             items: [
-                {name: '所有空间', link: 'space'},
-                {name: '创建空间', link: 'space/create'},
+                {name: '所有空间', url: 'space'},
+                {name: '创建空间', url: 'space/create'},
             ]
         },
         {
             name: '设备管理', icon: 'block',
             items: [
-                {name: '所有设备', link: 'device'},
-                {name: '创建设备', link: 'device/create'},
-            ]
-        },
-        {
-            name: '网关管理', icon: 'link',
-            items: [
-                {name: '所有网关', link: 'gateway'},
-                {name: '创建网关', link: 'gateway/create'},
-                {name: '批量创建', link: 'gateway/batch', disabled: true},
+                {name: '所有设备', url: 'device'},
+                {name: '创建设备', url: 'device/create'},
             ]
         },
         {
             name: '产品管理', icon: 'profile',
             items: [
-                {name: '所有产品', link: 'product'},
-                {name: '创建产品', link: 'product/create'},
-            ]
-        },
-        {
-            name: '连接管理', icon: 'link',
-            items: [
-                {name: 'TCP服务器', link: 'server'},
-                {name: 'TCP连接', link: 'link'},
-                {name: 'TCP客户端', link: 'clients'},
-                {name: '串口连接', link: 'serials'},
+                {name: '所有产品', url: 'product'},
+                {name: '创建产品', url: 'product/create'},
             ]
         },
         {
             name: '用户管理', icon: 'user',
             items: [
-                {name: '所有用户', link: 'user'},
-                {name: '创建用户', link: 'user/create'},
+                {name: '所有用户', url: 'user'},
+                {name: '创建用户', url: 'user/create'},
             ]
         },
         {
             name: '系统设置', icon: 'setting',
             items: [
-                {name: 'Web服务', link: 'setting/web'},
-                {name: '数据库', link: 'setting/database'},
-                {name: 'MQTT总线', link: 'setting/broker'},
-                {name: 'MQTT连接', link: 'setting/mqtt'},
-                {name: '系统日志', link: 'setting/log'},
-                {name: '附件管理', link: 'setting/attach'},
+                {name: 'Web服务', url: 'setting/web'},
+                {name: '数据库', url: 'setting/database'},
+                {name: 'MQTT总线', url: 'setting/broker'},
+                {name: 'MQTT连接', url: 'setting/mqtt'},
+                {name: '系统日志', url: 'setting/log'},
+                {name: '附件管理', url: 'setting/attach'},
             ]
         },
     ]
@@ -124,7 +107,7 @@ export class AdminComponent {
     }
 
     loadMenu() {
-        this.rs.get('plugin/menus/admin').subscribe((res: any) => {
+        this.rs.get('menu/admin').subscribe((res: any) => {
             //this.menus = res.data
             //this.menus = this.menus.concat(res.data)
             res.data?.forEach((m: any) => {
