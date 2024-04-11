@@ -6,12 +6,14 @@ import {NzMessageService} from 'ng-zorro-antd/message';
 import {CommonModule} from '@angular/common';
 import {Router} from '@angular/router';
 import {NzCardComponent} from "ng-zorro-antd/card";
-import {SmartEditorComponent, SmartField} from "../../../../../projects/smart/src/lib/smart-editor/smart-editor.component";
+import {
+    SmartEditorComponent,
+    SmartField
+} from "../../../../../projects/smart/src/lib/smart-editor/smart-editor.component";
 import {NzModalService} from "ng-zorro-antd/modal";
-import {ProjectsComponent} from "../../project/projects/projects.component";
 
 @Component({
-    selector: 'app-gateway-edit',
+    selector: 'app-broker-edit',
     standalone: true,
     imports: [
         CommonModule,
@@ -20,10 +22,10 @@ import {ProjectsComponent} from "../../project/projects/projects.component";
         NzCardComponent,
         SmartEditorComponent,
     ],
-    templateUrl: './gateway-edit.component.html',
-    styleUrl: './gateway-edit.component.scss'
+    templateUrl: './broker-edit.component.html',
+    styleUrl: './broker-edit.component.scss'
 })
-export class GatewayEditComponent implements OnInit, AfterViewInit {
+export class BrokerEditComponent implements OnInit, AfterViewInit {
     base = '/admin'
     id: any = '';
 
@@ -31,11 +33,9 @@ export class GatewayEditComponent implements OnInit, AfterViewInit {
 
     fields: SmartField[] = [
         {key: "id", label: "ID", type: "text", min: 2, max: 30, placeholder: "选填"},
-        {key: "name", label: "名称", type: "text", required: true, default: '新网关'},
-        {key: "keywords", label: "关键字", type: "tags", default: []},
+        {key: "name", label: "名称", type: "text", required: true, default: '新MQTT服务器'},
+        {key: "port", label: "端口", type: "number", default: 1883, min: 100, max: 65535},
         {key: "description", label: "说明", type: "textarea"},
-        {key: "username", label: "MQTT用户名", type: "text"},
-        {key: "password", label: "MQTT密码", type: "text"},
         {key: "disabled", label: "禁用", type: "switch"},
     ]
 
@@ -62,7 +62,7 @@ export class GatewayEditComponent implements OnInit, AfterViewInit {
 
 
     load() {
-        this.rs.get(`gateway/${this.id}`).subscribe(res => {
+        this.rs.get(`broker/${this.id}`).subscribe(res => {
             this.values = res.data
         });
     }
@@ -73,9 +73,9 @@ export class GatewayEditComponent implements OnInit, AfterViewInit {
             return
         }
 
-        let url = `gateway/${this.id || 'create'}`
+        let url = `broker/${this.id || 'create'}`
         this.rs.post(url, this.form.value).subscribe((res) => {
-            this.router.navigateByUrl(`${this.base}/gateway/` + res.data.id);
+            this.router.navigateByUrl(`${this.base}/broker/` + res.data.id);
             this.msg.success('保存成功');
         });
     }

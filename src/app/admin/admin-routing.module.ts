@@ -45,6 +45,9 @@ import {SerialDetailComponent} from "../pages/serial/serial-detail/serial-detail
 import {ClientsComponent} from "../pages/client/clients/clients.component";
 import {ClientEditComponent} from "../pages/client/client-edit/client-edit.component";
 import {ClientDetailComponent} from "../pages/client/client-detail/client-detail.component";
+import {BrokersComponent} from "../pages/broker/brokers/brokers.component";
+import {BrokerEditComponent} from "../pages/broker/broker-edit/broker-edit.component";
+import {BrokerDetailComponent} from "../pages/broker/broker-detail/broker-detail.component";
 
 const routes: Routes = [
     {path: "", pathMatch: "full", redirectTo: "dash"},
@@ -61,6 +64,11 @@ const routes: Routes = [
     {path: 'device/create', component: DeviceEditComponent, title:"创建设备", data:{breadcrumb:"创建设备"}},
     {path: 'device/:id', component: DeviceDetailComponent, title:"设备详情", data:{breadcrumb:"设备详情"}},
     {path: 'device/:id/edit', component: DeviceEditComponent, title:"编辑设备", data:{breadcrumb:"编辑设备"}},
+
+    {path: 'broker', component: BrokersComponent, title:"MQTT服务器列表", data:{breadcrumb:"MQTT服务器列表"}},
+    {path: 'broker/create', component: BrokerEditComponent, title:"创建MQTT服务器", data:{breadcrumb:"创建MQTT服务器"}},
+    {path: 'broker/:id', component: BrokerDetailComponent, title:"MQTT服务器详情", data:{breadcrumb:"MQTT服务器详情"}},
+    {path: 'broker/:id/edit', component: BrokerEditComponent, title:"编辑MQTT服务器", data:{breadcrumb:"编辑MQTT服务器"}},
 
     {path: 'gateway', component: GatewaysComponent, title:"网关列表", data:{breadcrumb:"网关列表"}},
     {path: 'gateway/create', component: GatewayEditComponent, title:"创建网关", data:{breadcrumb:"创建网关"}},
