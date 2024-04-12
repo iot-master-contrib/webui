@@ -31,7 +31,6 @@ export class ProductEditComponent implements OnInit {
         {key: "name", label: "名称", type: "text", required: true, default: '新产品'},
         {key: "keywords", label: "关键字", type: "tags", default: []},
         {key: "icon", label: "图标", type: "text"},
-        {key: "version", label: "版本", type: "text"},
         {key: "protocol", label: "协议", type: "text"},
         {key: "url", label: "链接", type: "text"},
         {key: "description", label: "说明", type: "textarea"},
