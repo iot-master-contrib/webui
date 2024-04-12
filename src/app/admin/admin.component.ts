@@ -40,7 +40,10 @@ export class AdminComponent {
     isVisible = false
     admin = false
 
-    settings: any = []
+    setting: any = {
+        name: '系统设置', icon: 'setting',
+        items: []
+    }
 
     menus: any = [
         {
@@ -48,46 +51,6 @@ export class AdminComponent {
             items: [
                 {name: '仪表盘', url: 'dash'}
             ]
-        },
-        {
-            name: '项目管理', icon: 'apartment',
-            items: [
-                {name: '所有项目', url: 'project'},
-                {name: '创建项目', url: 'project/create'},
-            ]
-        },
-        {
-            name: '空间管理', icon: 'appstore',
-            items: [
-                {name: '所有空间', url: 'space'},
-                {name: '创建空间', url: 'space/create'},
-            ]
-        },
-        {
-            name: '设备管理', icon: 'block',
-            items: [
-                {name: '所有设备', url: 'device'},
-                {name: '创建设备', url: 'device/create'},
-            ]
-        },
-        {
-            name: '产品管理', icon: 'profile',
-            items: [
-                {name: '所有产品', url: 'product'},
-                {name: '创建产品', url: 'product/create'},
-            ]
-        },
-        {
-            name: '用户管理', icon: 'user',
-            items: [
-                {name: '所有用户', url: 'user'},
-                {name: '角色管理', url: 'role'},
-                {name: '创建用户', url: 'user/create'},
-            ]
-        },
-        {
-            name: '系统设置', icon: 'setting',
-            items: this.settings
         },
     ]
     isCollapsed: boolean = false;
@@ -121,13 +84,14 @@ export class AdminComponent {
                 }
             })
 
-            this.menus.sort((m: any, n: any) => m.name > n.name)
+            //this.menus.sort((m: any, n: any) => m.name > n.name) 没起作用
+            this.menus.push(this.setting)
         })
 
         this.rs.get('setting/modules').subscribe(res => {
             //console.log(res)
             res.data?.forEach((s: any) => {
-                this.settings.push({
+                this.setting.items.push({
                     name: s.name,
                     url: "setting",
                     query: {module: s.module}
