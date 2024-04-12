@@ -40,19 +40,20 @@ export class AdminComponent {
     isVisible = false
     admin = false
 
+    dash: any = {
+        name: '控制台', icon: 'dashboard', open: true,
+        items: [
+            {name: '仪表盘', url: 'dash'}
+        ]
+    }
+
     setting: any = {
         name: '系统设置', icon: 'setting',
         items: []
     }
 
-    menus: any = [
-        {
-            name: '控制台', icon: 'dashboard', open: true,
-            items: [
-                {name: '仪表盘', url: 'dash'}
-            ]
-        },
-    ]
+    menus: any = []
+
     isCollapsed: boolean = false;
 
     constructor(
@@ -84,7 +85,9 @@ export class AdminComponent {
                 }
             })
 
-            //this.menus.sort((m: any, n: any) => m.name > n.name) 没起作用
+            this.menus.sort((m: any, n: any) => (m.name > n.name) ? 1 : -1)
+
+            this.menus.unshift(this.dash)
             this.menus.push(this.setting)
         })
 

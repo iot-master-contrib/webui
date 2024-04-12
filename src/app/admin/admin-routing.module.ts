@@ -22,13 +22,6 @@ import {SpaceDetailComponent} from "../pages/space/space-detail/space-detail.com
 import {UsersComponent} from "../pages/users/users/users.component";
 import {UserEditComponent} from "../pages/users/user-edit/user-edit.component";
 import {UserDetailComponent} from "../pages/users/user-detail/user-detail.component";
-import {SettingWebComponent} from "../pages/setting/setting-web/setting-web.component";
-import {SettingDatabaseComponent} from "../pages/setting/setting-database/setting-database.component";
-import {SettingBrokerComponent} from "../pages/setting/setting-broker/setting-broker.component";
-import {SettingMqttComponent} from "../pages/setting/setting-mqtt/setting-mqtt.component";
-import {SettingLogComponent} from "../pages/setting/setting-log/setting-log.component";
-import {SettingBackupComponent} from "../pages/setting/setting-backup/setting-backup.component";
-import {SettingAttachComponent} from "../pages/setting/setting-attach/setting-attach.component";
 import {ProjectUserComponent} from "../pages/project/project-user/project-user.component";
 import {SpaceDeviceComponent} from "../pages/space/space-device/space-device.component";
 import {ProductVersionComponent} from "../pages/product/product-version/product-version.component";
