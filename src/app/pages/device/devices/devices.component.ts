@@ -1,7 +1,7 @@
 import {Component, Inject, Input, OnInit, Optional,} from '@angular/core';
 import {ActivatedRoute,} from '@angular/router';
 import {CommonModule} from '@angular/common';
-import {RequestService} from '../../../../../projects/smart/src/lib/request.service';
+import {RequestService} from 'iot-master-smart';
 import {NZ_MODAL_DATA, NzModalRef} from 'ng-zorro-antd/modal';
 import {
     ParamSearch,
@@ -9,7 +9,7 @@ import {
     SmartTableColumn,
     SmartTableComponent,
     SmartTableOperator,
-} from '../../../../../projects/smart/src/lib/smart-table/smart-table.component';
+} from 'iot-master-smart';
 import {GetParentRouteParam, GetParentRouteParamFilter, GetParentRouteUrl} from "../../../app.routes";
 import {filter} from "rxjs/operators";
 

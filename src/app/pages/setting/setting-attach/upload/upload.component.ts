@@ -2,10 +2,8 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {FormGroup} from '@angular/forms';
 import {NzMessageService} from 'ng-zorro-antd/message';
 import {FormsModule} from '@angular/forms';
-import {NgModule} from '@angular/core';
 import {NzUploadModule} from 'ng-zorro-antd/upload';
 import {NzInputModule} from 'ng-zorro-antd/input';
-import {RequestService} from '../../../../../../projects/smart/src/lib/request.service';
 
 // , FileUploadModule
 @Component({

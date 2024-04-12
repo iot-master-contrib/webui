@@ -9,7 +9,7 @@ import {
 import {inject} from "@angular/core";
 import {UserService} from "./user.service";
 import {Subject} from "rxjs";
-import {RequestService} from "../../projects/smart/src/lib/request.service";
+import {RequestService} from "iot-master-smart";
 
 export const ProjectGuard: ResolveFn<any> = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
 

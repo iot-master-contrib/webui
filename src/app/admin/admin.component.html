@@ -46,7 +46,7 @@
                                 nzMatchRouterExact>
                                 @switch (item.type) {
                                     @case ('route') {
-                                        <a [routerLink]="item.url">{{ item.name }}</a>
+                                        <a [routerLink]="item.url" [queryParams]="item.query">{{ item.name }}</a>
                                     }
                                     @case ('web') {
                                         <a routerLink="web" [queryParams]="{url: item.url}">{{ item.name }}</a>
@@ -55,7 +55,7 @@
                                         <a [href]="item.url" target="_blank">{{ item.name }}</a>
                                     }
                                     @default {
-                                        <a [routerLink]="item.url">{{ item.name }}</a>
+                                        <a [routerLink]="item.url" [queryParams]="item.query">{{ item.name }}</a>
                                     }
                                 }
                             </li>

@@ -4,7 +4,7 @@ import {NzInputDirective} from "ng-zorro-antd/input";
 import {NzButtonComponent} from "ng-zorro-antd/button";
 import {NzModalService} from "ng-zorro-antd/modal";
 import {ProductsComponent} from "../../pages/product/products/products.component";
-import {RequestService} from "../../../../projects/smart/src/lib/request.service";
+import {RequestService} from "iot-master-smart";
 
 @Component({
     selector: 'app-input-product',

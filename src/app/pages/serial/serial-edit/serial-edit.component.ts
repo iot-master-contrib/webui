@@ -9,8 +9,8 @@ import {
     SmartEditorComponent,
     SmartField,
     SmartSelectOption
-} from "../../../../../projects/smart/src/lib/smart-editor/smart-editor.component";
-import {RequestService} from "../../../../../projects/smart/src/lib/request.service";
+} from "iot-master-smart";
+import {RequestService} from "iot-master-smart";
 
 @Component({
     selector: 'app-serials-edit',

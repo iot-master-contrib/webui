@@ -3,8 +3,8 @@ import {
     ParamSearch,
     SmartTableButton, SmartTableColumn,
     SmartTableComponent, SmartTableOperator
-} from "../../../../../projects/smart/src/lib/smart-table/smart-table.component";
-import {RequestService} from "../../../../../projects/smart/src/lib/request.service";
+} from "iot-master-smart";
+import {RequestService} from "iot-master-smart";
 import {NZ_MODAL_DATA, NzModalRef} from "ng-zorro-antd/modal";
 import {ActivatedRoute} from "@angular/router";
 

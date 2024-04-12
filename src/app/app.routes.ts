@@ -1,7 +1,7 @@
 import {ActivatedRoute, Routes} from '@angular/router';
 import {LoginComponent} from "./login/login.component";
 import {AdminComponent} from "./admin/admin.component";
-import {UnknownComponent} from "../../projects/smart/src/lib/unknown/unknown.component";
+import {UnknownComponent} from "iot-master-smart";
 import {authGuard} from "./auth.guard";
 import {ProjectComponent} from "./project/project.component";
 import {SelectComponent} from "./select/select.component";

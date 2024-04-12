@@ -9,7 +9,7 @@ import {FormsModule} from '@angular/forms';
 import {OemService} from "../oem.service";
 import {UserService} from "../user.service";
 import {PasswordComponent} from "../modals/password/password.component";
-import {RequestService} from '../../../projects/smart/src/lib/request.service';
+import {RequestService} from 'iot-master-smart';
 import {CommonModule} from '@angular/common';
 import {NzButtonComponent} from "ng-zorro-antd/button";
 import {NzBreadCrumbComponent} from "ng-zorro-antd/breadcrumb";
@@ -39,6 +39,8 @@ import {NzBreadCrumbComponent} from "ng-zorro-antd/breadcrumb";
 export class AdminComponent {
     isVisible = false
     admin = false
+
+    settings: any = []
 
     menus: any = [
         {
@@ -79,19 +81,13 @@ export class AdminComponent {
             name: '用户管理', icon: 'user',
             items: [
                 {name: '所有用户', url: 'user'},
+                {name: '角色管理', url: 'role'},
                 {name: '创建用户', url: 'user/create'},
             ]
         },
         {
             name: '系统设置', icon: 'setting',
-            items: [
-                {name: 'Web服务', url: 'setting/web'},
-                {name: '数据库', url: 'setting/database'},
-                {name: 'MQTT总线', url: 'setting/broker'},
-                {name: 'MQTT连接', url: 'setting/mqtt'},
-                {name: '系统日志', url: 'setting/log'},
-                {name: '附件管理', url: 'setting/attach'},
-            ]
+            items: this.settings
         },
     ]
     isCollapsed: boolean = false;
@@ -124,6 +120,20 @@ export class AdminComponent {
                     this.menus.push(m)
                 }
             })
+
+            this.menus.sort((m: any, n: any) => m.name > n.name)
+        })
+
+        this.rs.get('setting/modules').subscribe(res => {
+            //console.log(res)
+            res.data?.forEach((s: any) => {
+                this.settings.push({
+                    name: s.name,
+                    url: "setting",
+                    query: {module: s.module}
+                })
+            })
+
         })
     }
 

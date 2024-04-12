@@ -1,6 +1,6 @@
 import {Component, Inject, Input, OnInit, Optional} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {RequestService} from '../../../../../projects/smart/src/lib/request.service';
+import {RequestService} from 'iot-master-smart';
 import {NZ_MODAL_DATA, NzModalRef} from 'ng-zorro-antd/modal';
 import {CommonModule} from '@angular/common';
 import {
@@ -9,7 +9,7 @@ import {
     SmartTableColumn,
     SmartTableComponent,
     SmartTableOperator,
-} from '../../../../../projects/smart/src/lib/smart-table/smart-table.component';
+} from 'iot-master-smart';
 
 @Component({
     selector: 'app-brokers',

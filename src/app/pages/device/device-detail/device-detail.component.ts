@@ -4,13 +4,13 @@ import {NzButtonComponent} from 'ng-zorro-antd/button';
 import {CommonModule} from '@angular/common';
 import {ActivatedRoute, Router, RouterLink} from '@angular/router';
 import {NzPopconfirmDirective} from 'ng-zorro-antd/popconfirm';
-import {RequestService} from '../../../../../projects/smart/src/lib/request.service';
+import {RequestService} from 'iot-master-smart';
 import {NzMessageService} from 'ng-zorro-antd/message';
 import {NzDividerComponent} from "ng-zorro-antd/divider";
 import {NzColDirective, NzRowDirective} from "ng-zorro-antd/grid";
 import {NzStatisticComponent} from "ng-zorro-antd/statistic";
 import {NzCardComponent} from "ng-zorro-antd/card";
-import {SmartInfoComponent, SmartInfoItem} from "../../../../../projects/smart/src/lib/smart-info/smart-info.component";
+import {SmartInfoComponent, SmartInfoItem} from "iot-master-smart";
 import {NzTabsModule} from "ng-zorro-antd/tabs";
 import {DevicePropertyComponent} from "../device-property/device-property.component";
 

@@ -2,7 +2,7 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {WebViewComponent} from "../components/web-view/web-view.component";
 import {AlarmComponent} from "../pages/alarm/alarm.component";
-import {UnknownComponent} from "../../../projects/smart/src/lib/unknown/unknown.component";
+import {UnknownComponent} from "iot-master-smart";
 import {DevicesComponent} from "../pages/device/devices/devices.component";
 import {DeviceEditComponent} from "../pages/device/device-edit/device-edit.component";
 import {DeviceDetailComponent} from "../pages/device/device-detail/device-detail.component";

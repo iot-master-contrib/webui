@@ -1,12 +1,12 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
-import {RequestService} from '../../../../projects/smart/src/lib/request.service';
+import {RequestService} from 'iot-master-smart';
 import {
     ParamSearch,
     SmartTableColumn,
     SmartTableComponent,
     SmartTableOperator,
-} from '../../../../projects/smart/src/lib/smart-table/smart-table.component';
+} from 'iot-master-smart';
 import {GetParentRouteParam, GetParentRouteUrl} from "../../app.routes";
 
 @Component({

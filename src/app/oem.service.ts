@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Title} from '@angular/platform-browser';
 import {Subject} from "rxjs";
-import {RequestService} from "../../projects/smart/src/lib/request.service";
+import {RequestService} from "iot-master-smart";
 
 @Injectable({
     providedIn: 'root'

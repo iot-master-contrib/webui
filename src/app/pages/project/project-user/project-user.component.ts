@@ -2,7 +2,7 @@ import {Component, Inject, Input, Optional} from '@angular/core';
 import {NZ_MODAL_DATA, NzModalRef, NzModalService,} from 'ng-zorro-antd/modal';
 import {ActivatedRoute} from '@angular/router';
 import {CommonModule} from '@angular/common';
-import {RequestService} from "../../../../../projects/smart/src/lib/request.service";
+import {RequestService} from "iot-master-smart";
 import {UsersComponent} from "../../users/users/users.component";
 import {
     ParamSearch,
@@ -10,7 +10,7 @@ import {
     SmartTableColumn,
     SmartTableComponent,
     SmartTableOperator
-} from "../../../../../projects/smart/src/lib/smart-table/smart-table.component";
+} from "iot-master-smart";
 import {NzNotificationService} from "ng-zorro-antd/notification";
 
 @Component({

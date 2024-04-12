@@ -3,7 +3,7 @@ import {CountComponent} from "../../widgets/count/count.component";
 import {NzColDirective, NzRowDirective} from "ng-zorro-antd/grid";
 import {NzCardComponent} from "ng-zorro-antd/card";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {SmartEditorComponent, SmartField} from "../../../../projects/smart/src/lib/smart-editor/smart-editor.component";
+import {SmartEditorComponent, SmartField} from "iot-master-smart";
 import {InputProductComponent} from "../../components/input-product/input-product.component";
 
 @Component({

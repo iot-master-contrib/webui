@@ -1,6 +1,6 @@
 import {Component, OnInit, Optional} from '@angular/core';
 import {Router, RouterLink} from '@angular/router';
-import {RequestService} from '../../../../../projects/smart/src/lib/request.service';
+import {RequestService} from 'iot-master-smart';
 import {NzMessageService} from 'ng-zorro-antd/message';
 import {NzModalRef, NzModalService} from 'ng-zorro-antd/modal';
 import {CommonModule} from '@angular/common';
@@ -10,7 +10,7 @@ import {
     SmartTableColumn,
     SmartTableComponent,
     SmartTableOperator,
-} from '../../../../../projects/smart/src/lib/smart-table/smart-table.component';
+} from 'iot-master-smart';
 @Component({
     selector: 'app-products',
     standalone: true,

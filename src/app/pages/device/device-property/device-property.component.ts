@@ -4,7 +4,7 @@ import {NzColDirective, NzRowDirective} from "ng-zorro-antd/grid";
 import {NzStatisticComponent} from "ng-zorro-antd/statistic";
 import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 import {NzMessageService} from "ng-zorro-antd/message";
-import {RequestService} from "../../../../../projects/smart/src/lib/request.service";
+import {RequestService} from "iot-master-smart";
 import {NgxEchartsDirective} from "ngx-echarts";
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule} from "@angular/forms";
 import dayjs from "dayjs";

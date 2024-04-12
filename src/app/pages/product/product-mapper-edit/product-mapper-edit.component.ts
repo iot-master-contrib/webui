@@ -2,8 +2,8 @@ import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {
     SmartEditorComponent,
     SmartField
-} from "../../../../../projects/smart/src/lib/smart-editor/smart-editor.component";
-import {RequestService} from "../../../../../projects/smart/src/lib/request.service";
+} from "iot-master-smart";
+import {RequestService} from "iot-master-smart";
 import {NzNotificationService} from "ng-zorro-antd/notification";
 import {NzButtonComponent} from "ng-zorro-antd/button";
 import {NzCardComponent} from "ng-zorro-antd/card";

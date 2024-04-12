@@ -2,7 +2,7 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {WebViewComponent} from "../components/web-view/web-view.component";
 import {AlarmComponent} from "../pages/alarm/alarm.component";
-import {UnknownComponent} from "../../../projects/smart/src/lib/unknown/unknown.component";
+import {UnknownComponent} from "iot-master-smart";
 import {DashComponent} from "../pages/dash/dash.component";
 import {ProductsComponent} from "../pages/product/products/products.component";
 import {ProductEditComponent} from "../pages/product/product-edit/product-edit.component";
@@ -48,6 +48,7 @@ import {ClientDetailComponent} from "../pages/client/client-detail/client-detail
 import {BrokersComponent} from "../pages/broker/brokers/brokers.component";
 import {BrokerEditComponent} from "../pages/broker/broker-edit/broker-edit.component";
 import {BrokerDetailComponent} from "../pages/broker/broker-detail/broker-detail.component";
+import {SettingComponent} from "../pages/setting/setting.component";
 
 const routes: Routes = [
     {path: "", pathMatch: "full", redirectTo: "dash"},
@@ -113,13 +114,7 @@ const routes: Routes = [
     {path: 'user/:id', component: UserDetailComponent, title:"用户详情", data:{breadcrumb:"用户详情"}},
     {path: 'user/:id/edit', component: UserEditComponent, title:"编辑用户", data:{breadcrumb:"编辑用户"}},
 
-    {path: "setting/web", component: SettingWebComponent, title: "设置Web"},
-    {path: "setting/database", component: SettingDatabaseComponent, title:"设置数据库", data:{breadcrumb:"设置数据库"}},
-    {path: "setting/broker", component: SettingBrokerComponent, title:"设置数据总线", data:{breadcrumb:"设置数据总线"}},
-    {path: "setting/mqtt", component: SettingMqttComponent, title: "设置MQTT连接"},
-    {path: "setting/log", component: SettingLogComponent, title:"设置日志", data:{breadcrumb:"设置日志"}},
-    {path: "setting/backup", component: SettingBackupComponent, title:"系统备份", data:{breadcrumb:"系统备份"}},
-    {path: "setting/attach", component: SettingAttachComponent, title:"附件管理", data:{breadcrumb:"附件管理"}},
+    {path: "setting", component: SettingComponent, title: "设置", data:{breadcrumb:"设置"}},
 
     {path: "web", component: WebViewComponent, title: "扩展页面", data:{breadcrumb:"扩展页面"}},
     {path: "alarm", component: AlarmComponent, title:"告警日志", data:{breadcrumb:"告警日志"}},

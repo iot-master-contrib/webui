@@ -9,7 +9,7 @@ import {FormsModule} from '@angular/forms';
 import {OemService} from "../oem.service";
 import {UserService} from "../user.service";
 import {PasswordComponent} from "../modals/password/password.component";
-import {RequestService} from '../../../projects/smart/src/lib/request.service';
+import {RequestService} from 'iot-master-smart';
 import {CommonModule} from '@angular/common';
 import {NzBreadCrumbComponent} from "ng-zorro-antd/breadcrumb";
 

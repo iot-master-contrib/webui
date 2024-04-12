@@ -1,11 +1,11 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {NzButtonComponent} from 'ng-zorro-antd/button';
 import {RouterLink} from '@angular/router';
-import {RequestService} from '../../../../../projects/smart/src/lib/request.service';
+import {RequestService} from 'iot-master-smart';
 import {NzMessageService} from 'ng-zorro-antd/message';
 import {CommonModule} from '@angular/common';
 import {NzCardComponent} from "ng-zorro-antd/card";
-import {SmartEditorComponent, SmartField} from "../../../../../projects/smart/src/lib/smart-editor/smart-editor.component";
+import {SmartEditorComponent, SmartField} from "iot-master-smart";
 
 @Component({
     selector: 'app-setting-mqtt',
