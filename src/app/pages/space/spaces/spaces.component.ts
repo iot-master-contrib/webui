@@ -37,10 +37,6 @@ export class SpacesComponent implements OnInit {
         {icon: 'plus', label: '创建', link: () => `/admin/space/create`},
     ];
 
-    buttonsProject: SmartTableButton[] = [
-        {icon: 'plus', label: '创建', link: () => `/project/${this.project_id}/space/create`},
-    ];
-
     columns: SmartTableColumn[] = [
         {
             key: 'id', sortable: true, label: 'ID', keyword: true,
@@ -54,14 +50,6 @@ export class SpacesComponent implements OnInit {
         {key: 'created', sortable: true, label: '创建时间', date: true},
     ];
 
-    columnsProject: SmartTableColumn[] = [
-        {
-            key: 'id', sortable: true, label: 'ID', keyword: true,
-            link: (data) => `/project/${this.project_id}/space/${data.id}`,
-        },
-        {key: 'name', sortable: true, label: '名称', keyword: true},
-        {key: 'created', sortable: true, label: '创建时间', date: true},
-    ];
     columnsSelect: SmartTableColumn[] = [
         {key: 'id', label: 'ID', keyword: true},
         {key: 'name', label: '名称', keyword: true},
@@ -69,16 +57,6 @@ export class SpacesComponent implements OnInit {
 
     operators: SmartTableOperator[] = [
         {icon: 'edit', title: '编辑', link: (data) => `/admin/space/${data.id}/edit`,},
-        {
-            icon: 'delete', title: '删除', confirm: '确认删除？',
-            action: (data) => {
-                this.rs.get(`space/${data.id}/delete`).subscribe((res) => this.refresh())
-            },
-        },
-    ];
-
-    operatorsProject: SmartTableOperator[] = [
-        {icon: 'edit', title: '编辑', link: (data) => `/project/${this.project_id}/space/${data.id}/edit`,},
         {
             icon: 'delete', title: '删除', confirm: '确认删除？',
             action: (data) => {
