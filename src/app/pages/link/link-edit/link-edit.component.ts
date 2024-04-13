@@ -39,7 +39,7 @@ export class LinkEditComponent implements OnInit, AfterViewInit {
     @ViewChild('chooseProtocol') chooseProtocol!: TemplateRef<any>
 
 
-    fields: SmartField[] =  []
+    fields: SmartField[] = []
 
     build() {
         this.fields = [
@@ -47,7 +47,10 @@ export class LinkEditComponent implements OnInit, AfterViewInit {
             {key: "name", label: "名称", type: "text", required: true},
             {key: "server_id", label: "服务器", type: "template", template: this.chooseServer},
 
-            {key: "protocol_name", label: "通讯协议", type: "template", template: this.chooseProtocol},
+            {
+                key: "protocol_name", label: "通讯协议", type: "template", template: this.chooseProtocol,
+                change: ($event) => setTimeout(() => this.loadProtocolOptions($event))
+            },
             {key: "protocol_options", label: "通讯协议参数", type: "object"},
             {key: "description", label: "说明", type: "textarea"},
         ]
@@ -64,7 +67,7 @@ export class LinkEditComponent implements OnInit, AfterViewInit {
     }
 
     ngAfterViewInit(): void {
-        this.build()
+        setTimeout(()=>this.build(), 1)
     }
 
     ngOnInit(): void {

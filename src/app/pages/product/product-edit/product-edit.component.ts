@@ -59,7 +59,7 @@ export class ProductEditComponent implements OnInit, AfterViewInit {
     }
 
     ngAfterViewInit(): void {
-        this.build()
+        setTimeout(()=>this.build(), 1)
     }
 
     ngOnInit(): void {

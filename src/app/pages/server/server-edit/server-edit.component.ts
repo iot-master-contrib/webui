@@ -29,21 +29,24 @@ import {ReactiveFormsModule} from "@angular/forms";
     templateUrl: './server-edit.component.html',
     styleUrls: ['./server-edit.component.scss'],
 })
-export class ServerEditComponent implements OnInit {
+export class ServerEditComponent implements OnInit, AfterViewInit {
     id: any = '';
 
     @ViewChild('form') form!: SmartEditorComponent
     @ViewChild('chooseProtocol') chooseProtocol!: TemplateRef<any>
 
 
-    fields: SmartField[] =  []
+    fields: SmartField[] = []
 
     build() {
         this.fields = [
             {key: "id", label: "ID", type: "text", min: 2, max: 30, placeholder: "选填"},
             {key: "name", label: "名称", type: "text", required: true, default: '新服务端'},
             {key: "port", label: "端口", type: "number", min: 1, max: 65535, default: 60000},
-            {key: "protocol_name", label: "通讯协议", type: "template", template: this.chooseProtocol},
+            {
+                key: "protocol_name", label: "通讯协议", type: "template", template: this.chooseProtocol,
+                change: ($event) => setTimeout(() => this.loadProtocolOptions($event))
+            },
             {key: "protocol_options", label: "通讯协议参数", type: "object"},
             {key: "description", label: "说明", type: "textarea"},
         ]
@@ -67,7 +70,7 @@ export class ServerEditComponent implements OnInit {
     }
 
     ngAfterViewInit(): void {
-        this.build()
+        setTimeout(()=>this.build(), 1)
     }
 
     load() {

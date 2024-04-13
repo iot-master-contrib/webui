@@ -29,7 +29,7 @@ import {ReactiveFormsModule} from "@angular/forms";
     templateUrl: './client-edit.component.html',
     styleUrls: ['./client-edit.component.scss'],
 })
-export class ClientEditComponent implements OnInit {
+export class ClientEditComponent implements OnInit, AfterViewInit {
     id: any = '';
 
     @ViewChild('form') form!: SmartEditorComponent
@@ -50,7 +50,10 @@ export class ClientEditComponent implements OnInit {
             },
             {key: "addr", label: "地址", type: "text"},
             {key: "port", label: "端口", type: "number", min: 1, max: 65535},
-            {key: "protocol_name", label: "通讯协议", type: "template", template: this.chooseProtocol},
+            {
+                key: "protocol_name", label: "通讯协议", type: "template", template: this.chooseProtocol,
+                change: ($event) => setTimeout(()=>this.loadProtocolOptions($event))
+            },
             {key: "protocol_options", label: "通讯协议参数", type: "object"},
             {key: "description", label: "说明", type: "textarea"},
         ]
@@ -74,7 +77,7 @@ export class ClientEditComponent implements OnInit {
     }
 
     ngAfterViewInit(): void {
-        this.build()
+        setTimeout(()=>this.build(), 1)
     }
 
     load() {

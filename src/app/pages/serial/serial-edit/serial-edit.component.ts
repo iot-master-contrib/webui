@@ -86,7 +86,10 @@ export class SerialEditComponent implements OnInit, AfterViewInit {
                     {label: '2', value: 2},
                 ]
             },
-            {key: "protocol_name", label: "通讯协议", type: "template", template: this.chooseProtocol},
+            {
+                key: "protocol_name", label: "通讯协议", type: "template", template: this.chooseProtocol,
+                change: ($event) => setTimeout(() => this.loadProtocolOptions($event))
+            },
             {key: "protocol_options", label: "通讯协议参数", type: "object"},
             {key: "description", label: "说明", type: "textarea"},
         ]
@@ -111,7 +114,7 @@ export class SerialEditComponent implements OnInit, AfterViewInit {
     }
 
     ngAfterViewInit(): void {
-        this.build()
+        setTimeout(()=>this.build(), 1)
     }
 
     load() {

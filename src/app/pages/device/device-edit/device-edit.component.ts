@@ -64,7 +64,7 @@ export class DeviceEditComponent implements OnInit, AfterViewInit {
             {key: "keywords", label: "关键字", type: "tags", default: []},
             {
                 key: "product_id", label: "产品", type: "template", template: this.chooseProduct,
-                change: () => this.loadProtocolStation()
+                change: () => setTimeout(()=>this.loadProtocolStation())
             },
             {key: "product_version", label: "版本", type: "template", template: this.chooseVersion},
             {key: "project_id", label: "项目", type: "template", template: this.chooseProject},
@@ -99,18 +99,22 @@ export class DeviceEditComponent implements OnInit, AfterViewInit {
     }
 
     ngAfterViewInit(): void {
-        //setTimeout(()=>this.build(), 100)
-        this.build()
-        if (this.project_id) {
-            this.data.project_id = this.project_id
-            this.form.patchValue({project_id: this.project_id})
-            this.form.group.get('project_id')?.disable()
-        }
-        if (this.tunnel_id) {
-            this.data.tunnel_id = this.tunnel_id
-            this.form.patchValue({tunnel_id: this.tunnel_id})
-            this.form.group.get('tunnel_id')?.disable()
-        }
+        //this.build()
+        setTimeout(()=> {
+            this.build()
+
+            if (this.project_id) {
+                this.data.project_id = this.project_id
+                this.form.patchValue({project_id: this.project_id})
+                this.form.group.get('project_id')?.disable()
+            }
+            if (this.tunnel_id) {
+                this.data.tunnel_id = this.tunnel_id
+                this.form.patchValue({tunnel_id: this.tunnel_id})
+                this.form.group.get('tunnel_id')?.disable()
+            }
+
+        }, 100)
     }
 
 
