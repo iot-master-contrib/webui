@@ -39,12 +39,16 @@ export class SpaceEditComponent implements OnInit, AfterViewInit {
     @ViewChild('form') form!: SmartEditorComponent
     @ViewChild("chooseProject") chooseProject!: TemplateRef<any>
 
-    fields: SmartField[] = [
-        {key: "id", label: "ID", type: "text", min: 2, max: 30, placeholder: "选填"},
-        {key: "name", label: "名称", type: "text", required: true, default: '新空间'},
-        {key: "project_id", label: "项目", type: "template",},
-        {key: "description", label: "说明", type: "textarea"},
-    ]
+    fields: SmartField[] = []
+
+    build() {
+        this.fields = [
+            {key: "id", label: "ID", type: "text", min: 2, max: 30, placeholder: "选填"},
+            {key: "name", label: "名称", type: "text", required: true, default: '新空间'},
+            {key: "project_id", label: "项目", type: "template", template: this.chooseProject},
+            {key: "description", label: "说明", type: "textarea"},
+        ]
+    }
 
     values: any = {}
 
@@ -68,15 +72,11 @@ export class SpaceEditComponent implements OnInit, AfterViewInit {
     }
 
     ngAfterViewInit(): void {
-        setTimeout(() => {
-            this.fields[2].template = this.chooseProject
-            setTimeout(() => {
-                if (this.project_id) {
-                    this.form.patchValue({project_id: this.project_id})
-                    this.form.group.get('project_id')?.disable()
-                }
-            }, 10)
-        }, 10)
+        this.build()
+        if (this.project_id) {
+            this.form.patchValue({project_id: this.project_id})
+            this.form.group.get('project_id')?.disable()
+        }
     }
 
     load() {

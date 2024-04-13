@@ -12,20 +12,21 @@ import {
 } from "iot-master-smart";
 import {RequestService} from "iot-master-smart";
 import {InputServerComponent} from "../../../components/input-server/input-server.component";
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {InputProtocolComponent} from "../../../components/input-protocol/input-protocol.component";
+import {ReactiveFormsModule} from "@angular/forms";
 
 @Component({
     selector: 'app-links-edit',
     standalone: true,
     imports: [
         CommonModule,
-        FormsModule,
         ReactiveFormsModule,
         NzButtonComponent,
         RouterLink,
         NzCardComponent,
         SmartEditorComponent,
         InputServerComponent,
+        InputProtocolComponent,
     ],
     templateUrl: './link-edit.component.html',
     styleUrls: ['./link-edit.component.scss'],
@@ -35,21 +36,22 @@ export class LinkEditComponent implements OnInit, AfterViewInit {
 
     @ViewChild('form') form!: SmartEditorComponent
     @ViewChild("chooseServer") chooseServer!: TemplateRef<any>
+    @ViewChild('chooseProtocol') chooseProtocol!: TemplateRef<any>
 
-    protocols: SmartSelectOption[] = []
 
-    fields: SmartField[] = [
-        {key: "id", label: "ID", type: "text", min: 2, max: 30, placeholder: "选填"},
-        {key: "name", label: "名称", type: "text", required: true},
-        {key: "server_id", label:"服务器", type: "template"},
+    fields: SmartField[] =  []
 
-        {
-            key: "protocol_name", label: "通讯协议", type: "select", options: this.protocols,
-            change: (p: any) => this.loadProtocolOptions(p)
-        },
-        {key: "protocol_options", label: "通讯协议参数", type: "object"},
-        {key: "description", label: "说明", type: "textarea"},
-    ]
+    build() {
+        this.fields = [
+            {key: "id", label: "ID", type: "text", min: 2, max: 30, placeholder: "选填"},
+            {key: "name", label: "名称", type: "text", required: true},
+            {key: "server_id", label: "服务器", type: "template", template: this.chooseServer},
+
+            {key: "protocol_name", label: "通讯协议", type: "template", template: this.chooseProtocol},
+            {key: "protocol_options", label: "通讯协议参数", type: "object"},
+            {key: "description", label: "说明", type: "textarea"},
+        ]
+    }
 
     values: any = {}
 
@@ -62,9 +64,7 @@ export class LinkEditComponent implements OnInit, AfterViewInit {
     }
 
     ngAfterViewInit(): void {
-        setTimeout(()=>{
-            this.fields[2].template = this.chooseServer
-        })
+        this.build()
     }
 
     ngOnInit(): void {
@@ -72,22 +72,12 @@ export class LinkEditComponent implements OnInit, AfterViewInit {
             this.id = this.route.snapshot.paramMap.get('id');
             this.load()
         }
-        this.loadProtocols()
     }
 
     load() {
         this.rs.get(`link/` + this.id).subscribe((res) => {
             this.values = res.data
             this.loadProtocolOptions(this.values.protocol_name)
-        });
-    }
-
-
-    loadProtocols() {
-        this.rs.get(`protocol/list`).subscribe((res) => {
-            this.fields[3].options = res.data.map((p: any) => {
-                return {value: p.name, label: p.label}
-            })
         });
     }
 

@@ -55,14 +55,24 @@ export class DeviceEditComponent implements OnInit, AfterViewInit {
     fields: SmartField[] = [
         {key: "id", label: "ID", type: "text", min: 2, max: 30, placeholder: "选填"},
         {key: "name", label: "名称", type: "text", required: true, default: '新设备'},
-        {key: "keywords", label: "关键字", type: "tags", default: []},
-        {key: "product_id", label: "产品", type: "template", change: ()=>setTimeout(()=>this.loadProtocolStation(), 100)},
-        {key: "product_version", label: "版本", type: "template",},
-        {key: "project_id", label: "项目", type: "template",},
-        {key: "tunnel_id", label: "通道", type: "template",},
-        {key: "station", label: "从站", type: "object"},
-        {key: "description", label: "说明", type: "textarea"},
     ]
+
+    build() {
+        this.fields = [
+            {key: "id", label: "ID", type: "text", min: 2, max: 30, placeholder: "选填"},
+            {key: "name", label: "名称", type: "text", required: true, default: '新设备'},
+            {key: "keywords", label: "关键字", type: "tags", default: []},
+            {
+                key: "product_id", label: "产品", type: "template", template: this.chooseProduct,
+                change: () => this.loadProtocolStation()
+            },
+            {key: "product_version", label: "版本", type: "template", template: this.chooseVersion},
+            {key: "project_id", label: "项目", type: "template", template: this.chooseProject},
+            {key: "tunnel_id", label: "通道", type: "template", template: this.chooseTunnel},
+            {key: "station", label: "从站", type: "object"},
+            {key: "description", label: "说明", type: "textarea"},
+        ]
+    }
 
     values: any = {}
 
@@ -89,38 +99,29 @@ export class DeviceEditComponent implements OnInit, AfterViewInit {
     }
 
     ngAfterViewInit(): void {
-        setTimeout(() => {
-            this.fields[3].template = this.chooseProduct
-            this.fields[4].template = this.chooseVersion
-            this.fields[5].template = this.chooseProject
-            this.fields[6].template = this.chooseTunnel
-
-            setTimeout(() => {
-                if (this.project_id) {
-                    this.data.project_id = this.project_id
-                    this.form.patchValue({project_id: this.project_id})
-                    this.form.group.get('project_id')?.disable()
-                }
-                if (this.tunnel_id) {
-                    this.data.tunnel_id = this.tunnel_id
-                    this.form.patchValue({tunnel_id: this.tunnel_id})
-                    this.form.group.get('tunnel_id')?.disable()
-                }
-            }, 10)
-        }, 10)
-
-
+        //setTimeout(()=>this.build(), 100)
+        this.build()
+        if (this.project_id) {
+            this.data.project_id = this.project_id
+            this.form.patchValue({project_id: this.project_id})
+            this.form.group.get('project_id')?.disable()
+        }
+        if (this.tunnel_id) {
+            this.data.tunnel_id = this.tunnel_id
+            this.form.patchValue({tunnel_id: this.tunnel_id})
+            this.form.group.get('tunnel_id')?.disable()
+        }
     }
 
 
     load() {
         this.rs.get(`device/${this.id}`).subscribe(res => {
             this.values = res.data
-            setTimeout(()=>this.loadProtocolStation())
+            this.loadProtocolStation()
         });
     }
 
-    loadProtocolStation(){
+    loadProtocolStation() {
         console.log("loadProtocolStation", this.form.value)
         this.values = this.form.value
 

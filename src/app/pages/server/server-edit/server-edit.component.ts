@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {NzButtonComponent} from 'ng-zorro-antd/button';
 import {ActivatedRoute, RouterLink} from '@angular/router';
 import {NzMessageService} from 'ng-zorro-antd/message';
@@ -11,16 +11,20 @@ import {
     SmartSelectOption
 } from "iot-master-smart";
 import {RequestService} from "iot-master-smart";
+import {InputProtocolComponent} from "../../../components/input-protocol/input-protocol.component";
+import {ReactiveFormsModule} from "@angular/forms";
 
 @Component({
     selector: 'app-servers-edit',
     standalone: true,
     imports: [
         CommonModule,
+        ReactiveFormsModule,
         NzButtonComponent,
         RouterLink,
         NzCardComponent,
         SmartEditorComponent,
+        InputProtocolComponent,
     ],
     templateUrl: './server-edit.component.html',
     styleUrls: ['./server-edit.component.scss'],
@@ -29,20 +33,21 @@ export class ServerEditComponent implements OnInit {
     id: any = '';
 
     @ViewChild('form') form!: SmartEditorComponent
+    @ViewChild('chooseProtocol') chooseProtocol!: TemplateRef<any>
 
-    protocols: SmartSelectOption[] = []
 
-    fields: SmartField[] = [
-        {key: "id", label: "ID", type: "text", min: 2, max: 30, placeholder: "选填"},
-        {key: "name", label: "名称", type: "text", required: true, default: '新服务端'},
-        {key: "port", label: "端口", type: "number", min: 1, max: 65535, default: 60000},
-        {
-            key: "protocol_name", label: "通讯协议", type: "select", options: this.protocols,
-            change: (p: any) => this.loadProtocolOptions(p)
-        },
-        {key: "protocol_options", label: "通讯协议参数", type: "object"},
-        {key: "description", label: "说明", type: "textarea"},
-    ]
+    fields: SmartField[] =  []
+
+    build() {
+        this.fields = [
+            {key: "id", label: "ID", type: "text", min: 2, max: 30, placeholder: "选填"},
+            {key: "name", label: "名称", type: "text", required: true, default: '新服务端'},
+            {key: "port", label: "端口", type: "number", min: 1, max: 65535, default: 60000},
+            {key: "protocol_name", label: "通讯协议", type: "template", template: this.chooseProtocol},
+            {key: "protocol_options", label: "通讯协议参数", type: "object"},
+            {key: "description", label: "说明", type: "textarea"},
+        ]
+    }
 
     values: any = {}
 
@@ -59,7 +64,10 @@ export class ServerEditComponent implements OnInit {
             this.id = this.route.snapshot.paramMap.get('id');
             this.load()
         }
-        this.loadProtocols()
+    }
+
+    ngAfterViewInit(): void {
+        this.build()
     }
 
     load() {
@@ -69,14 +77,6 @@ export class ServerEditComponent implements OnInit {
         });
     }
 
-
-    loadProtocols() {
-        this.rs.get(`protocol/list`).subscribe((res) => {
-            this.fields[3].options = res.data.map((p: any) => {
-                return {value: p.name, label: p.label}
-            })
-        });
-    }
 
     loadProtocolOptions(protocol: string) {
         if (protocol)

@@ -39,7 +39,6 @@ export class InputProtocolComponent implements OnInit, ControlValueAccessor {
     }
 
     ngOnInit(): void {
-        throw new Error('Method not implemented.');
     }
 
     load() {

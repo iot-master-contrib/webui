@@ -8,17 +8,21 @@ import {Router} from '@angular/router';
 import {NzCardComponent} from "ng-zorro-antd/card";
 import {SmartEditorComponent, SmartField} from "iot-master-smart";
 import {InputProtocolComponent} from "../../../components/input-protocol/input-protocol.component";
+import {InputProjectComponent} from "../../../components/input-project/input-project.component";
+import {ReactiveFormsModule} from "@angular/forms";
 
 @Component({
     selector: 'app-product-edit',
     standalone: true,
     imports: [
         CommonModule,
+        ReactiveFormsModule,
         NzButtonComponent,
         RouterLink,
         NzCardComponent,
         SmartEditorComponent,
         InputProtocolComponent,
+        InputProjectComponent,
     ],
     templateUrl: './product-edit.component.html',
     styleUrl: './product-edit.component.scss',
@@ -55,7 +59,7 @@ export class ProductEditComponent implements OnInit, AfterViewInit {
     }
 
     ngAfterViewInit(): void {
-        setTimeout(() => this.build())
+        this.build()
     }
 
     ngOnInit(): void {
