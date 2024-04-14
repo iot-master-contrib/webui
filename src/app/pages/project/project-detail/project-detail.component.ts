@@ -16,6 +16,7 @@ import {SpacesComponent} from "../../space/spaces/spaces.component";
 import {DevicesComponent} from "../../device/devices/devices.component";
 import {GatewaysComponent} from "../../gateway/gateways/gateways.component";
 import {ProjectUserComponent} from "../project-user/project-user.component";
+import {GetParentRouteParam, GetParentRouteUrl} from "../../../app.routes";
 
 @Component({
     selector: 'app-project-detail',
@@ -43,6 +44,7 @@ import {ProjectUserComponent} from "../project-user/project-user.component";
     styleUrl: './project-detail.component.scss',
 })
 export class ProjectDetailComponent implements OnInit {
+    base = '/admin'
     project_id!: any;
     id!: any;
 
@@ -67,11 +69,13 @@ export class ProjectDetailComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        if (this.route.parent?.snapshot.paramMap.has('project')) {
-            this.project_id = this.id = this.route.parent?.snapshot.paramMap.get('project');
-        }
+        this.base = GetParentRouteUrl(this.route)
+        this.project_id ||= GetParentRouteParam(this.route, "project")
+
         if (this.route.snapshot.paramMap.has('id')) {
             this.id = this.route.snapshot.paramMap.get('id');
+        } else {
+            this.id = this.project_id
         }
         this.load();
     }
@@ -85,7 +89,7 @@ export class ProjectDetailComponent implements OnInit {
     delete() {
         this.rs.get(`project/${this.id}/delete`, {}).subscribe((res: any) => {
             this.msg.success('删除成功');
-            this.router.navigateByUrl('/project');
+            this.router.navigateByUrl(`/admin/project`);
         });
     }
 }

@@ -12,6 +12,7 @@ import {
 } from "iot-master-smart";
 import {NzNotificationService} from "ng-zorro-antd/notification";
 import {DevicesComponent} from "../../device/devices/devices.component";
+import {GetParentRouteParam, GetParentRouteUrl} from "../../../app.routes";
 
 @Component({
     selector: 'app-space-device',
@@ -24,6 +25,7 @@ import {DevicesComponent} from "../../device/devices/devices.component";
     styleUrl: './space-device.component.scss'
 })
 export class SpaceDeviceComponent {
+    base = "/admin"
     @Input() space_id: any = '';
     @Input() project_id: any = '';
 
@@ -40,7 +42,7 @@ export class SpaceDeviceComponent {
     columns: SmartTableColumn[] = [
         {
             key: 'device_id', sortable: true, label: 'ID', keyword: true,
-            link: (data) => `/admin/device/${data.device_id}`,
+            link: (data) => `${this.base}/device/${data.device_id}`,
         },
         {key: 'device', sortable: true, label: '名称', keyword: true},
         {key: 'created', sortable: true, label: '创建时间', date: true},
@@ -71,6 +73,9 @@ export class SpaceDeviceComponent {
     }
 
     ngOnInit(): void {
+        this.base = GetParentRouteUrl(this.route)
+        this.project_id ||= GetParentRouteParam(this.route, "project")
+
         if (this.route.snapshot.paramMap.has('id')) {
             this.space_id = this.route.snapshot.paramMap.get('id');
         }

@@ -11,6 +11,7 @@ import {
     SmartTableOperator,
 } from 'iot-master-smart';
 
+
 @Component({
     selector: 'app-brokers',
     standalone: true,
@@ -22,8 +23,6 @@ import {
     styleUrl: './brokers.component.scss',
 })
 export class BrokersComponent implements OnInit {
-
-
     datum: any[] = [];
     total = 0;
     loading = false;

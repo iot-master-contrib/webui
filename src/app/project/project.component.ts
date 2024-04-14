@@ -1,4 +1,4 @@
-import {Component, OnInit, signal} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router, RouterLink, RouterOutlet} from "@angular/router";
 import {NzContentComponent, NzHeaderComponent, NzLayoutComponent, NzSiderComponent} from "ng-zorro-antd/layout";
 import {NzDropDownDirective, NzDropdownMenuComponent} from "ng-zorro-antd/dropdown";
@@ -12,9 +12,10 @@ import {PasswordComponent} from "../modals/password/password.component";
 import {RequestService} from 'iot-master-smart';
 import {CommonModule} from '@angular/common';
 import {NzBreadCrumbComponent} from "ng-zorro-antd/breadcrumb";
+import {GetParentRouteParam, GetParentRouteUrl} from "../app.routes";
 
 @Component({
-    selector: 'app-project',
+    selector: 'app-project-admin',
     standalone: true,
     imports: [CommonModule,
         FormsModule,
@@ -39,36 +40,16 @@ export class ProjectComponent implements OnInit {
     id: any = ''
     project: any = {}
 
-    menus: any = [
-        {
-            name: '控制台', icon: 'dashboard', open: true,
-            items: [
-                {name: '仪表盘', link: 'dash'},
-                {name: '项目详情', link: 'detail'}
-            ]
-        },
-        {
-            name: '空间管理', icon: 'appstore',
-            items: [
-                {name: '所有空间', link: 'space'},
-                {name: '创建空间', link: 'space/create'},
-            ]
-        },
-        {
-            name: '设备管理', icon: 'block',
-            items: [
-                {name: '所有设备', link: 'device'},
-                {name: '创建设备', link: 'device/create'},
-            ]
-        },
-        {
-            name: '用户管理', icon: 'user',
-            items: [
-                {name: '项目用户', link: 'user'},
-                //{name: '创建用户', links: 'user/create'},
-            ]
-        },
-    ]
+    dash: any = {
+        name: '控制台', icon: 'dashboard', open: true,
+        items: [
+            {name: '仪表盘', url: 'dash'},
+            {name: '项目详情', url: 'detail'}
+        ]
+    }
+
+    menus: any = []
+
     isCollapsed: boolean = false;
 
     constructor(
@@ -83,11 +64,8 @@ export class ProjectComponent implements OnInit {
     }
 
     ngOnInit() {
-        // this.route.data.subscribe(({project})=>{
-        //   this.id = project
-        //   this.loadProject()
-        // })
         this.id = this.route.snapshot.paramMap.get("project")
+
         this.loadProject()
     }
 
@@ -98,11 +76,11 @@ export class ProjectComponent implements OnInit {
     }
 
     loadMenu() {
-        this.rs.get('plugin/menus/project').subscribe((res: any) => {
+        this.rs.get('menu/project').subscribe((res: any) => {
             //this.menus = res.data
             //this.menus = this.menus.concat(res.data)
-            res.data.forEach((m: any) => {
-                m.items.forEach((i: any) => i.standalone = true)
+            res.data?.forEach((m: any) => {
+                //m.items.forEach((i: any) => i.standalone = true)
                 //先查找同名，找到就合并
                 let has = false
                 this.menus.forEach((m2: any) => {
@@ -115,7 +93,12 @@ export class ProjectComponent implements OnInit {
                     this.menus.push(m)
                 }
             })
+
+            this.menus.sort((m: any, n: any) => (m.name > n.name) ? 1 : -1)
+
+            this.menus.unshift(this.dash)
         })
+
     }
 
 
@@ -136,13 +119,9 @@ export class ProjectComponent implements OnInit {
                     label: '保存',
                     type: 'primary',
                     onClick: (rs: any) => {
-                        rs!.submit().then(
-                            () => {
-                                modal.destroy();
-                            },
-                            () => {
-                            }
-                        );
+                        rs!.submit().then(() => {
+                            modal.destroy();
+                        });
                     },
                 },
             ],
@@ -150,7 +129,7 @@ export class ProjectComponent implements OnInit {
     }
 
     handleExit() {
-        this.rs.get("/logout").subscribe(() => {
+        this.rs.get("logout").subscribe(() => {
             this.us.setUser(undefined)
         })
         this.router.navigateByUrl("/login")

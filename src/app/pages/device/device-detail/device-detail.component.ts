@@ -13,6 +13,7 @@ import {NzCardComponent} from "ng-zorro-antd/card";
 import {SmartInfoComponent, SmartInfoItem} from "iot-master-smart";
 import {NzTabsModule} from "ng-zorro-antd/tabs";
 import {DevicePropertyComponent} from "../device-property/device-property.component";
+import {GetParentRouteParam, GetParentRouteUrl} from "../../../app.routes";
 
 @Component({
     selector: 'app-device-detail',
@@ -74,10 +75,9 @@ export class DeviceDetailComponent implements OnInit {
     loading = false;
 
     ngOnInit(): void {
-        if (this.route.parent?.snapshot.paramMap.has('project')) {
-            this.project_id = this.route.parent.snapshot.paramMap.get('project');
-            this.base = `/project/${this.project_id}`
-        }
+        this.base = GetParentRouteUrl(this.route)
+        this.project_id ||= GetParentRouteParam(this.route, "project")
+
         if (this.route.snapshot.paramMap.has('id')) {
             this.id = this.route.snapshot.paramMap.get('id');
             this.load();

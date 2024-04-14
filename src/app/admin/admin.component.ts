@@ -11,7 +11,6 @@ import {UserService} from "../user.service";
 import {PasswordComponent} from "../modals/password/password.component";
 import {RequestService} from 'iot-master-smart';
 import {CommonModule} from '@angular/common';
-import {NzButtonComponent} from "ng-zorro-antd/button";
 import {NzBreadCrumbComponent} from "ng-zorro-antd/breadcrumb";
 
 @Component({
@@ -31,7 +30,7 @@ import {NzBreadCrumbComponent} from "ng-zorro-antd/breadcrumb";
         NzMenuDividerDirective,
         NzMenuItemComponent,
         RouterLink,
-        NzSubMenuComponent, NzSiderComponent, NzButtonComponent, NzBreadCrumbComponent,
+        NzSubMenuComponent, NzSiderComponent, NzBreadCrumbComponent,
     ],
     templateUrl: './admin.component.html',
     styleUrl: './admin.component.scss'

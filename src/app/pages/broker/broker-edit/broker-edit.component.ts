@@ -12,6 +12,7 @@ import {
 } from "iot-master-smart";
 import {NzModalService} from "ng-zorro-antd/modal";
 
+
 @Component({
     selector: 'app-broker-edit',
     standalone: true,
@@ -26,7 +27,6 @@ import {NzModalService} from "ng-zorro-antd/modal";
     styleUrl: './broker-edit.component.scss'
 })
 export class BrokerEditComponent implements OnInit, AfterViewInit {
-    base = '/admin'
     id: any = '';
 
     @ViewChild('form') form!: SmartEditorComponent
@@ -75,7 +75,7 @@ export class BrokerEditComponent implements OnInit, AfterViewInit {
 
         let url = `broker/${this.id || 'create'}`
         this.rs.post(url, this.form.value).subscribe((res) => {
-            this.router.navigateByUrl(`${this.base}/broker/` + res.data.id);
+            this.router.navigateByUrl(`/admin/broker/` + res.data.id);
             this.msg.success('保存成功');
         });
     }

@@ -11,6 +11,7 @@ import {SmartInfoComponent, SmartInfoItem} from "iot-master-smart";
 import {NzTabsModule} from "ng-zorro-antd/tabs";
 import {DevicesComponent} from "../../device/devices/devices.component";
 
+
 @Component({
     selector: 'app-broker-detail',
     standalone: true,
@@ -30,7 +31,6 @@ import {DevicesComponent} from "../../device/devices/devices.component";
     styleUrl: './broker-detail.component.scss'
 })
 export class BrokerDetailComponent implements OnInit {
-    base = '/admin'
     id!: any;
 
     data: any = {};
@@ -70,7 +70,7 @@ export class BrokerDetailComponent implements OnInit {
     delete() {
         this.rs.get(`broker/${this.id}/delete`, {}).subscribe((res) => {
             this.msg.success('删除成功');
-            this.router.navigateByUrl(`${this.base}/broker`);
+            this.router.navigateByUrl(`/admin/broker`);
         });
 
     }

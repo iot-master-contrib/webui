@@ -11,6 +11,7 @@ import {
     SmartTableComponent,
     SmartTableOperator,
 } from 'iot-master-smart';
+import {GetParentRouteParam, GetParentRouteUrl} from "../../../app.routes";
 
 @Component({
     selector: 'app-spaces',
@@ -23,8 +24,7 @@ import {
     styleUrl: './spaces.component.scss',
 })
 export class SpacesComponent implements OnInit {
-    //从Modal中传参过来
-    //readonly data: any = inject(NZ_MODAL_DATA, {optional:true});
+    base = '/admin'
     @Input() project_id: any = '';
 
 
@@ -34,18 +34,18 @@ export class SpacesComponent implements OnInit {
 
 
     buttons: SmartTableButton[] = [
-        {icon: 'plus', label: '创建', link: () => `/admin/space/create`},
+        {icon: 'plus', label: '创建', link: () => `${this.base}/space/create`},
     ];
 
     columns: SmartTableColumn[] = [
         {
             key: 'id', sortable: true, label: 'ID', keyword: true,
-            link: (data) => `/admin/space/${data.id}`,
+            link: (data) => `${this.base}/space/${data.id}`,
         },
         {key: 'name', sortable: true, label: '名称', keyword: true},
         {
             key: 'project', sortable: true, label: '项目', keyword: true,
-            link: (data) => `/admin/project/${data.project_id}`,
+            link: (data) => `${this.base}/project/${data.project_id}`,
         },
         {key: 'created', sortable: true, label: '创建时间', date: true},
     ];
@@ -56,7 +56,7 @@ export class SpacesComponent implements OnInit {
     ];
 
     operators: SmartTableOperator[] = [
-        {icon: 'edit', title: '编辑', link: (data) => `/admin/space/${data.id}/edit`,},
+        {icon: 'edit', title: '编辑', link: (data) => `${this.base}/space/${data.id}/edit`,},
         {
             icon: 'delete', title: '删除', confirm: '确认删除？',
             action: (data) => {
@@ -78,10 +78,8 @@ export class SpacesComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        if (this.route.parent?.snapshot.paramMap.has('project')) {
-            this.project_id = this.route.parent?.snapshot.paramMap.get('project');
-            //console.log("project_id", this.project_id)
-        }
+        this.base = GetParentRouteUrl(this.route)
+        this.project_id ||= GetParentRouteParam(this.route, "project")
     }
 
     query!: ParamSearch

@@ -16,6 +16,7 @@ import {InputProjectComponent} from "../../../components/input-project/input-pro
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {InputVersionComponent} from "../../../components/input-version/input-version.component";
 import {InputTunnelComponent} from "../../../components/input-tunnel/input-tunnel.component";
+import {GetParentRouteParam, GetParentRouteUrl} from "../../../app.routes";
 
 @Component({
     selector: 'app-device-edit',
@@ -85,10 +86,9 @@ export class DeviceEditComponent implements OnInit, AfterViewInit {
     }
 
     ngOnInit(): void {
-        if (this.route.parent?.snapshot.paramMap.has('project')) {
-            this.project_id = this.route.parent.snapshot.paramMap.get('project');
-            this.base = `/project/${this.project_id}`
-        }
+        this.base = GetParentRouteUrl(this.route)
+        this.project_id ||= GetParentRouteParam(this.route, "project")
+
         if (this.route.snapshot.paramMap.has('id')) {
             this.id = this.route.snapshot.paramMap.get('id');
             this.load()

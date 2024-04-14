@@ -7,6 +7,7 @@ import {CommonModule} from '@angular/common';
 import {Router} from '@angular/router';
 import {NzCardComponent} from "ng-zorro-antd/card";
 import {SmartEditorComponent, SmartField} from "iot-master-smart";
+import {GetParentRouteParam, GetParentRouteUrl} from "../../../app.routes";
 
 @Component({
     selector: 'app-project-edit',
@@ -22,7 +23,9 @@ import {SmartEditorComponent, SmartField} from "iot-master-smart";
     styleUrl: './project-edit.component.scss',
 })
 export class ProjectEditComponent implements OnInit {
+    base = '/admin'
     project_id!: any;
+
     id: any = '';
 
     @ViewChild('form') form!: SmartEditorComponent
@@ -47,15 +50,15 @@ export class ProjectEditComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        if (this.route.parent?.snapshot.paramMap.has('project')) {
-            this.project_id = this.id = this.route.parent?.snapshot.paramMap.get('project');
-        }
+        this.base = GetParentRouteUrl(this.route)
+        this.project_id ||= GetParentRouteParam(this.route, "project")
+
         if (this.route.snapshot.paramMap.has('id')) {
             this.id = this.route.snapshot.paramMap.get('id');
+        } else {
+            this.id = this.project_id
         }
-        if (this.id) {
-            this.load()
-        }
+        this.load()
     }
 
     load() {
@@ -73,9 +76,9 @@ export class ProjectEditComponent implements OnInit {
         let url = `project/${this.id || 'create'}`
         this.rs.post(url, this.form.value).subscribe((res) => {
             if (this.project_id)
-                this.router.navigateByUrl(`/project/${this.project_id}/detail`);
+                this.router.navigateByUrl(`${this.base}/detail`);
             else
-                this.router.navigateByUrl(`/admin/project/` + res.data.id);
+                this.router.navigateByUrl(`${this.base}/project/` + res.data.id);
             this.msg.success('保存成功');
         });
     }

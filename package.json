@@ -19,7 +19,7 @@
         "@angular/platform-browser-dynamic": "^17.2.1",
         "@angular/router": "^17.2.1",
         "dayjs": "^1.11.10",
-        "iot-master-smart": "^0.1.4",
+        "iot-master-smart": "^0.1.6",
         "echarts": "^5.5.0",
         "ng-zorro-antd": "^17.3.0",
         "ngx-echarts": "^17.1.0",

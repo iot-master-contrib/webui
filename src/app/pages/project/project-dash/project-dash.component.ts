@@ -5,6 +5,7 @@ import {NzColDirective, NzRowDirective} from "ng-zorro-antd/grid";
 import {ActivatedRoute, Router} from "@angular/router";
 import {NzMessageService} from "ng-zorro-antd/message";
 import {RequestService} from "iot-master-smart";
+import {GetParentRouteParam, GetParentRouteUrl} from "../../../app.routes";
 
 @Component({
     selector: 'app-project-dash',
@@ -19,7 +20,7 @@ import {RequestService} from "iot-master-smart";
     styleUrl: './project-dash.component.scss'
 })
 export class ProjectDashComponent {
-
+    base = '/admin'
     project: any = ''
 
     constructor(
@@ -31,9 +32,7 @@ export class ProjectDashComponent {
     }
 
     ngOnInit(): void {
-        if (this.route.parent?.snapshot.paramMap.has('project')) {
-            this.project = this.route.parent?.snapshot.paramMap.get('project');
-            return;
-        }
+        this.base = GetParentRouteUrl(this.route)
+        this.project ||= GetParentRouteParam(this.route, "project")
     }
 }

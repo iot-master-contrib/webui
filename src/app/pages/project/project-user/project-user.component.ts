@@ -12,6 +12,7 @@ import {
     SmartTableOperator
 } from "iot-master-smart";
 import {NzNotificationService} from "ng-zorro-antd/notification";
+import {GetParentRouteParam, GetParentRouteUrl} from "../../../app.routes";
 
 @Component({
     selector: 'app-project-user',
@@ -24,6 +25,7 @@ import {NzNotificationService} from "ng-zorro-antd/notification";
     styleUrl: './project-user.component.scss',
 })
 export class ProjectUserComponent {
+    base = '/admin'
     @Input() project_id: any = '';
 
 
@@ -68,9 +70,8 @@ export class ProjectUserComponent {
     }
 
     ngOnInit(): void {
-        if (this.route.parent?.snapshot.paramMap.has('project')) {
-            this.project_id = this.route.parent?.snapshot.paramMap.get('project');
-        }
+        this.base = GetParentRouteUrl(this.route)
+        this.project_id ||= GetParentRouteParam(this.route, "project")
     }
 
     query!: ParamSearch
