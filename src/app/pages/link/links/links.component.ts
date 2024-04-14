@@ -52,6 +52,11 @@ export class LinksComponent {
                 this.rs.get(`link/${data.id}/delete`).subscribe(res => this.refresh())
             }
         },
+        {
+            icon: 'close-circle', title: '停止', action: data => {
+                this.rs.get(`link/${data.id}/close`).subscribe(res => this.refresh())
+            }
+        }
     ];
 
     operatorsSelect: SmartTableOperator[] = [
