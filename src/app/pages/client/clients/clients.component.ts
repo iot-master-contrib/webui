@@ -32,15 +32,17 @@ export class ClientsComponent {
         {key: "net", label: "网络", sortable: true, keyword: true},
         {key: "addr", label: "地址", sortable: true, keyword: true},
         {key: "port", label: "端口", sortable: true, keyword: true},
+        {key: "status", label: "状态"},
         {key: "created", label: "创建时间", sortable: true, date: true},
     ];
 
     columnsSelect: SmartTableColumn[] = [
         {key: "id", label: "ID", keyword: true},
         {key: "name", label: "名称", keyword: true},
-        {key: "net", label: "网络",  keyword: true},
+        {key: "net", label: "网络", keyword: true},
         {key: "addr", label: "地址", keyword: true},
         {key: "port", label: "端口", keyword: true},
+        {key: "status", label: "状态"},
     ];
 
     operators: SmartTableOperator[] = [
@@ -50,6 +52,16 @@ export class ClientsComponent {
                 this.rs.get(`client/${data.id}/delete`).subscribe(res => this.refresh())
             }
         },
+        {
+            icon: 'play-circle', title: '启动', action: data => {
+                this.rs.get(`client/${data.id}/open`).subscribe(res => this.refresh())
+            }
+        },
+        {
+            icon: 'close-circle', title: '停止', action: data => {
+                this.rs.get(`client/${data.id}/close`).subscribe(res => this.refresh())
+            }
+        }
     ];
 
     operatorsSelect: SmartTableOperator[] = [

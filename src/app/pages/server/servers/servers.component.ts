@@ -31,6 +31,7 @@ export class ServersComponent {
         {key: "id", sortable: true, label: "ID", keyword: true, link: (data) => `/admin/server/${data.id}`},
         {key: "name", sortable: true, label: "名称", keyword: true},
         {key: "port", sortable: true, label: "端口", keyword: true},
+        {key: "status", label: "状态"},
         {key: "created", sortable: true, label: "创建时间", date: true},
     ];
 
@@ -38,6 +39,7 @@ export class ServersComponent {
         {key: "id", label: "ID", keyword: true},
         {key: "name", label: "名称", keyword: true},
         {key: "port", label: "端口", keyword: true},
+        {key: "status", label: "状态"},
     ];
 
     operators: SmartTableOperator[] = [
@@ -47,6 +49,16 @@ export class ServersComponent {
                 this.rs.get(`server/${data.id}/delete`).subscribe(res => this.refresh())
             }
         },
+        {
+            icon: 'play-circle', title: '启动', action: data => {
+                this.rs.get(`server/${data.id}/open`).subscribe(res => this.refresh())
+            }
+        },
+        {
+            icon: 'close-circle', title: '停止', action: data => {
+                this.rs.get(`server/${data.id}/close`).subscribe(res => this.refresh())
+            }
+        }
     ];
 
     operatorsSelect: SmartTableOperator[] = [

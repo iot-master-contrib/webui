@@ -33,6 +33,7 @@ export class LinksComponent {
         {key: "server", sortable: true, label: "服务器", keyword: true, link: (data) => `/admin/server/${data.server_id}`},
         {key: "name", sortable: true, label: "名称", keyword: true},
         {key: "remote", sortable: true, label: "远程地址", keyword: true},
+        {key: "status", label: "状态"},
         {key: "created", sortable: true, label: "创建时间", date: true},
     ];
 
@@ -41,6 +42,7 @@ export class LinksComponent {
         {key: "server", label: "服务器", keyword: true},
         {key: "name", label: "名称", keyword: true},
         {key: "remote", label: "远程地址", keyword: true},
+        {key: "status", label: "状态"},
     ];
 
     operators: SmartTableOperator[] = [
