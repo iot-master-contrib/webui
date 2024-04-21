@@ -44,6 +44,13 @@ export class ServerEditComponent implements OnInit, AfterViewInit {
             {key: "name", label: "名称", type: "text", required: true, default: '新服务端'},
             {key: "port", label: "端口", type: "number", min: 1, max: 65535, default: 60000},
             {
+                key: "mode", label: "模式", type: "select", default: "register", options: [
+                    {label: "注册包", value: "register"},
+                    {label: "多连接", value: "multiple"},
+                    {label: "单连接", value: "single"},
+                ]
+            },
+            {
                 key: "protocol_name", label: "通讯协议", type: "template", template: this.chooseProtocol,
                 change: ($event) => setTimeout(() => this.loadProtocolOptions($event))
             },
@@ -70,7 +77,7 @@ export class ServerEditComponent implements OnInit, AfterViewInit {
     }
 
     ngAfterViewInit(): void {
-        setTimeout(()=>this.build(), 1)
+        setTimeout(() => this.build(), 1)
     }
 
     load() {

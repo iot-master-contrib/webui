@@ -40,6 +40,7 @@ export class ServerDetailComponent implements OnInit {
         {key: 'id', label: 'ID'},
         {key: 'name', label: '名称'},
         {key: 'port', label: '端口'},
+        {key: 'mode', label: '模式'},
         {key: 'disabled', label: '禁用'},
         {key: 'created', label: '创建时间', type: 'date'},
         {key: "protocol_name", label: "通讯协议"},
