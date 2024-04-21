@@ -4,14 +4,34 @@
     <nz-collapse></nz-collapse>
 
     <nz-tabset>
-        <nz-tab nzTitle="产品版本">
-            <ng-template nz-tab>
-                <app-product-version [product_id]="id"></app-product-version>
-            </ng-template>
-        </nz-tab>
         <nz-tab nzTitle="产品设备">
             <ng-template nz-tab>
                 <app-devices [product_id]="id" [project_id]="project_id"></app-devices>
+            </ng-template>
+        </nz-tab>
+        <nz-tab nzTitle="产品属性">
+            <ng-template nz-tab>
+                <app-product-property-edit [product_id]="id"></app-product-property-edit>
+            </ng-template>
+        </nz-tab>
+        <nz-tab nzTitle="产品事件">
+            <ng-template nz-tab>
+                <app-product-event-edit [product_id]="id"></app-product-event-edit>
+            </ng-template>
+        </nz-tab>
+        <nz-tab nzTitle="产品动作">
+            <ng-template nz-tab>
+                <app-product-action-edit [product_id]="id"></app-product-action-edit>
+            </ng-template>
+        </nz-tab>
+        <nz-tab nzTitle="数据映射">
+            <ng-template nz-tab>
+                <app-product-mapper-edit [product_id]="id"></app-product-mapper-edit>
+            </ng-template>
+        </nz-tab>
+        <nz-tab nzTitle="数据轮询">
+            <ng-template nz-tab>
+                <app-product-poller-edit [product_id]="id"></app-product-poller-edit>
             </ng-template>
         </nz-tab>
     </nz-tabset>

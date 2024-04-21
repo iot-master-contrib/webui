@@ -121,7 +121,7 @@ export class DevicePropertyComponent {
     }
 
     loadProperties() {
-        this.rs.get(`product/${this.data.product_id}/version/${this.data.product_version}/config/property`).subscribe(res => {
+        this.rs.get(`product/${this.data.product_id}/config/property`).subscribe(res => {
             this.properties = res.data
             this.properties.forEach((p: any) => {
                 this.names[p.name] = p.label || p.name

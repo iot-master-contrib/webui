@@ -14,8 +14,12 @@ import {SmartInfoComponent, SmartInfoItem} from "iot-master-smart";
 import {NzTabsModule} from "ng-zorro-antd/tabs";
 import {DevicesComponent} from "../../device/devices/devices.component";
 import {WebViewComponent} from "../../../components/web-view/web-view.component";
-import {ProductVersionComponent} from "../product-version/product-version.component";
 import {NzCollapseComponent} from "ng-zorro-antd/collapse";
+import {ProductActionEditComponent} from "../product-action-edit/product-action-edit.component";
+import {ProductEventEditComponent} from "../product-event-edit/product-event-edit.component";
+import {ProductMapperEditComponent} from "../product-mapper-edit/product-mapper-edit.component";
+import {ProductPollerEditComponent} from "../product-poller-edit/product-poller-edit.component";
+import {ProductPropertyEditComponent} from "../product-property-edit/product-property-edit.component";
 
 @Component({
     selector: 'app-product-detail',
@@ -32,8 +36,12 @@ import {NzCollapseComponent} from "ng-zorro-antd/collapse";
         NzTabsModule,
         DevicesComponent,
         WebViewComponent,
-        ProductVersionComponent,
         NzCollapseComponent,
+        ProductActionEditComponent,
+        ProductEventEditComponent,
+        ProductMapperEditComponent,
+        ProductPollerEditComponent,
+        ProductPropertyEditComponent,
     ],
     templateUrl: './product-detail.component.html',
     styleUrl: './product-detail.component.scss'

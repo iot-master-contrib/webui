@@ -21,7 +21,6 @@ import {NzCardComponent} from "ng-zorro-antd/card";
 })
 export class ProductMapperEditComponent implements OnInit {
     @Input() product_id!: any;
-    @Input() version!: any;
 
     @ViewChild("editor") editor!: SmartEditorComponent;
 
@@ -40,7 +39,7 @@ export class ProductMapperEditComponent implements OnInit {
             let protocol = res.data.protocol
             this.rs.get(`protocol/${protocol}/mapper`).subscribe(res=>{
                 this.fields[0].children = res.data
-                this.rs.get(`product/${this.product_id}/version/${this.version}/config/mapper`).subscribe(res => {
+                this.rs.get(`product/${this.product_id}/config/mapper`).subscribe(res => {
                     this.values = {mappers: res.data || []}
                 })
             })
@@ -49,7 +48,7 @@ export class ProductMapperEditComponent implements OnInit {
 
     onSubmit() {
         let value = this.editor.value
-        this.rs.post(`product/${this.product_id}/version/${this.version}/config/mapper`, value.mappers).subscribe(res => {
+        this.rs.post(`product/${this.product_id}/config/mapper`, value.mappers).subscribe(res => {
             this.ms.success("提示", "保存成功")
         })
     }

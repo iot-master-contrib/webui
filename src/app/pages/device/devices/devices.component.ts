@@ -49,7 +49,6 @@ export class DevicesComponent implements OnInit {
             key: 'product', sortable: true, label: '产品', keyword: true,
             link: (data) => `${this.base}/product/${data.product_id}`,
         },
-        {key: 'product_version', sortable: true, label: '版本'},
         {
             key: 'project', sortable: true, label: '项目', keyword: true,
             link: (data) => `${this.base}/project/${data.project_id}`,

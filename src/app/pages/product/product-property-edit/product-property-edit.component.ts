@@ -21,7 +21,6 @@ import {NzCardComponent} from "ng-zorro-antd/card";
 })
 export class ProductPropertyEditComponent implements OnInit {
     @Input() product_id!: any;
-    @Input() version!: any;
 
     @ViewChild("editor") editor!: SmartEditorComponent;
 
@@ -65,14 +64,14 @@ export class ProductPropertyEditComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.rs.get(`product/${this.product_id}/version/${this.version}/config/property`).subscribe(res => {
+        this.rs.get(`product/${this.product_id}/config/property`).subscribe(res => {
             this.values = {properties: res.data || []}
         })
     }
 
     onSubmit() {
         let value = this.editor.value
-        this.rs.post(`product/${this.product_id}/version/${this.version}/config/property`, value.properties).subscribe(res => {
+        this.rs.post(`product/${this.product_id}/config/property`, value.properties).subscribe(res => {
             this.ms.success("提示", "保存成功")
         })
     }

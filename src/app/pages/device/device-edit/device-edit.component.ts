@@ -14,7 +14,6 @@ import {InputProductComponent} from "../../../components/input-product/input-pro
 import {InputGatewayComponent} from "../../../components/input-gateway/input-gateway.component";
 import {InputProjectComponent} from "../../../components/input-project/input-project.component";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {InputVersionComponent} from "../../../components/input-version/input-version.component";
 import {InputTunnelComponent} from "../../../components/input-tunnel/input-tunnel.component";
 import {GetParentRouteParam, GetParentRouteUrl} from "../../../app.routes";
 
@@ -32,7 +31,6 @@ import {GetParentRouteParam, GetParentRouteUrl} from "../../../app.routes";
         InputProductComponent,
         InputGatewayComponent,
         InputProjectComponent,
-        InputVersionComponent,
         InputTunnelComponent,
     ],
     templateUrl: './device-edit.component.html',
@@ -67,7 +65,6 @@ export class DeviceEditComponent implements OnInit, AfterViewInit {
                 key: "product_id", label: "产品", type: "template", template: this.chooseProduct,
                 change: () => setTimeout(()=>this.loadProtocolStation())
             },
-            {key: "product_version", label: "版本", type: "template", template: this.chooseVersion},
             {key: "project_id", label: "项目", type: "template", template: this.chooseProject},
             {key: "tunnel_id", label: "通道", type: "template", template: this.chooseTunnel},
             {key: "station", label: "从站", type: "object"},

@@ -52,7 +52,6 @@ export class DeviceDetailComponent implements OnInit {
             key: 'product', label: '产品', type: 'link',
             link: () => `${this.base}/product/${this.data.product_id}`,
         },
-        {key: 'product_version', label: '版本'},
         {
             key: 'project', label: '项目', type: 'link',
             link: () => `${this.base}/project/${this.data.project_id}`,

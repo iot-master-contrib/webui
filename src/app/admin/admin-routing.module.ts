@@ -24,8 +24,6 @@ import {UserEditComponent} from "../pages/users/user-edit/user-edit.component";
 import {UserDetailComponent} from "../pages/users/user-detail/user-detail.component";
 import {ProjectUserComponent} from "../pages/project/project-user/project-user.component";
 import {SpaceDeviceComponent} from "../pages/space/space-device/space-device.component";
-import {ProductVersionComponent} from "../pages/product/product-version/product-version.component";
-import {VersionEditComponent} from "../pages/product/version-edit/version-edit.component";
 import {ServersComponent} from "../pages/server/servers/servers.component";
 import {ServerEditComponent} from "../pages/server/server-edit/server-edit.component";
 import {ServerDetailComponent} from "../pages/server/server-detail/server-detail.component";
@@ -51,8 +49,6 @@ const routes: Routes = [
     {path: 'product/create', component: ProductEditComponent, title:"创建产品", data:{breadcrumb:"创建产品"}},
     {path: 'product/:id', component: ProductDetailComponent, title:"产品详情", data:{breadcrumb:"产品详情"}},
     {path: 'product/:id/edit', component: ProductEditComponent, title:"编辑产品", data:{breadcrumb:"编辑产品"}},
-    {path: 'product/:id/version', component: ProductVersionComponent, title:"产品版本", data:{breadcrumb:"产品版本"}},
-    {path: 'product/:id/version/:version', component: VersionEditComponent, title:"产品版本详情", data:{breadcrumb:"产品版本详情"}},
 
     {path: 'device', component: DevicesComponent, title:"设备列表", data:{breadcrumb:"设备列表"}},
     {path: 'device/create', component: DeviceEditComponent, title:"创建设备", data:{breadcrumb:"创建设备"}},

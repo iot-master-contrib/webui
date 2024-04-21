@@ -8,9 +8,6 @@
 <ng-template #chooseProduct let-control="control" let-field="field">
     <app-input-product [formControl]="control"></app-input-product>
 </ng-template>
-<ng-template #chooseVersion let-control="control" let-field="field">
-    <app-input-version [formControl]="control" [product_id]="form.value.product_id"></app-input-version>
-</ng-template>
 <ng-template #chooseProject let-control="control" let-field="field">
     <app-input-project [formControl]="control"></app-input-project>
 </ng-template>

@@ -21,7 +21,6 @@ import {NzCardComponent} from "ng-zorro-antd/card";
 })
 export class ProductPollerEditComponent {
     @Input() product_id!: any;
-    @Input() version!: any;
 
     @ViewChild("editor") editor!: SmartEditorComponent;
 
@@ -40,7 +39,7 @@ export class ProductPollerEditComponent {
             let protocol = res.data.protocol
             this.rs.get(`protocol/${protocol}/poller`).subscribe(res=>{
                 this.fields[0].children = res.data
-                this.rs.get(`product/${this.product_id}/version/${this.version}/config/poller`).subscribe(res => {
+                this.rs.get(`product/${this.product_id}/config/poller`).subscribe(res => {
                     this.values = {pollers: res.data || []}
                 })
             })
@@ -49,7 +48,7 @@ export class ProductPollerEditComponent {
 
     onSubmit() {
         let value = this.editor.value
-        this.rs.post(`product/${this.product_id}/version/${this.version}/config/poller`, value.pollers).subscribe(res => {
+        this.rs.post(`product/${this.product_id}/config/poller`, value.pollers).subscribe(res => {
             this.ms.success("提示", "保存成功")
         })
     }

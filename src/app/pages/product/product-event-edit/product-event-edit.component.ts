@@ -21,7 +21,6 @@ import {NzCardComponent} from "ng-zorro-antd/card";
 })
 export class ProductEventEditComponent {
     @Input() product_id!: any;
-    @Input() version!: any;
 
     @ViewChild("editor") editor!: SmartEditorComponent;
 
@@ -61,14 +60,14 @@ export class ProductEventEditComponent {
     }
 
     ngOnInit(): void {
-        this.rs.get(`product/${this.product_id}/version/${this.version}/config/event`).subscribe(res => {
+        this.rs.get(`product/${this.product_id}/config/event`).subscribe(res => {
             this.values = {events: res.data || []}
         })
     }
 
     onSubmit() {
         let value = this.editor.value
-        this.rs.post(`product/${this.product_id}/version/${this.version}/config/event`, value.events).subscribe(res => {
+        this.rs.post(`product/${this.product_id}/config/event`, value.events).subscribe(res => {
             this.ms.success("提示", "保存成功")
         })
     }

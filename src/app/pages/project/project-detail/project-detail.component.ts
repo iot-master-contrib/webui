@@ -55,7 +55,6 @@ export class ProjectDetailComponent implements OnInit {
     fields: SmartInfoItem[] = [
         {label: 'ID', key: 'id'},
         {label: '名称', key: 'name'},
-        {label: '版本', key: 'version'},
         {label: '创建时间', key: 'created', type: 'date'},
         {label: '说明', key: 'description', span: 2},
     ];
