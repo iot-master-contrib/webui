@@ -43,7 +43,6 @@ export class DeviceDetailComponent implements OnInit {
 
     id!: any;
     data: any = {};
-    product: any = {}
 
     fields: SmartInfoItem[] = [
         {key: 'id', label: 'ID'},
@@ -87,9 +86,6 @@ export class DeviceDetailComponent implements OnInit {
         this.loading = true
         this.rs.post('device/search', {filter: {id: this.id}}).subscribe((res) => {
             this.data = res.data[0];
-            this.rs.get('product/' + this.data.product_id).subscribe((res) => {
-                this.product = res.data;
-            })
         }).add(() => this.loading = false);
     }
 

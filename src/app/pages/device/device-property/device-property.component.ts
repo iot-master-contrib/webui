@@ -13,7 +13,6 @@ import {NzOptionComponent, NzSelectComponent} from "ng-zorro-antd/select";
 import {NzInputNumberComponent, NzInputNumberGroupComponent} from "ng-zorro-antd/input-number";
 import {NzDatePickerModule} from "ng-zorro-antd/date-picker";
 import {NzSwitchComponent} from "ng-zorro-antd/switch";
-import {GetParentRouteParam, GetParentRouteUrl} from "../../../app.routes";
 
 @Component({
     selector: 'app-device-property',
@@ -93,9 +92,6 @@ export class DevicePropertyComponent {
     }
 
     ngOnInit(): void {
-        this.base = GetParentRouteUrl(this.route)
-        this.project_id ||= GetParentRouteParam(this.route, "project")
-
         this.load();
         this.loadValues();
 

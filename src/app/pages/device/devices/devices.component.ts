@@ -11,7 +11,6 @@ import {
     SmartTableOperator,
 } from 'iot-master-smart';
 import {GetParentRouteParam, GetParentRouteParamFilter, GetParentRouteUrl} from "../../../app.routes";
-import {filter} from "rxjs/operators";
 
 @Component({
     selector: 'app-devices',

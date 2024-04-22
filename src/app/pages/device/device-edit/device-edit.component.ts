@@ -47,7 +47,6 @@ export class DeviceEditComponent implements OnInit, AfterViewInit {
 
     @ViewChild('form') form!: SmartEditorComponent
     @ViewChild("chooseProduct") chooseProduct!: TemplateRef<any>
-    @ViewChild("chooseVersion") chooseVersion!: TemplateRef<any>
     @ViewChild("chooseProject") chooseProject!: TemplateRef<any>
     @ViewChild("chooseTunnel") chooseTunnel!: TemplateRef<any>
 

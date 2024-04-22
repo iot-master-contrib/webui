@@ -4,7 +4,7 @@ go 1.21.4
 
 require (
 	github.com/spf13/viper v1.18.2
-	github.com/zgwit/iot-master/v4 v4.0.7
+	github.com/zgwit/iot-master/v4 v4.1.4
 )
 
 require (
