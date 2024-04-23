@@ -131,7 +131,7 @@ export class DeviceEditComponent implements OnInit, AfterViewInit {
                 let product = res.data
                 this.rs.get(`protocol/${product.protocol}/station`).subscribe(res => {
                     if (res.data) {
-                        this.fields[7].children = res.data
+                        this.fields[6].children = res.data
                         this.form.ngOnInit()
                     }
                 })

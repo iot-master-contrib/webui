@@ -39,7 +39,6 @@ import {GetParentRouteParam, GetParentRouteUrl} from "../../../app.routes";
 })
 export class DeviceDetailComponent implements OnInit {
     base = '/admin'
-    project_id!: any;
 
     id!: any;
     data: any = {};
@@ -68,13 +67,10 @@ export class DeviceDetailComponent implements OnInit {
     ) {
     }
 
-    values: any = {};
-
     loading = false;
 
     ngOnInit(): void {
         this.base = GetParentRouteUrl(this.route)
-        this.project_id ||= GetParentRouteParam(this.route, "project")
 
         if (this.route.snapshot.paramMap.has('id')) {
             this.id = this.route.snapshot.paramMap.get('id');

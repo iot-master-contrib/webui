@@ -112,7 +112,7 @@ export class DevicePropertyComponent {
 
     loadValues() {
         this.rs.get('device/' + this.id + '/values').subscribe((res) => {
-            this.values = res.data;
+            this.values = res.data || {};
         });
     }
 
