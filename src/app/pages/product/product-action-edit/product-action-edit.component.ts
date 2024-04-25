@@ -41,7 +41,7 @@ export class ProductActionEditComponent {
         }
     ]
 
-    values: any = {}
+    data: any = {}
     fields: SmartField[] = [
         {
             label: '', key: 'actions', type: 'list',
@@ -62,7 +62,7 @@ export class ProductActionEditComponent {
 
     ngOnInit(): void {
         this.rs.get(`product/${this.product_id}/config/action`).subscribe(res => {
-            this.values = {actions: res.data || []}
+            this.data = {actions: res.data || []}
         })
     }
 

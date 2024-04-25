@@ -24,7 +24,7 @@ export class ProductPollerEditComponent {
 
     @ViewChild("editor") editor!: SmartEditorComponent;
 
-    values: any = {}
+    data: any = {}
     fields: SmartField[] = [
         {label: '', key: 'pollers', type: 'table', children: []},
     ]
@@ -40,7 +40,7 @@ export class ProductPollerEditComponent {
             this.rs.get(`protocol/${protocol}/poller`).subscribe(res=>{
                 this.fields[0].children = res.data
                 this.rs.get(`product/${this.product_id}/config/poller`).subscribe(res => {
-                    this.values = {pollers: res.data || []}
+                    this.data = {pollers: res.data || []}
                 })
             })
         })

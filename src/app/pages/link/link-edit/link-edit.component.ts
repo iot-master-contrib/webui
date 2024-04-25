@@ -56,7 +56,7 @@ export class LinkEditComponent implements OnInit, AfterViewInit {
         ]
     }
 
-    values: any = {}
+    data: any = {}
 
 
     constructor(private router: Router,
@@ -79,8 +79,8 @@ export class LinkEditComponent implements OnInit, AfterViewInit {
 
     load() {
         this.rs.get(`link/` + this.id).subscribe((res) => {
-            this.values = res.data
-            this.loadProtocolOptions(this.values.protocol_name)
+            this.data = res.data
+            this.loadProtocolOptions(this.data.protocol_name)
         });
     }
 

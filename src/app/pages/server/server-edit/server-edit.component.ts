@@ -59,7 +59,7 @@ export class ServerEditComponent implements OnInit, AfterViewInit {
         ]
     }
 
-    values: any = {}
+    data: any = {}
 
 
     constructor(private router: Router,
@@ -82,8 +82,8 @@ export class ServerEditComponent implements OnInit, AfterViewInit {
 
     load() {
         this.rs.get(`server/` + this.id).subscribe((res) => {
-            this.values = res.data
-            this.loadProtocolOptions(this.values.protocol_name)
+            this.data = res.data
+            this.loadProtocolOptions(this.data.protocol_name)
         });
     }
 

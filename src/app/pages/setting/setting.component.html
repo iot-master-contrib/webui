@@ -1,5 +1,5 @@
 <nz-card nzTitle="设置 Web服务" [nzExtra]="extraTemplate">
-    <im-smart-editor #form [fields]="fields" [values]="values"></im-smart-editor>
+    <im-smart-editor #form [fields]="fields" [values]="data"></im-smart-editor>
 </nz-card>
 <ng-template #extraTemplate>
     <button nz-button nzType="primary" (click)="onSubmit()">保存</button>

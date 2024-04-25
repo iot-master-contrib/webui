@@ -50,7 +50,7 @@ export class SpaceEditComponent implements OnInit, AfterViewInit {
         ]
     }
 
-    values: any = {}
+    data: any = {}
 
     constructor(private router: Router,
                 private ms: NzModalService,
@@ -80,7 +80,7 @@ export class SpaceEditComponent implements OnInit, AfterViewInit {
 
     load() {
         this.rs.get(`space/${this.id}`).subscribe((res) => {
-            this.values = res.data
+            this.data = res.data
         });
     }
 

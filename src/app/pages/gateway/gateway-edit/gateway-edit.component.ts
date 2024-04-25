@@ -39,7 +39,7 @@ export class GatewayEditComponent implements OnInit, AfterViewInit {
         {key: "disabled", label: "禁用", type: "switch"},
     ]
 
-    values: any = {}
+    data: any = {}
 
 
     constructor(private router: Router,
@@ -63,7 +63,7 @@ export class GatewayEditComponent implements OnInit, AfterViewInit {
 
     load() {
         this.rs.get(`gateway/${this.id}`).subscribe(res => {
-            this.values = res.data
+            this.data = res.data
         });
     }
 

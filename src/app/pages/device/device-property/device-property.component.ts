@@ -178,7 +178,7 @@ export class DevicePropertyComponent {
 
     valueSwitch(name: string, $event: any) {
         //console.log(name, $event)
-        this.rs.post('device/' + this.id + '/values', {[name]: $event}).subscribe((res) => {
+        this.rs.post('device/' + this.id + '/data', {[name]: $event}).subscribe((res) => {
             this.msg.success("操作成功")
         });
     }

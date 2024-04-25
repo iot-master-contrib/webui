@@ -38,7 +38,7 @@ export class ProjectEditComponent implements OnInit {
         {key: "description", label: "说明", type: "textarea"},
     ]
 
-    values: any = {}
+    data: any = {}
 
 
     constructor(private router: Router,
@@ -62,7 +62,7 @@ export class ProjectEditComponent implements OnInit {
 
     load() {
         this.rs.get(`project/` + this.id).subscribe((res) => {
-            this.values = res.data
+            this.data = res.data
         });
     }
 

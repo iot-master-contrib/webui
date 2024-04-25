@@ -48,7 +48,7 @@ export class ProductEditComponent implements OnInit, AfterViewInit {
         ]
     }
 
-    values: any = {}
+    data: any = {}
 
 
     constructor(private router: Router,
@@ -71,7 +71,7 @@ export class ProductEditComponent implements OnInit, AfterViewInit {
 
     load() {
         this.rs.get(`product/` + this.id).subscribe((res) => {
-            this.values = res.data
+            this.data = res.data
         });
     }
 

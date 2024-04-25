@@ -71,8 +71,6 @@ export class DeviceEditComponent implements OnInit, AfterViewInit {
         ]
     }
 
-    values: any = {}
-
 
     constructor(private router: Router,
                 private msg: NzMessageService,
@@ -116,14 +114,15 @@ export class DeviceEditComponent implements OnInit, AfterViewInit {
 
     load() {
         this.rs.get(`device/${this.id}`).subscribe(res => {
-            this.values = res.data
-            this.loadProtocolStation()
+            this.data = res.data
+            //this.loadProtocolStation()
+            setTimeout(()=>this.loadProtocolStation(), 100)
         });
     }
 
     loadProtocolStation() {
         console.log("loadProtocolStation", this.form.value)
-        this.values = this.form.value
+        this.data = this.form.value
 
         let product_id = this.form.value.product_id
         if (product_id) {

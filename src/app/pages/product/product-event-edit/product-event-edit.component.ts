@@ -41,7 +41,7 @@ export class ProductEventEditComponent {
         }
     ]
 
-    values: any = {}
+    data: any = {}
     fields: SmartField[] = [
         {
             label: '', key: 'events', type: 'list',
@@ -61,7 +61,7 @@ export class ProductEventEditComponent {
 
     ngOnInit(): void {
         this.rs.get(`product/${this.product_id}/config/event`).subscribe(res => {
-            this.values = {events: res.data || []}
+            this.data = {events: res.data || []}
         })
     }
 

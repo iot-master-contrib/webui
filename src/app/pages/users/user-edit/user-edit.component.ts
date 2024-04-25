@@ -35,7 +35,7 @@ export class UserEditComponent implements OnInit {
         {key: "admin", label: "管理员", type: "switch"},
     ]
 
-    values: any = {}
+    data: any = {}
 
 
     constructor(private router: Router,
@@ -54,7 +54,7 @@ export class UserEditComponent implements OnInit {
 
     load() {
         this.rs.get(`user/` + this.id).subscribe((res) => {
-            this.values = res.data
+            this.data = res.data
         });
     }
 

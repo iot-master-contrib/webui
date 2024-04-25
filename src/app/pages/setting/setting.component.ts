@@ -24,7 +24,7 @@ export class SettingComponent {
 
     fields: SmartField[] = []
 
-    values: any = {}
+    data: any = {}
 
     constructor(private msg: NzMessageService,
                 private rs: RequestService,
@@ -42,7 +42,7 @@ export class SettingComponent {
             this.fields = res.data
         });
         this.rs.get('setting/' + this.module).subscribe(res => {
-            this.values = res.data
+            this.data = res.data
         });
     }
 

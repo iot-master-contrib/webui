@@ -59,7 +59,7 @@ export class ClientEditComponent implements OnInit, AfterViewInit {
         ]
     }
 
-    values: any = {}
+    data: any = {}
 
 
     constructor(private router: Router,
@@ -82,15 +82,15 @@ export class ClientEditComponent implements OnInit, AfterViewInit {
 
     load() {
         this.rs.get(`client/` + this.id).subscribe((res) => {
-            this.values = res.data
-            this.loadProtocolOptions(this.values.protocol_name)
+            this.data = res.data
+            this.loadProtocolOptions(this.data.protocol_name)
         });
     }
 
     loadProtocolOptions(protocol: string) {
-        //let protocol = this.values.protocol_name || this.form.value.protocol_name
-        //this.values = this.form.value //备份数据
-        //Object.assign(this.values, this.form.value)
+        //let protocol = this.data.protocol_name || this.form.value.protocol_name
+        //this.data = this.form.value //备份数据
+        //Object.assign(this.data, this.form.value)
         if (protocol)
             this.rs.get(`protocol/${protocol}/option`).subscribe((res) => {
                 this.fields[6].children = res.data

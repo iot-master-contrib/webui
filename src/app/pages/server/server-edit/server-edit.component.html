@@ -1,5 +1,5 @@
 <nz-card [nzTitle]="'服务器'+ (this.id ? '编辑' : '创建') " [nzExtra]="extraTemplate">
-    <im-smart-editor #form [fields]="fields" [values]="values"></im-smart-editor>
+    <im-smart-editor #form [fields]="fields" [values]="data"></im-smart-editor>
 </nz-card>
 
 <ng-template #extraTemplate>

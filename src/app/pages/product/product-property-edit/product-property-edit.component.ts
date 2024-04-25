@@ -24,7 +24,7 @@ export class ProductPropertyEditComponent implements OnInit {
 
     @ViewChild("editor") editor!: SmartEditorComponent;
 
-    values: any = {}
+    data: any = {}
     fields: SmartField[] = [
         {
             label: '', key: 'properties', type: 'table',
@@ -65,7 +65,7 @@ export class ProductPropertyEditComponent implements OnInit {
 
     ngOnInit(): void {
         this.rs.get(`product/${this.product_id}/config/property`).subscribe(res => {
-            this.values = {properties: res.data || []}
+            this.data = {properties: res.data || []}
         })
     }
 
