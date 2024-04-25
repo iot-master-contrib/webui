@@ -1,9 +1,5 @@
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
-import {
-    SmartEditorComponent,
-    SmartField
-} from "iot-master-smart";
-import {RequestService} from "iot-master-smart";
+import {RequestService, SmartEditorComponent, SmartField} from "iot-master-smart";
 import {NzNotificationService} from "ng-zorro-antd/notification";
 import {NzButtonComponent} from "ng-zorro-antd/button";
 import {NzCardComponent} from "ng-zorro-antd/card";
@@ -35,9 +31,9 @@ export class ProductMapperEditComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.rs.get(`product/${this.product_id}`).subscribe(res=>{
+        this.rs.get(`product/${this.product_id}`).subscribe(res => {
             let protocol = res.data.protocol
-            this.rs.get(`protocol/${protocol}/mapper`).subscribe(res=>{
+            this.rs.get(`protocol/${protocol}/mapper`).subscribe(res => {
                 this.fields[0].children = res.data
                 this.rs.get(`product/${this.product_id}/config/mapper`).subscribe(res => {
                     this.data = {mappers: res.data || []}

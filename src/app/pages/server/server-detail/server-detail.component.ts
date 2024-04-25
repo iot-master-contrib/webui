@@ -7,9 +7,8 @@ import {NzSpaceComponent, NzSpaceItemDirective} from "ng-zorro-antd/space";
 import {NzButtonComponent} from "ng-zorro-antd/button";
 import {NzPopconfirmDirective} from "ng-zorro-antd/popconfirm";
 import {NzMessageService} from "ng-zorro-antd/message";
-import {SmartInfoComponent, SmartInfoItem} from "iot-master-smart";
+import {RequestService, SmartInfoComponent, SmartInfoItem} from "iot-master-smart";
 import {LinksComponent} from "../../link/links/links.component";
-import {RequestService} from "iot-master-smart";
 
 @Component({
     selector: 'app-servers-detail',

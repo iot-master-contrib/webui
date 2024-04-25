@@ -1,7 +1,6 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {FormGroup} from '@angular/forms';
+import {FormGroup, FormsModule} from '@angular/forms';
 import {NzMessageService} from 'ng-zorro-antd/message';
-import {FormsModule} from '@angular/forms';
 import {NzUploadModule} from 'ng-zorro-antd/upload';
 import {NzInputModule} from 'ng-zorro-antd/input';
 

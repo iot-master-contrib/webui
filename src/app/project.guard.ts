@@ -1,11 +1,4 @@
-import {
-    ActivatedRoute,
-    ActivatedRouteSnapshot,
-    CanActivateFn,
-    CanMatchFn, ResolveFn,
-    Router,
-    RouterStateSnapshot
-} from '@angular/router';
+import {ActivatedRouteSnapshot, CanMatchFn, ResolveFn, Router, RouterStateSnapshot} from '@angular/router';
 import {inject} from "@angular/core";
 import {UserService} from "./user.service";
 import {Subject} from "rxjs";

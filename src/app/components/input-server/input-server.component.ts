@@ -7,14 +7,14 @@ import {RequestService} from "iot-master-smart";
 import {ServersComponent} from "../../pages/server/servers/servers.component";
 
 @Component({
-  selector: 'app-input-server',
-  standalone: true,
+    selector: 'app-input-server',
+    standalone: true,
     imports: [
         NzButtonComponent,
         NzInputDirective
     ],
-  templateUrl: './input-server.component.html',
-  styleUrl: './input-server.component.scss',
+    templateUrl: './input-server.component.html',
+    styleUrl: './input-server.component.scss',
     providers: [
         {
             provide: NG_VALUE_ACCESSOR,

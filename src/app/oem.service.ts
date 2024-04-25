@@ -1,6 +1,5 @@
 import {Injectable} from '@angular/core';
 import {Title} from '@angular/platform-browser';
-import {Subject} from "rxjs";
 import {RequestService} from "iot-master-smart";
 
 @Injectable({

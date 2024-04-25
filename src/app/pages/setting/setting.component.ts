@@ -1,9 +1,8 @@
 import {Component, ViewChild} from '@angular/core';
 import {NzButtonComponent} from "ng-zorro-antd/button";
 import {NzCardComponent} from "ng-zorro-antd/card";
-import {SmartEditorComponent, SmartField} from "iot-master-smart";
+import {RequestService, SmartEditorComponent, SmartField} from "iot-master-smart";
 import {NzMessageService} from "ng-zorro-antd/message";
-import {RequestService} from "iot-master-smart";
 import {ActivatedRoute} from "@angular/router";
 
 @Component({
@@ -31,7 +30,7 @@ export class SettingComponent {
                 private route: ActivatedRoute,
     ) {
         //this.module = this.route.snapshot.queryParamMap.get("module")
-        this.route.queryParamMap.subscribe(res=>{
+        this.route.queryParamMap.subscribe(res => {
             this.module = res.get("module")
             this.load()
         })

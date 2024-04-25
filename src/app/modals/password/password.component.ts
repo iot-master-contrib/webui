@@ -1,17 +1,11 @@
 import {Component} from '@angular/core';
-import {FormBuilder, Validators, FormGroup, ReactiveFormsModule} from "@angular/forms";
+import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {NzMessageService} from "ng-zorro-antd/message";
 import {Md5} from "ts-md5";
 import {Router} from "@angular/router";
 import {RequestService} from "iot-master-smart";
 import {NzInputDirective} from "ng-zorro-antd/input";
-import {
-    NzFormControlComponent,
-    NzFormDirective,
-    NzFormItemComponent,
-    NzFormLabelComponent,
-    NzFormModule
-} from "ng-zorro-antd/form";
+import {NzFormModule} from "ng-zorro-antd/form";
 
 @Component({
     standalone: true,

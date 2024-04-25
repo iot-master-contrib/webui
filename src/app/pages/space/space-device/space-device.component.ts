@@ -2,9 +2,9 @@ import {Component, Inject, Input, Optional} from '@angular/core';
 import {NZ_MODAL_DATA, NzModalRef, NzModalService,} from 'ng-zorro-antd/modal';
 import {ActivatedRoute} from '@angular/router';
 import {CommonModule} from '@angular/common';
-import {RequestService} from "iot-master-smart";
 import {
     ParamSearch,
+    RequestService,
     SmartTableButton,
     SmartTableColumn,
     SmartTableComponent,

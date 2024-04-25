@@ -1,6 +1,6 @@
 import {Component, forwardRef, OnInit} from '@angular/core';
 import {RequestService} from "iot-master-smart";
-import {NzSelectComponent, NzSelectOptionInterface} from "ng-zorro-antd/select";
+import {NzSelectComponent} from "ng-zorro-antd/select";
 import {ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR} from "@angular/forms";
 
 @Component({
@@ -50,6 +50,7 @@ export class InputProtocolComponent implements OnInit, ControlValueAccessor {
     }
 
     private onChange!: any;
+
     registerOnChange(fn: any): void {
         this.onChange = fn
     }

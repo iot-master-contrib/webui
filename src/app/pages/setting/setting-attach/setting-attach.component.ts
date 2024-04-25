@@ -1,6 +1,6 @@
 import {Component, ViewContainerRef} from '@angular/core';
 import {NzMessageService} from 'ng-zorro-antd/message';
-import {NzModalRef, NzModalService} from 'ng-zorro-antd/modal';
+import {NzModalModule, NzModalRef, NzModalService} from 'ng-zorro-antd/modal';
 import {RequestService} from 'iot-master-smart';
 import {RenameComponent} from './rename/rename.component';
 import {UploadComponent} from './upload/upload.component';
@@ -12,12 +12,9 @@ import {NzSwitchModule} from 'ng-zorro-antd/switch';
 import {NzInputModule} from 'ng-zorro-antd/input';
 import {NzSpaceModule} from 'ng-zorro-antd/space';
 import {NzSpinModule} from 'ng-zorro-antd/spin';
-import {NgModule} from '@angular/core';
 import {NzIconModule} from 'ng-zorro-antd/icon';
-import {DatePipe} from '@angular/common';
 import {CommonModule} from '@angular/common';
 import {NzButtonModule} from 'ng-zorro-antd/button';
-import {NzModalModule} from 'ng-zorro-antd/modal';
 import {NzPopconfirmModule} from 'ng-zorro-antd/popconfirm';
 import {NzImageModule} from 'ng-zorro-antd/image';
 

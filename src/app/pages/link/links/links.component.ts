@@ -1,11 +1,14 @@
 import {Component, Input, Optional} from '@angular/core';
-import {RequestService} from 'iot-master-smart';
+import {
+    ParamSearch,
+    RequestService,
+    SmartTableButton,
+    SmartTableColumn,
+    SmartTableComponent,
+    SmartTableOperator
+} from 'iot-master-smart';
 import {NzModalRef} from 'ng-zorro-antd/modal';
 import {CommonModule} from '@angular/common';
-import {
-    ParamSearch, SmartTableButton, SmartTableColumn,
-    SmartTableComponent, SmartTableOperator
-} from "iot-master-smart";
 
 @Component({
     selector: 'app-links',
@@ -30,7 +33,13 @@ export class LinksComponent {
 
     columns: SmartTableColumn[] = [
         {key: "id", sortable: true, label: "ID", keyword: true, link: (data) => `/admin/link/${data.id}`},
-        {key: "server", sortable: true, label: "服务器", keyword: true, link: (data) => `/admin/server/${data.server_id}`},
+        {
+            key: "server",
+            sortable: true,
+            label: "服务器",
+            keyword: true,
+            link: (data) => `/admin/server/${data.server_id}`
+        },
         {key: "name", sortable: true, label: "名称", keyword: true},
         {key: "remote", sortable: true, label: "远程地址", keyword: true},
         {key: "status", label: "状态"},

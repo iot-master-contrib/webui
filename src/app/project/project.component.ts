@@ -12,7 +12,6 @@ import {PasswordComponent} from "../modals/password/password.component";
 import {RequestService} from 'iot-master-smart';
 import {CommonModule} from '@angular/common';
 import {NzBreadCrumbComponent} from "ng-zorro-antd/breadcrumb";
-import {GetParentRouteParam, GetParentRouteUrl} from "../app.routes";
 
 @Component({
     selector: 'app-project-admin',

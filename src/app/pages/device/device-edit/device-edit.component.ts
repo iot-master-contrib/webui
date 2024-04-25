@@ -1,15 +1,10 @@
 import {AfterViewInit, Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {NzButtonComponent} from 'ng-zorro-antd/button';
-import {ActivatedRoute, RouterLink} from '@angular/router';
-import {RequestService} from 'iot-master-smart';
+import {ActivatedRoute, Router, RouterLink} from '@angular/router';
+import {RequestService, SmartEditorComponent, SmartField} from 'iot-master-smart';
 import {NzMessageService} from 'ng-zorro-antd/message';
 import {CommonModule} from '@angular/common';
-import {Router} from '@angular/router';
 import {NzCardComponent} from "ng-zorro-antd/card";
-import {
-    SmartEditorComponent,
-    SmartField
-} from "iot-master-smart";
 import {InputProductComponent} from "../../../components/input-product/input-product.component";
 import {InputGatewayComponent} from "../../../components/input-gateway/input-gateway.component";
 import {InputProjectComponent} from "../../../components/input-project/input-project.component";
@@ -62,7 +57,7 @@ export class DeviceEditComponent implements OnInit, AfterViewInit {
             {key: "keywords", label: "关键字", type: "tags", default: []},
             {
                 key: "product_id", label: "产品", type: "template", template: this.chooseProduct,
-                change: () => setTimeout(()=>this.loadProtocolStation())
+                change: () => setTimeout(() => this.loadProtocolStation())
             },
             {key: "project_id", label: "项目", type: "template", template: this.chooseProject},
             {key: "tunnel_id", label: "通道", type: "template", template: this.chooseTunnel},
@@ -94,7 +89,7 @@ export class DeviceEditComponent implements OnInit, AfterViewInit {
 
     ngAfterViewInit(): void {
         //this.build()
-        setTimeout(()=> {
+        setTimeout(() => {
             this.build()
 
             if (this.project_id) {
@@ -116,7 +111,7 @@ export class DeviceEditComponent implements OnInit, AfterViewInit {
         this.rs.get(`device/${this.id}`).subscribe(res => {
             this.data = res.data
             //this.loadProtocolStation()
-            setTimeout(()=>this.loadProtocolStation(), 100)
+            setTimeout(() => this.loadProtocolStation(), 100)
         });
     }
 

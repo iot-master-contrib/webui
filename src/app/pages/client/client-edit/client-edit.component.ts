@@ -1,16 +1,10 @@
 import {AfterViewInit, Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {NzButtonComponent} from 'ng-zorro-antd/button';
-import {ActivatedRoute, RouterLink} from '@angular/router';
+import {ActivatedRoute, Router, RouterLink} from '@angular/router';
 import {NzMessageService} from 'ng-zorro-antd/message';
 import {CommonModule} from '@angular/common';
-import {Router} from '@angular/router';
 import {NzCardComponent} from "ng-zorro-antd/card";
-import {
-    SmartEditorComponent,
-    SmartField,
-    SmartSelectOption
-} from "iot-master-smart";
-import {RequestService} from "iot-master-smart";
+import {RequestService, SmartEditorComponent, SmartField} from "iot-master-smart";
 import {InputProtocolComponent} from "../../../components/input-protocol/input-protocol.component";
 import {ReactiveFormsModule} from "@angular/forms";
 
@@ -52,7 +46,7 @@ export class ClientEditComponent implements OnInit, AfterViewInit {
             {key: "port", label: "端口", type: "number", min: 1, max: 65535},
             {
                 key: "protocol_name", label: "通讯协议", type: "template", template: this.chooseProtocol,
-                change: ($event) => setTimeout(()=>this.loadProtocolOptions($event))
+                change: ($event) => setTimeout(() => this.loadProtocolOptions($event))
             },
             {key: "protocol_options", label: "通讯协议参数", type: "object"},
             {key: "description", label: "说明", type: "textarea"},
@@ -77,7 +71,7 @@ export class ClientEditComponent implements OnInit, AfterViewInit {
     }
 
     ngAfterViewInit(): void {
-        setTimeout(()=>this.build(), 1)
+        setTimeout(() => this.build(), 1)
     }
 
     load() {

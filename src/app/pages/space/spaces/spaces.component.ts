@@ -1,16 +1,15 @@
 import {Component, Inject, Input, OnInit, Optional} from '@angular/core';
-import {ActivatedRoute, Router, RouterLink} from '@angular/router';
-import {RequestService} from 'iot-master-smart';
-import {NzMessageService} from 'ng-zorro-antd/message';
-import {NzModalRef, NzModalService, NzModalModule, NZ_MODAL_DATA} from 'ng-zorro-antd/modal';
-import {CommonModule} from '@angular/common';
+import {ActivatedRoute} from '@angular/router';
 import {
     ParamSearch,
+    RequestService,
     SmartTableButton,
     SmartTableColumn,
     SmartTableComponent,
-    SmartTableOperator,
+    SmartTableOperator
 } from 'iot-master-smart';
+import {NZ_MODAL_DATA, NzModalRef} from 'ng-zorro-antd/modal';
+import {CommonModule} from '@angular/common';
 import {GetParentRouteParam, GetParentRouteUrl} from "../../../app.routes";
 
 @Component({

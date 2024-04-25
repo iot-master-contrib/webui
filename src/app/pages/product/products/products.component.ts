@@ -1,16 +1,15 @@
-import {Component, OnInit, Optional} from '@angular/core';
-import {Router, RouterLink} from '@angular/router';
-import {RequestService} from 'iot-master-smart';
-import {NzMessageService} from 'ng-zorro-antd/message';
-import {NzModalRef, NzModalService} from 'ng-zorro-antd/modal';
-import {CommonModule} from '@angular/common';
+import {Component, Optional} from '@angular/core';
 import {
     ParamSearch,
+    RequestService,
     SmartTableButton,
     SmartTableColumn,
     SmartTableComponent,
-    SmartTableOperator,
+    SmartTableOperator
 } from 'iot-master-smart';
+import {NzModalRef, NzModalService} from 'ng-zorro-antd/modal';
+import {CommonModule} from '@angular/common';
+
 @Component({
     selector: 'app-products',
     standalone: true,

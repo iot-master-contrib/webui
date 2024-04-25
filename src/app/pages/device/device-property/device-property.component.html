@@ -4,7 +4,8 @@
             <nz-statistic [nzTitle]="p.label" [nzValue]="values[p.name] || '-'" [nzSuffix]="p.unit"
                           (click)="actives[p.name]=!actives[p.name]; search()">
             </nz-statistic>
-            <nz-switch nzSize="small" [ngModel]="values[p.name]" (ngModelChange)="valueSwitch(p.name, $event)" *ngIf="p.type=='bool' && p.mode=='rw'"></nz-switch>
+            <nz-switch nzSize="small" [ngModel]="values[p.name]" (ngModelChange)="valueSwitch(p.name, $event)"
+                       *ngIf="p.type=='bool' && p.mode=='rw'"></nz-switch>
         </div>
     </nz-col>
 </nz-row>

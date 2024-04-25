@@ -1,6 +1,5 @@
 import {Component, Input} from '@angular/core';
 import {FormsModule} from '@angular/forms';
-import {NgModule} from '@angular/core';
 import {NzInputModule} from 'ng-zorro-antd/input';
 
 @Component({

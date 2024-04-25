@@ -1,16 +1,10 @@
 import {AfterViewInit, Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {NzButtonComponent} from 'ng-zorro-antd/button';
-import {ActivatedRoute, RouterLink} from '@angular/router';
+import {ActivatedRoute, Router, RouterLink} from '@angular/router';
 import {NzMessageService} from 'ng-zorro-antd/message';
 import {CommonModule} from '@angular/common';
-import {Router} from '@angular/router';
 import {NzCardComponent} from "ng-zorro-antd/card";
-import {
-    SmartEditorComponent,
-    SmartField,
-    SmartSelectOption
-} from "iot-master-smart";
-import {RequestService} from "iot-master-smart";
+import {RequestService, SmartEditorComponent, SmartField} from "iot-master-smart";
 import {InputServerComponent} from "../../../components/input-server/input-server.component";
 import {InputProtocolComponent} from "../../../components/input-protocol/input-protocol.component";
 import {ReactiveFormsModule} from "@angular/forms";
@@ -67,7 +61,7 @@ export class LinkEditComponent implements OnInit, AfterViewInit {
     }
 
     ngAfterViewInit(): void {
-        setTimeout(()=>this.build(), 1)
+        setTimeout(() => this.build(), 1)
     }
 
     ngOnInit(): void {
