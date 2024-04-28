@@ -21,9 +21,7 @@ export class ProductMapperEditComponent implements OnInit {
     @ViewChild("editor") editor!: SmartEditorComponent;
 
     data: any = {}
-    fields: SmartField[] = [
-        {label: '', key: 'mappers', type: 'table', children: []},
-    ]
+    fields: SmartField[] = []
 
 
     constructor(private rs: RequestService, private ms: NzNotificationService) {
@@ -34,9 +32,11 @@ export class ProductMapperEditComponent implements OnInit {
         this.rs.get(`product/${this.product_id}`).subscribe(res => {
             let protocol = res.data.protocol
             this.rs.get(`protocol/${protocol}/mapper`).subscribe(res => {
-                this.fields[0].children = res.data
+                this.fields = res.data;
+                //this.fields[0].children = res.data
                 this.rs.get(`product/${this.product_id}/config/mapper`).subscribe(res => {
-                    this.data = {mappers: res.data || []}
+                    //this.data = {mappers: res.data || []}
+                    this.data = res.data || {}
                 })
             })
         })
