@@ -43,6 +43,7 @@ import {
     UploadOutline,
     UserOutline,
     VideoCameraOutline,
+    ControlOutline,
 } from '@ant-design/icons-angular/icons';
 import {API_BASE} from "iot-master-smart";
 import {provideEcharts} from "ngx-echarts";
@@ -81,6 +82,7 @@ const icons: IconDefinition[] = [
     PlayCircleOutline,
     CloseCircleOutline,
     BuildOutline,
+    ControlOutline,
 ];
 
 export const appConfig: ApplicationConfig = {
