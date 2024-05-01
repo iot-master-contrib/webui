@@ -22,6 +22,8 @@ const routes: Routes = [
     {path: 'detail', component: ProjectDetailComponent, title: "项目详情", data: {breadcrumb: "项目详情"}},
     {path: 'edit', component: ProjectEditComponent, title: "项目编辑", data: {breadcrumb: "项目编辑"}},
 
+    {path: 'product/:id', component: ProductDetailComponent, title: "产品详情", data: {breadcrumb: "产品详情"}},
+
     {path: 'device', component: DevicesComponent, title: "设备列表", data: {breadcrumb: "设备列表"}},
     {path: 'device/create', component: DeviceEditComponent, title: "创建设备", data: {breadcrumb: "创建设备"}},
     {path: 'device/:id', component: DeviceDetailComponent, title: "设备详情", data: {breadcrumb: "设备详情"}},

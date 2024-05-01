@@ -55,7 +55,10 @@ export class ProjectEditComponent implements OnInit {
         } else {
             this.id = this.project_id
         }
-        this.load()
+	
+        if (this.id) {
+            this.load()
+        }
     }
 
     load() {

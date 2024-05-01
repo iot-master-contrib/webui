@@ -6,7 +6,6 @@ import {NzIconDirective} from "ng-zorro-antd/icon";
 import {NzMenuDirective, NzMenuDividerDirective, NzMenuItemComponent, NzSubMenuComponent} from "ng-zorro-antd/menu";
 import {NzModalModule, NzModalRef, NzModalService} from 'ng-zorro-antd/modal';
 import {FormsModule} from '@angular/forms';
-import {OemService} from "../oem.service";
 import {UserService} from "../user.service";
 import {PasswordComponent} from "../modals/password/password.component";
 import {RequestService} from 'iot-master-smart';
@@ -56,15 +55,12 @@ export class ProjectComponent implements OnInit {
         private route: ActivatedRoute,
         private ms: NzModalService,
         protected us: UserService,
-        private rs: RequestService,
-        protected os: OemService
-    ) {
+        private rs: RequestService) {
         this.loadMenu()
     }
 
     ngOnInit() {
         this.id = this.route.snapshot.paramMap.get("project")
-
         this.loadProject()
     }
 
